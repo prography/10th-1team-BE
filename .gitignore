@@ -22,7 +22,9 @@
 
 # User-specific stuff
 .idea/**/workspace.xml
+.idea/**/*.xml
 .idea/**/tasks.xml
+.idea/**/modules/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
