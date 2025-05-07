@@ -1,0 +1,90 @@
+name: 버그 리포트 (Bug Report)
+description: 예기치 못한 동작이나 오류가 발생한 경우 제보해주세요.
+title: "[Bug] "
+labels: [ "bug", "needs-triage" ]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🐛 버그 리포트 작성 가이드  
+        예기치 못한 동작, 오류, UI 깨짐 등 재현 가능한 내용을 작성해주세요.  
+        최대한 **언제, 어떤 상황에서** 발생했는지를 알려주시면 좋습니다.
+
+  - type: input
+    id: summary
+    attributes:
+      label: 🔍 버그 요약
+      description: 이슈의 핵심을 한 문장으로 요약해주세요.
+      placeholder: 예) 로그인 시도 시 500 에러 발생, 검색 시 분류가 안됨
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🚨 심각도
+      description: 버그의 영향도를 선택해주세요.
+      options:
+        - 크리티컬 (기능이 완전히 작동하지 않음, 해당 버그로 인대 다음 서비스 이용이 불가능 함)
+        - 보통 (일부 기능이 제한적임)
+        - 경미함 (UI 깨짐 등, 기능에는 영향 없음)
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 💻 테스트 환경
+      description: 어떤 환경에서 문제가 발생했나요?
+      placeholder: |
+        - 브라우저: Chrome 123.0
+        - OS: macOS 14 / Windows 11
+        - 해상도: 1920x1080
+        - 기기: 데스크탑 / 모바일
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 📋 재현 절차
+      description: 버그가 발생된 과정을 간단히 단계별로 작성해주세요.
+      placeholder: |
+        1. 로그인 화면으로 이동
+        2. 이메일/비밀번호 입력
+        3. 로그인 버튼 클릭
+        4. 500 Internal Server Error 발생
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ 기대 동작
+      description: 정상적으로 작동했을 경우 어떤 결과를 기대했나요?
+      placeholder: 예) 로그인 성공 후 대시보드로 이동
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❗ 실제 동작
+      description: 위의 재현 절차에서 실제로 어떤 문제가 발생했는지 설명해주세요.
+      placeholder: 예) 500 에러 페이지로 이동함
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 📸 스크린샷 또는 로그
+      description: 오류 화면 캡처나 콘솔 로그 등을 첨부해주세요 (선택).
+      placeholder: 예) 콘솔에 "Uncaught TypeError" 메시지 출력됨
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 🧾 체크리스트
+      options:
+        - label: 재현 가능한 단계가 명확하게 작성되었습니다.
+        - label: 테스트 환경 정보가 포함되어 있습니다.
+        - label: 기대 동작과 실제 동작을 구분해 작성했습니다.
+        - label: 스크린샷이나 로그를 첨부했습니다 (가능한 경우).

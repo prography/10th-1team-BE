@@ -1,0 +1,65 @@
+name: 기능 요청 (Feature Request)
+description: 새로운 기능을 제안하고 관련 디자인 및 기획 문서를 연결합니다.
+title: "[Feature] "
+labels: [ "feature", "planning" ]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ✨ 새로운 기능 요청서
+        새로운 기능에 대한 아이디어를 작성해주세요.  
+        기획 문서(Notion)와 디자인 시안(Figma) 링크가 있다면 함께 공유해 주세요.
+
+  - type: input
+    id: summary
+    attributes:
+      label: 📌 기능 요약
+      description: 어떤 기능인지 한 문장으로 간결하게 작성해 주세요.
+      placeholder: 예) 사용자 알림 설정에 카테고리별 토글 기능 추가
+    validations:
+      required: true
+
+  - type: textarea
+    id: notion
+    attributes:
+      label: 🧠 관련 Notion 문서
+      description: 기능 정의나 기획 문서가 있다면 Notion 링크를 붙여주세요.
+      placeholder: https://www.notion.so/...
+    validations:
+      required: false
+
+  - type: input
+    id: figma
+    attributes:
+      label: 🎨 관련 Figma 링크
+      description: UI/UX 시안이 있다면 해당 Figma 링크를 입력해주세요.
+      placeholder: https://www.figma.com/file/...
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: ✅ 기대 동작
+      description: 이 기능이 어떤 흐름으로 동작해야 하는지 상세히 설명해주세요.
+      placeholder: |
+        - 알림 설정 페이지에 카테고리별 toggle이 노출된다.
+        - 사용자가 toggle을 끄면 해당 카테고리 푸시 알림이 비활성화된다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 💬 추가 참고 사항
+      description: 백엔드 연동 여부, API 필요사항, 논의가 필요한 부분이 있다면 작성해주세요.
+      placeholder: 예) 서버 API PATCH /api/user/settings 필요
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 🧾 체크리스트
+      options:
+        - label: 관련 Notion 문서를 작성했습니다.
+        - label: Figma 디자인이 완료되었습니다.
+        - label: 백엔드 연동 여부를 정의했습니다.
+        - label: 기대 동작을 충분히 설명했습니다.
