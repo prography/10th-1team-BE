@@ -305,7 +305,8 @@
         "contents": "Review content 159"
       }
     ],
-    "naverVoteRate": 79
+    "naverVoteRate": 79,
+    "id": 1
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/2",
@@ -611,7 +612,8 @@
         "contents": "Review content 259"
       }
     ],
-    "naverVoteRate": 93
+    "naverVoteRate": 93,
+    "id": 2
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/3",
@@ -898,7 +900,8 @@
         "contents": "Review content 359"
       }
     ],
-    "naverVoteRate": 88
+    "naverVoteRate": 88,
+    "id": 3
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/4",
@@ -1185,7 +1188,8 @@
         "contents": "Review content 459"
       }
     ],
-    "naverVoteRate": 15
+    "naverVoteRate": 15,
+    "id": 4
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/5",
@@ -1488,7 +1492,8 @@
         "contents": "Review content 559"
       }
     ],
-    "naverVoteRate": 21
+    "naverVoteRate": 21,
+    "id": 5
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/6",
@@ -1782,7 +1787,8 @@
         "contents": "Review content 659"
       }
     ],
-    "naverVoteRate": 70
+    "naverVoteRate": 70,
+    "id": 6
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/7",
@@ -2074,7 +2080,8 @@
         "contents": "Review content 759"
       }
     ],
-    "naverVoteRate": 52
+    "naverVoteRate": 52,
+    "id": 7
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/8",
@@ -2386,7 +2393,8 @@
         "contents": "Review content 859"
       }
     ],
-    "naverVoteRate": 13
+    "naverVoteRate": 13,
+    "id": 8
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/9",
@@ -2687,7 +2695,8 @@
         "contents": "Review content 959"
       }
     ],
-    "naverVoteRate": 73
+    "naverVoteRate": 73,
+    "id": 9
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/10",
@@ -2976,7 +2985,8 @@
         "contents": "Review content 1059"
       }
     ],
-    "naverVoteRate": 50
+    "naverVoteRate": 50,
+    "id": 10
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/11",
@@ -3284,7 +3294,8 @@
         "contents": "Review content 1159"
       }
     ],
-    "naverVoteRate": 46
+    "naverVoteRate": 46,
+    "id": 11
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/12",
@@ -3608,7 +3619,8 @@
         "contents": "Review content 1259"
       }
     ],
-    "naverVoteRate": 94
+    "naverVoteRate": 94,
+    "id": 12
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/13",
@@ -3894,7 +3906,8 @@
         "contents": "Review content 1359"
       }
     ],
-    "naverVoteRate": 34
+    "naverVoteRate": 34,
+    "id": 13
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/14",
@@ -4218,7 +4231,8 @@
         "contents": "Review content 1459"
       }
     ],
-    "naverVoteRate": 52
+    "naverVoteRate": 52,
+    "id": 14
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/15",
@@ -4519,7 +4533,8 @@
         "contents": "Review content 1559"
       }
     ],
-    "naverVoteRate": 64
+    "naverVoteRate": 64,
+    "id": 15
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/16",
@@ -4806,7 +4821,8 @@
         "contents": "Review content 1659"
       }
     ],
-    "naverVoteRate": 77
+    "naverVoteRate": 77,
+    "id": 16
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/17",
@@ -5105,7 +5121,8 @@
         "contents": "Review content 1759"
       }
     ],
-    "naverVoteRate": 5
+    "naverVoteRate": 5,
+    "id": 17
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/18",
@@ -5403,7 +5420,8 @@
         "contents": "Review content 1859"
       }
     ],
-    "naverVoteRate": 34
+    "naverVoteRate": 34,
+    "id": 18
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/19",
@@ -5690,7 +5708,8 @@
         "contents": "Review content 1959"
       }
     ],
-    "naverVoteRate": 68
+    "naverVoteRate": 68,
+    "id": 19
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/20",
@@ -5980,7 +5999,8 @@
         "contents": "Review content 2059"
       }
     ],
-    "naverVoteRate": 18
+    "naverVoteRate": 18,
+    "id": 20
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/21",
@@ -6281,7 +6301,8 @@
         "contents": "Review content 2159"
       }
     ],
-    "naverVoteRate": 16
+    "naverVoteRate": 16,
+    "id": 21
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/22",
@@ -6596,7 +6617,8 @@
         "contents": "Review content 2259"
       }
     ],
-    "naverVoteRate": 49
+    "naverVoteRate": 49,
+    "id": 22
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/23",
@@ -6889,7 +6911,8 @@
         "contents": "Review content 2359"
       }
     ],
-    "naverVoteRate": 72
+    "naverVoteRate": 72,
+    "id": 23
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/24",
@@ -7202,7 +7225,8 @@
         "contents": "Review content 2459"
       }
     ],
-    "naverVoteRate": 15
+    "naverVoteRate": 15,
+    "id": 24
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/25",
@@ -7492,7 +7516,8 @@
         "contents": "Review content 2559"
       }
     ],
-    "naverVoteRate": 38
+    "naverVoteRate": 38,
+    "id": 25
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/26",
@@ -7781,7 +7806,8 @@
         "contents": "Review content 2659"
       }
     ],
-    "naverVoteRate": 90
+    "naverVoteRate": 90,
+    "id": 26
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/27",
@@ -8101,7 +8127,8 @@
         "contents": "Review content 2759"
       }
     ],
-    "naverVoteRate": 18
+    "naverVoteRate": 18,
+    "id": 27
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/28",
@@ -8404,7 +8431,8 @@
         "contents": "Review content 2859"
       }
     ],
-    "naverVoteRate": 60
+    "naverVoteRate": 60,
+    "id": 28
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/29",
@@ -8697,7 +8725,8 @@
         "contents": "Review content 2959"
       }
     ],
-    "naverVoteRate": 77
+    "naverVoteRate": 77,
+    "id": 29
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/30",
@@ -8980,7 +9009,8 @@
         "contents": "Review content 3059"
       }
     ],
-    "naverVoteRate": 7
+    "naverVoteRate": 7,
+    "id": 30
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/31",
@@ -9288,7 +9318,8 @@
         "contents": "Review content 3159"
       }
     ],
-    "naverVoteRate": 83
+    "naverVoteRate": 83,
+    "id": 31
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/32",
@@ -9583,7 +9614,8 @@
         "contents": "Review content 3259"
       }
     ],
-    "naverVoteRate": 52
+    "naverVoteRate": 52,
+    "id": 32
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/33",
@@ -9890,7 +9922,8 @@
         "contents": "Review content 3359"
       }
     ],
-    "naverVoteRate": 66
+    "naverVoteRate": 66,
+    "id": 33
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/34",
@@ -10194,7 +10227,8 @@
         "contents": "Review content 3459"
       }
     ],
-    "naverVoteRate": 24
+    "naverVoteRate": 24,
+    "id": 34
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/35",
@@ -10487,7 +10521,8 @@
         "contents": "Review content 3559"
       }
     ],
-    "naverVoteRate": 2
+    "naverVoteRate": 2,
+    "id": 35
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/36",
@@ -10770,7 +10805,8 @@
         "contents": "Review content 3659"
       }
     ],
-    "naverVoteRate": 64
+    "naverVoteRate": 64,
+    "id": 36
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/37",
@@ -11065,7 +11101,8 @@
         "contents": "Review content 3759"
       }
     ],
-    "naverVoteRate": 59
+    "naverVoteRate": 59,
+    "id": 37
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/38",
@@ -11375,7 +11412,8 @@
         "contents": "Review content 3859"
       }
     ],
-    "naverVoteRate": 91
+    "naverVoteRate": 91,
+    "id": 38
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/39",
@@ -11674,7 +11712,8 @@
         "contents": "Review content 3959"
       }
     ],
-    "naverVoteRate": 19
+    "naverVoteRate": 19,
+    "id": 39
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/40",
@@ -11965,7 +12004,8 @@
         "contents": "Review content 4059"
       }
     ],
-    "naverVoteRate": 77
+    "naverVoteRate": 77,
+    "id": 40
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/41",
@@ -12255,7 +12295,8 @@
         "contents": "Review content 4159"
       }
     ],
-    "naverVoteRate": 47
+    "naverVoteRate": 47,
+    "id": 41
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/42",
@@ -12554,7 +12595,8 @@
         "contents": "Review content 4259"
       }
     ],
-    "naverVoteRate": 18
+    "naverVoteRate": 18,
+    "id": 42
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/43",
@@ -12863,7 +12905,8 @@
         "contents": "Review content 4359"
       }
     ],
-    "naverVoteRate": 33
+    "naverVoteRate": 33,
+    "id": 43
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/44",
@@ -13183,7 +13226,8 @@
         "contents": "Review content 4459"
       }
     ],
-    "naverVoteRate": 15
+    "naverVoteRate": 15,
+    "id": 44
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/45",
@@ -13491,7 +13535,8 @@
         "contents": "Review content 4559"
       }
     ],
-    "naverVoteRate": 78
+    "naverVoteRate": 78,
+    "id": 45
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/46",
@@ -13784,7 +13829,8 @@
         "contents": "Review content 4659"
       }
     ],
-    "naverVoteRate": 22
+    "naverVoteRate": 22,
+    "id": 46
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/47",
@@ -14085,7 +14131,8 @@
         "contents": "Review content 4759"
       }
     ],
-    "naverVoteRate": 15
+    "naverVoteRate": 15,
+    "id": 47
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/48",
@@ -14387,7 +14434,8 @@
         "contents": "Review content 4859"
       }
     ],
-    "naverVoteRate": 11
+    "naverVoteRate": 11,
+    "id": 48
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/49",
@@ -14685,7 +14733,8 @@
         "contents": "Review content 4959"
       }
     ],
-    "naverVoteRate": 90
+    "naverVoteRate": 90,
+    "id": 49
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/50",
@@ -14989,7 +15038,8 @@
         "contents": "Review content 5059"
       }
     ],
-    "naverVoteRate": 6
+    "naverVoteRate": 6,
+    "id": 50
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/51",
@@ -15302,7 +15352,8 @@
         "contents": "Review content 5159"
       }
     ],
-    "naverVoteRate": 95
+    "naverVoteRate": 95,
+    "id": 51
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/52",
@@ -15613,7 +15664,8 @@
         "contents": "Review content 5259"
       }
     ],
-    "naverVoteRate": 16
+    "naverVoteRate": 16,
+    "id": 52
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/53",
@@ -15931,7 +15983,8 @@
         "contents": "Review content 5359"
       }
     ],
-    "naverVoteRate": 55
+    "naverVoteRate": 55,
+    "id": 53
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/54",
@@ -16249,7 +16302,8 @@
         "contents": "Review content 5459"
       }
     ],
-    "naverVoteRate": 82
+    "naverVoteRate": 82,
+    "id": 54
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/55",
@@ -16561,7 +16615,8 @@
         "contents": "Review content 5559"
       }
     ],
-    "naverVoteRate": 95
+    "naverVoteRate": 95,
+    "id": 55
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/56",
@@ -16859,7 +16914,8 @@
         "contents": "Review content 5659"
       }
     ],
-    "naverVoteRate": 43
+    "naverVoteRate": 43,
+    "id": 56
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/57",
@@ -17173,7 +17229,8 @@
         "contents": "Review content 5759"
       }
     ],
-    "naverVoteRate": 15
+    "naverVoteRate": 15,
+    "id": 57
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/58",
@@ -17471,7 +17528,8 @@
         "contents": "Review content 5859"
       }
     ],
-    "naverVoteRate": 21
+    "naverVoteRate": 21,
+    "id": 58
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/59",
@@ -17761,7 +17819,8 @@
         "contents": "Review content 5959"
       }
     ],
-    "naverVoteRate": 26
+    "naverVoteRate": 26,
+    "id": 59
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/60",
@@ -18059,7 +18118,8 @@
         "contents": "Review content 6059"
       }
     ],
-    "naverVoteRate": 84
+    "naverVoteRate": 84,
+    "id": 60
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/61",
@@ -18353,7 +18413,8 @@
         "contents": "Review content 6159"
       }
     ],
-    "naverVoteRate": 86
+    "naverVoteRate": 86,
+    "id": 61
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/62",
@@ -18655,7 +18716,8 @@
         "contents": "Review content 6259"
       }
     ],
-    "naverVoteRate": 22
+    "naverVoteRate": 22,
+    "id": 62
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/63",
@@ -18954,7 +19016,8 @@
         "contents": "Review content 6359"
       }
     ],
-    "naverVoteRate": 38
+    "naverVoteRate": 38,
+    "id": 63
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/64",
@@ -19257,7 +19320,8 @@
         "contents": "Review content 6459"
       }
     ],
-    "naverVoteRate": 26
+    "naverVoteRate": 26,
+    "id": 64
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/65",
@@ -19550,7 +19614,8 @@
         "contents": "Review content 6559"
       }
     ],
-    "naverVoteRate": 13
+    "naverVoteRate": 13,
+    "id": 65
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/66",
@@ -19855,7 +19920,8 @@
         "contents": "Review content 6659"
       }
     ],
-    "naverVoteRate": 9
+    "naverVoteRate": 9,
+    "id": 66
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/67",
@@ -20163,7 +20229,8 @@
         "contents": "Review content 6759"
       }
     ],
-    "naverVoteRate": 31
+    "naverVoteRate": 31,
+    "id": 67
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/68",
@@ -20468,7 +20535,8 @@
         "contents": "Review content 6859"
       }
     ],
-    "naverVoteRate": 35
+    "naverVoteRate": 35,
+    "id": 68
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/69",
@@ -20769,7 +20837,8 @@
         "contents": "Review content 6959"
       }
     ],
-    "naverVoteRate": 92
+    "naverVoteRate": 92,
+    "id": 69
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/70",
@@ -21058,7 +21127,8 @@
         "contents": "Review content 7059"
       }
     ],
-    "naverVoteRate": 0
+    "naverVoteRate": 0,
+    "id": 70
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/71",
@@ -21360,7 +21430,8 @@
         "contents": "Review content 7159"
       }
     ],
-    "naverVoteRate": 78
+    "naverVoteRate": 78,
+    "id": 71
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/72",
@@ -21652,7 +21723,8 @@
         "contents": "Review content 7259"
       }
     ],
-    "naverVoteRate": 30
+    "naverVoteRate": 30,
+    "id": 72
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/73",
@@ -21955,7 +22027,8 @@
         "contents": "Review content 7359"
       }
     ],
-    "naverVoteRate": 22
+    "naverVoteRate": 22,
+    "id": 73
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/74",
@@ -22275,7 +22348,8 @@
         "contents": "Review content 7459"
       }
     ],
-    "naverVoteRate": 76
+    "naverVoteRate": 76,
+    "id": 74
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/75",
@@ -22578,7 +22652,8 @@
         "contents": "Review content 7559"
       }
     ],
-    "naverVoteRate": 63
+    "naverVoteRate": 63,
+    "id": 75
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/76",
@@ -22882,7 +22957,8 @@
         "contents": "Review content 7659"
       }
     ],
-    "naverVoteRate": 45
+    "naverVoteRate": 45,
+    "id": 76
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/77",
@@ -23177,7 +23253,8 @@
         "contents": "Review content 7759"
       }
     ],
-    "naverVoteRate": 11
+    "naverVoteRate": 11,
+    "id": 77
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/78",
@@ -23482,7 +23559,8 @@
         "contents": "Review content 7859"
       }
     ],
-    "naverVoteRate": 72
+    "naverVoteRate": 72,
+    "id": 78
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/79",
@@ -23794,7 +23872,8 @@
         "contents": "Review content 7959"
       }
     ],
-    "naverVoteRate": 35
+    "naverVoteRate": 35,
+    "id": 79
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/80",
@@ -24099,7 +24178,8 @@
         "contents": "Review content 8059"
       }
     ],
-    "naverVoteRate": 18
+    "naverVoteRate": 18,
+    "id": 80
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/81",
@@ -24391,7 +24471,8 @@
         "contents": "Review content 8159"
       }
     ],
-    "naverVoteRate": 85
+    "naverVoteRate": 85,
+    "id": 81
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/82",
@@ -24701,7 +24782,8 @@
         "contents": "Review content 8259"
       }
     ],
-    "naverVoteRate": 41
+    "naverVoteRate": 41,
+    "id": 82
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/83",
@@ -25018,7 +25100,8 @@
         "contents": "Review content 8359"
       }
     ],
-    "naverVoteRate": 87
+    "naverVoteRate": 87,
+    "id": 83
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/84",
@@ -25336,7 +25419,8 @@
         "contents": "Review content 8459"
       }
     ],
-    "naverVoteRate": 0
+    "naverVoteRate": 0,
+    "id": 84
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/85",
@@ -25652,7 +25736,8 @@
         "contents": "Review content 8559"
       }
     ],
-    "naverVoteRate": 48
+    "naverVoteRate": 48,
+    "id": 85
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/86",
@@ -25942,7 +26027,8 @@
         "contents": "Review content 8659"
       }
     ],
-    "naverVoteRate": 0
+    "naverVoteRate": 0,
+    "id": 86
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/87",
@@ -26259,7 +26345,8 @@
         "contents": "Review content 8759"
       }
     ],
-    "naverVoteRate": 68
+    "naverVoteRate": 68,
+    "id": 87
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/88",
@@ -26552,7 +26639,8 @@
         "contents": "Review content 8859"
       }
     ],
-    "naverVoteRate": 1
+    "naverVoteRate": 1,
+    "id": 88
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/89",
@@ -26856,7 +26944,8 @@
         "contents": "Review content 8959"
       }
     ],
-    "naverVoteRate": 6
+    "naverVoteRate": 6,
+    "id": 89
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/90",
@@ -27154,7 +27243,8 @@
         "contents": "Review content 9059"
       }
     ],
-    "naverVoteRate": 62
+    "naverVoteRate": 62,
+    "id": 90
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/91",
@@ -27463,7 +27553,8 @@
         "contents": "Review content 9159"
       }
     ],
-    "naverVoteRate": 86
+    "naverVoteRate": 86,
+    "id": 91
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/92",
@@ -27769,7 +27860,8 @@
         "contents": "Review content 9259"
       }
     ],
-    "naverVoteRate": 44
+    "naverVoteRate": 44,
+    "id": 92
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/93",
@@ -28061,7 +28153,8 @@
         "contents": "Review content 9359"
       }
     ],
-    "naverVoteRate": 28
+    "naverVoteRate": 28,
+    "id": 93
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/94",
@@ -28357,7 +28450,8 @@
         "contents": "Review content 9459"
       }
     ],
-    "naverVoteRate": 29
+    "naverVoteRate": 29,
+    "id": 94
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/95",
@@ -28673,7 +28767,8 @@
         "contents": "Review content 9559"
       }
     ],
-    "naverVoteRate": 10
+    "naverVoteRate": 10,
+    "id": 95
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/96",
@@ -28978,7 +29073,8 @@
         "contents": "Review content 9659"
       }
     ],
-    "naverVoteRate": 68
+    "naverVoteRate": 68,
+    "id": 96
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/97",
@@ -29273,7 +29369,8 @@
         "contents": "Review content 9759"
       }
     ],
-    "naverVoteRate": 92
+    "naverVoteRate": 92,
+    "id": 97
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/98",
@@ -29562,7 +29659,8 @@
         "contents": "Review content 9859"
       }
     ],
-    "naverVoteRate": 18
+    "naverVoteRate": 18,
+    "id": 98
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/99",
@@ -29880,7 +29978,8 @@
         "contents": "Review content 9959"
       }
     ],
-    "naverVoteRate": 7
+    "naverVoteRate": 7,
+    "id": 99
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/100",
@@ -30190,7 +30289,8 @@
         "contents": "Review content 10059"
       }
     ],
-    "naverVoteRate": 24
+    "naverVoteRate": 24,
+    "id": 100
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/101",
@@ -30481,7 +30581,8 @@
         "contents": "Review content 10159"
       }
     ],
-    "naverVoteRate": 98
+    "naverVoteRate": 98,
+    "id": 101
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/102",
@@ -30795,7 +30896,8 @@
         "contents": "Review content 10259"
       }
     ],
-    "naverVoteRate": 52
+    "naverVoteRate": 52,
+    "id": 102
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/103",
@@ -31086,7 +31188,8 @@
         "contents": "Review content 10359"
       }
     ],
-    "naverVoteRate": 63
+    "naverVoteRate": 63,
+    "id": 103
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/104",
@@ -31392,7 +31495,8 @@
         "contents": "Review content 10459"
       }
     ],
-    "naverVoteRate": 70
+    "naverVoteRate": 70,
+    "id": 104
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/105",
@@ -31696,7 +31800,8 @@
         "contents": "Review content 10559"
       }
     ],
-    "naverVoteRate": 28
+    "naverVoteRate": 28,
+    "id": 105
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/106",
@@ -32014,7 +32119,8 @@
         "contents": "Review content 10659"
       }
     ],
-    "naverVoteRate": 77
+    "naverVoteRate": 77,
+    "id": 106
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/107",
@@ -32315,7 +32421,8 @@
         "contents": "Review content 10759"
       }
     ],
-    "naverVoteRate": 20
+    "naverVoteRate": 20,
+    "id": 107
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/108",
@@ -32612,7 +32719,8 @@
         "contents": "Review content 10859"
       }
     ],
-    "naverVoteRate": 84
+    "naverVoteRate": 84,
+    "id": 108
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/109",
@@ -32933,7 +33041,8 @@
         "contents": "Review content 10959"
       }
     ],
-    "naverVoteRate": 69
+    "naverVoteRate": 69,
+    "id": 109
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/110",
@@ -33245,7 +33354,8 @@
         "contents": "Review content 11059"
       }
     ],
-    "naverVoteRate": 53
+    "naverVoteRate": 53,
+    "id": 110
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/111",
@@ -33559,7 +33669,8 @@
         "contents": "Review content 11159"
       }
     ],
-    "naverVoteRate": 53
+    "naverVoteRate": 53,
+    "id": 111
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/112",
@@ -33861,7 +33972,8 @@
         "contents": "Review content 11259"
       }
     ],
-    "naverVoteRate": 6
+    "naverVoteRate": 6,
+    "id": 112
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/113",
@@ -34152,7 +34264,8 @@
         "contents": "Review content 11359"
       }
     ],
-    "naverVoteRate": 36
+    "naverVoteRate": 36,
+    "id": 113
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/114",
@@ -34446,7 +34559,8 @@
         "contents": "Review content 11459"
       }
     ],
-    "naverVoteRate": 98
+    "naverVoteRate": 98,
+    "id": 114
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/115",
@@ -34737,7 +34851,8 @@
         "contents": "Review content 11559"
       }
     ],
-    "naverVoteRate": 70
+    "naverVoteRate": 70,
+    "id": 115
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/116",
@@ -35039,7 +35154,8 @@
         "contents": "Review content 11659"
       }
     ],
-    "naverVoteRate": 14
+    "naverVoteRate": 14,
+    "id": 116
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/117",
@@ -35352,7 +35468,8 @@
         "contents": "Review content 11759"
       }
     ],
-    "naverVoteRate": 64
+    "naverVoteRate": 64,
+    "id": 117
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/118",
@@ -35642,7 +35759,8 @@
         "contents": "Review content 11859"
       }
     ],
-    "naverVoteRate": 77
+    "naverVoteRate": 77,
+    "id": 118
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/119",
@@ -35946,7 +36064,8 @@
         "contents": "Review content 11959"
       }
     ],
-    "naverVoteRate": 51
+    "naverVoteRate": 51,
+    "id": 119
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/120",
@@ -36257,7 +36376,8 @@
         "contents": "Review content 12059"
       }
     ],
-    "naverVoteRate": 44
+    "naverVoteRate": 44,
+    "id": 120
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/121",
@@ -36574,7 +36694,8 @@
         "contents": "Review content 12159"
       }
     ],
-    "naverVoteRate": 13
+    "naverVoteRate": 13,
+    "id": 121
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/122",
@@ -36877,7 +36998,8 @@
         "contents": "Review content 12259"
       }
     ],
-    "naverVoteRate": 20
+    "naverVoteRate": 20,
+    "id": 122
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/123",
@@ -37175,7 +37297,8 @@
         "contents": "Review content 12359"
       }
     ],
-    "naverVoteRate": 68
+    "naverVoteRate": 68,
+    "id": 123
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/124",
@@ -37464,7 +37587,8 @@
         "contents": "Review content 12459"
       }
     ],
-    "naverVoteRate": 28
+    "naverVoteRate": 28,
+    "id": 124
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/125",
@@ -37773,7 +37897,8 @@
         "contents": "Review content 12559"
       }
     ],
-    "naverVoteRate": 13
+    "naverVoteRate": 13,
+    "id": 125
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/126",
@@ -38064,7 +38189,8 @@
         "contents": "Review content 12659"
       }
     ],
-    "naverVoteRate": 58
+    "naverVoteRate": 58,
+    "id": 126
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/127",
@@ -38380,7 +38506,8 @@
         "contents": "Review content 12759"
       }
     ],
-    "naverVoteRate": 33
+    "naverVoteRate": 33,
+    "id": 127
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/128",
@@ -38671,7 +38798,8 @@
         "contents": "Review content 12859"
       }
     ],
-    "naverVoteRate": 89
+    "naverVoteRate": 89,
+    "id": 128
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/129",
@@ -38971,7 +39099,8 @@
         "contents": "Review content 12959"
       }
     ],
-    "naverVoteRate": 98
+    "naverVoteRate": 98,
+    "id": 129
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/130",
@@ -39295,7 +39424,8 @@
         "contents": "Review content 13059"
       }
     ],
-    "naverVoteRate": 7
+    "naverVoteRate": 7,
+    "id": 130
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/131",
@@ -39615,7 +39745,8 @@
         "contents": "Review content 13159"
       }
     ],
-    "naverVoteRate": 14
+    "naverVoteRate": 14,
+    "id": 131
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/132",
@@ -39921,7 +40052,8 @@
         "contents": "Review content 13259"
       }
     ],
-    "naverVoteRate": 82
+    "naverVoteRate": 82,
+    "id": 132
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/133",
@@ -40230,7 +40362,8 @@
         "contents": "Review content 13359"
       }
     ],
-    "naverVoteRate": 41
+    "naverVoteRate": 41,
+    "id": 133
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/134",
@@ -40532,7 +40665,8 @@
         "contents": "Review content 13459"
       }
     ],
-    "naverVoteRate": 99
+    "naverVoteRate": 99,
+    "id": 134
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/135",
@@ -40830,7 +40964,8 @@
         "contents": "Review content 13559"
       }
     ],
-    "naverVoteRate": 62
+    "naverVoteRate": 62,
+    "id": 135
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/136",
@@ -41120,7 +41255,8 @@
         "contents": "Review content 13659"
       }
     ],
-    "naverVoteRate": 96
+    "naverVoteRate": 96,
+    "id": 136
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/137",
@@ -41444,7 +41580,8 @@
         "contents": "Review content 13759"
       }
     ],
-    "naverVoteRate": 16
+    "naverVoteRate": 16,
+    "id": 137
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/138",
@@ -41768,7 +41905,8 @@
         "contents": "Review content 13859"
       }
     ],
-    "naverVoteRate": 16
+    "naverVoteRate": 16,
+    "id": 138
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/139",
@@ -42086,7 +42224,8 @@
         "contents": "Review content 13959"
       }
     ],
-    "naverVoteRate": 31
+    "naverVoteRate": 31,
+    "id": 139
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/140",
@@ -42373,7 +42512,8 @@
         "contents": "Review content 14059"
       }
     ],
-    "naverVoteRate": 83
+    "naverVoteRate": 83,
+    "id": 140
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/141",
@@ -42676,7 +42816,8 @@
         "contents": "Review content 14159"
       }
     ],
-    "naverVoteRate": 5
+    "naverVoteRate": 5,
+    "id": 141
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/142",
@@ -42984,7 +43125,8 @@
         "contents": "Review content 14259"
       }
     ],
-    "naverVoteRate": 21
+    "naverVoteRate": 21,
+    "id": 142
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/143",
@@ -43283,7 +43425,8 @@
         "contents": "Review content 14359"
       }
     ],
-    "naverVoteRate": 45
+    "naverVoteRate": 45,
+    "id": 143
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/144",
@@ -43596,7 +43739,8 @@
         "contents": "Review content 14459"
       }
     ],
-    "naverVoteRate": 36
+    "naverVoteRate": 36,
+    "id": 144
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/145",
@@ -43879,7 +44023,8 @@
         "contents": "Review content 14559"
       }
     ],
-    "naverVoteRate": 44
+    "naverVoteRate": 44,
+    "id": 145
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/146",
@@ -44182,7 +44327,8 @@
         "contents": "Review content 14659"
       }
     ],
-    "naverVoteRate": 44
+    "naverVoteRate": 44,
+    "id": 146
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/147",
@@ -44488,7 +44634,8 @@
         "contents": "Review content 14759"
       }
     ],
-    "naverVoteRate": 34
+    "naverVoteRate": 34,
+    "id": 147
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/148",
@@ -44801,7 +44948,8 @@
         "contents": "Review content 14859"
       }
     ],
-    "naverVoteRate": 11
+    "naverVoteRate": 11,
+    "id": 148
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/149",
@@ -45106,7 +45254,8 @@
         "contents": "Review content 14959"
       }
     ],
-    "naverVoteRate": 51
+    "naverVoteRate": 51,
+    "id": 149
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/150",
@@ -45415,7 +45564,8 @@
         "contents": "Review content 15059"
       }
     ],
-    "naverVoteRate": 6
+    "naverVoteRate": 6,
+    "id": 150
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/151",
@@ -45719,7 +45869,8 @@
         "contents": "Review content 15159"
       }
     ],
-    "naverVoteRate": 25
+    "naverVoteRate": 25,
+    "id": 151
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/152",
@@ -46034,7 +46185,8 @@
         "contents": "Review content 15259"
       }
     ],
-    "naverVoteRate": 59
+    "naverVoteRate": 59,
+    "id": 152
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/153",
@@ -46321,7 +46473,8 @@
         "contents": "Review content 15359"
       }
     ],
-    "naverVoteRate": 44
+    "naverVoteRate": 44,
+    "id": 153
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/154",
@@ -46642,7 +46795,8 @@
         "contents": "Review content 15459"
       }
     ],
-    "naverVoteRate": 39
+    "naverVoteRate": 39,
+    "id": 154
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/155",
@@ -46952,7 +47106,8 @@
         "contents": "Review content 15559"
       }
     ],
-    "naverVoteRate": 46
+    "naverVoteRate": 46,
+    "id": 155
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/156",
@@ -47258,7 +47413,8 @@
         "contents": "Review content 15659"
       }
     ],
-    "naverVoteRate": 82
+    "naverVoteRate": 82,
+    "id": 156
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/157",
@@ -47572,7 +47728,8 @@
         "contents": "Review content 15759"
       }
     ],
-    "naverVoteRate": 59
+    "naverVoteRate": 59,
+    "id": 157
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/158",
@@ -47892,7 +48049,8 @@
         "contents": "Review content 15859"
       }
     ],
-    "naverVoteRate": 3
+    "naverVoteRate": 3,
+    "id": 158
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/159",
@@ -48185,7 +48343,8 @@
         "contents": "Review content 15959"
       }
     ],
-    "naverVoteRate": 44
+    "naverVoteRate": 44,
+    "id": 159
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/160",
@@ -48494,7 +48653,8 @@
         "contents": "Review content 16059"
       }
     ],
-    "naverVoteRate": 89
+    "naverVoteRate": 89,
+    "id": 160
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/161",
@@ -48804,7 +48964,8 @@
         "contents": "Review content 16159"
       }
     ],
-    "naverVoteRate": 18
+    "naverVoteRate": 18,
+    "id": 161
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/162",
@@ -49110,7 +49271,8 @@
         "contents": "Review content 16259"
       }
     ],
-    "naverVoteRate": 85
+    "naverVoteRate": 85,
+    "id": 162
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/163",
@@ -49408,7 +49570,8 @@
         "contents": "Review content 16359"
       }
     ],
-    "naverVoteRate": 48
+    "naverVoteRate": 48,
+    "id": 163
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/164",
@@ -49729,7 +49892,8 @@
         "contents": "Review content 16459"
       }
     ],
-    "naverVoteRate": 58
+    "naverVoteRate": 58,
+    "id": 164
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/165",
@@ -50044,7 +50208,8 @@
         "contents": "Review content 16559"
       }
     ],
-    "naverVoteRate": 65
+    "naverVoteRate": 65,
+    "id": 165
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/166",
@@ -50334,7 +50499,8 @@
         "contents": "Review content 16659"
       }
     ],
-    "naverVoteRate": 34
+    "naverVoteRate": 34,
+    "id": 166
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/167",
@@ -50645,7 +50811,8 @@
         "contents": "Review content 16759"
       }
     ],
-    "naverVoteRate": 57
+    "naverVoteRate": 57,
+    "id": 167
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/168",
@@ -50956,7 +51123,8 @@
         "contents": "Review content 16859"
       }
     ],
-    "naverVoteRate": 7
+    "naverVoteRate": 7,
+    "id": 168
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/169",
@@ -51268,7 +51436,8 @@
         "contents": "Review content 16959"
       }
     ],
-    "naverVoteRate": 13
+    "naverVoteRate": 13,
+    "id": 169
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/170",
@@ -51569,7 +51738,8 @@
         "contents": "Review content 17059"
       }
     ],
-    "naverVoteRate": 100
+    "naverVoteRate": 100,
+    "id": 170
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/171",
@@ -51890,7 +52060,8 @@
         "contents": "Review content 17159"
       }
     ],
-    "naverVoteRate": 43
+    "naverVoteRate": 43,
+    "id": 171
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/172",
@@ -52206,7 +52377,8 @@
         "contents": "Review content 17259"
       }
     ],
-    "naverVoteRate": 65
+    "naverVoteRate": 65,
+    "id": 172
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/173",
@@ -52505,7 +52677,8 @@
         "contents": "Review content 17359"
       }
     ],
-    "naverVoteRate": 92
+    "naverVoteRate": 92,
+    "id": 173
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/174",
@@ -52810,7 +52983,8 @@
         "contents": "Review content 17459"
       }
     ],
-    "naverVoteRate": 98
+    "naverVoteRate": 98,
+    "id": 174
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/175",
@@ -53096,7 +53270,8 @@
         "contents": "Review content 17559"
       }
     ],
-    "naverVoteRate": 44
+    "naverVoteRate": 44,
+    "id": 175
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/176",
@@ -53398,7 +53573,8 @@
         "contents": "Review content 17659"
       }
     ],
-    "naverVoteRate": 80
+    "naverVoteRate": 80,
+    "id": 176
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/177",
@@ -53689,7 +53865,8 @@
         "contents": "Review content 17759"
       }
     ],
-    "naverVoteRate": 25
+    "naverVoteRate": 25,
+    "id": 177
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/178",
@@ -54010,7 +54187,8 @@
         "contents": "Review content 17859"
       }
     ],
-    "naverVoteRate": 42
+    "naverVoteRate": 42,
+    "id": 178
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/179",
@@ -54317,7 +54495,8 @@
         "contents": "Review content 17959"
       }
     ],
-    "naverVoteRate": 75
+    "naverVoteRate": 75,
+    "id": 179
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/180",
@@ -54632,7 +54811,8 @@
         "contents": "Review content 18059"
       }
     ],
-    "naverVoteRate": 66
+    "naverVoteRate": 66,
+    "id": 180
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/181",
@@ -54939,7 +55119,8 @@
         "contents": "Review content 18159"
       }
     ],
-    "naverVoteRate": 48
+    "naverVoteRate": 48,
+    "id": 181
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/182",
@@ -55252,7 +55433,8 @@
         "contents": "Review content 18259"
       }
     ],
-    "naverVoteRate": 86
+    "naverVoteRate": 86,
+    "id": 182
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/183",
@@ -55570,7 +55752,8 @@
         "contents": "Review content 18359"
       }
     ],
-    "naverVoteRate": 45
+    "naverVoteRate": 45,
+    "id": 183
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/184",
@@ -55870,7 +56053,8 @@
         "contents": "Review content 18459"
       }
     ],
-    "naverVoteRate": 99
+    "naverVoteRate": 99,
+    "id": 184
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/185",
@@ -56190,7 +56374,8 @@
         "contents": "Review content 18559"
       }
     ],
-    "naverVoteRate": 32
+    "naverVoteRate": 32,
+    "id": 185
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/186",
@@ -56495,7 +56680,8 @@
         "contents": "Review content 18659"
       }
     ],
-    "naverVoteRate": 69
+    "naverVoteRate": 69,
+    "id": 186
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/187",
@@ -56789,7 +56975,8 @@
         "contents": "Review content 18759"
       }
     ],
-    "naverVoteRate": 44
+    "naverVoteRate": 44,
+    "id": 187
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/188",
@@ -57104,7 +57291,8 @@
         "contents": "Review content 18859"
       }
     ],
-    "naverVoteRate": 36
+    "naverVoteRate": 36,
+    "id": 188
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/189",
@@ -57413,7 +57601,8 @@
         "contents": "Review content 18959"
       }
     ],
-    "naverVoteRate": 52
+    "naverVoteRate": 52,
+    "id": 189
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/190",
@@ -57712,7 +57901,8 @@
         "contents": "Review content 19059"
       }
     ],
-    "naverVoteRate": 47
+    "naverVoteRate": 47,
+    "id": 190
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/191",
@@ -58012,7 +58202,8 @@
         "contents": "Review content 19159"
       }
     ],
-    "naverVoteRate": 82
+    "naverVoteRate": 82,
+    "id": 191
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/192",
@@ -58325,7 +58516,8 @@
         "contents": "Review content 19259"
       }
     ],
-    "naverVoteRate": 84
+    "naverVoteRate": 84,
+    "id": 192
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/193",
@@ -58614,7 +58806,8 @@
         "contents": "Review content 19359"
       }
     ],
-    "naverVoteRate": 38
+    "naverVoteRate": 38,
+    "id": 193
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/194",
@@ -58912,7 +59105,8 @@
         "contents": "Review content 19459"
       }
     ],
-    "naverVoteRate": 43
+    "naverVoteRate": 43,
+    "id": 194
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/195",
@@ -59233,7 +59427,8 @@
         "contents": "Review content 19559"
       }
     ],
-    "naverVoteRate": 20
+    "naverVoteRate": 20,
+    "id": 195
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/196",
@@ -59546,7 +59741,8 @@
         "contents": "Review content 19659"
       }
     ],
-    "naverVoteRate": 10
+    "naverVoteRate": 10,
+    "id": 196
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/197",
@@ -59850,7 +60046,8 @@
         "contents": "Review content 19759"
       }
     ],
-    "naverVoteRate": 56
+    "naverVoteRate": 56,
+    "id": 197
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/198",
@@ -60148,7 +60345,8 @@
         "contents": "Review content 19859"
       }
     ],
-    "naverVoteRate": 69
+    "naverVoteRate": 69,
+    "id": 198
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/199",
@@ -60452,7 +60650,8 @@
         "contents": "Review content 19959"
       }
     ],
-    "naverVoteRate": 77
+    "naverVoteRate": 77,
+    "id": 199
   },
   {
     "kakaoPlaceUri": "https://place.kakao.com/200",
@@ -60760,6 +60959,7 @@
         "contents": "Review content 20059"
       }
     ],
-    "naverVoteRate": 98
+    "naverVoteRate": 98,
+    "id": 200
   }
 ]
