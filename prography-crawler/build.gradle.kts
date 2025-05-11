@@ -20,5 +20,5 @@ dependencyManagement {
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
-    workingDir = rootProject.projectDir      // 항상 루트에서 실행되게
+    workingDir = rootProject.projectDir // 항상 루트에서 실행되게
 }

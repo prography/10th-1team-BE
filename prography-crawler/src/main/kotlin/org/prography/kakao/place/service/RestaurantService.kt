@@ -1,7 +1,7 @@
 package org.prography.kakao.place.service
 
-import org.prography.kakao.place.external.KakaoFeignClient
 import org.prography.kakao.place.dto.KakaoPlaceData
+import org.prography.kakao.place.external.KakaoFeignClient
 import org.prography.restaurant.domain.RawRestaurantData
 import org.prography.restaurant.domain.RawRestaurantDataRepository
 import org.slf4j.LoggerFactory
@@ -15,11 +15,10 @@ class RestaurantService(
     @Qualifier("mainScrapExecutor")
     private val executor: Executor,
     private val kakaoFeignClient: KakaoFeignClient,
-    private val rawRestaurantDataRepository: RawRestaurantDataRepository
+    private val rawRestaurantDataRepository: RawRestaurantDataRepository,
 ) {
     companion object {
         private val log = LoggerFactory.getLogger(RestaurantService::class.java)
-        private const val SMALL_SCALE_FACTOR = 0.002
         private const val FOOD_CATEGORY_CODE = "FD6"
         private const val PAGE_MAX_SIZE = 15
         private const val THREAD_SLEEP_MILLIS = 10_000L
@@ -53,23 +52,24 @@ class RestaurantService(
 
     fun searchDataAsync(
         dongCode: String,
-        rectParam: String
-    ): CompletableFuture<Void> = CompletableFuture.runAsync({
-        try {
-            sleepThread()
-            log.info("check All From {}", rectParam)
-            val placeList = getAllRestaurantsInRect(rectParam)
-            log.info("Found {} restaurant data.", placeList.size)
-            placeList.forEach { savePlace(dongCode, it) }
-        } catch (e: Exception) {
-            log.error(
-                "Error in range: [{}] - {}",
-                rectParam,
-                e.message,
-                e
-            )
-        }
-    }, executor)
+        rectParam: String,
+    ): CompletableFuture<Void> =
+        CompletableFuture.runAsync({
+            try {
+                sleepThread()
+                log.info("check All From {}", rectParam)
+                val placeList = getAllRestaurantsInRect(rectParam)
+                log.info("Found {} restaurant data.", placeList.size)
+                placeList.forEach { savePlace(dongCode, it) }
+            } catch (e: Exception) {
+                log.error(
+                    "Error in range: [{}] - {}",
+                    rectParam,
+                    e.message,
+                    e,
+                )
+            }
+        }, executor)
 
     private fun sleepThread() {
         try {
@@ -83,59 +83,52 @@ class RestaurantService(
     private fun getAllRestaurantsInRect(rectParam: String): List<KakaoPlaceData> {
         val kakaoPlaces = mutableListOf<KakaoPlaceData>()
         var page = 1
-        val firstResponse = kakaoFeignClient.searchByCategory(
-            FOOD_CATEGORY_CODE,
-            page,
-            rectParam
-        )
+        val firstResponse =
+            kakaoFeignClient.searchByCategory(
+                FOOD_CATEGORY_CODE,
+                page,
+                rectParam,
+            )
         if (firstResponse.meta.total_count > KAKAO_PAGE_SIZE_LIMIT) {
             log.error(
                 "Place Size is {} (in {})",
                 firstResponse.meta.total_count,
-                rectParam
+                rectParam,
             )
         }
         kakaoPlaces += firstResponse.documents
         val endPage =
             Math.ceil(firstResponse.meta.total_count.toDouble() / PAGE_MAX_SIZE).toInt()
         for (p in 2..endPage) {
-            kakaoPlaces += kakaoFeignClient
-                .searchByCategory(
-                    FOOD_CATEGORY_CODE,
-                    p,
-                    rectParam
-                )
-                .documents
+            kakaoPlaces +=
+                kakaoFeignClient
+                    .searchByCategory(
+                        FOOD_CATEGORY_CODE,
+                        p,
+                        rectParam,
+                    )
+                    .documents
         }
         return kakaoPlaces
     }
 
-    private fun toRectParam(
-        fromLng: Double,
-        fromLat: Double,
-        toLng: Double,
-        toLat: Double
-    ): String =
-        "%f,%f,%f,%f".format(fromLng, fromLat, toLng, toLat)
-
-    private fun savePlace(dongCode: String, kakaoPlaceData: KakaoPlaceData) {
+    private fun savePlace(
+        dongCode: String,
+        kakaoPlaceData: KakaoPlaceData,
+    ) {
         val id = kakaoPlaceData.getDocId()
         if (isAlreadySaved(id)) {
             log.info("Document with id {} already exists.", id)
             return
         }
-        persistPlace(id, dongCode, kakaoPlaceData)
-    }
-
-    private fun isAlreadySaved(docId: String): Boolean =
-        rawRestaurantDataRepository.existsById(docId)
-
-    private fun persistPlace(id: String, dongCode: String, kakaoPlaceData: KakaoPlaceData) {
-        val data = RawRestaurantData(
-            id = id,
-            dongCode = dongCode,
-            kakaoPlaceData = kakaoPlaceData.toKakaoInfo()
-        )
+        val data =
+            RawRestaurantData(
+                id = id,
+                dongCode = dongCode,
+                kakaoPlaceData = kakaoPlaceData.toKakaoInfo(),
+            )
         rawRestaurantDataRepository.save(data)
     }
+
+    private fun isAlreadySaved(docId: String): Boolean = rawRestaurantDataRepository.existsById(docId)
 }

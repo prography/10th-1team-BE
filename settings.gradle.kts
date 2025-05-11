@@ -10,5 +10,5 @@ pluginManagement {
 include(
     "prography-crawler",
     "prography-search",
-    "prography-bff"
+    "prography-bff",
 )

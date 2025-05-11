@@ -6,7 +6,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
 
 @Configuration
 class ScrapThreadPoolConfig {
-
     @Bean(name = ["mainScrapExecutor"])
     fun mainScrapExecutor(): ThreadPoolTaskExecutor {
         val executor = ThreadPoolTaskExecutor()

@@ -12,10 +12,8 @@ data class GeoDongInfo(
      */
     @Id
     val dongCode: String,
-
     var name: String,
-
-    ) {
+) {
     var kakaoInfoUpdatedAt: LocalDateTime? = null
     var naverInfoUpdatedAt: LocalDateTime? = null
     var kakaoReviewUpdatedAt: LocalDateTime? = null

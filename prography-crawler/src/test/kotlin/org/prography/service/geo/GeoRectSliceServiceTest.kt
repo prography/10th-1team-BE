@@ -21,23 +21,22 @@ class GeoRectSliceServiceTest {
 
     @Test
     fun sliceTest() {
-        val rects = geoRectSliceService.sliceRectFromFeature(
-            "서울특별시 종로구 사직동", 0.001
-        )
-        val dongCode = geoRectSliceService.getDongCodeFromAdmName(
-            "서울특별시 종로구 사직동"
-        )
+        val rects =
+            geoRectSliceService.sliceRectFromFeature(
+                "서울특별시 종로구 사직동",
+                0.001,
+            )
+        val dongCode =
+            geoRectSliceService.getDongCodeFromAdmName(
+                "서울특별시 종로구 사직동",
+            )
 
         // searchDataAsync 가 CompletableFuture<Unit> 을 반환한다고 가정
-        val futures = rects.map { rect ->
-            restaurantService.searchDataAsync(dongCode, rect)
-        }
+        val futures =
+            rects.map { rect ->
+                restaurantService.searchDataAsync(dongCode, rect)
+            }
 
-        CompletableFuture.allOf(*futures.toTypedArray()).join()  // 💡 전부 끝날 때까지 대기
-    }
-
-    @Test
-    fun sliceTest2() {
-        kakaoReviewService.searchAllReviewsAsync()
+        CompletableFuture.allOf(*futures.toTypedArray()).join() // 💡 전부 끝날 때까지 대기
     }
 }
