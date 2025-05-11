@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# 1) 모든 소스셋( main + test ) 자동 포맷
+./gradlew ktlintFormat ktlintTestSourceSetFormat --quiet
+
+# 2) 수정 파일 stage
+git add -u
+
+# 3) 위반 검사 ― 실패 시 커밋 중단
+./gradlew ktlintCheck ktlintTestSourceSetCheck --quiet
+if [ $? -ne 0 ]; then
+  echo "❌ ktlint 오류: 커밋이 중단됩니다."
+  exit 1
+fi

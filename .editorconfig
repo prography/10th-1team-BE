@@ -1,0 +1,9 @@
+# .editorconfig
+root = true
+
+[*.{kt,kts}]
+
+
+# ktlint에서 자동으로 수정하지 않는 예외 제거
+ktlint_standard_no-wildcard-imports = disabled
+ktlint_standard_max-line-length = disabled
