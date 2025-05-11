@@ -1,5 +1,0 @@
-rootProject.name = '10th-1team-BE'
-
-include 'prography-crawler'
-include 'prography-search'
-include 'prography-bff'
