@@ -1,6 +1,6 @@
-package org.prography.search.model.enumeration;
+package org.prography.search.model.enumeration
 
-public enum FoodCategory {
+enum class FoodCategory {
     KOREAN,
     WESTERN,
     CHINESE,
@@ -10,5 +10,5 @@ public enum FoodCategory {
     STREET_FOOD,
     FAST_FOOD,
     ASIAN,
-    ETC
+    ETC,
 }

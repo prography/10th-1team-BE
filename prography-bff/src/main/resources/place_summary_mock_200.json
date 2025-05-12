@@ -1,0 +1,2002 @@
+[
+  {
+    "id": 1,
+    "name": "Place 1",
+    "addressName": "1 Sample Address",
+    "roadAddressName": "1 Sample Road Address",
+    "kakaoReviews": 118,
+    "kakaoScore": 1.8,
+    "naverReviews": 331,
+    "naverScore": 3.6
+  },
+  {
+    "id": 2,
+    "name": "Place 2",
+    "addressName": "2 Sample Address",
+    "roadAddressName": "2 Sample Road Address",
+    "kakaoReviews": 272,
+    "kakaoScore": 3.0,
+    "naverReviews": 108,
+    "naverScore": 3.1
+  },
+  {
+    "id": 3,
+    "name": "Place 3",
+    "addressName": "3 Sample Address",
+    "roadAddressName": "3 Sample Road Address",
+    "kakaoReviews": 193,
+    "kakaoScore": 1.0,
+    "naverReviews": 48,
+    "naverScore": 4.5
+  },
+  {
+    "id": 4,
+    "name": "Place 4",
+    "addressName": "4 Sample Address",
+    "roadAddressName": "4 Sample Road Address",
+    "kakaoReviews": 147,
+    "kakaoScore": 3.9,
+    "naverReviews": 199,
+    "naverScore": 4.6
+  },
+  {
+    "id": 5,
+    "name": "Place 5",
+    "addressName": "5 Sample Address",
+    "roadAddressName": "5 Sample Road Address",
+    "kakaoReviews": 421,
+    "kakaoScore": 3.2,
+    "naverReviews": 438,
+    "naverScore": 1.7
+  },
+  {
+    "id": 6,
+    "name": "Place 6",
+    "addressName": "6 Sample Address",
+    "roadAddressName": "6 Sample Road Address",
+    "kakaoReviews": 245,
+    "kakaoScore": 3.4,
+    "naverReviews": 218,
+    "naverScore": 4.4
+  },
+  {
+    "id": 7,
+    "name": "Place 7",
+    "addressName": "7 Sample Address",
+    "roadAddressName": "7 Sample Road Address",
+    "kakaoReviews": 435,
+    "kakaoScore": 3.8,
+    "naverReviews": 100,
+    "naverScore": 4.5
+  },
+  {
+    "id": 8,
+    "name": "Place 8",
+    "addressName": "8 Sample Address",
+    "roadAddressName": "8 Sample Road Address",
+    "kakaoReviews": 477,
+    "kakaoScore": 4.4,
+    "naverReviews": 280,
+    "naverScore": 4.0
+  },
+  {
+    "id": 9,
+    "name": "Place 9",
+    "addressName": "9 Sample Address",
+    "roadAddressName": "9 Sample Road Address",
+    "kakaoReviews": 270,
+    "kakaoScore": 3.8,
+    "naverReviews": 349,
+    "naverScore": 3.7
+  },
+  {
+    "id": 10,
+    "name": "Place 10",
+    "addressName": "10 Sample Address",
+    "roadAddressName": "10 Sample Road Address",
+    "kakaoReviews": 8,
+    "kakaoScore": 1.1,
+    "naverReviews": 265,
+    "naverScore": 4.6
+  },
+  {
+    "id": 11,
+    "name": "Place 11",
+    "addressName": "11 Sample Address",
+    "roadAddressName": "11 Sample Road Address",
+    "kakaoReviews": 380,
+    "kakaoScore": 2.9,
+    "naverReviews": 214,
+    "naverScore": 2.0
+  },
+  {
+    "id": 12,
+    "name": "Place 12",
+    "addressName": "12 Sample Address",
+    "roadAddressName": "12 Sample Road Address",
+    "kakaoReviews": 12,
+    "kakaoScore": 1.4,
+    "naverReviews": 189,
+    "naverScore": 1.7
+  },
+  {
+    "id": 13,
+    "name": "Place 13",
+    "addressName": "13 Sample Address",
+    "roadAddressName": "13 Sample Road Address",
+    "kakaoReviews": 401,
+    "kakaoScore": 3.7,
+    "naverReviews": 58,
+    "naverScore": 3.5
+  },
+  {
+    "id": 14,
+    "name": "Place 14",
+    "addressName": "14 Sample Address",
+    "roadAddressName": "14 Sample Road Address",
+    "kakaoReviews": 412,
+    "kakaoScore": 2.6,
+    "naverReviews": 119,
+    "naverScore": 4.1
+  },
+  {
+    "id": 15,
+    "name": "Place 15",
+    "addressName": "15 Sample Address",
+    "roadAddressName": "15 Sample Road Address",
+    "kakaoReviews": 285,
+    "kakaoScore": 3.9,
+    "naverReviews": 37,
+    "naverScore": 3.2
+  },
+  {
+    "id": 16,
+    "name": "Place 16",
+    "addressName": "16 Sample Address",
+    "roadAddressName": "16 Sample Road Address",
+    "kakaoReviews": 186,
+    "kakaoScore": 2.1,
+    "naverReviews": 397,
+    "naverScore": 4.6
+  },
+  {
+    "id": 17,
+    "name": "Place 17",
+    "addressName": "17 Sample Address",
+    "roadAddressName": "17 Sample Road Address",
+    "kakaoReviews": 59,
+    "kakaoScore": 2.6,
+    "naverReviews": 94,
+    "naverScore": 1.2
+  },
+  {
+    "id": 18,
+    "name": "Place 18",
+    "addressName": "18 Sample Address",
+    "roadAddressName": "18 Sample Road Address",
+    "kakaoReviews": 169,
+    "kakaoScore": 3.7,
+    "naverReviews": 111,
+    "naverScore": 4.5
+  },
+  {
+    "id": 19,
+    "name": "Place 19",
+    "addressName": "19 Sample Address",
+    "roadAddressName": "19 Sample Road Address",
+    "kakaoReviews": 203,
+    "kakaoScore": 1.2,
+    "naverReviews": 336,
+    "naverScore": 3.6
+  },
+  {
+    "id": 20,
+    "name": "Place 20",
+    "addressName": "20 Sample Address",
+    "roadAddressName": "20 Sample Road Address",
+    "kakaoReviews": 270,
+    "kakaoScore": 4.7,
+    "naverReviews": 467,
+    "naverScore": 4.4
+  },
+  {
+    "id": 21,
+    "name": "Place 21",
+    "addressName": "21 Sample Address",
+    "roadAddressName": "21 Sample Road Address",
+    "kakaoReviews": 273,
+    "kakaoScore": 3.2,
+    "naverReviews": 447,
+    "naverScore": 1.8
+  },
+  {
+    "id": 22,
+    "name": "Place 22",
+    "addressName": "22 Sample Address",
+    "roadAddressName": "22 Sample Road Address",
+    "kakaoReviews": 221,
+    "kakaoScore": 4.7,
+    "naverReviews": 106,
+    "naverScore": 3.9
+  },
+  {
+    "id": 23,
+    "name": "Place 23",
+    "addressName": "23 Sample Address",
+    "roadAddressName": "23 Sample Road Address",
+    "kakaoReviews": 479,
+    "kakaoScore": 2.7,
+    "naverReviews": 404,
+    "naverScore": 2.4
+  },
+  {
+    "id": 24,
+    "name": "Place 24",
+    "addressName": "24 Sample Address",
+    "roadAddressName": "24 Sample Road Address",
+    "kakaoReviews": 10,
+    "kakaoScore": 3.5,
+    "naverReviews": 133,
+    "naverScore": 4.2
+  },
+  {
+    "id": 25,
+    "name": "Place 25",
+    "addressName": "25 Sample Address",
+    "roadAddressName": "25 Sample Road Address",
+    "kakaoReviews": 354,
+    "kakaoScore": 3.2,
+    "naverReviews": 315,
+    "naverScore": 4.2
+  },
+  {
+    "id": 26,
+    "name": "Place 26",
+    "addressName": "26 Sample Address",
+    "roadAddressName": "26 Sample Road Address",
+    "kakaoReviews": 249,
+    "kakaoScore": 2.2,
+    "naverReviews": 233,
+    "naverScore": 3.9
+  },
+  {
+    "id": 27,
+    "name": "Place 27",
+    "addressName": "27 Sample Address",
+    "roadAddressName": "27 Sample Road Address",
+    "kakaoReviews": 476,
+    "kakaoScore": 2.4,
+    "naverReviews": 447,
+    "naverScore": 4.9
+  },
+  {
+    "id": 28,
+    "name": "Place 28",
+    "addressName": "28 Sample Address",
+    "roadAddressName": "28 Sample Road Address",
+    "kakaoReviews": 315,
+    "kakaoScore": 2.4,
+    "naverReviews": 347,
+    "naverScore": 2.6
+  },
+  {
+    "id": 29,
+    "name": "Place 29",
+    "addressName": "29 Sample Address",
+    "roadAddressName": "29 Sample Road Address",
+    "kakaoReviews": 435,
+    "kakaoScore": 1.6,
+    "naverReviews": 323,
+    "naverScore": 3.3
+  },
+  {
+    "id": 30,
+    "name": "Place 30",
+    "addressName": "30 Sample Address",
+    "roadAddressName": "30 Sample Road Address",
+    "kakaoReviews": 482,
+    "kakaoScore": 3.7,
+    "naverReviews": 454,
+    "naverScore": 4.2
+  },
+  {
+    "id": 31,
+    "name": "Place 31",
+    "addressName": "31 Sample Address",
+    "roadAddressName": "31 Sample Road Address",
+    "kakaoReviews": 443,
+    "kakaoScore": 1.3,
+    "naverReviews": 464,
+    "naverScore": 4.3
+  },
+  {
+    "id": 32,
+    "name": "Place 32",
+    "addressName": "32 Sample Address",
+    "roadAddressName": "32 Sample Road Address",
+    "kakaoReviews": 129,
+    "kakaoScore": 3.1,
+    "naverReviews": 160,
+    "naverScore": 2.5
+  },
+  {
+    "id": 33,
+    "name": "Place 33",
+    "addressName": "33 Sample Address",
+    "roadAddressName": "33 Sample Road Address",
+    "kakaoReviews": 356,
+    "kakaoScore": 1.5,
+    "naverReviews": 465,
+    "naverScore": 4.5
+  },
+  {
+    "id": 34,
+    "name": "Place 34",
+    "addressName": "34 Sample Address",
+    "roadAddressName": "34 Sample Road Address",
+    "kakaoReviews": 407,
+    "kakaoScore": 2.7,
+    "naverReviews": 113,
+    "naverScore": 4.4
+  },
+  {
+    "id": 35,
+    "name": "Place 35",
+    "addressName": "35 Sample Address",
+    "roadAddressName": "35 Sample Road Address",
+    "kakaoReviews": 17,
+    "kakaoScore": 3.7,
+    "naverReviews": 291,
+    "naverScore": 1.1
+  },
+  {
+    "id": 36,
+    "name": "Place 36",
+    "addressName": "36 Sample Address",
+    "roadAddressName": "36 Sample Road Address",
+    "kakaoReviews": 274,
+    "kakaoScore": 1.5,
+    "naverReviews": 135,
+    "naverScore": 1.5
+  },
+  {
+    "id": 37,
+    "name": "Place 37",
+    "addressName": "37 Sample Address",
+    "roadAddressName": "37 Sample Road Address",
+    "kakaoReviews": 190,
+    "kakaoScore": 1.9,
+    "naverReviews": 388,
+    "naverScore": 4.6
+  },
+  {
+    "id": 38,
+    "name": "Place 38",
+    "addressName": "38 Sample Address",
+    "roadAddressName": "38 Sample Road Address",
+    "kakaoReviews": 457,
+    "kakaoScore": 3.2,
+    "naverReviews": 50,
+    "naverScore": 2.1
+  },
+  {
+    "id": 39,
+    "name": "Place 39",
+    "addressName": "39 Sample Address",
+    "roadAddressName": "39 Sample Road Address",
+    "kakaoReviews": 80,
+    "kakaoScore": 2.7,
+    "naverReviews": 422,
+    "naverScore": 2.0
+  },
+  {
+    "id": 40,
+    "name": "Place 40",
+    "addressName": "40 Sample Address",
+    "roadAddressName": "40 Sample Road Address",
+    "kakaoReviews": 257,
+    "kakaoScore": 3.3,
+    "naverReviews": 390,
+    "naverScore": 1.1
+  },
+  {
+    "id": 41,
+    "name": "Place 41",
+    "addressName": "41 Sample Address",
+    "roadAddressName": "41 Sample Road Address",
+    "kakaoReviews": 299,
+    "kakaoScore": 4.6,
+    "naverReviews": 500,
+    "naverScore": 1.7
+  },
+  {
+    "id": 42,
+    "name": "Place 42",
+    "addressName": "42 Sample Address",
+    "roadAddressName": "42 Sample Road Address",
+    "kakaoReviews": 444,
+    "kakaoScore": 2.3,
+    "naverReviews": 210,
+    "naverScore": 4.1
+  },
+  {
+    "id": 43,
+    "name": "Place 43",
+    "addressName": "43 Sample Address",
+    "roadAddressName": "43 Sample Road Address",
+    "kakaoReviews": 24,
+    "kakaoScore": 1.8,
+    "naverReviews": 226,
+    "naverScore": 5.0
+  },
+  {
+    "id": 44,
+    "name": "Place 44",
+    "addressName": "44 Sample Address",
+    "roadAddressName": "44 Sample Road Address",
+    "kakaoReviews": 435,
+    "kakaoScore": 4.8,
+    "naverReviews": 261,
+    "naverScore": 3.8
+  },
+  {
+    "id": 45,
+    "name": "Place 45",
+    "addressName": "45 Sample Address",
+    "roadAddressName": "45 Sample Road Address",
+    "kakaoReviews": 102,
+    "kakaoScore": 4.6,
+    "naverReviews": 422,
+    "naverScore": 1.5
+  },
+  {
+    "id": 46,
+    "name": "Place 46",
+    "addressName": "46 Sample Address",
+    "roadAddressName": "46 Sample Road Address",
+    "kakaoReviews": 428,
+    "kakaoScore": 1.2,
+    "naverReviews": 131,
+    "naverScore": 4.8
+  },
+  {
+    "id": 47,
+    "name": "Place 47",
+    "addressName": "47 Sample Address",
+    "roadAddressName": "47 Sample Road Address",
+    "kakaoReviews": 189,
+    "kakaoScore": 3.0,
+    "naverReviews": 277,
+    "naverScore": 2.5
+  },
+  {
+    "id": 48,
+    "name": "Place 48",
+    "addressName": "48 Sample Address",
+    "roadAddressName": "48 Sample Road Address",
+    "kakaoReviews": 352,
+    "kakaoScore": 2.3,
+    "naverReviews": 138,
+    "naverScore": 2.9
+  },
+  {
+    "id": 49,
+    "name": "Place 49",
+    "addressName": "49 Sample Address",
+    "roadAddressName": "49 Sample Road Address",
+    "kakaoReviews": 248,
+    "kakaoScore": 1.3,
+    "naverReviews": 335,
+    "naverScore": 2.5
+  },
+  {
+    "id": 50,
+    "name": "Place 50",
+    "addressName": "50 Sample Address",
+    "roadAddressName": "50 Sample Road Address",
+    "kakaoReviews": 319,
+    "kakaoScore": 1.2,
+    "naverReviews": 463,
+    "naverScore": 4.6
+  },
+  {
+    "id": 51,
+    "name": "Place 51",
+    "addressName": "51 Sample Address",
+    "roadAddressName": "51 Sample Road Address",
+    "kakaoReviews": 394,
+    "kakaoScore": 4.4,
+    "naverReviews": 301,
+    "naverScore": 3.5
+  },
+  {
+    "id": 52,
+    "name": "Place 52",
+    "addressName": "52 Sample Address",
+    "roadAddressName": "52 Sample Road Address",
+    "kakaoReviews": 69,
+    "kakaoScore": 1.1,
+    "naverReviews": 433,
+    "naverScore": 3.6
+  },
+  {
+    "id": 53,
+    "name": "Place 53",
+    "addressName": "53 Sample Address",
+    "roadAddressName": "53 Sample Road Address",
+    "kakaoReviews": 267,
+    "kakaoScore": 4.6,
+    "naverReviews": 244,
+    "naverScore": 4.4
+  },
+  {
+    "id": 54,
+    "name": "Place 54",
+    "addressName": "54 Sample Address",
+    "roadAddressName": "54 Sample Road Address",
+    "kakaoReviews": 276,
+    "kakaoScore": 1.6,
+    "naverReviews": 160,
+    "naverScore": 2.6
+  },
+  {
+    "id": 55,
+    "name": "Place 55",
+    "addressName": "55 Sample Address",
+    "roadAddressName": "55 Sample Road Address",
+    "kakaoReviews": 149,
+    "kakaoScore": 3.2,
+    "naverReviews": 484,
+    "naverScore": 3.8
+  },
+  {
+    "id": 56,
+    "name": "Place 56",
+    "addressName": "56 Sample Address",
+    "roadAddressName": "56 Sample Road Address",
+    "kakaoReviews": 192,
+    "kakaoScore": 3.7,
+    "naverReviews": 317,
+    "naverScore": 1.1
+  },
+  {
+    "id": 57,
+    "name": "Place 57",
+    "addressName": "57 Sample Address",
+    "roadAddressName": "57 Sample Road Address",
+    "kakaoReviews": 45,
+    "kakaoScore": 3.1,
+    "naverReviews": 457,
+    "naverScore": 3.9
+  },
+  {
+    "id": 58,
+    "name": "Place 58",
+    "addressName": "58 Sample Address",
+    "roadAddressName": "58 Sample Road Address",
+    "kakaoReviews": 226,
+    "kakaoScore": 1.4,
+    "naverReviews": 277,
+    "naverScore": 4.2
+  },
+  {
+    "id": 59,
+    "name": "Place 59",
+    "addressName": "59 Sample Address",
+    "roadAddressName": "59 Sample Road Address",
+    "kakaoReviews": 123,
+    "kakaoScore": 3.2,
+    "naverReviews": 160,
+    "naverScore": 4.3
+  },
+  {
+    "id": 60,
+    "name": "Place 60",
+    "addressName": "60 Sample Address",
+    "roadAddressName": "60 Sample Road Address",
+    "kakaoReviews": 344,
+    "kakaoScore": 2.9,
+    "naverReviews": 344,
+    "naverScore": 3.3
+  },
+  {
+    "id": 61,
+    "name": "Place 61",
+    "addressName": "61 Sample Address",
+    "roadAddressName": "61 Sample Road Address",
+    "kakaoReviews": 247,
+    "kakaoScore": 4.5,
+    "naverReviews": 115,
+    "naverScore": 1.1
+  },
+  {
+    "id": 62,
+    "name": "Place 62",
+    "addressName": "62 Sample Address",
+    "roadAddressName": "62 Sample Road Address",
+    "kakaoReviews": 235,
+    "kakaoScore": 1.6,
+    "naverReviews": 424,
+    "naverScore": 2.6
+  },
+  {
+    "id": 63,
+    "name": "Place 63",
+    "addressName": "63 Sample Address",
+    "roadAddressName": "63 Sample Road Address",
+    "kakaoReviews": 161,
+    "kakaoScore": 4.7,
+    "naverReviews": 173,
+    "naverScore": 1.2
+  },
+  {
+    "id": 64,
+    "name": "Place 64",
+    "addressName": "64 Sample Address",
+    "roadAddressName": "64 Sample Road Address",
+    "kakaoReviews": 411,
+    "kakaoScore": 3.1,
+    "naverReviews": 378,
+    "naverScore": 2.3
+  },
+  {
+    "id": 65,
+    "name": "Place 65",
+    "addressName": "65 Sample Address",
+    "roadAddressName": "65 Sample Road Address",
+    "kakaoReviews": 350,
+    "kakaoScore": 2.3,
+    "naverReviews": 324,
+    "naverScore": 3.3
+  },
+  {
+    "id": 66,
+    "name": "Place 66",
+    "addressName": "66 Sample Address",
+    "roadAddressName": "66 Sample Road Address",
+    "kakaoReviews": 141,
+    "kakaoScore": 2.9,
+    "naverReviews": 46,
+    "naverScore": 4.3
+  },
+  {
+    "id": 67,
+    "name": "Place 67",
+    "addressName": "67 Sample Address",
+    "roadAddressName": "67 Sample Road Address",
+    "kakaoReviews": 89,
+    "kakaoScore": 3.0,
+    "naverReviews": 80,
+    "naverScore": 3.4
+  },
+  {
+    "id": 68,
+    "name": "Place 68",
+    "addressName": "68 Sample Address",
+    "roadAddressName": "68 Sample Road Address",
+    "kakaoReviews": 233,
+    "kakaoScore": 4.2,
+    "naverReviews": 119,
+    "naverScore": 4.1
+  },
+  {
+    "id": 69,
+    "name": "Place 69",
+    "addressName": "69 Sample Address",
+    "roadAddressName": "69 Sample Road Address",
+    "kakaoReviews": 97,
+    "kakaoScore": 3.3,
+    "naverReviews": 210,
+    "naverScore": 1.3
+  },
+  {
+    "id": 70,
+    "name": "Place 70",
+    "addressName": "70 Sample Address",
+    "roadAddressName": "70 Sample Road Address",
+    "kakaoReviews": 416,
+    "kakaoScore": 4.8,
+    "naverReviews": 27,
+    "naverScore": 1.3
+  },
+  {
+    "id": 71,
+    "name": "Place 71",
+    "addressName": "71 Sample Address",
+    "roadAddressName": "71 Sample Road Address",
+    "kakaoReviews": 39,
+    "kakaoScore": 2.6,
+    "naverReviews": 228,
+    "naverScore": 1.1
+  },
+  {
+    "id": 72,
+    "name": "Place 72",
+    "addressName": "72 Sample Address",
+    "roadAddressName": "72 Sample Road Address",
+    "kakaoReviews": 325,
+    "kakaoScore": 2.7,
+    "naverReviews": 121,
+    "naverScore": 1.1
+  },
+  {
+    "id": 73,
+    "name": "Place 73",
+    "addressName": "73 Sample Address",
+    "roadAddressName": "73 Sample Road Address",
+    "kakaoReviews": 218,
+    "kakaoScore": 1.6,
+    "naverReviews": 446,
+    "naverScore": 2.6
+  },
+  {
+    "id": 74,
+    "name": "Place 74",
+    "addressName": "74 Sample Address",
+    "roadAddressName": "74 Sample Road Address",
+    "kakaoReviews": 176,
+    "kakaoScore": 3.2,
+    "naverReviews": 234,
+    "naverScore": 4.4
+  },
+  {
+    "id": 75,
+    "name": "Place 75",
+    "addressName": "75 Sample Address",
+    "roadAddressName": "75 Sample Road Address",
+    "kakaoReviews": 102,
+    "kakaoScore": 4.4,
+    "naverReviews": 282,
+    "naverScore": 5.0
+  },
+  {
+    "id": 76,
+    "name": "Place 76",
+    "addressName": "76 Sample Address",
+    "roadAddressName": "76 Sample Road Address",
+    "kakaoReviews": 297,
+    "kakaoScore": 2.0,
+    "naverReviews": 245,
+    "naverScore": 3.0
+  },
+  {
+    "id": 77,
+    "name": "Place 77",
+    "addressName": "77 Sample Address",
+    "roadAddressName": "77 Sample Road Address",
+    "kakaoReviews": 250,
+    "kakaoScore": 1.5,
+    "naverReviews": 220,
+    "naverScore": 1.3
+  },
+  {
+    "id": 78,
+    "name": "Place 78",
+    "addressName": "78 Sample Address",
+    "roadAddressName": "78 Sample Road Address",
+    "kakaoReviews": 25,
+    "kakaoScore": 2.6,
+    "naverReviews": 379,
+    "naverScore": 3.7
+  },
+  {
+    "id": 79,
+    "name": "Place 79",
+    "addressName": "79 Sample Address",
+    "roadAddressName": "79 Sample Road Address",
+    "kakaoReviews": 81,
+    "kakaoScore": 2.7,
+    "naverReviews": 364,
+    "naverScore": 1.9
+  },
+  {
+    "id": 80,
+    "name": "Place 80",
+    "addressName": "80 Sample Address",
+    "roadAddressName": "80 Sample Road Address",
+    "kakaoReviews": 187,
+    "kakaoScore": 1.1,
+    "naverReviews": 312,
+    "naverScore": 1.9
+  },
+  {
+    "id": 81,
+    "name": "Place 81",
+    "addressName": "81 Sample Address",
+    "roadAddressName": "81 Sample Road Address",
+    "kakaoReviews": 205,
+    "kakaoScore": 1.7,
+    "naverReviews": 49,
+    "naverScore": 3.5
+  },
+  {
+    "id": 82,
+    "name": "Place 82",
+    "addressName": "82 Sample Address",
+    "roadAddressName": "82 Sample Road Address",
+    "kakaoReviews": 83,
+    "kakaoScore": 4.2,
+    "naverReviews": 417,
+    "naverScore": 4.2
+  },
+  {
+    "id": 83,
+    "name": "Place 83",
+    "addressName": "83 Sample Address",
+    "roadAddressName": "83 Sample Road Address",
+    "kakaoReviews": 218,
+    "kakaoScore": 1.0,
+    "naverReviews": 439,
+    "naverScore": 1.7
+  },
+  {
+    "id": 84,
+    "name": "Place 84",
+    "addressName": "84 Sample Address",
+    "roadAddressName": "84 Sample Road Address",
+    "kakaoReviews": 24,
+    "kakaoScore": 2.7,
+    "naverReviews": 368,
+    "naverScore": 1.5
+  },
+  {
+    "id": 85,
+    "name": "Place 85",
+    "addressName": "85 Sample Address",
+    "roadAddressName": "85 Sample Road Address",
+    "kakaoReviews": 401,
+    "kakaoScore": 1.1,
+    "naverReviews": 172,
+    "naverScore": 3.8
+  },
+  {
+    "id": 86,
+    "name": "Place 86",
+    "addressName": "86 Sample Address",
+    "roadAddressName": "86 Sample Road Address",
+    "kakaoReviews": 426,
+    "kakaoScore": 4.5,
+    "naverReviews": 383,
+    "naverScore": 3.5
+  },
+  {
+    "id": 87,
+    "name": "Place 87",
+    "addressName": "87 Sample Address",
+    "roadAddressName": "87 Sample Road Address",
+    "kakaoReviews": 174,
+    "kakaoScore": 4.9,
+    "naverReviews": 450,
+    "naverScore": 3.7
+  },
+  {
+    "id": 88,
+    "name": "Place 88",
+    "addressName": "88 Sample Address",
+    "roadAddressName": "88 Sample Road Address",
+    "kakaoReviews": 181,
+    "kakaoScore": 2.6,
+    "naverReviews": 8,
+    "naverScore": 3.3
+  },
+  {
+    "id": 89,
+    "name": "Place 89",
+    "addressName": "89 Sample Address",
+    "roadAddressName": "89 Sample Road Address",
+    "kakaoReviews": 234,
+    "kakaoScore": 2.6,
+    "naverReviews": 467,
+    "naverScore": 1.6
+  },
+  {
+    "id": 90,
+    "name": "Place 90",
+    "addressName": "90 Sample Address",
+    "roadAddressName": "90 Sample Road Address",
+    "kakaoReviews": 399,
+    "kakaoScore": 3.7,
+    "naverReviews": 350,
+    "naverScore": 3.8
+  },
+  {
+    "id": 91,
+    "name": "Place 91",
+    "addressName": "91 Sample Address",
+    "roadAddressName": "91 Sample Road Address",
+    "kakaoReviews": 22,
+    "kakaoScore": 4.4,
+    "naverReviews": 113,
+    "naverScore": 1.6
+  },
+  {
+    "id": 92,
+    "name": "Place 92",
+    "addressName": "92 Sample Address",
+    "roadAddressName": "92 Sample Road Address",
+    "kakaoReviews": 28,
+    "kakaoScore": 1.6,
+    "naverReviews": 389,
+    "naverScore": 1.0
+  },
+  {
+    "id": 93,
+    "name": "Place 93",
+    "addressName": "93 Sample Address",
+    "roadAddressName": "93 Sample Road Address",
+    "kakaoReviews": 356,
+    "kakaoScore": 3.3,
+    "naverReviews": 379,
+    "naverScore": 1.4
+  },
+  {
+    "id": 94,
+    "name": "Place 94",
+    "addressName": "94 Sample Address",
+    "roadAddressName": "94 Sample Road Address",
+    "kakaoReviews": 379,
+    "kakaoScore": 4.4,
+    "naverReviews": 458,
+    "naverScore": 2.4
+  },
+  {
+    "id": 95,
+    "name": "Place 95",
+    "addressName": "95 Sample Address",
+    "roadAddressName": "95 Sample Road Address",
+    "kakaoReviews": 454,
+    "kakaoScore": 2.8,
+    "naverReviews": 68,
+    "naverScore": 3.3
+  },
+  {
+    "id": 96,
+    "name": "Place 96",
+    "addressName": "96 Sample Address",
+    "roadAddressName": "96 Sample Road Address",
+    "kakaoReviews": 271,
+    "kakaoScore": 3.9,
+    "naverReviews": 87,
+    "naverScore": 1.2
+  },
+  {
+    "id": 97,
+    "name": "Place 97",
+    "addressName": "97 Sample Address",
+    "roadAddressName": "97 Sample Road Address",
+    "kakaoReviews": 139,
+    "kakaoScore": 3.9,
+    "naverReviews": 378,
+    "naverScore": 3.9
+  },
+  {
+    "id": 98,
+    "name": "Place 98",
+    "addressName": "98 Sample Address",
+    "roadAddressName": "98 Sample Road Address",
+    "kakaoReviews": 108,
+    "kakaoScore": 1.7,
+    "naverReviews": 463,
+    "naverScore": 3.9
+  },
+  {
+    "id": 99,
+    "name": "Place 99",
+    "addressName": "99 Sample Address",
+    "roadAddressName": "99 Sample Road Address",
+    "kakaoReviews": 395,
+    "kakaoScore": 3.3,
+    "naverReviews": 421,
+    "naverScore": 1.5
+  },
+  {
+    "id": 100,
+    "name": "Place 100",
+    "addressName": "100 Sample Address",
+    "roadAddressName": "100 Sample Road Address",
+    "kakaoReviews": 37,
+    "kakaoScore": 2.6,
+    "naverReviews": 3,
+    "naverScore": 1.2
+  },
+  {
+    "id": 101,
+    "name": "Place 101",
+    "addressName": "101 Sample Address",
+    "roadAddressName": "101 Sample Road Address",
+    "kakaoReviews": 44,
+    "kakaoScore": 1.7,
+    "naverReviews": 73,
+    "naverScore": 3.1
+  },
+  {
+    "id": 102,
+    "name": "Place 102",
+    "addressName": "102 Sample Address",
+    "roadAddressName": "102 Sample Road Address",
+    "kakaoReviews": 261,
+    "kakaoScore": 2.6,
+    "naverReviews": 339,
+    "naverScore": 3.5
+  },
+  {
+    "id": 103,
+    "name": "Place 103",
+    "addressName": "103 Sample Address",
+    "roadAddressName": "103 Sample Road Address",
+    "kakaoReviews": 18,
+    "kakaoScore": 3.0,
+    "naverReviews": 377,
+    "naverScore": 4.6
+  },
+  {
+    "id": 104,
+    "name": "Place 104",
+    "addressName": "104 Sample Address",
+    "roadAddressName": "104 Sample Road Address",
+    "kakaoReviews": 440,
+    "kakaoScore": 1.6,
+    "naverReviews": 224,
+    "naverScore": 4.7
+  },
+  {
+    "id": 105,
+    "name": "Place 105",
+    "addressName": "105 Sample Address",
+    "roadAddressName": "105 Sample Road Address",
+    "kakaoReviews": 48,
+    "kakaoScore": 3.0,
+    "naverReviews": 424,
+    "naverScore": 3.7
+  },
+  {
+    "id": 106,
+    "name": "Place 106",
+    "addressName": "106 Sample Address",
+    "roadAddressName": "106 Sample Road Address",
+    "kakaoReviews": 489,
+    "kakaoScore": 3.2,
+    "naverReviews": 82,
+    "naverScore": 1.2
+  },
+  {
+    "id": 107,
+    "name": "Place 107",
+    "addressName": "107 Sample Address",
+    "roadAddressName": "107 Sample Road Address",
+    "kakaoReviews": 9,
+    "kakaoScore": 2.4,
+    "naverReviews": 411,
+    "naverScore": 2.9
+  },
+  {
+    "id": 108,
+    "name": "Place 108",
+    "addressName": "108 Sample Address",
+    "roadAddressName": "108 Sample Road Address",
+    "kakaoReviews": 153,
+    "kakaoScore": 1.5,
+    "naverReviews": 395,
+    "naverScore": 1.2
+  },
+  {
+    "id": 109,
+    "name": "Place 109",
+    "addressName": "109 Sample Address",
+    "roadAddressName": "109 Sample Road Address",
+    "kakaoReviews": 350,
+    "kakaoScore": 4.7,
+    "naverReviews": 321,
+    "naverScore": 3.5
+  },
+  {
+    "id": 110,
+    "name": "Place 110",
+    "addressName": "110 Sample Address",
+    "roadAddressName": "110 Sample Road Address",
+    "kakaoReviews": 386,
+    "kakaoScore": 4.1,
+    "naverReviews": 4,
+    "naverScore": 2.1
+  },
+  {
+    "id": 111,
+    "name": "Place 111",
+    "addressName": "111 Sample Address",
+    "roadAddressName": "111 Sample Road Address",
+    "kakaoReviews": 286,
+    "kakaoScore": 3.5,
+    "naverReviews": 5,
+    "naverScore": 2.5
+  },
+  {
+    "id": 112,
+    "name": "Place 112",
+    "addressName": "112 Sample Address",
+    "roadAddressName": "112 Sample Road Address",
+    "kakaoReviews": 50,
+    "kakaoScore": 4.8,
+    "naverReviews": 53,
+    "naverScore": 4.0
+  },
+  {
+    "id": 113,
+    "name": "Place 113",
+    "addressName": "113 Sample Address",
+    "roadAddressName": "113 Sample Road Address",
+    "kakaoReviews": 11,
+    "kakaoScore": 3.3,
+    "naverReviews": 234,
+    "naverScore": 4.7
+  },
+  {
+    "id": 114,
+    "name": "Place 114",
+    "addressName": "114 Sample Address",
+    "roadAddressName": "114 Sample Road Address",
+    "kakaoReviews": 376,
+    "kakaoScore": 4.6,
+    "naverReviews": 464,
+    "naverScore": 5.0
+  },
+  {
+    "id": 115,
+    "name": "Place 115",
+    "addressName": "115 Sample Address",
+    "roadAddressName": "115 Sample Road Address",
+    "kakaoReviews": 380,
+    "kakaoScore": 4.6,
+    "naverReviews": 1,
+    "naverScore": 4.7
+  },
+  {
+    "id": 116,
+    "name": "Place 116",
+    "addressName": "116 Sample Address",
+    "roadAddressName": "116 Sample Road Address",
+    "kakaoReviews": 487,
+    "kakaoScore": 3.3,
+    "naverReviews": 180,
+    "naverScore": 4.9
+  },
+  {
+    "id": 117,
+    "name": "Place 117",
+    "addressName": "117 Sample Address",
+    "roadAddressName": "117 Sample Road Address",
+    "kakaoReviews": 112,
+    "kakaoScore": 3.9,
+    "naverReviews": 429,
+    "naverScore": 1.7
+  },
+  {
+    "id": 118,
+    "name": "Place 118",
+    "addressName": "118 Sample Address",
+    "roadAddressName": "118 Sample Road Address",
+    "kakaoReviews": 275,
+    "kakaoScore": 2.7,
+    "naverReviews": 213,
+    "naverScore": 2.5
+  },
+  {
+    "id": 119,
+    "name": "Place 119",
+    "addressName": "119 Sample Address",
+    "roadAddressName": "119 Sample Road Address",
+    "kakaoReviews": 195,
+    "kakaoScore": 2.8,
+    "naverReviews": 260,
+    "naverScore": 1.9
+  },
+  {
+    "id": 120,
+    "name": "Place 120",
+    "addressName": "120 Sample Address",
+    "roadAddressName": "120 Sample Road Address",
+    "kakaoReviews": 405,
+    "kakaoScore": 4.7,
+    "naverReviews": 389,
+    "naverScore": 4.5
+  },
+  {
+    "id": 121,
+    "name": "Place 121",
+    "addressName": "121 Sample Address",
+    "roadAddressName": "121 Sample Road Address",
+    "kakaoReviews": 399,
+    "kakaoScore": 4.3,
+    "naverReviews": 68,
+    "naverScore": 4.9
+  },
+  {
+    "id": 122,
+    "name": "Place 122",
+    "addressName": "122 Sample Address",
+    "roadAddressName": "122 Sample Road Address",
+    "kakaoReviews": 363,
+    "kakaoScore": 2.8,
+    "naverReviews": 467,
+    "naverScore": 1.2
+  },
+  {
+    "id": 123,
+    "name": "Place 123",
+    "addressName": "123 Sample Address",
+    "roadAddressName": "123 Sample Road Address",
+    "kakaoReviews": 321,
+    "kakaoScore": 2.3,
+    "naverReviews": 411,
+    "naverScore": 3.6
+  },
+  {
+    "id": 124,
+    "name": "Place 124",
+    "addressName": "124 Sample Address",
+    "roadAddressName": "124 Sample Road Address",
+    "kakaoReviews": 240,
+    "kakaoScore": 4.0,
+    "naverReviews": 365,
+    "naverScore": 2.3
+  },
+  {
+    "id": 125,
+    "name": "Place 125",
+    "addressName": "125 Sample Address",
+    "roadAddressName": "125 Sample Road Address",
+    "kakaoReviews": 221,
+    "kakaoScore": 3.9,
+    "naverReviews": 186,
+    "naverScore": 2.8
+  },
+  {
+    "id": 126,
+    "name": "Place 126",
+    "addressName": "126 Sample Address",
+    "roadAddressName": "126 Sample Road Address",
+    "kakaoReviews": 401,
+    "kakaoScore": 3.0,
+    "naverReviews": 432,
+    "naverScore": 4.1
+  },
+  {
+    "id": 127,
+    "name": "Place 127",
+    "addressName": "127 Sample Address",
+    "roadAddressName": "127 Sample Road Address",
+    "kakaoReviews": 399,
+    "kakaoScore": 2.2,
+    "naverReviews": 142,
+    "naverScore": 4.7
+  },
+  {
+    "id": 128,
+    "name": "Place 128",
+    "addressName": "128 Sample Address",
+    "roadAddressName": "128 Sample Road Address",
+    "kakaoReviews": 382,
+    "kakaoScore": 3.5,
+    "naverReviews": 68,
+    "naverScore": 4.2
+  },
+  {
+    "id": 129,
+    "name": "Place 129",
+    "addressName": "129 Sample Address",
+    "roadAddressName": "129 Sample Road Address",
+    "kakaoReviews": 426,
+    "kakaoScore": 3.2,
+    "naverReviews": 67,
+    "naverScore": 1.4
+  },
+  {
+    "id": 130,
+    "name": "Place 130",
+    "addressName": "130 Sample Address",
+    "roadAddressName": "130 Sample Road Address",
+    "kakaoReviews": 486,
+    "kakaoScore": 1.9,
+    "naverReviews": 216,
+    "naverScore": 3.6
+  },
+  {
+    "id": 131,
+    "name": "Place 131",
+    "addressName": "131 Sample Address",
+    "roadAddressName": "131 Sample Road Address",
+    "kakaoReviews": 250,
+    "kakaoScore": 1.0,
+    "naverReviews": 492,
+    "naverScore": 3.0
+  },
+  {
+    "id": 132,
+    "name": "Place 132",
+    "addressName": "132 Sample Address",
+    "roadAddressName": "132 Sample Road Address",
+    "kakaoReviews": 331,
+    "kakaoScore": 4.7,
+    "naverReviews": 101,
+    "naverScore": 3.2
+  },
+  {
+    "id": 133,
+    "name": "Place 133",
+    "addressName": "133 Sample Address",
+    "roadAddressName": "133 Sample Road Address",
+    "kakaoReviews": 330,
+    "kakaoScore": 1.9,
+    "naverReviews": 395,
+    "naverScore": 4.1
+  },
+  {
+    "id": 134,
+    "name": "Place 134",
+    "addressName": "134 Sample Address",
+    "roadAddressName": "134 Sample Road Address",
+    "kakaoReviews": 122,
+    "kakaoScore": 2.1,
+    "naverReviews": 190,
+    "naverScore": 2.6
+  },
+  {
+    "id": 135,
+    "name": "Place 135",
+    "addressName": "135 Sample Address",
+    "roadAddressName": "135 Sample Road Address",
+    "kakaoReviews": 365,
+    "kakaoScore": 2.8,
+    "naverReviews": 183,
+    "naverScore": 2.4
+  },
+  {
+    "id": 136,
+    "name": "Place 136",
+    "addressName": "136 Sample Address",
+    "roadAddressName": "136 Sample Road Address",
+    "kakaoReviews": 104,
+    "kakaoScore": 1.2,
+    "naverReviews": 99,
+    "naverScore": 2.6
+  },
+  {
+    "id": 137,
+    "name": "Place 137",
+    "addressName": "137 Sample Address",
+    "roadAddressName": "137 Sample Road Address",
+    "kakaoReviews": 464,
+    "kakaoScore": 3.4,
+    "naverReviews": 87,
+    "naverScore": 2.2
+  },
+  {
+    "id": 138,
+    "name": "Place 138",
+    "addressName": "138 Sample Address",
+    "roadAddressName": "138 Sample Road Address",
+    "kakaoReviews": 360,
+    "kakaoScore": 4.2,
+    "naverReviews": 370,
+    "naverScore": 1.8
+  },
+  {
+    "id": 139,
+    "name": "Place 139",
+    "addressName": "139 Sample Address",
+    "roadAddressName": "139 Sample Road Address",
+    "kakaoReviews": 337,
+    "kakaoScore": 2.4,
+    "naverReviews": 94,
+    "naverScore": 3.8
+  },
+  {
+    "id": 140,
+    "name": "Place 140",
+    "addressName": "140 Sample Address",
+    "roadAddressName": "140 Sample Road Address",
+    "kakaoReviews": 42,
+    "kakaoScore": 1.9,
+    "naverReviews": 323,
+    "naverScore": 1.8
+  },
+  {
+    "id": 141,
+    "name": "Place 141",
+    "addressName": "141 Sample Address",
+    "roadAddressName": "141 Sample Road Address",
+    "kakaoReviews": 342,
+    "kakaoScore": 1.4,
+    "naverReviews": 352,
+    "naverScore": 3.9
+  },
+  {
+    "id": 142,
+    "name": "Place 142",
+    "addressName": "142 Sample Address",
+    "roadAddressName": "142 Sample Road Address",
+    "kakaoReviews": 130,
+    "kakaoScore": 1.9,
+    "naverReviews": 205,
+    "naverScore": 2.6
+  },
+  {
+    "id": 143,
+    "name": "Place 143",
+    "addressName": "143 Sample Address",
+    "roadAddressName": "143 Sample Road Address",
+    "kakaoReviews": 239,
+    "kakaoScore": 3.4,
+    "naverReviews": 399,
+    "naverScore": 1.7
+  },
+  {
+    "id": 144,
+    "name": "Place 144",
+    "addressName": "144 Sample Address",
+    "roadAddressName": "144 Sample Road Address",
+    "kakaoReviews": 435,
+    "kakaoScore": 1.9,
+    "naverReviews": 465,
+    "naverScore": 2.1
+  },
+  {
+    "id": 145,
+    "name": "Place 145",
+    "addressName": "145 Sample Address",
+    "roadAddressName": "145 Sample Road Address",
+    "kakaoReviews": 431,
+    "kakaoScore": 3.2,
+    "naverReviews": 211,
+    "naverScore": 2.5
+  },
+  {
+    "id": 146,
+    "name": "Place 146",
+    "addressName": "146 Sample Address",
+    "roadAddressName": "146 Sample Road Address",
+    "kakaoReviews": 482,
+    "kakaoScore": 4.1,
+    "naverReviews": 244,
+    "naverScore": 1.6
+  },
+  {
+    "id": 147,
+    "name": "Place 147",
+    "addressName": "147 Sample Address",
+    "roadAddressName": "147 Sample Road Address",
+    "kakaoReviews": 27,
+    "kakaoScore": 3.1,
+    "naverReviews": 30,
+    "naverScore": 2.9
+  },
+  {
+    "id": 148,
+    "name": "Place 148",
+    "addressName": "148 Sample Address",
+    "roadAddressName": "148 Sample Road Address",
+    "kakaoReviews": 185,
+    "kakaoScore": 4.6,
+    "naverReviews": 208,
+    "naverScore": 2.9
+  },
+  {
+    "id": 149,
+    "name": "Place 149",
+    "addressName": "149 Sample Address",
+    "roadAddressName": "149 Sample Road Address",
+    "kakaoReviews": 244,
+    "kakaoScore": 3.2,
+    "naverReviews": 147,
+    "naverScore": 2.0
+  },
+  {
+    "id": 150,
+    "name": "Place 150",
+    "addressName": "150 Sample Address",
+    "roadAddressName": "150 Sample Road Address",
+    "kakaoReviews": 65,
+    "kakaoScore": 4.3,
+    "naverReviews": 127,
+    "naverScore": 2.0
+  },
+  {
+    "id": 151,
+    "name": "Place 151",
+    "addressName": "151 Sample Address",
+    "roadAddressName": "151 Sample Road Address",
+    "kakaoReviews": 33,
+    "kakaoScore": 2.5,
+    "naverReviews": 113,
+    "naverScore": 3.7
+  },
+  {
+    "id": 152,
+    "name": "Place 152",
+    "addressName": "152 Sample Address",
+    "roadAddressName": "152 Sample Road Address",
+    "kakaoReviews": 337,
+    "kakaoScore": 2.5,
+    "naverReviews": 117,
+    "naverScore": 2.8
+  },
+  {
+    "id": 153,
+    "name": "Place 153",
+    "addressName": "153 Sample Address",
+    "roadAddressName": "153 Sample Road Address",
+    "kakaoReviews": 105,
+    "kakaoScore": 4.3,
+    "naverReviews": 276,
+    "naverScore": 3.3
+  },
+  {
+    "id": 154,
+    "name": "Place 154",
+    "addressName": "154 Sample Address",
+    "roadAddressName": "154 Sample Road Address",
+    "kakaoReviews": 5,
+    "kakaoScore": 2.5,
+    "naverReviews": 21,
+    "naverScore": 1.3
+  },
+  {
+    "id": 155,
+    "name": "Place 155",
+    "addressName": "155 Sample Address",
+    "roadAddressName": "155 Sample Road Address",
+    "kakaoReviews": 362,
+    "kakaoScore": 2.8,
+    "naverReviews": 388,
+    "naverScore": 1.1
+  },
+  {
+    "id": 156,
+    "name": "Place 156",
+    "addressName": "156 Sample Address",
+    "roadAddressName": "156 Sample Road Address",
+    "kakaoReviews": 166,
+    "kakaoScore": 1.6,
+    "naverReviews": 18,
+    "naverScore": 3.3
+  },
+  {
+    "id": 157,
+    "name": "Place 157",
+    "addressName": "157 Sample Address",
+    "roadAddressName": "157 Sample Road Address",
+    "kakaoReviews": 133,
+    "kakaoScore": 4.7,
+    "naverReviews": 384,
+    "naverScore": 2.0
+  },
+  {
+    "id": 158,
+    "name": "Place 158",
+    "addressName": "158 Sample Address",
+    "roadAddressName": "158 Sample Road Address",
+    "kakaoReviews": 410,
+    "kakaoScore": 4.7,
+    "naverReviews": 274,
+    "naverScore": 2.9
+  },
+  {
+    "id": 159,
+    "name": "Place 159",
+    "addressName": "159 Sample Address",
+    "roadAddressName": "159 Sample Road Address",
+    "kakaoReviews": 412,
+    "kakaoScore": 3.1,
+    "naverReviews": 49,
+    "naverScore": 3.0
+  },
+  {
+    "id": 160,
+    "name": "Place 160",
+    "addressName": "160 Sample Address",
+    "roadAddressName": "160 Sample Road Address",
+    "kakaoReviews": 369,
+    "kakaoScore": 4.9,
+    "naverReviews": 53,
+    "naverScore": 1.4
+  },
+  {
+    "id": 161,
+    "name": "Place 161",
+    "addressName": "161 Sample Address",
+    "roadAddressName": "161 Sample Road Address",
+    "kakaoReviews": 493,
+    "kakaoScore": 2.5,
+    "naverReviews": 241,
+    "naverScore": 2.9
+  },
+  {
+    "id": 162,
+    "name": "Place 162",
+    "addressName": "162 Sample Address",
+    "roadAddressName": "162 Sample Road Address",
+    "kakaoReviews": 176,
+    "kakaoScore": 1.2,
+    "naverReviews": 195,
+    "naverScore": 2.1
+  },
+  {
+    "id": 163,
+    "name": "Place 163",
+    "addressName": "163 Sample Address",
+    "roadAddressName": "163 Sample Road Address",
+    "kakaoReviews": 33,
+    "kakaoScore": 3.4,
+    "naverReviews": 52,
+    "naverScore": 1.4
+  },
+  {
+    "id": 164,
+    "name": "Place 164",
+    "addressName": "164 Sample Address",
+    "roadAddressName": "164 Sample Road Address",
+    "kakaoReviews": 290,
+    "kakaoScore": 1.7,
+    "naverReviews": 78,
+    "naverScore": 3.8
+  },
+  {
+    "id": 165,
+    "name": "Place 165",
+    "addressName": "165 Sample Address",
+    "roadAddressName": "165 Sample Road Address",
+    "kakaoReviews": 5,
+    "kakaoScore": 1.7,
+    "naverReviews": 418,
+    "naverScore": 5.0
+  },
+  {
+    "id": 166,
+    "name": "Place 166",
+    "addressName": "166 Sample Address",
+    "roadAddressName": "166 Sample Road Address",
+    "kakaoReviews": 83,
+    "kakaoScore": 1.1,
+    "naverReviews": 148,
+    "naverScore": 2.0
+  },
+  {
+    "id": 167,
+    "name": "Place 167",
+    "addressName": "167 Sample Address",
+    "roadAddressName": "167 Sample Road Address",
+    "kakaoReviews": 296,
+    "kakaoScore": 3.3,
+    "naverReviews": 113,
+    "naverScore": 3.0
+  },
+  {
+    "id": 168,
+    "name": "Place 168",
+    "addressName": "168 Sample Address",
+    "roadAddressName": "168 Sample Road Address",
+    "kakaoReviews": 327,
+    "kakaoScore": 1.9,
+    "naverReviews": 128,
+    "naverScore": 5.0
+  },
+  {
+    "id": 169,
+    "name": "Place 169",
+    "addressName": "169 Sample Address",
+    "roadAddressName": "169 Sample Road Address",
+    "kakaoReviews": 258,
+    "kakaoScore": 2.6,
+    "naverReviews": 112,
+    "naverScore": 2.9
+  },
+  {
+    "id": 170,
+    "name": "Place 170",
+    "addressName": "170 Sample Address",
+    "roadAddressName": "170 Sample Road Address",
+    "kakaoReviews": 497,
+    "kakaoScore": 3.4,
+    "naverReviews": 378,
+    "naverScore": 3.9
+  },
+  {
+    "id": 171,
+    "name": "Place 171",
+    "addressName": "171 Sample Address",
+    "roadAddressName": "171 Sample Road Address",
+    "kakaoReviews": 199,
+    "kakaoScore": 1.1,
+    "naverReviews": 138,
+    "naverScore": 3.9
+  },
+  {
+    "id": 172,
+    "name": "Place 172",
+    "addressName": "172 Sample Address",
+    "roadAddressName": "172 Sample Road Address",
+    "kakaoReviews": 253,
+    "kakaoScore": 2.6,
+    "naverReviews": 329,
+    "naverScore": 3.6
+  },
+  {
+    "id": 173,
+    "name": "Place 173",
+    "addressName": "173 Sample Address",
+    "roadAddressName": "173 Sample Road Address",
+    "kakaoReviews": 456,
+    "kakaoScore": 1.1,
+    "naverReviews": 424,
+    "naverScore": 3.0
+  },
+  {
+    "id": 174,
+    "name": "Place 174",
+    "addressName": "174 Sample Address",
+    "roadAddressName": "174 Sample Road Address",
+    "kakaoReviews": 19,
+    "kakaoScore": 2.3,
+    "naverReviews": 95,
+    "naverScore": 4.8
+  },
+  {
+    "id": 175,
+    "name": "Place 175",
+    "addressName": "175 Sample Address",
+    "roadAddressName": "175 Sample Road Address",
+    "kakaoReviews": 21,
+    "kakaoScore": 3.0,
+    "naverReviews": 306,
+    "naverScore": 1.6
+  },
+  {
+    "id": 176,
+    "name": "Place 176",
+    "addressName": "176 Sample Address",
+    "roadAddressName": "176 Sample Road Address",
+    "kakaoReviews": 397,
+    "kakaoScore": 1.8,
+    "naverReviews": 498,
+    "naverScore": 2.9
+  },
+  {
+    "id": 177,
+    "name": "Place 177",
+    "addressName": "177 Sample Address",
+    "roadAddressName": "177 Sample Road Address",
+    "kakaoReviews": 150,
+    "kakaoScore": 2.8,
+    "naverReviews": 207,
+    "naverScore": 2.9
+  },
+  {
+    "id": 178,
+    "name": "Place 178",
+    "addressName": "178 Sample Address",
+    "roadAddressName": "178 Sample Road Address",
+    "kakaoReviews": 132,
+    "kakaoScore": 1.3,
+    "naverReviews": 44,
+    "naverScore": 2.6
+  },
+  {
+    "id": 179,
+    "name": "Place 179",
+    "addressName": "179 Sample Address",
+    "roadAddressName": "179 Sample Road Address",
+    "kakaoReviews": 139,
+    "kakaoScore": 3.4,
+    "naverReviews": 218,
+    "naverScore": 1.2
+  },
+  {
+    "id": 180,
+    "name": "Place 180",
+    "addressName": "180 Sample Address",
+    "roadAddressName": "180 Sample Road Address",
+    "kakaoReviews": 86,
+    "kakaoScore": 1.5,
+    "naverReviews": 316,
+    "naverScore": 1.6
+  },
+  {
+    "id": 181,
+    "name": "Place 181",
+    "addressName": "181 Sample Address",
+    "roadAddressName": "181 Sample Road Address",
+    "kakaoReviews": 307,
+    "kakaoScore": 1.7,
+    "naverReviews": 122,
+    "naverScore": 4.9
+  },
+  {
+    "id": 182,
+    "name": "Place 182",
+    "addressName": "182 Sample Address",
+    "roadAddressName": "182 Sample Road Address",
+    "kakaoReviews": 102,
+    "kakaoScore": 3.5,
+    "naverReviews": 310,
+    "naverScore": 3.9
+  },
+  {
+    "id": 183,
+    "name": "Place 183",
+    "addressName": "183 Sample Address",
+    "roadAddressName": "183 Sample Road Address",
+    "kakaoReviews": 417,
+    "kakaoScore": 1.4,
+    "naverReviews": 179,
+    "naverScore": 4.8
+  },
+  {
+    "id": 184,
+    "name": "Place 184",
+    "addressName": "184 Sample Address",
+    "roadAddressName": "184 Sample Road Address",
+    "kakaoReviews": 172,
+    "kakaoScore": 1.6,
+    "naverReviews": 86,
+    "naverScore": 2.5
+  },
+  {
+    "id": 185,
+    "name": "Place 185",
+    "addressName": "185 Sample Address",
+    "roadAddressName": "185 Sample Road Address",
+    "kakaoReviews": 343,
+    "kakaoScore": 3.3,
+    "naverReviews": 359,
+    "naverScore": 1.3
+  },
+  {
+    "id": 186,
+    "name": "Place 186",
+    "addressName": "186 Sample Address",
+    "roadAddressName": "186 Sample Road Address",
+    "kakaoReviews": 176,
+    "kakaoScore": 4.8,
+    "naverReviews": 89,
+    "naverScore": 3.5
+  },
+  {
+    "id": 187,
+    "name": "Place 187",
+    "addressName": "187 Sample Address",
+    "roadAddressName": "187 Sample Road Address",
+    "kakaoReviews": 303,
+    "kakaoScore": 2.1,
+    "naverReviews": 347,
+    "naverScore": 1.4
+  },
+  {
+    "id": 188,
+    "name": "Place 188",
+    "addressName": "188 Sample Address",
+    "roadAddressName": "188 Sample Road Address",
+    "kakaoReviews": 44,
+    "kakaoScore": 4.8,
+    "naverReviews": 479,
+    "naverScore": 3.4
+  },
+  {
+    "id": 189,
+    "name": "Place 189",
+    "addressName": "189 Sample Address",
+    "roadAddressName": "189 Sample Road Address",
+    "kakaoReviews": 85,
+    "kakaoScore": 4.5,
+    "naverReviews": 2,
+    "naverScore": 2.2
+  },
+  {
+    "id": 190,
+    "name": "Place 190",
+    "addressName": "190 Sample Address",
+    "roadAddressName": "190 Sample Road Address",
+    "kakaoReviews": 18,
+    "kakaoScore": 1.2,
+    "naverReviews": 96,
+    "naverScore": 3.9
+  },
+  {
+    "id": 191,
+    "name": "Place 191",
+    "addressName": "191 Sample Address",
+    "roadAddressName": "191 Sample Road Address",
+    "kakaoReviews": 422,
+    "kakaoScore": 3.3,
+    "naverReviews": 400,
+    "naverScore": 2.4
+  },
+  {
+    "id": 192,
+    "name": "Place 192",
+    "addressName": "192 Sample Address",
+    "roadAddressName": "192 Sample Road Address",
+    "kakaoReviews": 0,
+    "kakaoScore": 1.7,
+    "naverReviews": 29,
+    "naverScore": 4.3
+  },
+  {
+    "id": 193,
+    "name": "Place 193",
+    "addressName": "193 Sample Address",
+    "roadAddressName": "193 Sample Road Address",
+    "kakaoReviews": 289,
+    "kakaoScore": 4.5,
+    "naverReviews": 98,
+    "naverScore": 4.4
+  },
+  {
+    "id": 194,
+    "name": "Place 194",
+    "addressName": "194 Sample Address",
+    "roadAddressName": "194 Sample Road Address",
+    "kakaoReviews": 218,
+    "kakaoScore": 1.2,
+    "naverReviews": 10,
+    "naverScore": 2.9
+  },
+  {
+    "id": 195,
+    "name": "Place 195",
+    "addressName": "195 Sample Address",
+    "roadAddressName": "195 Sample Road Address",
+    "kakaoReviews": 241,
+    "kakaoScore": 2.8,
+    "naverReviews": 414,
+    "naverScore": 2.7
+  },
+  {
+    "id": 196,
+    "name": "Place 196",
+    "addressName": "196 Sample Address",
+    "roadAddressName": "196 Sample Road Address",
+    "kakaoReviews": 486,
+    "kakaoScore": 4.7,
+    "naverReviews": 108,
+    "naverScore": 1.5
+  },
+  {
+    "id": 197,
+    "name": "Place 197",
+    "addressName": "197 Sample Address",
+    "roadAddressName": "197 Sample Road Address",
+    "kakaoReviews": 162,
+    "kakaoScore": 4.3,
+    "naverReviews": 178,
+    "naverScore": 3.5
+  },
+  {
+    "id": 198,
+    "name": "Place 198",
+    "addressName": "198 Sample Address",
+    "roadAddressName": "198 Sample Road Address",
+    "kakaoReviews": 267,
+    "kakaoScore": 4.3,
+    "naverReviews": 338,
+    "naverScore": 4.5
+  },
+  {
+    "id": 199,
+    "name": "Place 199",
+    "addressName": "199 Sample Address",
+    "roadAddressName": "199 Sample Road Address",
+    "kakaoReviews": 139,
+    "kakaoScore": 4.9,
+    "naverReviews": 27,
+    "naverScore": 1.4
+  },
+  {
+    "id": 200,
+    "name": "Place 200",
+    "addressName": "200 Sample Address",
+    "roadAddressName": "200 Sample Road Address",
+    "kakaoReviews": 63,
+    "kakaoScore": 4.4,
+    "naverReviews": 231,
+    "naverScore": 3.9
+  }
+]
