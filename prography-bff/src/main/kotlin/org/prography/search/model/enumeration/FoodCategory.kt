@@ -10,5 +10,5 @@ enum class FoodCategory {
     STREET_FOOD,
     FAST_FOOD,
     ASIAN,
-    ETC
+    ETC,
 }

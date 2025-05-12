@@ -8,5 +8,5 @@ data class PlaceSummaryDTO(
     val kakaoReviews: Int,
     val kakaoScore: Double,
     val naverReviews: Int,
-    val naverScore: Double
+    val naverScore: Double,
 )

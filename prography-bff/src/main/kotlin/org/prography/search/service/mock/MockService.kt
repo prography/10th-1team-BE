@@ -26,15 +26,23 @@ class MockService {
         }
     }
 
-    fun getSummaries(keyword: String?, lastId: Long?, size: Int): List<PlaceSummary> {
+    fun getSummaries(
+        keyword: String?,
+        lastId: Long?,
+        size: Int,
+    ): List<PlaceSummary> {
         val fromIndex = lastId?.let { getStatIndex(lastId) } ?: 0
         return if (keyword.isNullOrBlank()) {
             findAllSummaries(fromIndex, size)
-        } else
+        } else {
             findFilteredSummaries(keyword, fromIndex, size)
+        }
     }
 
-    private fun findAllSummaries(fromIndex: Long, size: Int): List<PlaceSummary> {
+    private fun findAllSummaries(
+        fromIndex: Long,
+        size: Int,
+    ): List<PlaceSummary> {
         if (fromIndex >= mockSummaryData.size) return emptyList()
 
         val toIndex = (fromIndex + size).coerceAtMost(mockSummaryData.size.toLong())
@@ -44,7 +52,7 @@ class MockService {
     private fun findFilteredSummaries(
         keyword: String,
         fromIndex: Long,
-        size: Int
+        size: Int,
     ): List<PlaceSummary> {
         if (fromIndex >= mockSummaryData.size) return emptyList()
 
@@ -63,8 +71,7 @@ class MockService {
         return (index + 1).toLong()
     }
 
-    private fun existsBySummaryId(id: Long?): Boolean =
-        id?.let { cursorId -> mockSummaryData.any { it.id == cursorId } } ?: true
+    private fun existsBySummaryId(id: Long?): Boolean = id?.let { cursorId -> mockSummaryData.any { it.id == cursorId } } ?: true
 
     fun isLatest(lastId: Long): Boolean {
         val index = mockSummaryData.indexOfFirst { it.id == lastId }
@@ -72,7 +79,7 @@ class MockService {
     }
 
     fun getPlaceDetail(placeId: Long): PlaceDetail {
-        //TODO DB에서 조회할 때는 List 원소들을 LIMIT으로 걸어서 조금씩 가져와야함
+        // TODO DB에서 조회할 때는 List 원소들을 LIMIT으로 걸어서 조금씩 가져와야함
         return mockDetailData.find { it.id == placeId }
             ?: throw NotFoundException.PlaceNotFoundException()
     }

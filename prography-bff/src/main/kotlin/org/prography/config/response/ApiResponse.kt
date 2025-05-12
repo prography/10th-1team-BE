@@ -11,6 +11,7 @@ sealed class ApiResponse<out T> {
 
     companion object {
         fun <T> success(data: T): ApiResponse<T> = Success(data)
+
         fun fail(message: String): ApiResponse<Nothing> = Failure(message)
     }
 }

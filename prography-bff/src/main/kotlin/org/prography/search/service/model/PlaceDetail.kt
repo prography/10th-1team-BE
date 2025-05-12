@@ -21,5 +21,5 @@ data class PlaceDetail(
     val naverReviewCount: Int,
     val naverReviewAvgScore: Double,
     val naverReviews: List<Review>,
-    val naverVoteRate: Int
+    val naverVoteRate: Int,
 )
