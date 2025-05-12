@@ -1,4 +1,3 @@
-// build.gradle.kts
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -52,6 +51,5 @@ subprojects {
         version.set("1.2.1")
     }
 
-    // `gradlew check` 때 같이 돌도록 묶기
     tasks.named("check") { dependsOn("ktlintCheck") }
 }

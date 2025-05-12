@@ -52,17 +52,9 @@ class KakaoReviewBatchService(
                 batch.size - failures,
                 failures,
             )
-            kakaoReviewService.updateAllReviewsAsync(batch)
             batch.forEach { it.kakaoReviewProcessed = true }
             rawRestaurantDataRepository.saveAll(batch)
         }
-    }
-
-    fun scrapAllRestaurants() {
-        val all = rawRestaurantDataRepository.findAll()
-        kakaoReviewService.updateAllReviewsAsync(all)
-        all.forEach { it.kakaoReviewProcessed = true }
-        rawRestaurantDataRepository.saveAll(all)
     }
 
     private fun isQueueFull(): Boolean {

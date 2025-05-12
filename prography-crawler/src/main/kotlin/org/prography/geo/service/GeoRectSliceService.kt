@@ -155,4 +155,20 @@ class GeoRectSliceService(
         val props = feature.getAsJsonObject(Keys.PROPERTIES)
         return props.get(Keys.ADM_CD2).asString
     }
+
+    /**
+     * 주어진 구에 해당하는 동의 리스트를 전달하는 함수
+     *
+     * @param prefix  구 이름 ("서울시 강남구")
+     * @return 행정동명 리스트
+     */
+    fun getDongListByGu(prefix: String): List<String> {
+        // 1) features 에서 Properties.ADM_NM 값만 꺼내서 prefix 로 필터
+        return features
+            .asSequence()
+            .map(JsonElement::getAsJsonObject)
+            .map { it.getAsJsonObject(Keys.PROPERTIES).get(Keys.ADM_NM).asString }
+            .filter { it.startsWith(prefix) }
+            .toList()
+    }
 }
