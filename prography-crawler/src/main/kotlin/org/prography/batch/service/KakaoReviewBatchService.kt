@@ -50,6 +50,8 @@ class KakaoReviewBatchService(
     fun scrapAllRestaurants() {
         val all = rawRestaurantDataRepository.findAll()
         kakaoReviewService.updateAllReviewsAsync(all)
+        all.forEach { it.kakaoReviewProcessed = true }
+        rawRestaurantDataRepository.saveAll(all)
     }
 
     private fun isQueueFull(): Boolean {

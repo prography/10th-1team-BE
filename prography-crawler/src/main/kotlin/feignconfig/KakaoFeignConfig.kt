@@ -1,11 +1,9 @@
-package org.prography.kakao.place.external
+package feignconfig
 
 import feign.RequestInterceptor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 
-@Configuration
 class KakaoFeignConfig {
     @Value("\${kakao.api.key}")
     private val kakaoApiKey: String? = null

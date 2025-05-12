@@ -1,5 +1,6 @@
 package org.prography.kakao.place.external
 
+import feignconfig.KakaoFeignConfig
 import org.prography.kakao.place.dto.KakaoPlaceResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping

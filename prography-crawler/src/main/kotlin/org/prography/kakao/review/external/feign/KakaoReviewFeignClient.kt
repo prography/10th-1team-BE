@@ -1,5 +1,6 @@
 package org.prography.kakao.review.external.feign
 
+import feignconfig.KakaoReviewFeignConfig
 import org.prography.kakao.review.external.dto.KakaoReviewResponse
 import org.prography.kakao.review.external.dto.Order
 import org.springframework.cloud.openfeign.FeignClient

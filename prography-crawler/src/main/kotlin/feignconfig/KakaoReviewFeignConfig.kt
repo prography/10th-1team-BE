@@ -1,10 +1,8 @@
-package org.prography.kakao.review.external.feign
+package feignconfig
 
 import feign.RequestInterceptor
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 
-@Configuration
 class KakaoReviewFeignConfig {
     @Bean
     fun kakaoHeaderInterceptor(): RequestInterceptor =
