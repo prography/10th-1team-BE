@@ -20,6 +20,8 @@ class KakaoReviewBatchService(
     private val kakaoReviewService: KakaoReviewService,
     @Qualifier("kakaoScrapExecutor")
     private val executor: ThreadPoolTaskExecutor,
+    @Qualifier("callbackExecutor")
+    private val callbackExecutor: ThreadPoolTaskExecutor,
 ) {
     companion object {
         private const val SLEEP_MS = 5_000L
@@ -34,6 +36,7 @@ class KakaoReviewBatchService(
         }
 
         val unprocessedCount = rawRestaurantDataRepository.countByKakaoReviewProcessedFalse()
+        log.info("Unchecked KakaoReviewSize: $unprocessedCount")
         if (unprocessedCount >= BATCH_SIZE) {
             // 최초 1,000건만 조회
             val batch =
@@ -44,16 +47,20 @@ class KakaoReviewBatchService(
                     ),
                 )
             val futures = batch.map(::processRestaurantAsync)
-            futures.awaitAll()
 
-            val failures = futures.count { it.isCompletedExceptionally }
-            log.info(
-                "✅ All review updates completed. successes={} failures={}",
-                batch.size - failures,
-                failures,
-            )
-            batch.forEach { it.kakaoReviewProcessed = true }
-            rawRestaurantDataRepository.saveAll(batch)
+            CompletableFuture
+                .allOf(*futures.toTypedArray())
+                .whenCompleteAsync({ _, ex ->
+                    // 모든 작업이 끝났거나, 하나라도 에러가 나면 이 블록이 호출됩니다.
+                    val failures = futures.count { it.isCompletedExceptionally }
+                    log.info(
+                        "✅ All review updates completed. successes={} failures={}",
+                        batch.size - failures,
+                        failures,
+                    )
+                    batch.forEach { it.kakaoReviewProcessed = true }
+                    rawRestaurantDataRepository.saveAll(batch)
+                }, callbackExecutor)
         }
     }
 

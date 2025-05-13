@@ -35,4 +35,14 @@ class ScrapThreadPoolConfig {
         executor.setThreadNamePrefix("kakao-feign-exec-")
         return executor
     }
+
+    @Bean(name = ["callbackExecutor"])
+    fun callbackExecutor(): ThreadPoolTaskExecutor =
+        ThreadPoolTaskExecutor().apply {
+            corePoolSize = 2
+            maxPoolSize = 5
+            queueCapacity = 500
+            setThreadNamePrefix("callback-exec-")
+            initialize()
+        }
 }

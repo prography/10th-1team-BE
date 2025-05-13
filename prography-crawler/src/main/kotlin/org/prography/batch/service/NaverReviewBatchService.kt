@@ -21,6 +21,8 @@ class NaverReviewBatchService(
     private val naverReviewService: NaverReviewService,
     @Qualifier("naverScrapExecutor")
     private val executor: ThreadPoolTaskExecutor,
+    @Qualifier("callbackExecutor")
+    private val callbackExecutor: ThreadPoolTaskExecutor, // 추가
 ) {
     companion object {
         private val log: Logger = LoggerFactory.getLogger(this::class.java)
@@ -63,10 +65,20 @@ class NaverReviewBatchService(
                 }
 
             // 모든 작업 완료까지 대기
-            CompletableFuture.allOf(*futures.toTypedArray()).join()
-            log.info("✅ All Naver updates completed.")
-            batch.forEach { it.naverReviewProcessed = true }
-            rawRestaurantDataRepository.saveAll(batch)
+
+            CompletableFuture
+                .allOf(*futures.toTypedArray())
+                .whenCompleteAsync({ _, ex ->
+                    // 모든 작업이 끝났거나, 하나라도 에러가 나면 이 블록이 호출됩니다.
+                    val failures = futures.count { it.isCompletedExceptionally }
+                    log.info(
+                        "✅ All Naver updates completed. successes={} failures={}",
+                        batch.size - failures,
+                        failures,
+                    )
+                    batch.forEach { it.naverReviewProcessed = true }
+                    rawRestaurantDataRepository.saveAll(batch)
+                }, callbackExecutor)
         }
     }
 
