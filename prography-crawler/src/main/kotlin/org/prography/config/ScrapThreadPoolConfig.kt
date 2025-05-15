@@ -19,9 +19,9 @@ class ScrapThreadPoolConfig {
     @Bean(name = ["naverScrapExecutor"])
     fun naverScrapExecutor(): ThreadPoolTaskExecutor {
         val executor = ThreadPoolTaskExecutor()
-        executor.corePoolSize = 3
-        executor.maxPoolSize = 3
-        executor.queueCapacity = 10000
+        executor.corePoolSize = 1
+        executor.maxPoolSize = 1
+        executor.queueCapacity = 100
         executor.setThreadNamePrefix("naver-feign-exec-")
         return executor
     }
@@ -31,7 +31,7 @@ class ScrapThreadPoolConfig {
         val executor = ThreadPoolTaskExecutor()
         executor.corePoolSize = 3
         executor.maxPoolSize = 3
-        executor.queueCapacity = 10000
+        executor.queueCapacity = 100
         executor.setThreadNamePrefix("kakao-feign-exec-")
         return executor
     }

@@ -17,8 +17,15 @@ class StoreNameNormalizer {
     private val branchRegex: Pattern =
         Pattern.compile("\\s*(${branchSuffixes.joinToString("|")})\\s*$")
 
-    /** 매장 이름 정규화: 지점/본점/○○점 접미사 제거 */
-    private fun normalize(raw: String?): String = if (raw == null) "" else branchRegex.matcher(raw).replaceFirst("")
+    /** 매장 이름 정규화: 지점/본점/○○점 접미사 제거 (미매칭 시 원본 리턴) */
+    private fun normalize(raw: String): String {
+        val m = branchRegex.matcher(raw)
+        return if (m.find()) {
+            m.replaceFirst("").trimEnd()
+        } else {
+            raw
+        }
+    }
 
     fun buildSearchQuery(kakao: KakaoPlaceInfo): String = "${kakao.placeName} ${kakao.roadAddressName}"
 

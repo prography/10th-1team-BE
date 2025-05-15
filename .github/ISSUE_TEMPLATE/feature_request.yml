@@ -20,7 +20,7 @@ body:
     validations:
       required: true
 
-  - type: textarea
+  - type: input
     id: notion
     attributes:
       label: 🧠 관련 Notion 문서
@@ -53,13 +53,3 @@ body:
       label: 💬 추가 참고 사항
       description: 백엔드 연동 여부, API 필요사항, 논의가 필요한 부분이 있다면 작성해주세요.
       placeholder: 예) 서버 API PATCH /api/user/settings 필요
-
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: 🧾 체크리스트
-      options:
-        - label: 관련 Notion 문서를 작성했습니다.
-        - label: Figma 디자인이 완료되었습니다.
-        - label: 백엔드 연동 여부를 정의했습니다.
-        - label: 기대 동작을 충분히 설명했습니다.

@@ -78,13 +78,3 @@ body:
       label: 📸 스크린샷 또는 로그
       description: 오류 화면 캡처나 콘솔 로그 등을 첨부해주세요 (선택).
       placeholder: 예) 콘솔에 "Uncaught TypeError" 메시지 출력됨
-
-  - type: checkboxes
-    id: checklist
-    attributes:
-      label: 🧾 체크리스트
-      options:
-        - label: 재현 가능한 단계가 명확하게 작성되었습니다.
-        - label: 테스트 환경 정보가 포함되어 있습니다.
-        - label: 기대 동작과 실제 동작을 구분해 작성했습니다.
-        - label: 스크린샷이나 로그를 첨부했습니다 (가능한 경우).

@@ -4,6 +4,6 @@ root = true
 [*.{kt,kts}]
 
 
-# ktlint에서 자동으로 수정하지 않는 예외 제거
+# lint Check 위반하지만, 자동으로 수정되지 않는 예외 처리
 ktlint_standard_no-wildcard-imports = disabled
 ktlint_standard_max-line-length = disabled
