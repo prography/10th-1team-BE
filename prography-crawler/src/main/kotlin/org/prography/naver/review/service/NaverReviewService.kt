@@ -60,8 +60,6 @@ class NaverReviewService(
 
     /** 모든 RawRestaurantData 에 대해 리뷰를 병렬 수집 (Executor + CompletableFuture) */
     fun saveNaverReview(rawRestaurantData: RawRestaurantData) {
-        log.info("naverReviewSearchStart = {}", rawRestaurantData.id)
-
         val placeInfo: NaverPlaceInfo = rawRestaurantData.naverPlaceData ?: return
         val naverReviewData = findNaverInfo(placeInfo.id)
 
@@ -75,7 +73,7 @@ class NaverReviewService(
             rawRestaurantDataRepository.save(rawRestaurantData)
             return
         }
-        log.info("naverReviewNotFound = {}", rawRestaurantData.id)
+        log.error("naverReviewNotFound = {}", rawRestaurantData.id)
     }
 
     /** 단일 사업장 리뷰 조회 */

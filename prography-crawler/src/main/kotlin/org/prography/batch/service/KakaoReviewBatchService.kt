@@ -2,6 +2,7 @@ package org.prography.batch.service
 
 import org.prography.batch.domain.BatchConstants.BATCH_DELAY
 import org.prography.batch.domain.BatchConstants.BATCH_SIZE
+import org.prography.batch.domain.BatchConstants.LIMIT_REQUEST_TIME
 import org.prography.kakao.review.service.KakaoReviewService
 import org.prography.restaurant.domain.RawRestaurantData
 import org.prography.restaurant.domain.RawRestaurantDataRepository
@@ -24,7 +25,6 @@ class KakaoReviewBatchService(
     private val callbackExecutor: ThreadPoolTaskExecutor,
 ) {
     companion object {
-        private const val SLEEP_MS = 5_000L
         private val log: Logger = LoggerFactory.getLogger(KakaoReviewBatchService::class.java)
     }
 
@@ -38,7 +38,6 @@ class KakaoReviewBatchService(
         val unprocessedCount = rawRestaurantDataRepository.countByKakaoReviewProcessedFalse()
         log.info("Unchecked KakaoReviewSize: $unprocessedCount")
         if (unprocessedCount >= BATCH_SIZE) {
-            // 최초 1,000건만 조회
             val batch =
                 rawRestaurantDataRepository.findByKakaoReviewProcessedFalse(
                     PageRequest.of(
@@ -58,8 +57,6 @@ class KakaoReviewBatchService(
                         batch.size - failures,
                         failures,
                     )
-                    batch.forEach { it.kakaoReviewProcessed = true }
-                    rawRestaurantDataRepository.saveAll(batch)
                 }, callbackExecutor)
         }
     }
@@ -77,7 +74,7 @@ class KakaoReviewBatchService(
     private fun processRestaurantAsync(data: RawRestaurantData): CompletableFuture<Void> =
         CompletableFuture.runAsync({
             runCatching {
-                Thread.sleep(SLEEP_MS) // TODO: 네트워크 쿨다운이라면 retry/backoff 로 교체 고려
+                Thread.sleep(LIMIT_REQUEST_TIME)
                 kakaoReviewService.saveKakaoReview(data)
             }.onFailure { ex ->
                 log.error(
@@ -89,5 +86,3 @@ class KakaoReviewBatchService(
             }
         }, executor)
 }
-
-private fun <T> List<CompletableFuture<T>>.awaitAll(): Void? = CompletableFuture.allOf(*toTypedArray()).join()

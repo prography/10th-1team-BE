@@ -22,19 +22,19 @@ class NaverPlaceService(
     /** Java style Executor + CompletableFuture */
     fun saveNaverPlaceData(restaurantData: RawRestaurantData) {
         if (restaurantData.kakaoPlaceData == null) {
-            log.info("No kakao place found for ${restaurantData.id}")
-            return
+            log.error("No kakao place found for ${restaurantData.id}")
         }
 
         val naverInfo = findNaverInfo(restaurantData.kakaoPlaceData!!)
         if (naverInfo != null) {
             log.info("NaverInfo Found: {}", naverInfo.id)
             restaurantData.naverPlaceData = naverInfo.toNaverPlaceInfo()
-            rawRestaurantDataRepository.save(restaurantData)
-            return
+        } else {
+            log.error("NaverPlace Not Found : ${restaurantData.id}")
         }
 
-        log.info("NaverPlace Not Found : ${restaurantData.id}")
+        restaurantData.naverReviewProcessed = true
+        rawRestaurantDataRepository.save(restaurantData)
     }
 
     /** 1차 검색 실패 시 fallback 한 번 더 시도 */
@@ -53,7 +53,11 @@ class NaverPlaceService(
         search(primaryQuery)?.let { return it }
 
         val fallbackQuery = storeNameNormalizer.buildFallbackSearchQuery(kakao)
-        log.info("Fallback query: {}, basic: {}", fallbackQuery, kakao.placeName)
+        if (primaryQuery == fallbackQuery) {
+            return null
+        }
+
+        log.info("Try fallback query: {}, basic: {}", fallbackQuery, kakao.placeName)
         return search(fallbackQuery)
     }
 }

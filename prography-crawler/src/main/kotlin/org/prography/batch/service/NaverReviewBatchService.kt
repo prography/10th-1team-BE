@@ -2,8 +2,10 @@ package org.prography.batch.service
 
 import org.prography.batch.domain.BatchConstants.BATCH_DELAY
 import org.prography.batch.domain.BatchConstants.BATCH_SIZE
+import org.prography.batch.domain.BatchConstants.LIMIT_REQUEST_TIME
 import org.prography.naver.place.service.NaverPlaceService
 import org.prography.naver.review.service.NaverReviewService
+import org.prography.restaurant.domain.RawRestaurantData
 import org.prography.restaurant.domain.RawRestaurantDataRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -36,7 +38,7 @@ class NaverReviewBatchService(
         }
 
         val unprocessedCount = rawRestaurantDataRepository.countByNaverReviewProcessedFalse()
-        log.info("unprocessed count: {}", unprocessedCount)
+        log.info("unprocessed naver count: {}", unprocessedCount)
         if (unprocessedCount >= BATCH_SIZE) {
             // 최초 1,000건만 조회
             val batch =
@@ -47,22 +49,7 @@ class NaverReviewBatchService(
                     ),
                 )
 
-            val futures =
-                batch.map { restaurant ->
-                    CompletableFuture.runAsync(
-                        {
-                            try {
-                                naverPlaceService.saveNaverPlaceData(restaurant)
-                                naverReviewService.saveNaverReview(restaurant)
-                            } catch (e: Exception) {
-                                log.error("Failed to process review for id: {}", restaurant.id, e)
-                            } finally {
-                                Thread.sleep(10_000)
-                            }
-                        },
-                        executor,
-                    )
-                }
+            val futures = batch.map(::processRestaurantAsync)
 
             // 모든 작업 완료까지 대기
 
@@ -76,21 +63,25 @@ class NaverReviewBatchService(
                         batch.size - failures,
                         failures,
                     )
-                    batch.forEach { it.naverReviewProcessed = true }
-                    rawRestaurantDataRepository.saveAll(batch)
                 }, callbackExecutor)
         }
     }
 
-    fun scrapAllRestaurants() {
-        val all = rawRestaurantDataRepository.findAll()
-        all.forEach {
-            naverPlaceService.saveNaverPlaceData(it)
-            naverReviewService.saveNaverReview(it)
-        }
-        all.forEach { it.naverReviewProcessed = true }
-        rawRestaurantDataRepository.saveAll(all)
-    }
+    private fun processRestaurantAsync(data: RawRestaurantData): CompletableFuture<Void> =
+        CompletableFuture.runAsync({
+            runCatching {
+                Thread.sleep(LIMIT_REQUEST_TIME)
+                naverPlaceService.saveNaverPlaceData(data)
+                naverReviewService.saveNaverReview(data)
+            }.onFailure { ex ->
+                log.error(
+                    "❌ Failed to process review for id={}, kakaoID = {}",
+                    data.id,
+                    data.kakaoPlaceData?.id,
+                    ex,
+                )
+            }
+        }, executor)
 
     private fun isQueueFull(): Boolean {
         val pool = executor.threadPoolExecutor // 실제 ThreadPoolExecutor

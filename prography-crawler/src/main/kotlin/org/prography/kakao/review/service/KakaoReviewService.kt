@@ -8,7 +8,6 @@ import org.prography.restaurant.domain.RawRestaurantData
 import org.prography.restaurant.domain.RawRestaurantDataRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import java.util.concurrent.CompletableFuture
 
 @Service
 class KakaoReviewService(
@@ -27,6 +26,7 @@ class KakaoReviewService(
         // 리뷰 페이징 호출 → 전체 합산
         val response = searchReviewsByKakaoId(kakaoId)
         restaurant.kakaoReviewData = KakaoReviewDataConverter.toDomain(response)
+        restaurant.kakaoReviewProcessed = true
         rawRestaurantDataRepository.save(restaurant)
     }
 
@@ -59,5 +59,3 @@ class KakaoReviewService(
         return kakaoReviewResponse
     }
 }
-
-private fun <T> List<CompletableFuture<T>>.awaitAll(): Void? = CompletableFuture.allOf(*toTypedArray()).join()
