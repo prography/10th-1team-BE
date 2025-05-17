@@ -80,6 +80,7 @@ class NaverReviewBatchService(
                     data.kakaoPlaceData?.id,
                     ex,
                 )
+                throw ex
             }
         }, executor)
 

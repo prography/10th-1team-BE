@@ -83,6 +83,7 @@ class KakaoReviewBatchService(
                     data.kakaoPlaceData?.id,
                     ex,
                 )
+                throw ex
             }
         }, executor)
 }
