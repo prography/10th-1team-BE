@@ -1,2 +1,15 @@
 server:
   port: 8081
+
+spring:
+  config:
+    import: optional:file:./prography-crawler/.env[.properties]
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
+
+kakao:
+  api:
+    key: ${KAKAO_API_KEY}
+
+

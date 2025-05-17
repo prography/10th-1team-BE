@@ -1,4 +1,3 @@
-// build.gradle.kts
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -17,12 +16,12 @@ allprojects {
 }
 
 subprojects {
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.kotlin.kapt")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-web")
@@ -44,6 +43,7 @@ subprojects {
     }
 
     tasks.withType<Test> {
+        workingDir = rootProject.projectDir
         useJUnitPlatform()
     }
 
@@ -51,6 +51,5 @@ subprojects {
         version.set("1.2.1")
     }
 
-    // `gradlew check` 때 같이 돌도록 묶기
     tasks.named("check") { dependsOn("ktlintCheck") }
 }
