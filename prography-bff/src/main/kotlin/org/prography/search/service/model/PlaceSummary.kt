@@ -1,7 +1,7 @@
 package org.prography.search.service.model
 
 data class PlaceSummary(
-    val id: Long,
+    val id: String,
     val name: String,
     val addressName: String,
     val roadAddressName: String,

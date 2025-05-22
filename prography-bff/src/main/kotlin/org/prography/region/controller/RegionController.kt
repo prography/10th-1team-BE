@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import org.prography.config.response.ApiResponse
 import org.prography.region.model.RegionDto
-import org.springframework.http.ResponseEntity
 
 interface RegionController {
     @Operation(
@@ -23,5 +22,5 @@ interface RegionController {
             ),
         ],
     )
-    fun getSearchableRegions(): ResponseEntity<ApiResponse<RegionDto>>
+    fun getSearchableRegions(): ApiResponse<RegionDto>
 }
