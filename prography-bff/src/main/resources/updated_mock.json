@@ -1,0 +1,1412 @@
+[
+  {
+    "id": "오엔_카페앤레스토랑@서울_강남구_압구정로11길_37-30",
+    "name": "Place 1",
+    "addressName": "1 Sample Address",
+    "roadAddressName": "1 Sample Road Address",
+    "kakaoReviews": 10,
+    "kakaoScore": 3.0,
+    "naverReviews": 5,
+    "naverScore": 4.0
+  },
+  {
+    "id": "더_리버사이드_호텔_뷔페_더_가든키친@서울_서초구_강남대로107길_6",
+    "name": "Place 2",
+    "addressName": "2 Sample Address",
+    "roadAddressName": "2 Sample Road Address",
+    "kakaoReviews": 20,
+    "kakaoScore": 3.0,
+    "naverReviews": 10,
+    "naverScore": 4.0
+  },
+  {
+    "id": "더_리버사이드_호텔_중식당_따뚱@서울_서초구_강남대로107길_6",
+    "name": "Place 3",
+    "addressName": "3 Sample Address",
+    "roadAddressName": "3 Sample Road Address",
+    "kakaoReviews": 30,
+    "kakaoScore": 3.0,
+    "naverReviews": 15,
+    "naverScore": 4.0
+  },
+  {
+    "id": "더_리버사이드호텔_카와베_스키야키@서울_서초구_강남대로107길_6",
+    "name": "Place 4",
+    "addressName": "4 Sample Address",
+    "roadAddressName": "4 Sample Road Address",
+    "kakaoReviews": 40,
+    "kakaoScore": 3.0,
+    "naverReviews": 20,
+    "naverScore": 4.0
+  },
+  {
+    "id": "더_리버사이드호텔_카와베_테판야키@서울_서초구_강남대로107길_6",
+    "name": "Place 5",
+    "addressName": "5 Sample Address",
+    "roadAddressName": "5 Sample Road Address",
+    "kakaoReviews": 50,
+    "kakaoScore": 3.0,
+    "naverReviews": 25,
+    "naverScore": 4.0
+  },
+  {
+    "id": "더라운지@서울_서초구_강남대로107길_6",
+    "name": "Place 6",
+    "addressName": "6 Sample Address",
+    "roadAddressName": "6 Sample Road Address",
+    "kakaoReviews": 60,
+    "kakaoScore": 3.0,
+    "naverReviews": 30,
+    "naverScore": 4.0
+  },
+  {
+    "id": "산내들@서울_서초구_강남대로107길_6",
+    "name": "Place 7",
+    "addressName": "7 Sample Address",
+    "roadAddressName": "7 Sample Road Address",
+    "kakaoReviews": 70,
+    "kakaoScore": 3.0,
+    "naverReviews": 35,
+    "naverScore": 4.0
+  },
+  {
+    "id": "마츠리@서울_서초구_강남대로107길_6",
+    "name": "Place 8",
+    "addressName": "8 Sample Address",
+    "roadAddressName": "8 Sample Road Address",
+    "kakaoReviews": 80,
+    "kakaoScore": 3.0,
+    "naverReviews": 40,
+    "naverScore": 4.0
+  },
+  {
+    "id": "신죽마고우24시@서울_서초구_강남대로_631",
+    "name": "Place 9",
+    "addressName": "9 Sample Address",
+    "roadAddressName": "9 Sample Road Address",
+    "kakaoReviews": 90,
+    "kakaoScore": 3.0,
+    "naverReviews": 45,
+    "naverScore": 4.0
+  },
+  {
+    "id": "만수정_강남점@서울_강남구_강남대로_628",
+    "name": "Place 10",
+    "addressName": "10 Sample Address",
+    "roadAddressName": "10 Sample Road Address",
+    "kakaoReviews": 100,
+    "kakaoScore": 3.0,
+    "naverReviews": 50,
+    "naverScore": 4.0
+  },
+  {
+    "id": "이월육일@서울_강남구_강남대로_628",
+    "name": "Place 11",
+    "addressName": "11 Sample Address",
+    "roadAddressName": "11 Sample Road Address",
+    "kakaoReviews": 110,
+    "kakaoScore": 3.0,
+    "naverReviews": 55,
+    "naverScore": 4.0
+  },
+  {
+    "id": "화작@서울_강남구_강남대로_630",
+    "name": "Place 12",
+    "addressName": "12 Sample Address",
+    "roadAddressName": "12 Sample Road Address",
+    "kakaoReviews": 120,
+    "kakaoScore": 3.0,
+    "naverReviews": 60,
+    "naverScore": 4.0
+  },
+  {
+    "id": "꿉당_신사점@서울_서초구_강남대로_615",
+    "name": "Place 13",
+    "addressName": "13 Sample Address",
+    "roadAddressName": "13 Sample Road Address",
+    "kakaoReviews": 130,
+    "kakaoScore": 3.0,
+    "naverReviews": 65,
+    "naverScore": 4.0
+  },
+  {
+    "id": "강남쌀국수_신사역점@서울_강남구_강남대로_620",
+    "name": "Place 14",
+    "addressName": "14 Sample Address",
+    "roadAddressName": "14 Sample Road Address",
+    "kakaoReviews": 140,
+    "kakaoScore": 3.0,
+    "naverReviews": 70,
+    "naverScore": 4.0
+  },
+  {
+    "id": "앙평신내서울해장국@서울_서초구_강남대로_615",
+    "name": "Place 15",
+    "addressName": "15 Sample Address",
+    "roadAddressName": "15 Sample Road Address",
+    "kakaoReviews": 150,
+    "kakaoScore": 3.0,
+    "naverReviews": 75,
+    "naverScore": 4.0
+  },
+  {
+    "id": "흥@서울_강남구_강남대로_630",
+    "name": "Place 16",
+    "addressName": "16 Sample Address",
+    "roadAddressName": "16 Sample Road Address",
+    "kakaoReviews": 160,
+    "kakaoScore": 3.0,
+    "naverReviews": 80,
+    "naverScore": 4.0
+  },
+  {
+    "id": "청담동마녀김밥_신사역점@서울_서초구_강남대로_617",
+    "name": "Place 17",
+    "addressName": "17 Sample Address",
+    "roadAddressName": "17 Sample Road Address",
+    "kakaoReviews": 170,
+    "kakaoScore": 3.0,
+    "naverReviews": 85,
+    "naverScore": 4.0
+  },
+  {
+    "id": "탄화@서울_강남구_강남대로_628",
+    "name": "Place 18",
+    "addressName": "18 Sample Address",
+    "roadAddressName": "18 Sample Road Address",
+    "kakaoReviews": 180,
+    "kakaoScore": 3.0,
+    "naverReviews": 90,
+    "naverScore": 4.0
+  },
+  {
+    "id": "153구포국수_신사점@서울_강남구_강남대로_616",
+    "name": "Place 19",
+    "addressName": "19 Sample Address",
+    "roadAddressName": "19 Sample Road Address",
+    "kakaoReviews": 190,
+    "kakaoScore": 3.0,
+    "naverReviews": 95,
+    "naverScore": 4.0
+  },
+  {
+    "id": "신촌설렁탕_신사점@서울_강남구_강남대로_628",
+    "name": "Place 20",
+    "addressName": "20 Sample Address",
+    "roadAddressName": "20 Sample Road Address",
+    "kakaoReviews": 200,
+    "kakaoScore": 3.0,
+    "naverReviews": 100,
+    "naverScore": 4.0
+  },
+  {
+    "id": "프랭크버거_신사역점@서울_서초구_강남대로_617",
+    "name": "Place 21",
+    "addressName": "21 Sample Address",
+    "roadAddressName": "21 Sample Road Address",
+    "kakaoReviews": 210,
+    "kakaoScore": 3.0,
+    "naverReviews": 105,
+    "naverScore": 4.0
+  },
+  {
+    "id": "원해치킨하우스@서울_강남구_강남대로_620",
+    "name": "Place 22",
+    "addressName": "22 Sample Address",
+    "roadAddressName": "22 Sample Road Address",
+    "kakaoReviews": 220,
+    "kakaoScore": 3.0,
+    "naverReviews": 110,
+    "naverScore": 4.0
+  },
+  {
+    "id": "씨엘33@서울_강남구_강남대로_616",
+    "name": "Place 23",
+    "addressName": "23 Sample Address",
+    "roadAddressName": "23 Sample Road Address",
+    "kakaoReviews": 230,
+    "kakaoScore": 3.0,
+    "naverReviews": 115,
+    "naverScore": 4.0
+  },
+  {
+    "id": "오마카세육@서울_강남구_강남대로_628",
+    "name": "Place 24",
+    "addressName": "24 Sample Address",
+    "roadAddressName": "24 Sample Road Address",
+    "kakaoReviews": 240,
+    "kakaoScore": 3.0,
+    "naverReviews": 120,
+    "naverScore": 4.0
+  },
+  {
+    "id": "마운틴가라오케@서울_강남구_강남대로_616",
+    "name": "Place 25",
+    "addressName": "25 Sample Address",
+    "roadAddressName": "25 Sample Road Address",
+    "kakaoReviews": 250,
+    "kakaoScore": 3.0,
+    "naverReviews": 125,
+    "naverScore": 4.0
+  },
+  {
+    "id": "야키니쿠규@서울_강남구_강남대로_640",
+    "name": "Place 26",
+    "addressName": "26 Sample Address",
+    "roadAddressName": "26 Sample Road Address",
+    "kakaoReviews": 260,
+    "kakaoScore": 3.0,
+    "naverReviews": 130,
+    "naverScore": 4.0
+  },
+  {
+    "id": "더뷰라운지@서울_강남구_강남대로_626",
+    "name": "Place 27",
+    "addressName": "27 Sample Address",
+    "roadAddressName": "27 Sample Road Address",
+    "kakaoReviews": 270,
+    "kakaoScore": 3.0,
+    "naverReviews": 135,
+    "naverScore": 4.0
+  },
+  {
+    "id": "라운지501@서울_강남구_강남대로_616",
+    "name": "Place 28",
+    "addressName": "28 Sample Address",
+    "roadAddressName": "28 Sample Road Address",
+    "kakaoReviews": 280,
+    "kakaoScore": 3.0,
+    "naverReviews": 140,
+    "naverScore": 4.0
+  },
+  {
+    "id": "용이네술집@서울_강남구_강남대로156길_8",
+    "name": "Place 29",
+    "addressName": "29 Sample Address",
+    "roadAddressName": "29 Sample Road Address",
+    "kakaoReviews": 290,
+    "kakaoScore": 3.0,
+    "naverReviews": 145,
+    "naverScore": 4.0
+  },
+  {
+    "id": "더내츄럴키친@서울_강남구_강남대로_624",
+    "name": "Place 30",
+    "addressName": "30 Sample Address",
+    "roadAddressName": "30 Sample Road Address",
+    "kakaoReviews": 300,
+    "kakaoScore": 3.0,
+    "naverReviews": 150,
+    "naverScore": 4.0
+  },
+  {
+    "id": "초코동@서울_강남구_강남대로158길_9",
+    "name": "Place 31",
+    "addressName": "31 Sample Address",
+    "roadAddressName": "31 Sample Road Address",
+    "kakaoReviews": 310,
+    "kakaoScore": 3.0,
+    "naverReviews": 155,
+    "naverScore": 4.0
+  },
+  {
+    "id": "송주담@서울_강남구_강남대로156길_8",
+    "name": "Place 32",
+    "addressName": "32 Sample Address",
+    "roadAddressName": "32 Sample Road Address",
+    "kakaoReviews": 320,
+    "kakaoScore": 3.0,
+    "naverReviews": 160,
+    "naverScore": 4.0
+  },
+  {
+    "id": "송쉐프_본점@서울_강남구_도산대로1길_40",
+    "name": "Place 33",
+    "addressName": "33 Sample Address",
+    "roadAddressName": "33 Sample Road Address",
+    "kakaoReviews": 330,
+    "kakaoScore": 3.0,
+    "naverReviews": 165,
+    "naverScore": 4.0
+  },
+  {
+    "id": "김북순큰남비집_신사본점@서울_강남구_압구정로2길_15",
+    "name": "Place 34",
+    "addressName": "34 Sample Address",
+    "roadAddressName": "34 Sample Road Address",
+    "kakaoReviews": 340,
+    "kakaoScore": 3.0,
+    "naverReviews": 170,
+    "naverScore": 4.0
+  },
+  {
+    "id": "신사꽃게당@서울_강남구_강남대로160길_11",
+    "name": "Place 35",
+    "addressName": "35 Sample Address",
+    "roadAddressName": "35 Sample Road Address",
+    "kakaoReviews": 350,
+    "kakaoScore": 3.0,
+    "naverReviews": 175,
+    "naverScore": 4.0
+  },
+  {
+    "id": "직화장인_신사점@서울_강남구_도산대로1길_62",
+    "name": "Place 36",
+    "addressName": "36 Sample Address",
+    "roadAddressName": "36 Sample Road Address",
+    "kakaoReviews": 360,
+    "kakaoScore": 3.0,
+    "naverReviews": 180,
+    "naverScore": 4.0
+  },
+  {
+    "id": "청자매운소돼지갈비찜@서울_강남구_도산대로1길_36",
+    "name": "Place 37",
+    "addressName": "37 Sample Address",
+    "roadAddressName": "37 Sample Road Address",
+    "kakaoReviews": 370,
+    "kakaoScore": 3.0,
+    "naverReviews": 185,
+    "naverScore": 4.0
+  },
+  {
+    "id": "트라가_가로수길점@서울_강남구_압구정로2길_18",
+    "name": "Place 38",
+    "addressName": "38 Sample Address",
+    "roadAddressName": "38 Sample Road Address",
+    "kakaoReviews": 380,
+    "kakaoScore": 3.0,
+    "naverReviews": 190,
+    "naverScore": 4.0
+  },
+  {
+    "id": "이목스모크다이닝@서울_강남구_압구정로2길_6",
+    "name": "Place 39",
+    "addressName": "39 Sample Address",
+    "roadAddressName": "39 Sample Road Address",
+    "kakaoReviews": 390,
+    "kakaoScore": 3.0,
+    "naverReviews": 195,
+    "naverScore": 4.0
+  },
+  {
+    "id": "날리@서울_강남구_강남대로160길_10",
+    "name": "Place 40",
+    "addressName": "40 Sample Address",
+    "roadAddressName": "40 Sample Road Address",
+    "kakaoReviews": 400,
+    "kakaoScore": 3.0,
+    "naverReviews": 200,
+    "naverScore": 4.0
+  },
+  {
+    "id": "캘리포니아호프치킨@서울_강남구_압구정로4길_12",
+    "name": "Place 41",
+    "addressName": "41 Sample Address",
+    "roadAddressName": "41 Sample Road Address",
+    "kakaoReviews": 410,
+    "kakaoScore": 3.0,
+    "naverReviews": 205,
+    "naverScore": 4.0
+  },
+  {
+    "id": "알집모닝메이트@서울_강남구_도산대로1길_62",
+    "name": "Place 42",
+    "addressName": "42 Sample Address",
+    "roadAddressName": "42 Sample Road Address",
+    "kakaoReviews": 420,
+    "kakaoScore": 3.0,
+    "naverReviews": 210,
+    "naverScore": 4.0
+  },
+  {
+    "id": "스와니예@서울_강남구_강남대로_652",
+    "name": "Place 43",
+    "addressName": "43 Sample Address",
+    "roadAddressName": "43 Sample Road Address",
+    "kakaoReviews": 430,
+    "kakaoScore": 3.0,
+    "naverReviews": 215,
+    "naverScore": 4.0
+  },
+  {
+    "id": "게집@서울_강남구_압구정로4길_14-14",
+    "name": "Place 44",
+    "addressName": "44 Sample Address",
+    "roadAddressName": "44 Sample Road Address",
+    "kakaoReviews": 440,
+    "kakaoScore": 3.0,
+    "naverReviews": 220,
+    "naverScore": 4.0
+  },
+  {
+    "id": "복자네대박났네@서울_강남구_도산대로1길_62",
+    "name": "Place 45",
+    "addressName": "45 Sample Address",
+    "roadAddressName": "45 Sample Road Address",
+    "kakaoReviews": 450,
+    "kakaoScore": 3.0,
+    "naverReviews": 225,
+    "naverScore": 4.0
+  },
+  {
+    "id": "키이로@서울_강남구_강남대로_652",
+    "name": "Place 46",
+    "addressName": "46 Sample Address",
+    "roadAddressName": "46 Sample Road Address",
+    "kakaoReviews": 460,
+    "kakaoScore": 3.0,
+    "naverReviews": 230,
+    "naverScore": 4.0
+  },
+  {
+    "id": "삼정하누펍@서울_강남구_압구정로2길_6",
+    "name": "Place 47",
+    "addressName": "47 Sample Address",
+    "roadAddressName": "47 Sample Road Address",
+    "kakaoReviews": 470,
+    "kakaoScore": 3.0,
+    "naverReviews": 235,
+    "naverScore": 4.0
+  },
+  {
+    "id": "아로보서울@서울_강남구_도산대로1길_36",
+    "name": "Place 48",
+    "addressName": "48 Sample Address",
+    "roadAddressName": "48 Sample Road Address",
+    "kakaoReviews": 480,
+    "kakaoScore": 3.0,
+    "naverReviews": 240,
+    "naverScore": 4.0
+  },
+  {
+    "id": "로이신사@서울_강남구_도산대로1길_78",
+    "name": "Place 49",
+    "addressName": "49 Sample Address",
+    "roadAddressName": "49 Sample Road Address",
+    "kakaoReviews": 490,
+    "kakaoScore": 3.0,
+    "naverReviews": 245,
+    "naverScore": 4.0
+  },
+  {
+    "id": "레이호스시@서울_강남구_강남대로_652",
+    "name": "Place 50",
+    "addressName": "50 Sample Address",
+    "roadAddressName": "50 Sample Road Address",
+    "kakaoReviews": 500,
+    "kakaoScore": 3.0,
+    "naverReviews": 250,
+    "naverScore": 4.0
+  },
+  {
+    "id": "보나로@서울_강남구_도산대로1길_78",
+    "name": "Place 51",
+    "addressName": "51 Sample Address",
+    "roadAddressName": "51 Sample Road Address",
+    "kakaoReviews": 510,
+    "kakaoScore": 3.0,
+    "naverReviews": 255,
+    "naverScore": 4.0
+  },
+  {
+    "id": "피키오@서울_강남구_도산대로1길_36",
+    "name": "Place 52",
+    "addressName": "52 Sample Address",
+    "roadAddressName": "52 Sample Road Address",
+    "kakaoReviews": 520,
+    "kakaoScore": 3.0,
+    "naverReviews": 260,
+    "naverScore": 4.0
+  },
+  {
+    "id": "타스@서울_강남구_도산대로1길_78",
+    "name": "Place 53",
+    "addressName": "53 Sample Address",
+    "roadAddressName": "53 Sample Road Address",
+    "kakaoReviews": 530,
+    "kakaoScore": 3.0,
+    "naverReviews": 265,
+    "naverScore": 4.0
+  },
+  {
+    "id": "태번38@서울_강남구_강남대로_652",
+    "name": "Place 54",
+    "addressName": "54 Sample Address",
+    "roadAddressName": "54 Sample Road Address",
+    "kakaoReviews": 540,
+    "kakaoScore": 3.0,
+    "naverReviews": 270,
+    "naverScore": 4.0
+  },
+  {
+    "id": "서리달@서울_강남구_도산대로1길_36",
+    "name": "Place 55",
+    "addressName": "55 Sample Address",
+    "roadAddressName": "55 Sample Road Address",
+    "kakaoReviews": 550,
+    "kakaoScore": 3.0,
+    "naverReviews": 275,
+    "naverScore": 4.0
+  },
+  {
+    "id": "레귬@서울_강남구_강남대로_652",
+    "name": "Place 56",
+    "addressName": "56 Sample Address",
+    "roadAddressName": "56 Sample Road Address",
+    "kakaoReviews": 560,
+    "kakaoScore": 3.0,
+    "naverReviews": 280,
+    "naverScore": 4.0
+  },
+  {
+    "id": "중식포차@서울_강남구_도산대로1길_40",
+    "name": "Place 57",
+    "addressName": "57 Sample Address",
+    "roadAddressName": "57 Sample Road Address",
+    "kakaoReviews": 570,
+    "kakaoScore": 3.0,
+    "naverReviews": 285,
+    "naverScore": 4.0
+  },
+  {
+    "id": "까사밀_레스토랑@서울_강남구_도산대로1길_83",
+    "name": "Place 58",
+    "addressName": "58 Sample Address",
+    "roadAddressName": "58 Sample Road Address",
+    "kakaoReviews": 580,
+    "kakaoScore": 3.0,
+    "naverReviews": 290,
+    "naverScore": 4.0
+  },
+  {
+    "id": "라까사호텔_서울_호아@서울_강남구_도산대로1길_83",
+    "name": "Place 59",
+    "addressName": "59 Sample Address",
+    "roadAddressName": "59 Sample Road Address",
+    "kakaoReviews": 590,
+    "kakaoScore": 3.0,
+    "naverReviews": 295,
+    "naverScore": 4.0
+  },
+  {
+    "id": "북스테이지@서울_강남구_압구정로_102",
+    "name": "Place 60",
+    "addressName": "60 Sample Address",
+    "roadAddressName": "60 Sample Road Address",
+    "kakaoReviews": 600,
+    "kakaoScore": 3.0,
+    "naverReviews": 300,
+    "naverScore": 4.0
+  },
+  {
+    "id": "호아_가로수길@서울_강남구_압구정로_102",
+    "name": "Place 61",
+    "addressName": "61 Sample Address",
+    "roadAddressName": "61 Sample Road Address",
+    "kakaoReviews": 610,
+    "kakaoScore": 3.0,
+    "naverReviews": 305,
+    "naverScore": 4.0
+  },
+  {
+    "id": "미우@서울_강남구_압구정로_113-22",
+    "name": "Place 62",
+    "addressName": "62 Sample Address",
+    "roadAddressName": "62 Sample Road Address",
+    "kakaoReviews": 620,
+    "kakaoScore": 3.0,
+    "naverReviews": 310,
+    "naverScore": 4.0
+  },
+  {
+    "id": "매란방_압구정점@서울_강남구_압구정로_113",
+    "name": "Place 63",
+    "addressName": "63 Sample Address",
+    "roadAddressName": "63 Sample Road Address",
+    "kakaoReviews": 630,
+    "kakaoScore": 3.0,
+    "naverReviews": 315,
+    "naverScore": 4.0
+  },
+  {
+    "id": "홍종흔베이커리_압구정점@서울_강남구_압구정로_113",
+    "name": "Place 64",
+    "addressName": "64 Sample Address",
+    "roadAddressName": "64 Sample Road Address",
+    "kakaoReviews": 640,
+    "kakaoScore": 3.0,
+    "naverReviews": 320,
+    "naverScore": 4.0
+  },
+  {
+    "id": "이명환_오메기랑떡이랑@서울_강남구_압구정로_113-22",
+    "name": "Place 65",
+    "addressName": "65 Sample Address",
+    "roadAddressName": "65 Sample Road Address",
+    "kakaoReviews": 650,
+    "kakaoScore": 3.0,
+    "naverReviews": 325,
+    "naverScore": 4.0
+  },
+  {
+    "id": "미성백반@서울_강남구_압구정로_113-22",
+    "name": "Place 66",
+    "addressName": "66 Sample Address",
+    "roadAddressName": "66 Sample Road Address",
+    "kakaoReviews": 660,
+    "kakaoScore": 3.0,
+    "naverReviews": 330,
+    "naverScore": 4.0
+  },
+  {
+    "id": "강남떡집@서울_강남구_압구정로_113-22",
+    "name": "Place 67",
+    "addressName": "67 Sample Address",
+    "roadAddressName": "67 Sample Road Address",
+    "kakaoReviews": 670,
+    "kakaoScore": 3.0,
+    "naverReviews": 335,
+    "naverScore": 4.0
+  },
+  {
+    "id": "압구정오리@서울_강남구_압구정로_113-22",
+    "name": "Place 68",
+    "addressName": "68 Sample Address",
+    "roadAddressName": "68 Sample Road Address",
+    "kakaoReviews": 680,
+    "kakaoScore": 3.0,
+    "naverReviews": 340,
+    "naverScore": 4.0
+  },
+  {
+    "id": "압구정에프앤씨@서울_강남구_압구정로_113-22",
+    "name": "Place 69",
+    "addressName": "69 Sample Address",
+    "roadAddressName": "69 Sample Road Address",
+    "kakaoReviews": 690,
+    "kakaoScore": 3.0,
+    "naverReviews": 345,
+    "naverScore": 4.0
+  },
+  {
+    "id": "비앤에스에프앤비@서울_강남구_압구정로_113",
+    "name": "Place 70",
+    "addressName": "70 Sample Address",
+    "roadAddressName": "70 Sample Road Address",
+    "kakaoReviews": 700,
+    "kakaoScore": 3.0,
+    "naverReviews": 350,
+    "naverScore": 4.0
+  },
+  {
+    "id": "텐타이@서울_강남구_도산대로1길_3",
+    "name": "Place 71",
+    "addressName": "71 Sample Address",
+    "roadAddressName": "71 Sample Road Address",
+    "kakaoReviews": 710,
+    "kakaoScore": 3.0,
+    "naverReviews": 355,
+    "naverScore": 4.0
+  },
+  {
+    "id": "평안도식당_신사점@서울_강남구_강남대로150길_11",
+    "name": "Place 72",
+    "addressName": "72 Sample Address",
+    "roadAddressName": "72 Sample Road Address",
+    "kakaoReviews": 720,
+    "kakaoScore": 3.0,
+    "naverReviews": 360,
+    "naverScore": 4.0
+  },
+  {
+    "id": "타워식당@서울_강남구_도산대로_107",
+    "name": "Place 73",
+    "addressName": "73 Sample Address",
+    "roadAddressName": "73 Sample Road Address",
+    "kakaoReviews": 730,
+    "kakaoScore": 3.0,
+    "naverReviews": 365,
+    "naverScore": 4.0
+  },
+  {
+    "id": "호시@서울_강남구_도산대로_107",
+    "name": "Place 74",
+    "addressName": "74 Sample Address",
+    "roadAddressName": "74 Sample Road Address",
+    "kakaoReviews": 740,
+    "kakaoScore": 3.0,
+    "naverReviews": 370,
+    "naverScore": 4.0
+  },
+  {
+    "id": "우주에서온샐러드@서울_강남구_도산대로_107",
+    "name": "Place 75",
+    "addressName": "75 Sample Address",
+    "roadAddressName": "75 Sample Road Address",
+    "kakaoReviews": 750,
+    "kakaoScore": 3.0,
+    "naverReviews": 375,
+    "naverScore": 4.0
+  },
+  {
+    "id": "호두당@서울_강남구_도산대로_지하_102",
+    "name": "Place 76",
+    "addressName": "76 Sample Address",
+    "roadAddressName": "76 Sample Road Address",
+    "kakaoReviews": 760,
+    "kakaoScore": 3.0,
+    "naverReviews": 380,
+    "naverScore": 4.0
+  },
+  {
+    "id": "신빌딩구내식당@서울_강남구_도산대로_107",
+    "name": "Place 77",
+    "addressName": "77 Sample Address",
+    "roadAddressName": "77 Sample Road Address",
+    "kakaoReviews": 770,
+    "kakaoScore": 3.0,
+    "naverReviews": 385,
+    "naverScore": 4.0
+  },
+  {
+    "id": "마리왕_신사역점@서울_강남구_도산대로_지하_102",
+    "name": "Place 78",
+    "addressName": "78 Sample Address",
+    "roadAddressName": "78 Sample Road Address",
+    "kakaoReviews": 780,
+    "kakaoScore": 3.0,
+    "naverReviews": 390,
+    "naverScore": 4.0
+  },
+  {
+    "id": "더아담_신사역점@서울_강남구_도산대로_지하_102",
+    "name": "Place 79",
+    "addressName": "79 Sample Address",
+    "roadAddressName": "79 Sample Road Address",
+    "kakaoReviews": 790,
+    "kakaoScore": 3.0,
+    "naverReviews": 395,
+    "naverScore": 4.0
+  },
+  {
+    "id": "퍼스트푸드@서울_강남구_도산대로_104",
+    "name": "Place 80",
+    "addressName": "80 Sample Address",
+    "roadAddressName": "80 Sample Road Address",
+    "kakaoReviews": 800,
+    "kakaoScore": 3.0,
+    "naverReviews": 400,
+    "naverScore": 4.0
+  },
+  {
+    "id": "천미미@서울_강남구_강남대로152길_11",
+    "name": "Place 81",
+    "addressName": "81 Sample Address",
+    "roadAddressName": "81 Sample Road Address",
+    "kakaoReviews": 810,
+    "kakaoScore": 3.0,
+    "naverReviews": 405,
+    "naverScore": 4.0
+  },
+  {
+    "id": "홍미닭발_신사본점@서울_강남구_도산대로1길_6",
+    "name": "Place 82",
+    "addressName": "82 Sample Address",
+    "roadAddressName": "82 Sample Road Address",
+    "kakaoReviews": 820,
+    "kakaoScore": 3.0,
+    "naverReviews": 410,
+    "naverScore": 4.0
+  },
+  {
+    "id": "꼬끄더그릴@서울_강남구_강남대로154길_10",
+    "name": "Place 83",
+    "addressName": "83 Sample Address",
+    "roadAddressName": "83 Sample Road Address",
+    "kakaoReviews": 830,
+    "kakaoScore": 3.0,
+    "naverReviews": 415,
+    "naverScore": 4.0
+  },
+  {
+    "id": "응수수산@서울_강남구_강남대로152길_15",
+    "name": "Place 84",
+    "addressName": "84 Sample Address",
+    "roadAddressName": "84 Sample Road Address",
+    "kakaoReviews": 840,
+    "kakaoScore": 3.0,
+    "naverReviews": 420,
+    "naverScore": 4.0
+  },
+  {
+    "id": "롱타임노씨_신사점@서울_강남구_강남대로152길_15",
+    "name": "Place 85",
+    "addressName": "85 Sample Address",
+    "roadAddressName": "85 Sample Road Address",
+    "kakaoReviews": 850,
+    "kakaoScore": 3.0,
+    "naverReviews": 425,
+    "naverScore": 4.0
+  },
+  {
+    "id": "심퍼티쿠시_가로수길점@서울_강남구_강남대로154길_16",
+    "name": "Place 86",
+    "addressName": "86 Sample Address",
+    "roadAddressName": "86 Sample Road Address",
+    "kakaoReviews": 860,
+    "kakaoScore": 3.0,
+    "naverReviews": 430,
+    "naverScore": 4.0
+  },
+  {
+    "id": "신사만장어@서울_강남구_도산대로1길_10",
+    "name": "Place 87",
+    "addressName": "87 Sample Address",
+    "roadAddressName": "87 Sample Road Address",
+    "kakaoReviews": 870,
+    "kakaoScore": 3.0,
+    "naverReviews": 435,
+    "naverScore": 4.0
+  },
+  {
+    "id": "도톤보리_서울@서울_강남구_강남대로152길_14",
+    "name": "Place 88",
+    "addressName": "88 Sample Address",
+    "roadAddressName": "88 Sample Road Address",
+    "kakaoReviews": 880,
+    "kakaoScore": 3.0,
+    "naverReviews": 440,
+    "naverScore": 4.0
+  },
+  {
+    "id": "마산옥@서울_강남구_강남대로152길_9",
+    "name": "Place 89",
+    "addressName": "89 Sample Address",
+    "roadAddressName": "89 Sample Road Address",
+    "kakaoReviews": 890,
+    "kakaoScore": 3.0,
+    "naverReviews": 445,
+    "naverScore": 4.0
+  },
+  {
+    "id": "취향의공간@서울_강남구_도산대로1길_16",
+    "name": "Place 90",
+    "addressName": "90 Sample Address",
+    "roadAddressName": "90 Sample Road Address",
+    "kakaoReviews": 900,
+    "kakaoScore": 3.0,
+    "naverReviews": 450,
+    "naverScore": 4.0
+  },
+  {
+    "id": "두사라@서울_강남구_강남대로154길_13",
+    "name": "Place 91",
+    "addressName": "91 Sample Address",
+    "roadAddressName": "91 Sample Road Address",
+    "kakaoReviews": 910,
+    "kakaoScore": 3.0,
+    "naverReviews": 455,
+    "naverScore": 4.0
+  },
+  {
+    "id": "닭한마리감자탕_신사본점@서울_강남구_강남대로152길_14",
+    "name": "Place 92",
+    "addressName": "92 Sample Address",
+    "roadAddressName": "92 Sample Road Address",
+    "kakaoReviews": 920,
+    "kakaoScore": 3.0,
+    "naverReviews": 460,
+    "naverScore": 4.0
+  },
+  {
+    "id": "미분당_신사점@서울_강남구_도산대로1길_18",
+    "name": "Place 93",
+    "addressName": "93 Sample Address",
+    "roadAddressName": "93 Sample Road Address",
+    "kakaoReviews": 930,
+    "kakaoScore": 3.0,
+    "naverReviews": 465,
+    "naverScore": 4.0
+  },
+  {
+    "id": "북경반점@서울_강남구_강남대로152길_14",
+    "name": "Place 94",
+    "addressName": "94 Sample Address",
+    "roadAddressName": "94 Sample Road Address",
+    "kakaoReviews": 940,
+    "kakaoScore": 3.0,
+    "naverReviews": 470,
+    "naverScore": 4.0
+  },
+  {
+    "id": "고메램_신사점@서울_강남구_강남대로152길_11",
+    "name": "Place 95",
+    "addressName": "95 Sample Address",
+    "roadAddressName": "95 Sample Road Address",
+    "kakaoReviews": 950,
+    "kakaoScore": 3.0,
+    "naverReviews": 475,
+    "naverScore": 4.0
+  },
+  {
+    "id": "뻘@서울_강남구_강남대로154길_21",
+    "name": "Place 96",
+    "addressName": "96 Sample Address",
+    "roadAddressName": "96 Sample Road Address",
+    "kakaoReviews": 960,
+    "kakaoScore": 3.0,
+    "naverReviews": 480,
+    "naverScore": 4.0
+  },
+  {
+    "id": "무쇠김치삼겹_신사점@서울_강남구_강남대로152길_13",
+    "name": "Place 97",
+    "addressName": "97 Sample Address",
+    "roadAddressName": "97 Sample Road Address",
+    "kakaoReviews": 970,
+    "kakaoScore": 3.0,
+    "naverReviews": 485,
+    "naverScore": 4.0
+  },
+  {
+    "id": "청담동_순도리_신사점@서울_강남구_강남대로152길_15",
+    "name": "Place 98",
+    "addressName": "98 Sample Address",
+    "roadAddressName": "98 Sample Road Address",
+    "kakaoReviews": 980,
+    "kakaoScore": 3.0,
+    "naverReviews": 490,
+    "naverScore": 4.0
+  },
+  {
+    "id": "미미면가_2호점@서울_강남구_도산대로1길_10",
+    "name": "Place 99",
+    "addressName": "99 Sample Address",
+    "roadAddressName": "99 Sample Road Address",
+    "kakaoReviews": 990,
+    "kakaoScore": 3.0,
+    "naverReviews": 495,
+    "naverScore": 4.0
+  },
+  {
+    "id": "바다를훔친언니@서울_강남구_강남대로154길_12",
+    "name": "Place 100",
+    "addressName": "100 Sample Address",
+    "roadAddressName": "100 Sample Road Address",
+    "kakaoReviews": 1000,
+    "kakaoScore": 3.0,
+    "naverReviews": 500,
+    "naverScore": 4.0
+  },
+  {
+    "id": "유쾌한접시_3호점@서울_강남구_도산대로1길_16",
+    "name": "Place 101",
+    "addressName": "101 Sample Address",
+    "roadAddressName": "101 Sample Road Address",
+    "kakaoReviews": 1010,
+    "kakaoScore": 3.0,
+    "naverReviews": 505,
+    "naverScore": 4.0
+  },
+  {
+    "id": "장미정_신사점@서울_강남구_강남대로152길_9",
+    "name": "Place 102",
+    "addressName": "102 Sample Address",
+    "roadAddressName": "102 Sample Road Address",
+    "kakaoReviews": 1020,
+    "kakaoScore": 3.0,
+    "naverReviews": 510,
+    "naverScore": 4.0
+  },
+  {
+    "id": "두사라_현@서울_강남구_도산대로1길_10",
+    "name": "Place 103",
+    "addressName": "103 Sample Address",
+    "roadAddressName": "103 Sample Road Address",
+    "kakaoReviews": 1030,
+    "kakaoScore": 3.0,
+    "naverReviews": 515,
+    "naverScore": 4.0
+  },
+  {
+    "id": "몬스터홀덤펍@서울_강남구_강남대로152길_17",
+    "name": "Place 104",
+    "addressName": "104 Sample Address",
+    "roadAddressName": "104 Sample Road Address",
+    "kakaoReviews": 1040,
+    "kakaoScore": 3.0,
+    "naverReviews": 520,
+    "naverScore": 4.0
+  },
+  {
+    "id": "상하이블룸_신사점@서울_강남구_강남대로152길_17",
+    "name": "Place 105",
+    "addressName": "105 Sample Address",
+    "roadAddressName": "105 Sample Road Address",
+    "kakaoReviews": 1050,
+    "kakaoScore": 3.0,
+    "naverReviews": 525,
+    "naverScore": 4.0
+  },
+  {
+    "id": "트리플우@서울_강남구_강남대로154길_21",
+    "name": "Place 106",
+    "addressName": "106 Sample Address",
+    "roadAddressName": "106 Sample Road Address",
+    "kakaoReviews": 1060,
+    "kakaoScore": 3.0,
+    "naverReviews": 530,
+    "naverScore": 4.0
+  },
+  {
+    "id": "소일젤라또@서울_강남구_도산대로_113",
+    "name": "Place 107",
+    "addressName": "107 Sample Address",
+    "roadAddressName": "107 Sample Road Address",
+    "kakaoReviews": 1070,
+    "kakaoScore": 3.0,
+    "naverReviews": 535,
+    "naverScore": 4.0
+  },
+  {
+    "id": "사케짱@서울_강남구_강남대로154길_13",
+    "name": "Place 108",
+    "addressName": "108 Sample Address",
+    "roadAddressName": "108 Sample Road Address",
+    "kakaoReviews": 1080,
+    "kakaoScore": 3.0,
+    "naverReviews": 540,
+    "naverScore": 4.0
+  },
+  {
+    "id": "J바@서울_강남구_도산대로1길_16",
+    "name": "Place 109",
+    "addressName": "109 Sample Address",
+    "roadAddressName": "109 Sample Road Address",
+    "kakaoReviews": 1090,
+    "kakaoScore": 3.0,
+    "naverReviews": 545,
+    "naverScore": 4.0
+  },
+  {
+    "id": "빅스텍@서울_강남구_강남대로152길_15",
+    "name": "Place 110",
+    "addressName": "110 Sample Address",
+    "roadAddressName": "110 Sample Road Address",
+    "kakaoReviews": 1100,
+    "kakaoScore": 3.0,
+    "naverReviews": 550,
+    "naverScore": 4.0
+  },
+  {
+    "id": "시골통돼지볶음_신사점@서울_강남구_강남대로154길_19",
+    "name": "Place 111",
+    "addressName": "111 Sample Address",
+    "roadAddressName": "111 Sample Road Address",
+    "kakaoReviews": 1110,
+    "kakaoScore": 3.0,
+    "naverReviews": 555,
+    "naverScore": 4.0
+  },
+  {
+    "id": "에스에이치더힐@서울_강남구_강남대로152길_13",
+    "name": "Place 112",
+    "addressName": "112 Sample Address",
+    "roadAddressName": "112 Sample Road Address",
+    "kakaoReviews": 1120,
+    "kakaoScore": 3.0,
+    "naverReviews": 560,
+    "naverScore": 4.0
+  },
+  {
+    "id": "신사모소리@서울_강남구_도산대로1길_24",
+    "name": "Place 113",
+    "addressName": "113 Sample Address",
+    "roadAddressName": "113 Sample Road Address",
+    "kakaoReviews": 1130,
+    "kakaoScore": 3.0,
+    "naverReviews": 565,
+    "naverScore": 4.0
+  },
+  {
+    "id": "동인동@서울_강남구_강남대로156길_14",
+    "name": "Place 114",
+    "addressName": "114 Sample Address",
+    "roadAddressName": "114 Sample Road Address",
+    "kakaoReviews": 1140,
+    "kakaoScore": 3.0,
+    "naverReviews": 570,
+    "naverScore": 4.0
+  },
+  {
+    "id": "치보_강남신사점@서울_강남구_강남대로154길_21",
+    "name": "Place 115",
+    "addressName": "115 Sample Address",
+    "roadAddressName": "115 Sample Road Address",
+    "kakaoReviews": 1150,
+    "kakaoScore": 3.0,
+    "naverReviews": 575,
+    "naverScore": 4.0
+  },
+  {
+    "id": "돈불리제담@서울_강남구_압구정로2길_46",
+    "name": "Place 116",
+    "addressName": "116 Sample Address",
+    "roadAddressName": "116 Sample Road Address",
+    "kakaoReviews": 1160,
+    "kakaoScore": 3.0,
+    "naverReviews": 580,
+    "naverScore": 4.0
+  },
+  {
+    "id": "구르메_본점@서울_강남구_도산대로1길_24",
+    "name": "Place 117",
+    "addressName": "117 Sample Address",
+    "roadAddressName": "117 Sample Road Address",
+    "kakaoReviews": 1170,
+    "kakaoScore": 3.0,
+    "naverReviews": 585,
+    "naverScore": 4.0
+  },
+  {
+    "id": "갓포우오@서울_강남구_강남대로156길_12",
+    "name": "Place 118",
+    "addressName": "118 Sample Address",
+    "roadAddressName": "118 Sample Road Address",
+    "kakaoReviews": 1180,
+    "kakaoScore": 3.0,
+    "naverReviews": 590,
+    "naverScore": 4.0
+  },
+  {
+    "id": "크라운돼지@서울_강남구_강남대로156길_17-1",
+    "name": "Place 119",
+    "addressName": "119 Sample Address",
+    "roadAddressName": "119 Sample Road Address",
+    "kakaoReviews": 1190,
+    "kakaoScore": 3.0,
+    "naverReviews": 595,
+    "naverScore": 4.0
+  },
+  {
+    "id": "e청우참치@서울_강남구_강남대로156길_18",
+    "name": "Place 120",
+    "addressName": "120 Sample Address",
+    "roadAddressName": "120 Sample Road Address",
+    "kakaoReviews": 1200,
+    "kakaoScore": 3.0,
+    "naverReviews": 600,
+    "naverScore": 4.0
+  },
+  {
+    "id": "우오하나@서울_강남구_압구정로2길_29",
+    "name": "Place 121",
+    "addressName": "121 Sample Address",
+    "roadAddressName": "121 Sample Road Address",
+    "kakaoReviews": 1210,
+    "kakaoScore": 3.0,
+    "naverReviews": 605,
+    "naverScore": 4.0
+  },
+  {
+    "id": "스시소기@서울_강남구_강남대로154길_21",
+    "name": "Place 122",
+    "addressName": "122 Sample Address",
+    "roadAddressName": "122 Sample Road Address",
+    "kakaoReviews": 1220,
+    "kakaoScore": 3.0,
+    "naverReviews": 610,
+    "naverScore": 4.0
+  },
+  {
+    "id": "해남집@서울_강남구_강남대로160길_16",
+    "name": "Place 123",
+    "addressName": "123 Sample Address",
+    "roadAddressName": "123 Sample Road Address",
+    "kakaoReviews": 1230,
+    "kakaoScore": 3.0,
+    "naverReviews": 615,
+    "naverScore": 4.0
+  },
+  {
+    "id": "전주현대옥_신사가로수길점@서울_강남구_강남대로156길_16",
+    "name": "Place 124",
+    "addressName": "124 Sample Address",
+    "roadAddressName": "124 Sample Road Address",
+    "kakaoReviews": 1240,
+    "kakaoScore": 3.0,
+    "naverReviews": 620,
+    "naverScore": 4.0
+  },
+  {
+    "id": "우와_신사점@서울_강남구_강강대로158길_17",
+    "name": "Place 125",
+    "addressName": "125 Sample Address",
+    "roadAddressName": "125 Sample Road Address",
+    "kakaoReviews": 1250,
+    "kakaoScore": 3.0,
+    "naverReviews": 625,
+    "naverScore": 4.0
+  },
+  {
+    "id": "자주식당@서울_강남구_강남대로156길_17",
+    "name": "Place 126",
+    "addressName": "126 Sample Address",
+    "roadAddressName": "126 Sample Road Address",
+    "kakaoReviews": 1260,
+    "kakaoScore": 3.0,
+    "naverReviews": 630,
+    "naverScore": 4.0
+  },
+  {
+    "id": "딸부자네불백_신사본점@서울_강남구_강남대로158길_21",
+    "name": "Place 127",
+    "addressName": "127 Sample Address",
+    "roadAddressName": "127 Sample Road Address",
+    "kakaoReviews": 1270,
+    "kakaoScore": 3.0,
+    "naverReviews": 635,
+    "naverScore": 4.0
+  },
+  {
+    "id": "삼바리@서울_강남구_압구정로2길_46",
+    "name": "Place 128",
+    "addressName": "128 Sample Address",
+    "roadAddressName": "128 Sample Road Address",
+    "kakaoReviews": 1280,
+    "kakaoScore": 3.0,
+    "naverReviews": 640,
+    "naverScore": 4.0
+  },
+  {
+    "id": "타코앤칠리@서울_강남구_강남대로160길_21",
+    "name": "Place 129",
+    "addressName": "129 Sample Address",
+    "roadAddressName": "129 Sample Road Address",
+    "kakaoReviews": 1290,
+    "kakaoScore": 3.0,
+    "naverReviews": 645,
+    "naverScore": 4.0
+  },
+  {
+    "id": "호보식당_신사역직영점@서울_강남구_도산대로1길_24",
+    "name": "Place 130",
+    "addressName": "130 Sample Address",
+    "roadAddressName": "130 Sample Road Address",
+    "kakaoReviews": 1300,
+    "kakaoScore": 3.0,
+    "naverReviews": 650,
+    "naverScore": 4.0
+  },
+  {
+    "id": "교텐@서울_강남구_강남대로160길_23",
+    "name": "Place 131",
+    "addressName": "131 Sample Address",
+    "roadAddressName": "131 Sample Road Address",
+    "kakaoReviews": 1310,
+    "kakaoScore": 3.0,
+    "naverReviews": 655,
+    "naverScore": 4.0
+  },
+  {
+    "id": "대봉칼국수보쌈@서울_강강대로2길_46",
+    "name": "Place 132",
+    "addressName": "132 Sample Address",
+    "roadAddressName": "132 Sample Road Address",
+    "kakaoReviews": 1320,
+    "kakaoScore": 3.0,
+    "naverReviews": 660,
+    "naverScore": 4.0
+  },
+  {
+    "id": "신비갈비살_본점@서울_강강대로158길_15",
+    "name": "Place 133",
+    "addressName": "133 Sample Address",
+    "roadAddressName": "133 Sample Road Address",
+    "kakaoReviews": 1330,
+    "kakaoScore": 3.0,
+    "naverReviews": 665,
+    "naverScore": 4.0
+  },
+  {
+    "id": "영동소금구이_신사점@서울_강강대로156길_15",
+    "name": "Place 134",
+    "addressName": "134 Sample Address",
+    "roadAddressName": "134 Sample Road Address",
+    "kakaoReviews": 1340,
+    "kakaoScore": 3.0,
+    "naverReviews": 670,
+    "naverScore": 4.0
+  },
+  {
+    "id": "애시드하우스@서울_강강대로162길_18",
+    "name": "Place 135",
+    "addressName": "135 Sample Address",
+    "roadAddressName": "135 Sample Road Address",
+    "kakaoReviews": 1350,
+    "kakaoScore": 3.0,
+    "naverReviews": 675,
+    "naverScore": 4.0
+  },
+  {
+    "id": "러쉬바@서울_강강대로158길_11",
+    "name": "Place 136",
+    "addressName": "136 Sample Address",
+    "roadAddressName": "136 Sample Road Address",
+    "kakaoReviews": 1360,
+    "kakaoScore": 3.0,
+    "naverReviews": 680,
+    "naverScore": 4.0
+  },
+  {
+    "id": "소각@서울_강강대로160길_17",
+    "name": "Place 137",
+    "addressName": "137 Sample Address",
+    "roadAddressName": "137 Sample Road Address",
+    "kakaoReviews": 1370,
+    "kakaoScore": 3.0,
+    "naverReviews": 685,
+    "naverScore": 4.0
+  },
+  {
+    "id": "퀸실내포차@서울_강강대로158길_12",
+    "name": "Place 138",
+    "addressName": "138 Sample Address",
+    "roadAddressName": "138 Sample Road Address",
+    "kakaoReviews": 1380,
+    "kakaoScore": 3.0,
+    "naverReviews": 690,
+    "naverScore": 4.0
+  },
+  {
+    "id": "육회담@서울_강강대로2길_46",
+    "name": "Place 139",
+    "addressName": "139 Sample Address",
+    "roadAddressName": "139 Sample Road Address",
+    "kakaoReviews": 1390,
+    "kakaoScore": 3.0,
+    "naverReviews": 695,
+    "naverScore": 4.0
+  },
+  {
+    "id": "낭낙@서울_강강대로156길_17",
+    "name": "Place 140",
+    "addressName": "140 Sample Address",
+    "roadAddressName": "140 Sample Road Address",
+    "kakaoReviews": 1400,
+    "kakaoScore": 3.0,
+    "naverReviews": 700,
+    "naverScore": 4.0
+  },
+  {
+    "id": "키보_재즈킷사@서울_강강대로158길_19",
+    "name": "Place 141",
+    "addressName": "141 Sample Address",
+    "roadAddressName": "141 Sample Road Address",
+    "kakaoReviews": 1410,
+    "kakaoScore": 3.0,
+    "naverReviews": 705,
+    "naverScore": 4.0
+  }
+]

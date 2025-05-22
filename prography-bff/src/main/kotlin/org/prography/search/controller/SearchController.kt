@@ -1,83 +1,67 @@
 package org.prography.search.controller
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.ArraySchema
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
 import org.prography.config.response.ApiResponse
 import org.prography.config.response.CursorResponse
 import org.prography.search.model.PlaceDetailDTO
 import org.prography.search.model.PlaceSummaryDTO
-import org.prography.search.service.mock.MockService
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.prography.search.model.enumeration.SortType
 
-@RestController
-class SearchController(
-    private val mockService: MockService,
-) {
-    @GetMapping("/search/mock")
-    fun getMockSummaryList(
-        @RequestParam(required = false) keyword: String?,
-        @RequestParam(required = false) lastId: Long?,
-        @RequestParam(required = false, defaultValue = "10") size: Int,
-    ): ResponseEntity<ApiResponse<CursorResponse<PlaceSummaryDTO>>> {
-        val summaries =
-            mockService.getSummaries(keyword, lastId, size)
-                .stream()
-                .map {
-                    PlaceSummaryDTO(
-                        it.id,
-                        it.name,
-                        it.addressName,
-                        it.roadAddressName,
-                        it.kakaoReviews,
-                        it.kakaoScore,
-                        it.naverReviews,
-                        it.naverScore,
-                    )
-                }.toList()
-        val hasNext = mockService.isLatest(summaries.last().id)
-
-        return ResponseEntity.ok(
-            ApiResponse.success(
-                CursorResponse(
-                    summaries,
-                    hasNext,
-                ),
+interface SearchController {
+    @Operation(
+        summary = "검색 결과 API",
+        description = "요청의 기준에 따라 적합한 음식점 정보 리스트를 리스트업합니다.",
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        array =
+                            ArraySchema(
+                                schema = Schema(implementation = PlaceSummaryDTO::class),
+                                arraySchema = Schema(description = "Cursor-paginated list"),
+                            ),
+                    ),
+                ],
             ),
-        )
-    }
-
-    @GetMapping("/detail/mock/{id}")
+        ],
+    )
     fun getMockSummaryList(
-        @PathVariable(value = "id") placeId: Long,
-    ): ResponseEntity<ApiResponse<PlaceDetailDTO>> {
-        val detail = mockService.getPlaceDetail(placeId)
+        keyword: String?,
+        lastId: String?,
+        size: Int,
+        guCodes: List<String>?,
+        sortType: SortType,
+    ): ApiResponse<CursorResponse<PlaceSummaryDTO>>
 
-        val data =
-            PlaceDetailDTO(
-                detail.kakaoPlaceUri,
-                detail.naverPlaceUri,
-                detail.name,
-                detail.addressName,
-                detail.roadAddressName,
-                detail.photos,
-                detail.keywords,
-                detail.reviewSummary,
-                detail.kakaoReviewCount,
-                detail.kakaoReviewAvgScore,
-                detail.kakaoReviews,
-                detail.kakaoVoteRate,
-                detail.naverReviewCount,
-                detail.naverReviewAvgScore,
-                detail.naverReviews,
-                detail.naverVoteRate,
-            )
-
-        return ResponseEntity.ok(
-            ApiResponse.success(
-                data,
+    @Operation(
+        summary = "음식점 세부 페이지 정보",
+        description = "부족한 정보는 말해주세요.",
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = PlaceDetailDTO::class),
+                    ),
+                ],
             ),
-        )
-    }
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "404",
+                description = "데이터가 수집되지 않은 음식점인 경우",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = ApiResponse.Failure::class),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun getMockSummary(placeId: String): ApiResponse<PlaceDetailDTO>
 }
