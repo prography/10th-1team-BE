@@ -8,5 +8,5 @@ spring:
       host: ${ELASTICSEARCH_HOST:localhost}
       port: ${ELASTICSEARCH_PORT:9200}
       repositories:
-        enabled: true
+        enabled: false
 
