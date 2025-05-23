@@ -5,4 +5,5 @@ plugins {
 }
 
 dependencies {
+    implementation("org.springframework.data:spring-data-elasticsearch:5.5.0")
 }
