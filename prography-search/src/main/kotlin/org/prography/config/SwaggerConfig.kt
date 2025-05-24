@@ -7,16 +7,6 @@ import io.swagger.v3.oas.models.info.Info
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
-// Todo : Swagger UI에 JWT Bearer 입력 필드를 추가하는 설정, 로그인 구현 후 적용
-// @SecurityScheme(
-//    name = "BearerAuth",
-//    type = SecuritySchemeType.HTTP,
-//    scheme = "bearer",
-//    bearerFormat = "JWT",
-//    `in` = SecuritySchemeIn.HEADER,
-//    paramName = "Authorization"
-// )
-
 @Configuration
 class SwaggerConfig {
     @Bean
