@@ -14,4 +14,11 @@ class City(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_code", nullable = false)
     var province: Province,
+    @OneToMany(
+        mappedBy = "city",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true,
+        fetch = FetchType.LAZY,
+    )
+    val dongList: MutableList<Dong> = mutableListOf(),
 )
