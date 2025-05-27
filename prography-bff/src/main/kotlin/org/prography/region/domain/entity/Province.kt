@@ -16,5 +16,5 @@ class Province(
         orphanRemoval = true,
         fetch = FetchType.LAZY,
     )
-    val cities: MutableList<City> = mutableListOf(),
+    val cityList: MutableList<City> = mutableListOf(),
 )

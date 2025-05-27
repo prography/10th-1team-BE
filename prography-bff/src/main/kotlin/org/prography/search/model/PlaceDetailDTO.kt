@@ -6,12 +6,12 @@ import org.prography.search.model.reveiw.Review
 import org.prography.search.model.strength.StrengthScoresDto
 
 data class PlaceDetailDTO(
-    @Schema(example = "https://") val kakaoPlaceUri: String,
-    @Schema(example = "https://") val naverPlaceUri: String,
+    @Schema(example = "1416620404") val kakaoPlaceUK: String,
+    @Schema(example = "1720070048") val naverPlaceUK: String,
     @Schema(example = "카이센동우니도 신사본점") val name: String,
     @Schema(example = "서울 강남구 신사동 522") val addressName: String,
     @Schema(example = "서울 강남구 압구정로2길 15") val roadAddressName: String,
-    @Schema(example = "1168000000") val dongCode: String,
+    @Schema(example = "1168051000") val dongCode: String,
     val photos: List<Photo>,
     val strengthScoresDto: StrengthScoresDto,
     @Schema(example = "53", description = "카카오 리뷰 수") val kakaoReviewCount: Int,

@@ -14,10 +14,8 @@ data class RawRestaurantData(
     val dongCode: String,
     var kakaoPlaceData: KakaoPlaceInfo? = null,
     var naverPlaceData: NaverPlaceInfo? = null,
-//    var kakaoReviewResponse: KakaoReviewResponse? = null,
     var kakaoReviewData: KakaoReviewData? = null,
     var naverReviewData: NaverReviewData? = null,
-//    var naverReviewResponse: NaverReviewResponse? = null
 ) {
     var kakaoReviewProcessed: Boolean = false
     var naverReviewProcessed: Boolean = false
