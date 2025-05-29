@@ -20,13 +20,14 @@ class KakaoReviewService(
 
     fun saveKakaoReview(restaurant: RawRestaurantData) {
         val kakaoId =
-            restaurant.kakaoPlaceData?.id
-                ?: throw IllegalStateException("kakaoPlaceData is null for ${restaurant.id}")
+            restaurant.kakaoPlaceData.id
+
+        // TODO : 오류 발생 시 Fail 추가
+        restaurant.kakaoReviewProcessed = true
 
         // 리뷰 페이징 호출 → 전체 합산
         val response = searchReviewsByKakaoId(kakaoId)
         restaurant.kakaoReviewData = KakaoReviewDataConverter.toDomain(response)
-        restaurant.kakaoReviewProcessed = true
         rawRestaurantDataRepository.save(restaurant)
     }
 

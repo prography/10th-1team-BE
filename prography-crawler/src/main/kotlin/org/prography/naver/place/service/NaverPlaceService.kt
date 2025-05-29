@@ -21,18 +21,13 @@ class NaverPlaceService(
 
     /** Java style Executor + CompletableFuture */
     fun saveNaverPlaceData(restaurantData: RawRestaurantData) {
-        if (restaurantData.kakaoPlaceData == null) {
-            log.error("No kakao place found for ${restaurantData.id}")
-        }
-
-        val naverInfo = findNaverInfo(restaurantData.kakaoPlaceData!!)
+        val naverInfo = findNaverInfo(restaurantData.kakaoPlaceData)
         if (naverInfo != null) {
             log.info("NaverInfo Found: {}", naverInfo.id)
             restaurantData.naverPlaceData = naverInfo.toNaverPlaceInfo()
         } else {
             log.error("NaverPlace Not Found : ${restaurantData.id}")
         }
-
         restaurantData.naverReviewProcessed = true
         rawRestaurantDataRepository.save(restaurantData)
     }

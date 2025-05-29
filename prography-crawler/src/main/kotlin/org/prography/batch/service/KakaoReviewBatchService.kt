@@ -3,6 +3,8 @@ package org.prography.batch.service
 import org.prography.batch.domain.BatchConstants.BATCH_DELAY
 import org.prography.batch.domain.BatchConstants.BATCH_SIZE
 import org.prography.batch.domain.BatchConstants.LIMIT_REQUEST_TIME
+import org.prography.error.ExceptionLog
+import org.prography.error.ExceptionLogRepository
 import org.prography.kakao.review.service.KakaoReviewService
 import org.prography.restaurant.domain.RawRestaurantData
 import org.prography.restaurant.domain.RawRestaurantDataRepository
@@ -23,6 +25,7 @@ class KakaoReviewBatchService(
     private val executor: ThreadPoolTaskExecutor,
     @Qualifier("callbackExecutor")
     private val callbackExecutor: ThreadPoolTaskExecutor,
+    private val exceptionLogRepository: ExceptionLogRepository,
 ) {
     companion object {
         private val log: Logger = LoggerFactory.getLogger(KakaoReviewBatchService::class.java)
@@ -82,6 +85,13 @@ class KakaoReviewBatchService(
                     data.id,
                     data.kakaoPlaceData?.id,
                     ex,
+                )
+                exceptionLogRepository.save(
+                    ExceptionLog(
+                        domain = "KakaoReviewBatchService",
+                        message = ex.message ?: "",
+                        details = mapOf("ID" to data.kakaoPlaceData?.id!!),
+                    ),
                 )
                 throw ex
             }
