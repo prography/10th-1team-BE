@@ -22,7 +22,8 @@ data class PlaceDetail(
     val naverReviewAvgScore: Double?,
     val naverReviews: List<Review>,
     val naverVoteRate: Int,
-    val dongCode: String,
+    val hCode: String,
+    val bCode: String,
 ) {
     companion object {
         fun fromDomain(
@@ -31,7 +32,6 @@ data class PlaceDetail(
         ): PlaceDetail {
             val kakaoPlaceInfo =
                 restaurantData.kakaoPlaceData
-                    ?: throw NotFoundException.PlaceInfoNotFoundException()
             val naverPlaceInfo =
                 restaurantData.naverPlaceData
                     ?: throw NotFoundException.PlaceInfoNotFoundException()
@@ -62,7 +62,8 @@ data class PlaceDetail(
                 naverReviewAvgScore = naverReviewScore.reviewRating,
                 naverReviews = naverReviewData.reviews.map { Review.fromNaverReview(it) },
                 naverVoteRate = naverReviewScore.totalCount,
-                dongCode = restaurantData.dongCode,
+                hCode = restaurantData.hCode,
+                bCode = restaurantData.bCode,
             )
         }
     }

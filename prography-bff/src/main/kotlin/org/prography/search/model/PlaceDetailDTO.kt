@@ -11,7 +11,7 @@ data class PlaceDetailDTO(
     @Schema(example = "카이센동우니도 신사본점") val name: String,
     @Schema(example = "서울 강남구 신사동 522") val addressName: String,
     @Schema(example = "서울 강남구 압구정로2길 15") val roadAddressName: String,
-    @Schema(example = "1168051000") val dongCode: String,
+    @Schema(example = "1165010600") val bCode: String,
     val photos: List<Photo>,
     val strengthScoresDto: StrengthScoresDto,
     @Schema(example = "53", description = "카카오 리뷰 수") val kakaoReviewCount: Int,

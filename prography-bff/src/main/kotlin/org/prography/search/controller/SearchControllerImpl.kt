@@ -19,10 +19,10 @@ class SearchControllerImpl(
         @RequestParam(required = false) keyword: String?,
         @RequestParam(required = false) lastId: String?,
         @RequestParam(required = false, defaultValue = "10") size: Int,
-        @RequestParam(required = false) guCodes: List<String>?,
+        @RequestParam(required = false) dongCodes: List<String>?,
         @RequestParam(required = false, defaultValue = "GENERAL") sortType: SortType,
     ): ApiResponse<CursorResponse<PlaceSummaryDTO>> {
-        val codes = guCodes ?: emptyList()
+        val codes = dongCodes ?: emptyList()
         val summaries =
             mockService.getSummaries(keyword, lastId, size)
                 .stream()
@@ -61,7 +61,7 @@ class SearchControllerImpl(
                 detail.name,
                 detail.addressName,
                 detail.roadAddressName,
-                detail.dongCode,
+                detail.bCode,
                 detail.photos,
                 StrengthScoresDto.fromDomain(detail.strengthScores),
                 detail.kakaoReviewCount,
