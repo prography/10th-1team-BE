@@ -1,6 +1,8 @@
 package org.prography.search.controller
 
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
@@ -31,10 +33,45 @@ interface SearchController {
         ],
     )
     fun getMockSummaryList(
+        @Parameter(
+            name = "keyword",
+            `in` = ParameterIn.QUERY,
+            description = "검색어 (음식점 이름 또는 설명 등에서 일치 검색에 사용)",
+            required = false,
+            example = "치킨",
+        )
         keyword: String?,
+        @Parameter(
+            name = "lastId",
+            `in` = ParameterIn.QUERY,
+            description = "이전 페이지의 마지막 ID. 이 ID 이후부터 다음 페이지 조회",
+            required = false,
+            example = "더라운지@서울_서초구_강남대로107길_6",
+        )
         lastId: String?,
+        @Parameter(
+            name = "size",
+            `in` = ParameterIn.QUERY,
+            description = "한 번에 조회할 결과 개수",
+            required = true,
+            example = "20",
+        )
         size: Int,
-        guCodes: List<String>?,
+        @Parameter(
+            name = "dongCodes",
+            `in` = ParameterIn.QUERY,
+            description = "검색을 제한할 구 코드 리스트 (여러 개 전달 가능)",
+            required = false,
+            example = "[\"11110\",\"11140\"]",
+        )
+        dongCodes: List<String>?,
+        @Parameter(
+            name = "sortType",
+            `in` = ParameterIn.QUERY,
+            description = "정렬 기준 (예: GENERAL, MOST_REVIEW)",
+            required = true,
+            example = "GENERAL",
+        )
         sortType: SortType,
     ): ApiResponse<CursorResponse<PlaceSummaryDTO>>
 
