@@ -22,12 +22,8 @@ class RestaurantController(
                     it,
                     0.001,
                 )
-            val dongCode =
-                geoRectSliceService.getDongCodeFromAdmName(
-                    it,
-                )
             rects.map { rect ->
-                restaurantService.searchDataAsync(dongCode, rect)
+                restaurantService.searchDataAsync(rect)
             }
         }
     }

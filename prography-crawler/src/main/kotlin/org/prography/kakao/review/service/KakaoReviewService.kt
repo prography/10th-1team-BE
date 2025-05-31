@@ -19,16 +19,19 @@ class KakaoReviewService(
     }
 
     fun saveKakaoReview(restaurant: RawRestaurantData) {
-        val kakaoId =
-            restaurant.kakaoPlaceData.id
-
-        // TODO : 오류 발생 시 Fail 추가
-        restaurant.kakaoReviewProcessed = true
-
-        // 리뷰 페이징 호출 → 전체 합산
-        val response = searchReviewsByKakaoId(kakaoId)
-        restaurant.kakaoReviewData = KakaoReviewDataConverter.toDomain(response)
-        rawRestaurantDataRepository.save(restaurant)
+        try {
+            val kakaoId = restaurant.kakaoPlaceData.id
+            restaurant.kakaoReviewProcessed = true
+            // 리뷰 페이징 호출 → 전체 합산
+            val response = searchReviewsByKakaoId(kakaoId)
+            restaurant.kakaoReviewData = KakaoReviewDataConverter.toDomain(response)
+        } catch (e: Exception) {
+            // TODO : 오류 발생 시 Fail 추가
+            log.error(e.message, e)
+            throw e
+        } finally {
+            rawRestaurantDataRepository.save(restaurant)
+        }
     }
 
     /**

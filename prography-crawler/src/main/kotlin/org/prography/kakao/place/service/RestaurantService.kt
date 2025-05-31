@@ -56,10 +56,7 @@ class RestaurantService(
 //        log.info("All restaurant scraping tasks completed.")
 //    }
 
-    fun searchDataAsync(
-        dongCode: String,
-        rectParam: String,
-    ): CompletableFuture<Void> =
+    fun searchDataAsync(rectParam: String): CompletableFuture<Void> =
         CompletableFuture.runAsync({
             try {
                 sleepThread()

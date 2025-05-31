@@ -11,7 +11,7 @@ class ScrapThreadPoolConfig {
         val executor = ThreadPoolTaskExecutor()
         executor.corePoolSize = 5
         executor.maxPoolSize = 5
-        executor.queueCapacity = 10000
+        executor.queueCapacity = 100000
         executor.setThreadNamePrefix("main-feign-exec-")
         return executor
     }

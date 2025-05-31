@@ -40,13 +40,14 @@ class KakaoReviewBatchService(
 
         val unprocessedCount = rawRestaurantDataRepository.countByKakaoReviewProcessedFalse()
         log.info("Unchecked KakaoReviewSize: $unprocessedCount")
-        if (unprocessedCount >= BATCH_SIZE) {
-            val batch =
+        if (unprocessedCount > 0) {
+            val pageSize = minOf(unprocessedCount.toInt(), BATCH_SIZE)
+
+            // 남은 개수 < BATCH_SIZE 면 남은 개수만큼 가져오고,
+            // >= BATCH_SIZE 면 BATCH_SIZE 만큼 가져온다.
+            val batch: List<RawRestaurantData> =
                 rawRestaurantDataRepository.findByKakaoReviewProcessedFalse(
-                    PageRequest.of(
-                        0,
-                        BATCH_SIZE,
-                    ),
+                    PageRequest.of(0, pageSize),
                 )
             val futures = batch.map(::processRestaurantAsync)
 
@@ -81,7 +82,7 @@ class KakaoReviewBatchService(
                 kakaoReviewService.saveKakaoReview(data)
             }.onFailure { ex ->
                 log.error(
-                    "❌ Failed to process review for id={}, kakaoID = {}",
+                    "Failed to process review for id={}, kakaoID = {}",
                     data.id,
                     data.kakaoPlaceData?.id,
                     ex,

@@ -150,12 +150,6 @@ class GeoRectSliceService(
         return feature
     }
 
-    fun getDongCodeFromAdmName(admName: String): String {
-        val feature = findGeoDongInfoFromAdmName(admName)
-        val props = feature.getAsJsonObject(Keys.PROPERTIES)
-        return props.get(Keys.ADM_CD2).asString
-    }
-
     /**
      * 주어진 구에 해당하는 동의 리스트를 전달하는 함수
      *

@@ -39,13 +39,14 @@ class NaverReviewBatchService(
 
         val unprocessedCount = rawRestaurantDataRepository.countByNaverReviewProcessedFalse()
         log.info("unprocessed naver count: {}", unprocessedCount)
-        if (unprocessedCount >= BATCH_SIZE) {
-            // 최초 1,000건만 조회
+        if (unprocessedCount > 0) {
+            val pageSize = minOf(unprocessedCount.toInt(), BATCH_SIZE)
+
             val batch =
                 rawRestaurantDataRepository.findByNaverReviewProcessedFalse(
                     PageRequest.of(
                         0,
-                        BATCH_SIZE,
+                        pageSize,
                     ),
                 )
 
