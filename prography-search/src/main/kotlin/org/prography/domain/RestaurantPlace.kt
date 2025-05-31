@@ -11,9 +11,13 @@ data class RestaurantPlace(
      */
     val id: String,
     /**
-     * 지역구 코드
+     * 법정동 코드
      */
-    val dongCode: String = "",
+    val legal: String = "",
+    /**
+     * 행정구 코드
+     */
+    val division: String = "",
     /**
      * 카카오 주소
      */
