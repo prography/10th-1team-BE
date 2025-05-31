@@ -7,6 +7,9 @@ import co.elastic.clients.transport.rest_client.RestClientTransport
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 import org.apache.http.HttpHost
+import org.apache.http.auth.AuthScope
+import org.apache.http.auth.UsernamePasswordCredentials
+import org.apache.http.impl.client.BasicCredentialsProvider
 import org.elasticsearch.client.RestClient
 import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
@@ -28,11 +31,25 @@ class ElasticsearchConfig(
      */
     @Bean
     fun retClient(): RestClient {
-        val schema = if (props.tls) "https" else "http"
-        log.info("🗄️  Elasticsearch RestClient will connect to {}://{}:{}", schema, props.host, props.port)
-        return RestClient.builder(
-            HttpHost(props.host, props.port, schema),
-        ).build()
+        val schema = if (props.tls) "https" else HttpHost.DEFAULT_SCHEME_NAME
+
+        log.info("🗄Elasticsearch RestClient will connect to {}://{}:{}", schema, props.host, props.port)
+
+        if (!props.tls) {
+            return RestClient.builder(HttpHost(props.host, props.port, schema)).build()
+        }
+        val credentialsProvider =
+            BasicCredentialsProvider().apply {
+                setCredentials(
+                    AuthScope.ANY,
+                    UsernamePasswordCredentials(props.user, props.password),
+                )
+            }
+
+        return RestClient.builder(HttpHost(props.host, props.port, schema))
+            .setHttpClientConfigCallback { callBack ->
+                callBack.setDefaultCredentialsProvider(credentialsProvider)
+            }.build()
     }
 
     /**
