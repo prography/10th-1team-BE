@@ -1,11 +1,6 @@
 spring:
-  data:
-    elasticsearch:
-      tls: ${ELASTICSEARCH_TLS:false}
-      host: ${ELASTICSEARCH_HOST:localhost}
-      port: ${ELASTICSEARCH_PORT:9200}
-      repositories:
-        enabled: false
+  profiles:
+    default: local # 기본 환경을 dev로
 
-  jackson:
-    property-naming-strategy: SNAKE_CASE
+server:
+  port: 8080
