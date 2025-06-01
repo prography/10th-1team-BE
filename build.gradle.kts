@@ -53,4 +53,19 @@ subprojects {
     }
 
     tasks.named("check") { dependsOn("ktlintCheck") }
+
+    project(":prography-bff") {
+        tasks {
+            named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+                enabled = true
+            }
+            named<Jar>("jar") {
+                enabled = true
+            }
+        }
+
+        dependencies {
+            implementation(project(":prography-search"))
+        }
+    }
 }
