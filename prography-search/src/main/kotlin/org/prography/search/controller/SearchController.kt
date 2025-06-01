@@ -8,6 +8,8 @@ import org.prography.config.response.ApiResponse
 import org.prography.config.response.CursorResponse
 import org.prography.search.controller.model.AutoCompleteResponseDTO
 import org.prography.search.controller.model.SearchResponseDTO
+import org.prography.search.controller.model.enumeration.FoodCategory
+import org.prography.search.controller.model.enumeration.OrderStrategy
 
 interface SearchController {
     @Operation(
@@ -32,6 +34,7 @@ interface SearchController {
     fun autoComplete(
         keyword: String,
         size: Int,
+        addressCodes: List<String>?,
     ): ApiResponse<List<AutoCompleteResponseDTO>>
 
     @Operation(
@@ -57,6 +60,7 @@ interface SearchController {
         keyword: String,
         size: Int,
         lastId: String?,
+        addressCodes: List<String>?,
     ): ApiResponse<CursorResponse<AutoCompleteResponseDTO>>
 
     @Operation(
@@ -82,5 +86,8 @@ interface SearchController {
         keyword: String,
         size: Int,
         lastId: String?,
+        addressCodes: List<String>?,
+        categories: List<FoodCategory>?,
+        sort: OrderStrategy?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>>
 }

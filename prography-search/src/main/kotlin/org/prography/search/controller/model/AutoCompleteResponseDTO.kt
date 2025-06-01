@@ -5,15 +5,15 @@ package org.prography.search.controller.model
  */
 data class AutoCompleteResponseDTO(
     /**
-     * 몽고 디비 조회용 ID
+     * 장소 아이디
      */
     val id: String,
     /**
-     * 동 코드
+     * 장소 지역 정보
      */
-    val dongCode: String?,
+    val region: Region,
     /**
-     * 카카오 도로명 주소 기반, 도로명 주소
+     * 도로명 주소, 카카오 도로명 주소 기반
      */
     val roadAddresses: String,
     /**
@@ -21,7 +21,7 @@ data class AutoCompleteResponseDTO(
      */
     val category: String?,
     /**
-     * 카카오 상호명 기반
+     * 상호명, 카카오 상호명 기반
      */
     val name: String,
 )
