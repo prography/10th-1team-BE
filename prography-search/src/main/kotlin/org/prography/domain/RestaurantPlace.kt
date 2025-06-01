@@ -1,7 +1,5 @@
 package org.prography.domain
 
-import com.fasterxml.jackson.annotation.JsonProperty
-
 /**
  * Elasticsearch 에 저장되어 매핑되어 있는 문서 그대로 매핑된 도메인
  */
@@ -86,13 +84,11 @@ data class RestaurantPlace(
      * MongoDB oplog에서 동기화된 이 문서의 최종 수정 일시.
      * "yyyy/MM/dd HH:mm:ss" 형식으로 저장됩니다.
      */
-    @JsonProperty("oplog_date")
     val oplogDate: String = "",
     /**
      * MongoDB oplog 타임스탬프 객체.
      * - T: 초 단위 Unix 타임스탬프
      * - I: 동일 초 내에서의 증분 카운터
      */
-    @JsonProperty("oplog_ts")
     val oplogTs: OplogTs = OplogTs(),
 )

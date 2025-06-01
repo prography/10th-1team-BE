@@ -5,16 +5,21 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper
 import co.elastic.clients.transport.ElasticsearchTransport
 import co.elastic.clients.transport.rest_client.RestClientTransport
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 import org.apache.http.HttpHost
 import org.apache.http.auth.AuthScope
 import org.apache.http.auth.UsernamePasswordCredentials
+import org.apache.http.conn.ssl.NoopHostnameVerifier
+import org.apache.http.conn.ssl.TrustAllStrategy
 import org.apache.http.impl.client.BasicCredentialsProvider
+import org.apache.http.ssl.SSLContexts
 import org.elasticsearch.client.RestClient
 import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import javax.net.ssl.SSLContext
 
 /**
  * Elasticsearch configuration component
@@ -31,11 +36,11 @@ class ElasticsearchConfig(
      */
     @Bean
     fun retClient(): RestClient {
-        val schema = if (props.tls) "https" else HttpHost.DEFAULT_SCHEME_NAME
+        val sslProperties = props.ssl
+        val schema = if (sslProperties.enable) "https" else HttpHost.DEFAULT_SCHEME_NAME
 
         log.info("🗄Elasticsearch RestClient will connect to {}://{}:{}", schema, props.host, props.port)
-
-        if (!props.tls) {
+        if (!sslProperties.enable) {
             return RestClient.builder(HttpHost(props.host, props.port, schema)).build()
         }
         val credentialsProvider =
@@ -46,10 +51,27 @@ class ElasticsearchConfig(
                 )
             }
 
-        return RestClient.builder(HttpHost(props.host, props.port, schema))
-            .setHttpClientConfigCallback { callBack ->
-                callBack.setDefaultCredentialsProvider(credentialsProvider)
+        val builder = RestClient.builder(HttpHost(props.host, props.port, schema))
+        return if (sslProperties.trustAll) {
+            log.info("🔓 SSL 검증을 무시하도록 RestClient 설정 (elasticsearch.ssl.trust-all=true)")
+            val sslContext: SSLContext =
+                SSLContexts.custom()
+                    .loadTrustMaterial(null, TrustAllStrategy.INSTANCE) // 모든 인증서 무조건 신뢰
+                    .build()
+
+            builder.setHttpClientConfigCallback { httpClientBuilder ->
+                httpClientBuilder
+                    .setSSLContext(sslContext)
+                    .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                    .setDefaultCredentialsProvider(credentialsProvider)
             }.build()
+        } else {
+            log.info("🔐 기본 SSL 검증 모드로 RestClient 설정 (elasticsearch.ssl.trust-all=false)")
+            builder.setHttpClientConfigCallback { httpClientBuilder ->
+                httpClientBuilder
+                    .setDefaultCredentialsProvider(credentialsProvider)
+            }.build()
+        }
     }
 
     /**
@@ -60,6 +82,7 @@ class ElasticsearchConfig(
         log.info("🔗  Wrapping RestClient in RestClientTransport with JacksonJsonpMapper")
         val objectMapper =
             ObjectMapper()
+                .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
                 .registerModules(kotlinModule())
         return RestClientTransport(
             restClient,
