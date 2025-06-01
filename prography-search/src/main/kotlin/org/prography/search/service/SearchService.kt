@@ -4,10 +4,10 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient
 import co.elastic.clients.elasticsearch._types.SortOptions
 import co.elastic.clients.elasticsearch._types.SortOrder
 import org.prography.domain.RestaurantPlace
-import org.prography.search.controller.model.enumeration.FoodCategory
 import org.prography.search.service.model.AutoCompleteResult
 import org.prography.search.service.model.CursorPlaceResult
 import org.prography.search.service.model.PlaceSearchResult
+import org.prography.search.service.model.enumeration.FilterCategory
 import org.springframework.stereotype.Service
 
 /**
@@ -63,7 +63,7 @@ class SearchService(
         size: Int,
         lastId: String? = null,
         addressCodes: List<String>? = emptyList(),
-        categories: List<FoodCategory>? = emptyList(),
+        categories: List<FilterCategory>? = emptyList(),
     ): CursorPlaceResult {
         val resp =
             client.search({ req ->

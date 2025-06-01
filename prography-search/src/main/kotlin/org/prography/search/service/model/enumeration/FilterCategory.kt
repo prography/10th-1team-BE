@@ -1,7 +1,5 @@
 package org.prography.search.service.model.enumeration
 
-import org.prography.search.controller.model.enumeration.FoodCategory
-
 /**
  *
  */
@@ -16,10 +14,10 @@ enum class FilterCategory(val categories: List<String>) {
     ;
 
     companion object {
-        private val codeMap = FoodCategory.values().associateBy { it.name }
+        private val codeMap = FilterCategory.values().associateBy { it.name }
 
-        fun ofCode(code: String): FoodCategory? = codeMap[code]
+        fun ofCode(code: String): FilterCategory? = codeMap[code]
 
-        fun getKeywordsByCode(code: String): List<String> = ofCode(code)?.keywords.orEmpty()
+        fun getKeywordsByCode(code: String): List<String> = ofCode(code)?.categories.orEmpty()
     }
 }
