@@ -79,7 +79,7 @@ class ElasticsearchConfig(
      */
     @Bean
     fun transport(restClient: RestClient): ElasticsearchTransport {
-        log.info("🔗  Wrapping RestClient in RestClientTransport with JacksonJsonpMapper")
+        log.info("🔗  Wrapping RestClient in RestClientTransport with JacksonJsonMapper")
         val objectMapper =
             ObjectMapper()
                 .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
