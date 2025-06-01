@@ -38,7 +38,7 @@ data class ElasticsearchProperty(
          * TLS(HTTPS) 연결을 활성화할지 여부
          * (application-local.yml: spring.data.elasticsearch.ssl.enable)
          */
-        var enable: Boolean = false,
+        var enable: Boolean = true,
         /**
          * TLS가 활성화된 상태에서 "모든 인증서"를 무조건 신뢰할지(true)/기본 검증(false)할지 여부
          * (application-local.yml: spring.data.elasticsearch.ssl.trust-all)
