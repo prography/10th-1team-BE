@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class PrographyCrawlerApplication
+class PrographySearchApplication
 
 fun main(args: Array<String>) {
-    runApplication<PrographyCrawlerApplication>(*args)
+    runApplication<PrographySearchApplication>(*args)
 }
