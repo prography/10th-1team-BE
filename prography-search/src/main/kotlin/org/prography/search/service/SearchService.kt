@@ -3,7 +3,7 @@ package org.prography.search.service
 import co.elastic.clients.elasticsearch.ElasticsearchClient
 import co.elastic.clients.elasticsearch._types.SortOptions
 import co.elastic.clients.elasticsearch._types.SortOrder
-import org.prography.domain.RestaurantPlace
+import org.prography.search.domain.RestaurantPlace
 import org.prography.search.service.model.AutoCompleteResult
 import org.prography.search.service.model.CursorPlaceResult
 import org.prography.search.service.model.PlaceSearchResult

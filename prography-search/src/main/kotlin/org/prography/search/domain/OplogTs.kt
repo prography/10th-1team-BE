@@ -1,4 +1,4 @@
-package org.prography.domain
+package org.prography.search.domain
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

@@ -1,4 +1,4 @@
-package org.prography.domain
+package org.prography.search.domain
 
 /**
  * Elasticsearch 에 저장되어 매핑되어 있는 문서 그대로 매핑된 도메인
