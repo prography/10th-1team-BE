@@ -15,11 +15,13 @@ import org.apache.http.conn.ssl.TrustAllStrategy
 import org.apache.http.impl.client.BasicCredentialsProvider
 import org.apache.http.ssl.SSLContexts
 import org.elasticsearch.client.RestClient
+import org.prography.search.exception.ElasticsearchException
 import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLHandshakeException
 
 /**
  * Elasticsearch configuration component
@@ -29,7 +31,7 @@ import javax.net.ssl.SSLContext
 class ElasticsearchConfig(
     private val props: ElasticsearchProperty,
 ) {
-    private val log = LoggerFactory.getLogger(javaClass)
+    private val log = LoggerFactory.getLogger(ElasticsearchConfig::class.java)
 
     /**
      * Low-level REST Client
@@ -53,7 +55,7 @@ class ElasticsearchConfig(
 
         val builder = RestClient.builder(HttpHost(props.host, props.port, schema))
         return if (sslProperties.trustAll) {
-            log.info("🔓 SSL 검증을 무시하도록 RestClient 설정 (elasticsearch.ssl.trust-all=true)")
+            log.info("🔓 RestClient SSL ignore setting (elasticsearch.ssl.trust-all=true)")
             val sslContext: SSLContext =
                 SSLContexts.custom()
                     .loadTrustMaterial(null, TrustAllStrategy.INSTANCE) // 모든 인증서 무조건 신뢰
@@ -66,7 +68,7 @@ class ElasticsearchConfig(
                     .setDefaultCredentialsProvider(credentialsProvider)
             }.build()
         } else {
-            log.info("🔐 기본 SSL 검증 모드로 RestClient 설정 (elasticsearch.ssl.trust-all=false)")
+            log.info("🔐 RestClient setting (elasticsearch.ssl.trust-all=false)")
             builder.setHttpClientConfigCallback { httpClientBuilder ->
                 httpClientBuilder
                     .setDefaultCredentialsProvider(credentialsProvider)
@@ -95,7 +97,34 @@ class ElasticsearchConfig(
      */
     @Bean
     fun elasticsearchClient(transport: ElasticsearchTransport): ElasticsearchClient {
+        val client = ElasticsearchClient(transport)
         log.info("🚀  ElasticsearchClient initialized")
-        return ElasticsearchClient(transport)
+
+        try {
+            val pingResponse = client.ping()
+            if (pingResponse.value()) {
+                log.info("✅ Elasticsearch ping successful (cluster is reachable).")
+            } else {
+                log.error("❌ Elasticsearch ping returned false; cluster might be unreachable.")
+                throw ElasticsearchException.ConnectionException(
+                    RuntimeException("Elasticsearch ping returned false; cluster unreachable."),
+                )
+//                System.err.println("FATAL: Elasticsearch cluster unreachable (ping returned false). Exiting.")
+//                exitProcess(1)
+            }
+        } catch (sslEx: SSLHandshakeException) {
+            // SSL 인증서 검증 실패 시
+            log.error("❌ SSL certificate validation failed when pinging Elasticsearch: ${sslEx.localizedMessage}")
+            throw ElasticsearchException.CertificateValidationException(sslEx)
+//            System.err.println("FATAL: Elasticsearch SSL certificate validation failed. Exiting.")
+//            exitProcess(1)
+        } catch (e: Exception) {
+            // 기타 예상치 못한 예외 (네트워크 오류 등)
+            log.error("❌ Failed to connect to Elasticsearch during ping check: ${e.localizedMessage}")
+            throw ElasticsearchException.ConnectionException(e)
+//            System.err.println("FATAL: Unable to connect to Elasticsearch (${e.localizedMessage}). Exiting.")
+//            exitProcess(1)
+        }
+        return client
     }
 }
