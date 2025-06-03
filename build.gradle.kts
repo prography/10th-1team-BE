@@ -1,13 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25" apply false
-    kotlin("plugin.jpa") version "1.9.25" apply false
-    kotlin("kapt") version "1.9.25"
-    id("org.springframework.boot") version "3.4.4" apply false
-    id("io.spring.dependency-management") version "1.1.4" apply false
-    id("org.jlleitschuh.gradle.ktlint") version "12.2.0"
+    // 버전만 관리하고, 실제 적용은 서브모듈에서 따로
+    kotlin("jvm") apply false
+    kotlin("plugin.spring") apply false
+    kotlin("plugin.jpa") apply false
+    kotlin("kapt") apply false
+    id("org.springframework.boot") apply false
+    id("io.spring.dependency-management") apply false
+    // ktlint은 모든 모듈에 적용해서 코드 스타일을 검사
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 allprojects {
@@ -17,25 +19,7 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin = "org.jlleitschuh.gradle.ktlint")
-    apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "org.jetbrains.kotlin.kapt")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
-
-    dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-        implementation("org.jetbrains.kotlin:kotlin-reflect")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-        // Spring Boot Test
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
-        // Kotlin’s JUnit 5 support (includes kotlin-test core)
-        testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.9.25")
-    }
-
+    // KotlinCompile 옵션: 거의 모든 모듈에 공통 적용
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -43,29 +27,22 @@ subprojects {
         }
     }
 
+    // 테스트 환경: JUnit5 + Sprint Test
     tasks.withType<Test> {
         workingDir = rootProject.projectDir
         useJUnitPlatform()
     }
 
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
     ktlint {
         version.set("1.2.1")
     }
-
-    tasks.named("check") { dependsOn("ktlintCheck") }
-
-    project(":prography-bff") {
-        tasks {
-            named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
-                enabled = true
+    // ktlintCheck 태스크가 존재하는 경우에만 check에 의존을 걸어준다.
+    afterEvaluate {
+        if (tasks.findByName("ktlintCheck") != null) {
+            tasks.named("check") {
+                dependsOn("ktlintCheck")
             }
-            named<Jar>("jar") {
-                enabled = true
-            }
-        }
-
-        dependencies {
-            implementation(project(":prography-search"))
         }
     }
 }
