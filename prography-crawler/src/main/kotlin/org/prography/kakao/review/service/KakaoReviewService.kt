@@ -19,21 +19,25 @@ class KakaoReviewService(
     }
 
     fun saveKakaoReview(restaurant: RawRestaurantData) {
-        val kakaoId =
-            restaurant.kakaoPlaceData?.id
-                ?: throw IllegalStateException("kakaoPlaceData is null for ${restaurant.id}")
-
-        // 리뷰 페이징 호출 → 전체 합산
-        val response = searchReviewsByKakaoId(kakaoId)
-        restaurant.kakaoReviewData = KakaoReviewDataConverter.toDomain(response)
-        restaurant.kakaoReviewProcessed = true
-        rawRestaurantDataRepository.save(restaurant)
+        try {
+            val kakaoId = restaurant.kakaoPlaceData.id
+            restaurant.kakaoReviewProcessed = true
+            // 리뷰 페이징 호출 → 전체 합산
+            val response = searchReviewsByKakaoId(kakaoId)
+            restaurant.kakaoReviewData = KakaoReviewDataConverter.toDomain(response)
+        } catch (e: Exception) {
+            // TODO : 오류 발생 시 Fail 추가
+            log.error(e.message, e)
+            throw e
+        } finally {
+            rawRestaurantDataRepository.save(restaurant)
+        }
     }
 
     /**
      * 카카오 아이디로 리뷰를 페이징 조회하여 모두 합칩니다.
      */
-    private fun searchReviewsByKakaoId(kakaoId: String): KakaoReviewResponse {
+    fun searchReviewsByKakaoId(kakaoId: String): KakaoReviewResponse {
         var previousLastReviewId = 0L
         val kakaoReviewResponse: KakaoReviewResponse =
             kakaoReviewClient.searchReviewsByKakaoId(

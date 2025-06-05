@@ -9,9 +9,9 @@ class ScrapThreadPoolConfig {
     @Bean(name = ["mainScrapExecutor"])
     fun mainScrapExecutor(): ThreadPoolTaskExecutor {
         val executor = ThreadPoolTaskExecutor()
-        executor.corePoolSize = 3
-        executor.maxPoolSize = 3
-        executor.queueCapacity = 10000
+        executor.corePoolSize = 5
+        executor.maxPoolSize = 5
+        executor.queueCapacity = 100000
         executor.setThreadNamePrefix("main-feign-exec-")
         return executor
     }

@@ -3,6 +3,8 @@ package org.prography.batch.service
 import org.prography.batch.domain.BatchConstants.BATCH_DELAY
 import org.prography.batch.domain.BatchConstants.BATCH_SIZE
 import org.prography.batch.domain.BatchConstants.LIMIT_REQUEST_TIME
+import org.prography.error.ExceptionLog
+import org.prography.error.ExceptionLogRepository
 import org.prography.kakao.review.service.KakaoReviewService
 import org.prography.restaurant.domain.RawRestaurantData
 import org.prography.restaurant.domain.RawRestaurantDataRepository
@@ -23,6 +25,7 @@ class KakaoReviewBatchService(
     private val executor: ThreadPoolTaskExecutor,
     @Qualifier("callbackExecutor")
     private val callbackExecutor: ThreadPoolTaskExecutor,
+    private val exceptionLogRepository: ExceptionLogRepository,
 ) {
     companion object {
         private val log: Logger = LoggerFactory.getLogger(KakaoReviewBatchService::class.java)
@@ -37,13 +40,14 @@ class KakaoReviewBatchService(
 
         val unprocessedCount = rawRestaurantDataRepository.countByKakaoReviewProcessedFalse()
         log.info("Unchecked KakaoReviewSize: $unprocessedCount")
-        if (unprocessedCount >= BATCH_SIZE) {
-            val batch =
+        if (unprocessedCount > 0) {
+            val pageSize = minOf(unprocessedCount.toInt(), BATCH_SIZE)
+
+            // 남은 개수 < BATCH_SIZE 면 남은 개수만큼 가져오고,
+            // >= BATCH_SIZE 면 BATCH_SIZE 만큼 가져온다.
+            val batch: List<RawRestaurantData> =
                 rawRestaurantDataRepository.findByKakaoReviewProcessedFalse(
-                    PageRequest.of(
-                        0,
-                        BATCH_SIZE,
-                    ),
+                    PageRequest.of(0, pageSize),
                 )
             val futures = batch.map(::processRestaurantAsync)
 
@@ -65,10 +69,7 @@ class KakaoReviewBatchService(
         val pool = executor.threadPoolExecutor // 실제 ThreadPoolExecutor
         val queue = pool.queue
 
-        if (queue.remainingCapacity() < BATCH_SIZE) {
-            return true
-        }
-        return false
+        return queue.remainingCapacity() < BATCH_SIZE
     }
 
     private fun processRestaurantAsync(data: RawRestaurantData): CompletableFuture<Void> =
@@ -78,10 +79,17 @@ class KakaoReviewBatchService(
                 kakaoReviewService.saveKakaoReview(data)
             }.onFailure { ex ->
                 log.error(
-                    "❌ Failed to process review for id={}, kakaoID = {}",
+                    "Failed to process review for id={}, kakaoID = {}",
                     data.id,
-                    data.kakaoPlaceData?.id,
+                    data.kakaoPlaceData.id,
                     ex,
+                )
+                exceptionLogRepository.save(
+                    ExceptionLog(
+                        domain = "KakaoReviewBatchService",
+                        message = ex.message ?: "",
+                        details = mapOf("ID" to data.id),
+                    ),
                 )
                 throw ex
             }
