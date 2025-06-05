@@ -37,12 +37,12 @@ class ScrapThreadPoolConfig {
     }
 
     @Bean(name = ["callbackExecutor"])
-    fun callbackExecutor(): ThreadPoolTaskExecutor {
-        val executor = ThreadPoolTaskExecutor()
-        executor.corePoolSize = 2
-        executor.maxPoolSize = 5
-        executor.queueCapacity = 500
-        executor.setThreadNamePrefix("callback-exec-")
-        return executor
-    }
+    fun callbackExecutor(): ThreadPoolTaskExecutor =
+        ThreadPoolTaskExecutor().apply {
+            corePoolSize = 2
+            maxPoolSize = 5
+            queueCapacity = 500
+            setThreadNamePrefix("callback-exec-")
+            initialize()
+        }
 }
