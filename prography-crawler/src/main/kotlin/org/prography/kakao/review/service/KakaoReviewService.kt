@@ -37,7 +37,7 @@ class KakaoReviewService(
     /**
      * 카카오 아이디로 리뷰를 페이징 조회하여 모두 합칩니다.
      */
-    private fun searchReviewsByKakaoId(kakaoId: String): KakaoReviewResponse {
+    fun searchReviewsByKakaoId(kakaoId: String): KakaoReviewResponse {
         var previousLastReviewId = 0L
         val kakaoReviewResponse: KakaoReviewResponse =
             kakaoReviewClient.searchReviewsByKakaoId(
