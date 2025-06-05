@@ -3,6 +3,8 @@ package org.prography.batch.service
 import org.prography.batch.domain.BatchConstants.BATCH_DELAY
 import org.prography.batch.domain.BatchConstants.BATCH_SIZE
 import org.prography.batch.domain.BatchConstants.LIMIT_REQUEST_TIME
+import org.prography.error.ExceptionLog
+import org.prography.error.ExceptionLogRepository
 import org.prography.naver.place.service.NaverPlaceService
 import org.prography.naver.review.service.NaverReviewService
 import org.prography.restaurant.domain.RawRestaurantData
@@ -24,7 +26,8 @@ class NaverReviewBatchService(
     @Qualifier("naverScrapExecutor")
     private val executor: ThreadPoolTaskExecutor,
     @Qualifier("callbackExecutor")
-    private val callbackExecutor: ThreadPoolTaskExecutor, // 추가
+    private val callbackExecutor: ThreadPoolTaskExecutor,
+    private val exceptionLogRepository: ExceptionLogRepository,
 ) {
     companion object {
         private val log: Logger = LoggerFactory.getLogger(this::class.java)
@@ -38,7 +41,7 @@ class NaverReviewBatchService(
         }
 
         val unprocessedCount = rawRestaurantDataRepository.countByNaverReviewProcessedFalse()
-        log.info("unprocessed naver count: {}", unprocessedCount)
+        log.info("Unchecked NaverReviewSize: {}", unprocessedCount)
         if (unprocessedCount > 0) {
             val pageSize = minOf(unprocessedCount.toInt(), BATCH_SIZE)
 
@@ -53,7 +56,6 @@ class NaverReviewBatchService(
             val futures = batch.map(::processRestaurantAsync)
 
             // 모든 작업 완료까지 대기
-
             CompletableFuture
                 .allOf(*futures.toTypedArray())
                 .whenCompleteAsync({ _, ex ->
@@ -68,6 +70,13 @@ class NaverReviewBatchService(
         }
     }
 
+    private fun isQueueFull(): Boolean {
+        val pool = executor.threadPoolExecutor // 실제 ThreadPoolExecutor
+        val queue = pool.queue
+
+        return queue.remainingCapacity() < BATCH_SIZE
+    }
+
     private fun processRestaurantAsync(data: RawRestaurantData): CompletableFuture<Void> =
         CompletableFuture.runAsync({
             runCatching {
@@ -76,22 +85,18 @@ class NaverReviewBatchService(
                 naverReviewService.saveNaverReview(data)
             }.onFailure { ex ->
                 log.error(
-                    "❌ Failed to process review for id={}, kakaoID = {}",
+                    "❌ Failed to process review for id={}",
                     data.id,
-                    data.kakaoPlaceData?.id,
                     ex,
+                )
+                exceptionLogRepository.save(
+                    ExceptionLog(
+                        domain = "NaverReviewBatchService",
+                        message = ex.message ?: "",
+                        details = mapOf("ID" to data.id),
+                    ),
                 )
                 throw ex
             }
         }, executor)
-
-    private fun isQueueFull(): Boolean {
-        val pool = executor.threadPoolExecutor // 실제 ThreadPoolExecutor
-        val queue = pool.queue
-
-        if (queue.remainingCapacity() < BATCH_SIZE) {
-            return true
-        }
-        return false
-    }
 }

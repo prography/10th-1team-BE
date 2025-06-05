@@ -69,10 +69,7 @@ class KakaoReviewBatchService(
         val pool = executor.threadPoolExecutor // 실제 ThreadPoolExecutor
         val queue = pool.queue
 
-        if (queue.remainingCapacity() < BATCH_SIZE) {
-            return true
-        }
-        return false
+        return queue.remainingCapacity() < BATCH_SIZE
     }
 
     private fun processRestaurantAsync(data: RawRestaurantData): CompletableFuture<Void> =
@@ -84,14 +81,14 @@ class KakaoReviewBatchService(
                 log.error(
                     "Failed to process review for id={}, kakaoID = {}",
                     data.id,
-                    data.kakaoPlaceData?.id,
+                    data.kakaoPlaceData.id,
                     ex,
                 )
                 exceptionLogRepository.save(
                     ExceptionLog(
                         domain = "KakaoReviewBatchService",
                         message = ex.message ?: "",
-                        details = mapOf("ID" to data.kakaoPlaceData?.id!!),
+                        details = mapOf("ID" to data.id),
                     ),
                 )
                 throw ex
