@@ -29,15 +29,26 @@ jobs:
 
       - name: Set TAG (timestamp)
         id: tag
-        run: echo "tag=$(date '+%Y%m%d-%H%M%S')" >> "$GITHUB_OUTPUT"
+        run: echo tag=$(date '+%Y%m%d-%H%M%S') >> $GITHUB_OUTPUT
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-
 
       - name: Build & Push to Artifact Registry
         run: |
-          docker build \
-          -f ./deploy/Dockerfile \
-          -t asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:${{ steps.tag.outputs.tag }} \
-          .
-          docker push asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:${{ steps.tag.outputs.tag }}
+          docker buildx create --use
+          docker buildx build \
+            --cache-from=type=local,src=/tmp/.buildx-cache \
+            --cache-to=type=local,dest=/tmp/.buildx-cache \
+            --push \
+            -f ./deploy/Dockerfile \
+            -t asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:${{ steps.tag.outputs.tag }} \
+            .
 
       - name: SSH & Deploy to GCP
         uses: appleboy/ssh-action@v1.0.3
