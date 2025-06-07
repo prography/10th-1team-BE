@@ -9,10 +9,10 @@ import io.swagger.v3.oas.annotations.media.Schema
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.response.CursorResponse
 import org.prography.bff.search.controller.model.AutoCompleteResponseDTO
+import org.prography.bff.search.controller.model.PlaceDetailDTO
 import org.prography.bff.search.controller.model.SearchResponseDTO
 import org.prography.bff.search.controller.model.enumeration.FoodCategory
 import org.prography.bff.search.controller.model.enumeration.OrderStrategy
-import org.prography.bff.search.model.PlaceDetailDTO
 
 interface SearchController {
     @Operation(
