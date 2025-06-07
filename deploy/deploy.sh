@@ -3,9 +3,10 @@ set -e
 
 cd ~/prography
 TAG=$1
+echo "TAG=$TAG" > .env
 
 # 1. 이미지 Pull
-docker pull asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:$TAG
+docker pull seogwoojin1/reviewmatch-bff:$TAG
 
 # 2. 현재 실행중인 앱 확인
 if docker ps --format '{{.Names}}' | grep -q app-blue; then
