@@ -3,6 +3,7 @@ name: Build & Push to GCR
 on:
   push:
     branches: [ deploy/bff ]
+  workflow_dispatch:  # 
 
 env:
   IMAGE_NAME: reviewmatch-bff
