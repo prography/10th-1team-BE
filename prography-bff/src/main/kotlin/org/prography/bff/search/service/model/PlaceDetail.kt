@@ -22,7 +22,10 @@ data class PlaceDetail(
     val naverReviewAvgScore: Double?,
     val naverReviews: List<Review>,
     val naverVoteRate: Int,
-    val dongCode: String,
+    val hCode: String,
+    val bCode: String,
+    val x: String,
+    val y: String,
 ) {
     companion object {
         fun fromDomain(
@@ -62,7 +65,10 @@ data class PlaceDetail(
                 naverReviewAvgScore = naverReviewScore.reviewRating,
                 naverReviews = naverReviewData.reviews.map { Review.fromNaverReview(it) },
                 naverVoteRate = naverReviewScore.totalCount,
-                dongCode = restaurantData.dongCode,
+                hCode = restaurantData.hCode,
+                bCode = restaurantData.bCode,
+                x = restaurantData.kakaoPlaceData.x,
+                y = restaurantData.kakaoPlaceData.y,
             )
         }
     }

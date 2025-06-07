@@ -1,14 +1,14 @@
 package org.prography.bff.region.domain.service
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.annotation.PostConstruct
 import org.prography.bff.region.domain.entity.City
 import org.prography.bff.region.domain.entity.Province
 import org.prography.bff.region.domain.repository.CityRepository
+import org.prography.bff.region.domain.repository.DongRepository
 import org.prography.bff.region.domain.repository.ProvinceRepository
-import org.prography.bff.region.model.AdminMap
-import org.prography.bff.region.model.RegionJsonData
 import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,36 +20,72 @@ class RegionService(
     private val resourceLoader: ResourceLoader,
     private val provinceRepo: ProvinceRepository,
     private val cityRepo: CityRepository,
+    private val dongRepo: DongRepository,
 ) {
+    data class RegionJsonData(
+        @JsonProperty("법정동코드") val admCd: String,
+        @JsonProperty("시도명") val provinceName: String,
+        @JsonProperty("시군구명") val cityName: String?,
+        @JsonProperty("읍면동명") val townshipName: String?,
+        @JsonProperty("리명") val villageName: String?,
+    )
+
     @PostConstruct
     @Transactional
     fun saveData() {
-        // 1) JSON 파일 로드
-        val resource = resourceLoader.getResource("classpath:korea_region_data.json")
-        val adminMap: AdminMap =
+        // 1) JSON 파일 로드 (플랫한 리스트)
+        val resource = resourceLoader.getResource("classpath:korea_full_region_data.json")
+        val all: List<RegionJsonData> =
             objectMapper.readValue(
                 resource.inputStream,
-                object : TypeReference<AdminMap>() {},
+                object : TypeReference<List<RegionJsonData>>() {},
             )
 
-        adminMap.forEach { (provinceName, regions) ->
-            if (regions.isEmpty()) return@forEach
+        // 2) 시도별로 묶기
+        all.groupBy { it.provinceName }
+            .forEach { (provinceName, provinceList) ->
 
-            // 2) Province 생성 (코드는 adm_cd2 앞 2자리)
-            val provinceCode = regions.first().adm_cd2.substring(0, 2)
-            val province = Province(code = provinceCode, name = provinceName)
-            provinceRepo.save(province)
+                // 3) Province 저장 (코드: admCd 앞 2자리)
+                val provCode = provinceList.first().admCd.substring(0, 2)
+                val province = Province(code = provCode, name = provinceName)
+                provinceRepo.save(province)
 
-            // 3) City 생성 (코드는 adm_cd2 앞 5자리)
-            regions.forEach { dto: RegionJsonData ->
-                val cityCode = dto.adm_cd2
-                val city = City(code = cityCode, name = dto.name, province = province)
-                cityRepo.save(city)
+                // 4) 시군구별로 묶기
+                provinceList
+                    .filter { it.cityName != null }
+                    .groupBy { it.cityName!! }
+                    .forEach { (cityName, cityList) ->
+
+                        // 5) City 저장 (코드: admCd 앞 5자리)
+                        val cityCode = cityList.first().admCd.substring(0, 5)
+                        val city =
+                            City(
+                                code = cityCode,
+                                name = cityName,
+                                province = province,
+                            )
+                        cityRepo.save(city)
+
+                        // 6) Dong 저장
+                        cityList.forEach { dto ->
+                            val dongCode = dto.admCd
+                            // 읍면동명 + 리명이 둘 다 있을 땐 합쳐서, 아니면 있는 쪽만
+                            val dongName =
+                                listOfNotNull(dto.townshipName, dto.villageName)
+                                    .joinToString(" ")
+                            val dong =
+                                org.prography.bff.region.domain.entity.Dong(
+                                    code = dongCode,
+                                    name = dongName,
+                                    city = city,
+                                )
+                            dongRepo.save(dong)
+                        }
+                    }
             }
-        }
+
+        println(">>> 저장 완료: Province ${provinceRepo.count()}, City ${cityRepo.count()}, Dong ${dongRepo.count()}")
     }
 
-    fun getRegionData(): List<Province> {
-        return provinceRepo.findAll()
-    }
+    fun getRegionData(): List<Province> = provinceRepo.findAll()
 }

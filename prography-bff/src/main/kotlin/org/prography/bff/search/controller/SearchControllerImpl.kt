@@ -53,7 +53,8 @@ class SearchControllerImpl(
         @RequestParam(name = "sort", required = false) sort: OrderStrategy?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>> {
         val sort = sort ?: OrderStrategy.RELATED
-        val cursorSearch = searchService.cursorSearchByKeyword(keyword, size, lastId, addressCodes, emptyList())
+        val cursorSearch =
+            searchService.cursorSearchByKeyword(keyword, size, lastId, addressCodes, emptyList())
         val data =
             cursorSearch.result.map { result ->
                 SearchResponseDTO(
@@ -100,7 +101,7 @@ class SearchControllerImpl(
                 detail.name,
                 detail.addressName,
                 detail.roadAddressName,
-                detail.dongCode,
+                detail.bCode,
                 detail.photos,
                 StrengthScoresDto.fromDomain(detail.strengthScores),
                 detail.kakaoReviewCount,
@@ -111,6 +112,8 @@ class SearchControllerImpl(
                 detail.naverReviewAvgScore,
                 detail.naverReviews,
                 detail.naverVoteRate,
+                detail.x,
+                detail.y,
             )
 
         return ApiResponse.success(data)

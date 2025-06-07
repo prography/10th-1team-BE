@@ -9,14 +9,14 @@ import org.prography.bff.region.model.RegionDto
 interface RegionController {
     @Operation(
         summary = "검색 가능한 지역 정보 API",
-        description = "시, 군, 구 기준으로 리턴합니다.",
+        description = "최소 단위 '동' 기준으로 리턴합니다.",
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
                 responseCode = "200",
                 content = [
                     Content(
                         mediaType = "application/json",
-                        schema = Schema(implementation = RegionDto::class),
+                        schema = Schema(implementation = org.prography.bff.region.model.RegionDto::class),
                     ),
                 ],
             ),
