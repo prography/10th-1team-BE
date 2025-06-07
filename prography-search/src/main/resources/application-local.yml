@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    elasticsearch:
+      ssl:
+        trust-all: true
+      repositories:
+        enabled: false
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
