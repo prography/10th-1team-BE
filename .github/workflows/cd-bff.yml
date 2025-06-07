@@ -42,7 +42,9 @@ jobs:
       - name: Build & Push to Artifact Registry
         run: |
           docker buildx create --use
+          mkdir -p /tmp/.buildx-cache
           docker buildx build \
+            --provenance=false \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache \
             --push \
