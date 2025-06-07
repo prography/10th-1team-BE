@@ -33,9 +33,9 @@ jobs:
       - name: Build & Push to Artifact Registry
         run: |
           docker build \
-            -f 10th-1team-BE/prography-bff/Dockerfile \
-            -t asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:${{ steps.tag.outputs.tag }} \
-            ./10th-1team-BE
+          -f ./deploy/Dockerfile \
+          -t asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:${{ steps.tag.outputs.tag }} \
+          .
           docker push asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:${{ steps.tag.outputs.tag }}
 
       - name: SSH & Deploy to GCP
