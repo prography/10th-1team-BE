@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: your-dockerhub-username/reviewmatch-bff
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/reviewmatch-bff
 
 jobs:
   build-and-push:
