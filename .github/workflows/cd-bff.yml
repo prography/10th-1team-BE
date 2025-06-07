@@ -1,0 +1,50 @@
+name: Build & Push to GCR
+
+on:
+  push:
+    branches: [ deploy/bff ]
+  workflow_dispatch:  # 
+
+env:
+  IMAGE_NAME: reviewmatch-bff
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configure Docker to use gcloud auth
+        run: gcloud auth configure-docker
+
+      - name: Set TAG (timestamp)
+        id: tag
+        run: echo "tag=$(date '+%Y%m%d-%H%M%S')" >> "$GITHUB_OUTPUT"
+
+      - name: Build & Push to Artifact Registry
+        run: |
+          docker build \
+            -f 10th-1team-BE/prography-bff/Dockerfile \
+            -t asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:${{ steps.tag.outputs.tag }} \
+            ./10th-1team-BE
+          docker push asia-northeast3-docker.pkg.dev/third-strategy-458506-h5/reviewmatch-bff:${{ steps.tag.outputs.tag }}
+
+      - name: SSH & Deploy to GCP
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.GCP_VM_IP }}
+          username: ${{ secrets.GCP_VM_USER }}
+          key: ${{ secrets.GCP_SSH_KEY }}
+          envs: TAG=${{ steps.tag.outputs.tag }}
+          script: |
+            bash ~/prography/deploy.sh ${{ steps.tag.outputs.tag }}
