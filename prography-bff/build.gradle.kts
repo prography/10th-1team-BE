@@ -33,6 +33,9 @@ dependencies {
 
     // Mongo DB
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+
+    // Health Check
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 }
 
 allOpen {
