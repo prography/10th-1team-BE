@@ -2,7 +2,7 @@ name: Build & Push to Docker Hub
 
 on:
   push:
-    branches: [ deploy/bff ]
+    branches: [ module/bff ]
   workflow_dispatch:
 
 env:
