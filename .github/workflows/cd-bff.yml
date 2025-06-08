@@ -51,12 +51,11 @@ jobs:
             .
 
       - name: SSH & Deploy to GCP
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.GCP_VM_IP }}
           username: ${{ secrets.GCP_VM_USER }}
           key: ${{ secrets.GCP_SSH_KEY }}
-          debug: true
           envs: TAG=${{ steps.tag.outputs.tag }}
           script: |
             bash ~/prography/deploy.sh ${{ steps.tag.outputs.tag }}
