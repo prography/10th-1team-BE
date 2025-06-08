@@ -33,6 +33,9 @@ class RegionService(
     @PostConstruct
     @Transactional
     fun saveData() {
+        if (dongRepo.count() > 0) {
+            return // 이미 저장된 경우 저장 X
+        }
         // 1) JSON 파일 로드 (플랫한 리스트)
         val resource = resourceLoader.getResource("classpath:korea_full_region_data.json")
         val all: List<RegionJsonData> =
