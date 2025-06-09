@@ -1,0 +1,6 @@
+# EK 이미지 풀
+# FROM docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+# FROM docker.elastic.co/kibana/kibana:${STACK_VERSION}
+
+# Nori Analyzer 플러그인 설치
+RUN bin/elasticsearch-plugin install analysis-nori
