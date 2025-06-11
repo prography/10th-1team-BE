@@ -3,12 +3,20 @@ package org.prography.search.service
 import co.elastic.clients.elasticsearch.ElasticsearchClient
 import co.elastic.clients.elasticsearch._types.SortOptions
 import co.elastic.clients.elasticsearch._types.SortOrder
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery
+import co.elastic.clients.elasticsearch._types.query_dsl.MultiMatchQuery
+import co.elastic.clients.elasticsearch._types.query_dsl.Operator
+import co.elastic.clients.elasticsearch._types.query_dsl.Query
+import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType
+import co.elastic.clients.elasticsearch.core.SearchRequest
+import org.prography.search.domain.GeoPoint
 import org.prography.search.domain.RestaurantPlace
 import org.prography.search.exception.ElasticsearchException
 import org.prography.search.service.model.AutoCompleteResult
 import org.prography.search.service.model.CursorPlaceResult
 import org.prography.search.service.model.PlaceSearchResult
 import org.prography.search.service.model.enumeration.FilterCategory
+import org.prography.search.service.model.enumeration.SortingStrategy
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import javax.net.ssl.SSLHandshakeException
@@ -23,9 +31,114 @@ class SearchService(
     private val log = LoggerFactory.getLogger(SearchService::class.java)
 
     companion object {
-        private const val INDEX = "restaurant_place"
-        private const val KEYWORD_KAKAO_PLACE_NAME = "kakaoPlaceName.keyword"
+        private const val INDEX = "test"
         private const val EMPTY_CATEGORY = "EMPTY"
+    }
+
+    fun service(
+        keyword: String,
+        size: Int,
+        cursor: String? = null,
+        addressCodes: List<String>,
+        categories: List<FilterCategory>,
+        strategy: SortingStrategy = SortingStrategy.RELATED,
+    ): List<PlaceSearchResult> {
+        val multiMatch =
+            MultiMatchQuery.Builder()
+                .query(keyword)
+                .fields("place_name")
+                .type(TextQueryType.CrossFields)
+                .operator(Operator.And)
+                .build()
+
+        val multiMatchQuery =
+            Query.Builder()
+                .multiMatch(multiMatch)
+                .build()
+
+        val boolQueryBuilder = BoolQuery.Builder().must(multiMatchQuery)
+
+//        if (addressCodes.isNotEmpty()) {
+//            boolQueryBuilder.filter({ filter ->
+//                filter
+//            })
+//        } else {
+//            boolQueryBuilder.filter({ filter ->
+//                filter
+//            })
+//        }
+
+//        if (categories.isNotEmpty()) {
+//            boolQueryBuilder.filter({ filter ->
+//                filter
+//            })
+//        }
+
+        val reqBuilder =
+            SearchRequest.Builder()
+                .index(INDEX)
+                .query(Query.Builder().bool(boolQueryBuilder.build()).build())
+                .size(size)
+
+        when (strategy) {
+            SortingStrategy.RELATED -> {
+                reqBuilder
+                    .sort { s -> s.score { sc -> sc.order(SortOrder.Desc) } }
+                    .sort { s -> s.field { f -> f.field("_id").order(SortOrder.Asc) } }
+            }
+
+            SortingStrategy.AVERAGE_RATING_HIGH -> {
+                reqBuilder
+                    .sort { s -> s.field { f -> f.field("review_count").order(SortOrder.Asc) } }
+                    .sort { s -> s.field { f -> f.field("_id").order(SortOrder.Asc) } }
+            }
+
+            SortingStrategy.AVERAGE_RATING_LOW -> {
+                reqBuilder
+                    .sort { s -> s.field { f -> f.field("review_count").order(SortOrder.Asc) } }
+                    .sort { s -> s.field { f -> f.field("_id").order(SortOrder.Asc) } }
+            }
+
+            SortingStrategy.REVIEW_COUNT_HIGH -> {
+                reqBuilder
+                    .sort { s -> s.field { f -> f.field("review_count").order(SortOrder.Asc) } }
+                    .sort { s -> s.field { f -> f.field("_id").order(SortOrder.Asc) } }
+            }
+
+            SortingStrategy.REVIEW_COUNT_LOW -> {
+                reqBuilder
+                    .sort { s -> s.field { f -> f.field("review_count").order(SortOrder.Asc) } }
+                    .sort { s -> s.field { f -> f.field("_id").order(SortOrder.Asc) } }
+            }
+        }
+
+        val searchResponse = client.search(reqBuilder.build(), RestaurantPlace::class.java)
+
+        val hits = searchResponse.hits().hits()
+        if (hits.isEmpty()) {
+            return emptyList()
+        }
+
+        return hits.map { hit ->
+            val source = hit.source()!!
+            PlaceSearchResult(
+                id = source.id,
+                legalCode = source.legal,
+                administrativeCode = source.division,
+                addresses = source.address,
+                roadAddresses = source.roadAddress,
+                category = EMPTY_CATEGORY,
+                name = source.placeName,
+                imageUrl = source.imageUrl,
+                kakaoReviewCount = source.kakaoReviewCount,
+                kakaoScore = source.kakaoScore,
+                kakaoReview = source.kakaoReview,
+                naverReviewCount = source.naverReviewCount,
+                naverScore = source.naverScore,
+                naverReview = source.naverReview,
+                location = source.location ?: GeoPoint(0.0, 0.0),
+            )
+        }
     }
 
     /**
@@ -34,29 +147,53 @@ class SearchService(
     fun autoCompleteByKeyword(
         keyword: String,
         size: Int,
+        addressCodes: List<String>,
+        categories: List<FilterCategory>,
     ): List<AutoCompleteResult> {
         try {
-            val resp =
-                client.search({ req ->
-                    req.index(INDEX)
-                        .size(size)
-                        .query { q ->
-                            q.prefix { p ->
-                                p.field(KEYWORD_KAKAO_PLACE_NAME)
-                                    .value(keyword)
-                            }
-                        }
-                }, RestaurantPlace::class.java)
+            val multiMatch =
+                MultiMatchQuery.Builder()
+                    .query(keyword)
+                    .fields(
+                        "place_name.auto_complete",
+                        "place_name.auto_complete._2gram",
+                        "place_name.auto_complete._3gram",
+                    )
+                    .type(TextQueryType.BoolPrefix)
+                    .build()
 
-            return resp.hits().hits().map { hit ->
+            val multiMatchQuery =
+                Query.Builder()
+                    .multiMatch(multiMatch)
+                    .build()
+
+            val boolQuery =
+                BoolQuery.Builder()
+                    .must(multiMatchQuery)
+                    .build()
+
+            val reqBuilder =
+                SearchRequest.Builder()
+                    .index(INDEX)
+                    .query(Query.Builder().bool(boolQuery).build())
+                    .size(size)
+
+            val searchResponse = client.search(reqBuilder.build(), RestaurantPlace::class.java)
+
+            val hits = searchResponse.hits().hits()
+            if (hits.isEmpty()) {
+                return emptyList()
+            }
+
+            return hits.map { hit ->
                 val source = hit.source()!!
                 AutoCompleteResult(
                     id = source.id,
                     legalCode = source.legal,
                     administrativeCode = source.division,
-                    roadAddresses = source.kakaoRoadAddress,
-                    category = source.category.firstOrNull() ?: EMPTY_CATEGORY,
-                    name = source.kakaoPlaceName,
+                    roadAddresses = source.roadAddress,
+                    category = EMPTY_CATEGORY,
+                    name = source.placeName,
                 )
             }
         } catch (sslEx: SSLHandshakeException) {
@@ -76,8 +213,9 @@ class SearchService(
         keyword: String,
         size: Int,
         lastId: String? = null,
-        addressCodes: List<String>? = emptyList(),
-        categories: List<FilterCategory>? = emptyList(),
+        addressCodes: List<String>,
+        categories: List<FilterCategory>,
+        strategy: SortingStrategy? = SortingStrategy.RELATED,
     ): CursorPlaceResult {
         try {
             val resp =
@@ -108,10 +246,10 @@ class SearchService(
                         id = source.id,
                         legalCode = source.legal,
                         administrativeCode = source.division,
-                        addresses = source.kakaoAddress,
-                        roadAddresses = source.kakaoRoadAddress,
-                        category = source.category.firstOrNull() ?: EMPTY_CATEGORY,
-                        name = source.kakaoPlaceName,
+                        addresses = source.address,
+                        roadAddresses = source.roadAddress,
+                        category = EMPTY_CATEGORY,
+                        name = source.placeName,
                         imageUrl = source.imageUrl,
                         kakaoReviewCount = source.kakaoReviewCount,
                         kakaoScore = source.kakaoScore,
@@ -119,6 +257,7 @@ class SearchService(
                         naverReviewCount = source.naverReviewCount,
                         naverScore = source.naverScore,
                         naverReview = source.naverReview,
+                        location = source.location ?: GeoPoint(0.0, 0.0),
                     )
                 }
 
