@@ -16,6 +16,8 @@ data class RestaurantPlace(
     val roadAddress: String = "",
     /** 상호명 (카카오 기반) */
     val placeName: String = "",
+    /** 음식 카테고리 */
+    val category: List<String> = emptyList(),
     /** 이미지 존재 여부 */
     val image: Boolean = false,
     /** 대표 이미지 URL */
