@@ -1,12 +1,16 @@
 package org.prography.search.service
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient
+import co.elastic.clients.elasticsearch._types.FieldValue
 import co.elastic.clients.elasticsearch._types.SortOptions
 import co.elastic.clients.elasticsearch._types.SortOrder
 import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.MultiMatchQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.Operator
+import co.elastic.clients.elasticsearch._types.query_dsl.PrefixQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.Query
+import co.elastic.clients.elasticsearch._types.query_dsl.TermQuery
+import co.elastic.clients.elasticsearch._types.query_dsl.TermsQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType
 import co.elastic.clients.elasticsearch.core.SearchRequest
 import org.prography.search.domain.GeoPoint
@@ -32,7 +36,8 @@ class SearchService(
 
     companion object {
         private const val INDEX = "test"
-        private const val EMPTY_CATEGORY = "EMPTY"
+        private const val EMPTY_CATEGORY = "UNDEFINED"
+        private const val DEFAULT_LEGAL_CODE = "11680" // 강남구
     }
 
     fun service(
@@ -40,51 +45,77 @@ class SearchService(
         size: Int,
         cursor: String? = null,
         addressCodes: List<String>,
-        categories: List<FilterCategory>,
+        category: FilterCategory? = null,
         strategy: SortingStrategy = SortingStrategy.RELATED,
     ): List<PlaceSearchResult> {
-        val multiMatch =
-            MultiMatchQuery.Builder()
-                .query(keyword)
-                .fields("place_name")
-                .type(TextQueryType.CrossFields)
-                .operator(Operator.And)
-                .build()
-
         val multiMatchQuery =
             Query.Builder()
-                .multiMatch(multiMatch)
+                .multiMatch(
+                    MultiMatchQuery.Builder()
+                        .query(keyword)
+                        .fields("place_name")
+                        .type(TextQueryType.CrossFields)
+                        .operator(Operator.And)
+                        .build(),
+                )
                 .build()
 
         val boolQueryBuilder = BoolQuery.Builder().must(multiMatchQuery)
 
-//        if (addressCodes.isNotEmpty()) {
-//            boolQueryBuilder.filter({ filter ->
-//                filter
-//            })
-//        } else {
-//            boolQueryBuilder.filter({ filter ->
-//                filter
-//            })
-//        }
+        if (addressCodes.isNotEmpty()) {
+            val legalFilterQuery =
+                Query.Builder()
+                    .terms(
+                        TermsQuery.Builder()
+                            .field("legal")
+                            .terms { term -> term.value(addressCodes.map { FieldValue.of(it) }) }
+                            .build(),
+                    )
+                    .build()
+            boolQueryBuilder.filter(legalFilterQuery)
+        } else {
+            val legalPrefixQuery =
+                Query.Builder()
+                    .prefix(
+                        PrefixQuery.Builder()
+                            .field("legal")
+                            .value(DEFAULT_LEGAL_CODE)
+                            .build(),
+                    )
+                    .build()
+            boolQueryBuilder.filter(legalPrefixQuery)
+        }
 
-//        if (categories.isNotEmpty()) {
-//            boolQueryBuilder.filter({ filter ->
-//                filter
-//            })
-//        }
+        category?.let {
+            val categoryFilterQuery =
+                Query.Builder()
+                    .term(
+                        TermQuery.Builder()
+                            .field("category")
+                            .value(category.value)
+                            .build(),
+                    )
+                    .build()
+            boolQueryBuilder.filter(categoryFilterQuery)
+        }
 
         val reqBuilder =
             SearchRequest.Builder()
                 .index(INDEX)
-                .query(Query.Builder().bool(boolQueryBuilder.build()).build())
+                .query(
+                    Query.Builder()
+                        .bool(
+                            boolQueryBuilder
+                                .build(),
+                        )
+                        .build(),
+                )
                 .size(size)
 
         when (strategy) {
             SortingStrategy.RELATED -> {
                 reqBuilder
                     .sort { s -> s.score { sc -> sc.order(SortOrder.Desc) } }
-                    .sort { s -> s.field { f -> f.field("_id").order(SortOrder.Asc) } }
             }
 
             SortingStrategy.AVERAGE_RATING_HIGH -> {
@@ -108,7 +139,6 @@ class SearchService(
             SortingStrategy.REVIEW_COUNT_LOW -> {
                 reqBuilder
                     .sort { s -> s.field { f -> f.field("review_count").order(SortOrder.Asc) } }
-                    .sort { s -> s.field { f -> f.field("_id").order(SortOrder.Asc) } }
             }
         }
 
@@ -127,7 +157,7 @@ class SearchService(
                 administrativeCode = source.division,
                 addresses = source.address,
                 roadAddresses = source.roadAddress,
-                category = EMPTY_CATEGORY,
+                category = source.category.firstOrNull() ?: EMPTY_CATEGORY,
                 name = source.placeName,
                 imageUrl = source.imageUrl,
                 kakaoReviewCount = source.kakaoReviewCount,
