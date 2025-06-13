@@ -5,7 +5,7 @@ package org.prography.search.domain
  */
 data class RestaurantPlace(
     /** MongoDB 고유 아이디 (=_id) */
-    val id: String,
+    val mongoId: String,
     /** 행정구 코드 */
     val division: String = "",
     /** 법정동 코드 */

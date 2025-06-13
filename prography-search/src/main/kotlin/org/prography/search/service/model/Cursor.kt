@@ -18,18 +18,14 @@ data class Cursor(
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
         fun decode(
-            str: String,
+            str: String?,
             strategy: SortingStrategy,
-        ): Cursor {
-            /**
-             * strategy 에 따라서 RATING 일 경우에는 double 타입으로 key로 그 외에는 int 형식으로
-             * AVERAGE_RATING_HIGH, // 별점 높은 순 (카카오+네이버 평균)
-             *     AVERAGE_RATING_LOW, // 별점 낮은 순 (카카오+네이버 평균)
-             *     REVIEW_COUNT_HIGH, // 리뷰 많은 순 (카카오+네이버 합산)
-             *     REVIEW_COUNT_LOW, // 리뷰 적은 순 (카카오+네이버 합산)
-             */
+        ): Cursor? {
+            if (str.isNullOrBlank()) {
+                return null
+            }
+
             val json = String(Base64.getDecoder().decode(str))
-            // 2) JSON → Map<String, Any>
             val map: Map<String, Any?> = mapper.readValue(json)
             val id =
                 map["id"] as? String
