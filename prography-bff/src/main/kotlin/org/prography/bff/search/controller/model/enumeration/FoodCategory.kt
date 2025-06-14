@@ -5,6 +5,11 @@ package org.prography.bff.search.controller.model.enumeration
  */
 enum class FoodCategory {
     /**
+     * 정의되지 않은 음식 유형
+     */
+    UNDEFINED,
+
+    /**
      * 한식
      */
     FD01,
