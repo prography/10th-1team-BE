@@ -1,16 +1,18 @@
 package org.prography.bff.search.controller
 
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.response.CursorResponse
 import org.prography.bff.search.controller.model.AutoCompleteResponseDTO
+import org.prography.bff.search.controller.model.PlaceDetailDTO
 import org.prography.bff.search.controller.model.SearchResponseDTO
 import org.prography.bff.search.controller.model.enumeration.FoodCategory
 import org.prography.bff.search.controller.model.enumeration.OrderStrategy
-import org.prography.bff.search.model.PlaceDetailDTO
 
 interface SearchController {
     @Operation(
@@ -58,11 +60,46 @@ interface SearchController {
         ],
     )
     fun searchTerm(
+        @Parameter(
+            name = "keyword",
+            `in` = ParameterIn.QUERY,
+            description = "검색어 (음식점 이름 또는 설명 등에서 일치 검색에 사용)",
+            required = false,
+            example = "치킨",
+        )
         keyword: String,
+        @Parameter(
+            name = "size",
+            `in` = ParameterIn.QUERY,
+            description = "한 번에 조회할 결과 개수",
+            required = true,
+            example = "20",
+        )
         size: Int,
+        @Parameter(
+            name = "lastId",
+            `in` = ParameterIn.QUERY,
+            description = "이전 페이지의 마지막 ID. 이 ID 이후부터 다음 페이지 조회",
+            required = false,
+            example = "더라운지@서울_서초구_강남대로107길_6",
+        )
         lastId: String?,
+        @Parameter(
+            name = "dong_code",
+            `in` = ParameterIn.QUERY,
+            description = "검색을 제한할 구 코드 리스트 (여러 개 전달 가능)",
+            required = false,
+            example = "[\"11110\",\"11140\"]",
+        )
         addressCodes: List<String>?,
         categories: List<FoodCategory>?,
+        @Parameter(
+            name = "sort",
+            `in` = ParameterIn.QUERY,
+            description = "정렬 기준 (예: RELATED, AVERAGE_RATING_HIGH)",
+            required = false,
+            example = "RELATED",
+        )
         sort: OrderStrategy?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>>
 

@@ -32,4 +32,13 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: NEVER

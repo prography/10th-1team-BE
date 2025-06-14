@@ -7,6 +7,6 @@ data class KakaoPlaceInfo(
     var id: String,
     var phone: String? = null,
     var placeName: String,
-    var x: String? = null,
-    var y: String? = null,
+    var x: String,
+    var y: String,
 )

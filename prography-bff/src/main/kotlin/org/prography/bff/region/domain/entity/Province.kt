@@ -1,12 +1,6 @@
 package org.prography.bff.region.domain.entity
 
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
-import jakarta.persistence.Table
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "province")
@@ -22,5 +16,5 @@ class Province(
         orphanRemoval = true,
         fetch = FetchType.LAZY,
     )
-    val cities: MutableList<City> = mutableListOf(),
+    val cityList: MutableList<org.prography.bff.region.domain.entity.City> = mutableListOf(),
 )

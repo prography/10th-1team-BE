@@ -1,12 +1,6 @@
 package org.prography.bff.region.domain.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.Table
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "city")
@@ -20,4 +14,11 @@ class City(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_code", nullable = false)
     var province: Province,
+    @OneToMany(
+        mappedBy = "city",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true,
+        fetch = FetchType.LAZY,
+    )
+    val dongList: MutableList<Dong> = mutableListOf(),
 )

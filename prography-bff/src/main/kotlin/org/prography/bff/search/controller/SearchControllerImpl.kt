@@ -3,12 +3,12 @@ package org.prography.bff.search.controller
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.response.CursorResponse
 import org.prography.bff.search.controller.model.AutoCompleteResponseDTO
+import org.prography.bff.search.controller.model.PlaceDetailDTO
 import org.prography.bff.search.controller.model.Region
 import org.prography.bff.search.controller.model.ReviewSummary
 import org.prography.bff.search.controller.model.SearchResponseDTO
 import org.prography.bff.search.controller.model.enumeration.FoodCategory
 import org.prography.bff.search.controller.model.enumeration.OrderStrategy
-import org.prography.bff.search.model.PlaceDetailDTO
 import org.prography.bff.search.model.strength.StrengthScoresDto
 import org.prography.bff.search.service.mock.MockService
 import org.prography.search.service.SearchService
@@ -53,7 +53,8 @@ class SearchControllerImpl(
         @RequestParam(name = "sort", required = false) sort: OrderStrategy?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>> {
         val sort = sort ?: OrderStrategy.RELATED
-        val cursorSearch = searchService.cursorSearchByKeyword(keyword, size, lastId, addressCodes, emptyList())
+        val cursorSearch =
+            searchService.cursorSearchByKeyword(keyword, size, lastId, addressCodes, emptyList())
         val data =
             cursorSearch.result.map { result ->
                 SearchResponseDTO(
@@ -100,7 +101,9 @@ class SearchControllerImpl(
                 detail.name,
                 detail.addressName,
                 detail.roadAddressName,
-                detail.dongCode,
+                detail.bCode,
+                detail.x,
+                detail.y,
                 detail.photos,
                 StrengthScoresDto.fromDomain(detail.strengthScores),
                 detail.kakaoReviewCount,
