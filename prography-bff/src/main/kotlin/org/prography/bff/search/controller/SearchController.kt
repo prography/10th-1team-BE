@@ -80,7 +80,7 @@ interface SearchController {
             required = false,
             example = "FD01",
         )
-        categories: FoodCategory?,
+        foodCategory: FoodCategory?,
     ): ApiResponse<List<AutoCompleteResponseDTO>>
 
     @Operation(
@@ -148,7 +148,7 @@ interface SearchController {
             required = false,
             example = "FD01",
         )
-        categories: FoodCategory?,
+        foodCategory: FoodCategory?,
         @Parameter(
             name = "sort",
             `in` = ParameterIn.QUERY,
