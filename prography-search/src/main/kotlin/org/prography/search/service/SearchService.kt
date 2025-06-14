@@ -36,7 +36,7 @@ class SearchService(
     private val log = LoggerFactory.getLogger(SearchService::class.java)
 
     companion object {
-        private const val INDEX = "test"
+        private const val INDEX = "restaurant_search"
         private const val EMPTY_CATEGORY = "UNDEFINED"
         private const val DEFAULT_LEGAL_CODE = "11680" // 강남구
     }
@@ -121,7 +121,7 @@ class SearchService(
                     .multiMatch(
                         MultiMatchQuery.Builder()
                             .query(keyword)
-                            .fields("place_name")
+                            .fields("place_name", "place_name.raw^5")
                             .type(TextQueryType.CrossFields)
                             .operator(Operator.And)
                             .build(),
