@@ -8,7 +8,6 @@ import co.elastic.clients.elasticsearch._types.query_dsl.MultiMatchQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.Operator
 import co.elastic.clients.elasticsearch._types.query_dsl.PrefixQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.Query
-import co.elastic.clients.elasticsearch._types.query_dsl.TermQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.TermsQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType
 import co.elastic.clients.elasticsearch.core.SearchRequest
@@ -89,7 +88,7 @@ class SearchService(
                     id = source.mongoId,
                     legalCode = source.legal,
                     administrativeCode = source.division,
-                    roadAddresses = source.roadAddress,
+                    roadAddresses = source.address,
                     category = source.category.firstOrNull() ?: EMPTY_CATEGORY,
                     name = source.placeName,
                 )
@@ -230,7 +229,7 @@ class SearchService(
                     .terms(
                         TermsQuery.Builder()
                             .field("legal")
-                            .terms { t -> t.value(addressCodes.map { FieldValue.of(it) }) }
+                            .terms { term -> term.value(addressCodes.map { FieldValue.of(it) }) }
                             .build(),
                     )
                     .build()
@@ -248,10 +247,10 @@ class SearchService(
         if (category != null) {
             val categoryQuery =
                 Query.Builder()
-                    .term(
-                        TermQuery.Builder()
+                    .terms(
+                        TermsQuery.Builder()
                             .field("category")
-                            .value(category.value)
+                            .terms { term -> term.value(category.values.map { FieldValue.of(it) }) }
                             .build(),
                     )
                     .build()

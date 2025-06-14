@@ -1,20 +1,66 @@
 package org.prography.bff.search.controller.model.enumeration
 
-enum class FoodCategory(val keywords: List<String>) {
-    FD01(listOf("한식")),
-    FD02(listOf("일식")),
-    FD03(listOf("양식")),
-    FD04(listOf("중식")),
-    FD05(listOf("분식")),
-    FD06(listOf("베트남")),
-    FD07(listOf("야식")),
-    ;
+/**
+ * View 에 존재하는 음식종류 카테고리
+ */
+enum class FoodCategory {
+    /**
+     * 한식
+     */
+    FD01,
 
-    companion object {
-        private val codeMap = values().associateBy { it.name }
+    /**
+     * 일식
+     */
+    FD02,
 
-        fun ofCode(code: String): FoodCategory? = codeMap[code]
+    /**
+     * 중식
+     */
+    FD03,
 
-        fun getKeywordsByCode(code: String): List<String> = ofCode(code)?.keywords.orEmpty()
-    }
+    /**
+     * 양식
+     */
+    FD04,
+
+    /**
+     * 분식
+     */
+    FD05,
+
+    /**
+     * 카페 & 베이커리
+     */
+    FD06,
+
+    /**
+     * 패스트푸드
+     */
+    FD07,
+
+    /**
+     * 샐러드
+     */
+    FD08,
+
+    /**
+     * 육류
+     */
+    FD09,
+
+    /**
+     * 해물
+     */
+    FD10,
+
+    /**
+     * 주점
+     */
+    FD11,
+
+    /**
+     * 기타 세계음식
+     */
+    FD12,
 }
