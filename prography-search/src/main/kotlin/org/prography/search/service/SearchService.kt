@@ -44,7 +44,7 @@ class SearchService(
         keyword: String,
         size: Int,
         addressCodes: List<String>,
-        category: FilterCategory? = null,
+        category: FilterCategory?,
     ): List<AutoCompleteResult> {
         try {
             val multiMatchQuery =
@@ -108,7 +108,7 @@ class SearchService(
         size: Int,
         cursorString: String?,
         addressCodes: List<String>,
-        category: FilterCategory? = null,
+        category: FilterCategory?,
         strategy: SortingStrategy = SortingStrategy.RELATED,
     ): CursorPlaceResult {
         try {

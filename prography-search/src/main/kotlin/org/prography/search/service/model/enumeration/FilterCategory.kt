@@ -19,7 +19,9 @@ enum class FilterCategory(val values: List<String>) {
     ;
 
     companion object {
-        /** Korean name으로부터 Enum 조회 */
-        fun fromValue(name: String): FilterCategory? = values().firstOrNull { it.values.contains(name) }
+        fun fromKeyword(keyword: String): FilterCategory? =
+            entries.firstOrNull { category ->
+                category.values.any { it == keyword }
+            }
     }
 }
