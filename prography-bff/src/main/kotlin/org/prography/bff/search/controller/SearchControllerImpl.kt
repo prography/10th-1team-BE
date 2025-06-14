@@ -2,6 +2,8 @@ package org.prography.bff.search.controller
 
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.response.CursorResponse
+import org.prography.bff.search.controller.mapper.CategoryMapper
+import org.prography.bff.search.controller.mapper.StrategyMapper
 import org.prography.bff.search.controller.model.AutoCompleteResponseDTO
 import org.prography.bff.search.controller.model.PlaceDetailDTO
 import org.prography.bff.search.controller.model.Region
@@ -26,18 +28,24 @@ class SearchControllerImpl(
 ) : SearchController {
     @GetMapping("/auto")
     override fun autoComplete(
-        @RequestParam(name = "keyword") keyword: String,
-        @RequestParam(name = "size", defaultValue = "5") size: Int,
-        @RequestParam(name = "dong_code", required = false) addressCodes: List<String>?,
+        @RequestParam(required = true, name = "keyword") keyword: String,
+        @RequestParam(required = false, name = "size") size: Int?,
+        @RequestParam(required = false, name = "dong_code") addressCodes: List<String>?,
+        @RequestParam(required = false, name = "category") foodCategory: FoodCategory?,
     ): ApiResponse<List<AutoCompleteResponseDTO>> {
         val data =
-            searchService.autoCompleteByKeyword(keyword, size).map { result ->
+            searchService.autoCompleteByKeyword(
+                keyword = keyword,
+                size = size ?: 5,
+                addressCodes = addressCodes ?: emptyList(),
+                category = CategoryMapper.service(foodCategory ?: FoodCategory.UNDEFINED),
+            ).map { (id, legalCode, _, roadAddresses, category, name) ->
                 AutoCompleteResponseDTO(
-                    id = result.id,
-                    region = Region("법정동 이름", result.legalCode),
-                    roadAddresses = result.roadAddresses,
-                    category = result.category,
-                    name = result.name,
+                    id = id,
+                    region = Region("법정동 이름", legalCode),
+                    roadAddresses = roadAddresses,
+                    category = category,
+                    name = name,
                 )
             }.toList()
         return ApiResponse.success(data)
@@ -45,16 +53,23 @@ class SearchControllerImpl(
 
     @GetMapping("")
     override fun searchTerm(
-        @RequestParam(name = "keyword") keyword: String,
-        @RequestParam(name = "size", defaultValue = "5") size: Int,
-        @RequestParam(name = "last_id", required = false) lastId: String?,
-        @RequestParam(name = "dong_code", required = false) addressCodes: List<String>?,
-        @RequestParam(name = "categories", required = false) categories: List<FoodCategory>?,
-        @RequestParam(name = "sort", required = false) sort: OrderStrategy?,
+        @RequestParam(required = true, name = "keyword") keyword: String,
+        @RequestParam(required = false, name = "size") size: Int?,
+        @RequestParam(required = false, name = "dong_code") addressCodes: List<String>?,
+        @RequestParam(required = false, name = "category") foodCategory: FoodCategory?,
+        @RequestParam(required = false, name = "sort") sort: OrderStrategy?,
+        @RequestParam(required = false, name = "cursor") cursorString: String?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>> {
-        val sort = sort ?: OrderStrategy.RELATED
         val cursorSearch =
-            searchService.cursorSearchByKeyword(keyword, size, lastId, addressCodes, emptyList())
+            searchService.cursorSearchByKeyword(
+                keyword = keyword,
+                size = size ?: 5,
+                cursorString = cursorString,
+                addressCodes = addressCodes ?: emptyList(),
+                category = CategoryMapper.service(foodCategory ?: FoodCategory.UNDEFINED),
+                strategy = StrategyMapper.service(sort ?: OrderStrategy.RELATED),
+            )
+
         val data =
             cursorSearch.result.map { result ->
                 SearchResponseDTO(
@@ -83,6 +98,7 @@ class SearchControllerImpl(
         return ApiResponse.success(
             CursorResponse(
                 content = data,
+                cursor = cursorSearch.cursor,
                 hasNext = cursorSearch.hasNext,
             ),
         )

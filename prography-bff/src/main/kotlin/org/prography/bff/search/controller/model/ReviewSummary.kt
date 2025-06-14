@@ -11,7 +11,7 @@ data class ReviewSummary(
     /**
      * 리뷰 평균 점수
      */
-    val score: Float,
+    val score: Double,
     /**
      * 리뷰 수집 여부
      * true 인데 count 및 score 0 일 경우 리뷰가 없음을 뜻함
