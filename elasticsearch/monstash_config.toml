@@ -1,0 +1,148 @@
+# MongoDB Atlas 연결
+mongo-url = "mongodb://localhost:27017"
+
+# Elasticsearch 연결 주소
+elasticsearch-urls = ["https://localhost:9200"]
+
+# 수집할 namespace 지정
+direct-read-namespaces = [""]
+
+# 추적할 namespace 지정
+change-stream-namespaces = [""]
+
+# TLS 연결 시 인증서 신뢰 설정
+elasticsearch-pem-file = "ca.crt"
+
+# 인증서 검증 활성화 (기본 true, 필요시 false로 테스트 가능)
+elasticsearch-validate-pem-file = false
+
+# 인증 정보 (필요시)
+elasticsearch-user = "elastic"
+elasticsearch-password = "changeme"
+
+# 일반 설정
+gzip = true
+stats = true
+index-files = false
+
+resume = true
+resume-write-unsafe = false
+resume-name = "default"
+resume-strategy = 1
+
+replay = false
+elasticsearch-max-conns = 4
+verbose = true
+
+[[mapping]]
+# MongoDB Collection 이름
+namespace = "test.restaurant_data"
+# inser 할 Elasticsearch index 이름
+index = "test"
+
+[[script]]
+# JS5 형식만 지원함
+namespace = "test.restaurant_data"
+script = '''
+module.exports = function(doc) {
+    // helper
+    function toList(val) {
+        if (!val || typeof val !== 'string') return [];
+        // '>' 대신 '\u003e' 사용
+        return val.split('\u003e')
+                  .map(function(s) { return s.trim(); })
+                  .filter(function(s) { return !!s; });
+    }
+
+    function toFloat(val) {
+        var n = parseFloat(val);
+        return isNaN(n) ? 0.0 : n;
+    }
+
+    function toInt(val) {
+        var n = parseInt(val, 10);
+        return isNaN(n) ? 0 : n;
+    }
+
+    function uniqueConcat(a, b) {
+        var res = Array.isArray(a) ? a.slice() : [];
+        if (Array.isArray(b)) {
+            for (var i = 0; i < b.length; i++) {
+                var v = b[i];
+                if (res.indexOf(v) === -1) res.push(v);
+            }
+        }
+        return res;
+    }
+
+    // merge only categories
+    var cat1 = toList(doc.kakaoPlaceData && doc.kakaoPlaceData.categoryName);
+    var cat2 = Array.isArray(doc.naverPlaceData && doc.naverPlaceData.category)
+               ? doc.naverPlaceData.category : [];
+    var category = uniqueConcat(cat1, cat2)
+                     .filter(function(v) { return v !== '음식점'; });
+
+    // calculate counts and scores
+    var kakaoReviewCount = toInt(doc.kakaoReviewData && doc.kakaoReviewData.score && doc.kakaoReviewData.score.reviewCount);
+    var naverReviewCount = toInt(doc.naverReviewData && doc.naverReviewData.score && doc.naverReviewData.score.totalCount);
+    var review_count = kakaoReviewCount + naverReviewCount;
+
+    var kakaoScore = (doc.kakaoReviewData && doc.kakaoReviewData.score && doc.kakaoReviewData.score.averageScore != null)
+                      ? toFloat(doc.kakaoReviewData.score.averageScore)
+                      : null;
+    var naverScore = (doc.naverReviewData && doc.naverReviewData.score && doc.naverReviewData.score.reviewRating != null)
+                      ? toFloat(doc.naverReviewData.score.reviewRating)
+                      : null;
+    var review_score;
+    if (kakaoScore != null && naverScore != null) {
+        review_score = (kakaoScore + naverScore) / 2;
+    } else if (kakaoScore != null) {
+        review_score = kakaoScore;
+    } else if (naverScore != null) {
+        review_score = naverScore;
+    } else {
+        review_score = 0.0;
+    }
+
+    return {
+        _id:                doc._id || "",
+        id:                 doc._id || "",
+        // 행정동 코드
+        division:           doc.h_code || "",
+        // 법정동 코드
+        legal:              doc.b_code || "",
+        // 주소는 카카오
+        address:            (doc.kakaoPlaceData && doc.kakaoPlaceData.addressName) || "",
+        // 도로명 카카오
+        road_address:       (doc.kakaoPlaceData && doc.kakaoPlaceData.roadAddressName) || "",
+        // 상호명도 카카오 기준
+        place_name:         (doc.kakaoPlaceData && doc.kakaoPlaceData.placeName) || "",
+        // 카테고리만 합쳐서
+        category:           category,
+        // image doc.naverPlaceData.thumUrl 값이 존재할 경우에는 true, 아닐 경우 false
+        image:              !!(doc.naverPlaceData && doc.naverPlaceData.thumUrl),
+        // image link 값이 있다면 넣지만 없다면 공백
+        image_url:          (doc.naverPlaceData && doc.naverPlaceData.thumUrl) || "",
+        // 값이 있다면 doc.kakaoReviewData.score.reviewCount 넣지만 없다면 0
+        kakao_review_count: kakaoReviewCount,
+        // 값이 있다면 doc.kakaoReviewData.score.averageScore 넣지만 없다면 0.0
+        kakao_score:        (kakaoScore != null ? kakaoScore : 0.0),
+        // doc.kakaoReviewProcessed === true
+        kakao_review:       doc.kakaoReviewProcessed === true,
+        // 값이 있다면 doc.naverReviewData.score.totalCount 넣지만 없다면 0
+        naver_review_count: naverReviewCount,
+        // 값이 있다면 doc.naverReviewData.score.reviewRating 넣지만 없다면 0.0
+        naver_score:        (naverScore != null ? naverScore : 0.0),
+        // doc.naverReviewProcessed === true
+        naver_review:       doc.naverReviewProcessed === true,
+        // sum of kakao+naver review counts
+        review_count:       review_count,
+        // average of kakao+naver scores, fallback logic applied
+        review_score:       review_score,
+        // kakaoPlaceData.x 와 kakaoPlaceData.y 값이 있다면 합쳐서 elasticsearch 의 geo_point 타입에 맞춰서 넣기
+        location:           (doc.kakaoPlaceData && doc.kakaoPlaceData.x != null && doc.kakaoPlaceData.y != null)
+                             ? { lat: doc.kakaoPlaceData.y, lon: doc.kakaoPlaceData.x }
+                             : null
+    };
+};
+'''

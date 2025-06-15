@@ -4,85 +4,45 @@ package org.prography.search.domain
  * Elasticsearch 에 저장되어 매핑되어 있는 문서 그대로 매핑된 도메인
  */
 data class RestaurantPlace(
-    /**
-     * MongoDB 고유 아이디 (=_id)
-     */
-    val id: String,
-    /**
-     * 법정동 코드
-     */
-    val legal: String = "",
-    /**
-     * 행정구 코드
-     */
+    /** MongoDB 고유 아이디 (=_id) */
+    val mongoId: String,
+    /** 행정구 코드 */
     val division: String = "",
-    /**
-     * 카카오 주소
-     */
-    val kakaoAddress: String = "",
-    /**
-     * 네이버 주소
-     */
-    val naverAddress: String = "",
-    /**
-     * 카카오 도로명 주소
-     */
-    val kakaoRoadAddress: String = "",
-    /**
-     * 네이버 도로명 주소
-     */
-    val naverRoadAddress: String = "",
-    /**
-     * 카카오 상호명
-     */
-    val kakaoPlaceName: String = "",
-    /**
-     * 네이버 상호명
-     */
-    val naverPlaceName: String = "",
-    /**
-     * 합쳐진 카테고리 리스트
-     */
+    /** 법정동 코드 */
+    val legal: String = "",
+    /** 주소 (카카오 기반) */
+    val address: String = "",
+    /** 도로명 주소 (카카오 기반) */
+    val roadAddress: String = "",
+    /** 상호명 (카카오 기반) */
+    val placeName: String = "",
+    /** 음식 카테고리 */
     val category: List<String> = emptyList(),
-    /**
-     * 네이버 가게 정보의 대표 이미지 URL
-     */
+    /** 이미지 존재 여부 */
+    val image: Boolean = false,
+    /** 대표 이미지 URL */
     val imageUrl: String = "",
-    /**
-     * 네이버 가게 정보의 블로그 리뷰 갯수
-     */
-    val blogReviewCount: Long = 0,
-    /**
-     * 네이버 가게 정보의 방문자 리뷰 갯수
-     */
-    val visitReviewCount: Long = 0,
-    /**
-     * 카카오 리뷰 갯수
-     */
-    val kakaoReviewCount: Long = 0,
-    /**
-     * 카카오 리뷰 평균 점수
-     */
-    val kakaoScore: Float = 0.0f,
-    /**
-     * 크롤러의 카카오 리뷰 수집 진행 여부
-     */
+    /** 카카오 리뷰 갯수 */
+    val kakaoReviewCount: Long = 0L,
+    /** 카카오 리뷰 평균 점수 */
+    val kakaoScore: Double = 0.0,
+    /** 카카오 리뷰 수집 여부 */
     val kakaoReview: Boolean = false,
-    /**
-     * 네이버 리뷰 갯수
-     */
-    val naverReviewCount: Long = 0,
-    /**
-     * 네이버 리뷰 평균 점수
-     */
-    val naverScore: Float = 0.0f,
-    /**
-     * 크롤러의 네이버 리뷰 수집 진행 여부
-     */
+    /** 네이버 리뷰 갯수 */
+    val naverReviewCount: Long = 0L,
+    /** 네이버 리뷰 평균 점수 */
+    val naverScore: Double = 0.0,
+    /** 네이버 리뷰 수집 여부 */
     val naverReview: Boolean = false,
+    /** 합산 리뷰 갯수 */
+    val reviewCount: Long = 0L,
+    /** 평균 리뷰 점수 */
+    val reviewScore: Double = 0.0,
+    /** 위치 정보 */
+    val location: GeoPoint? = null,
     /**
-     * MongoDB oplog에서 동기화된 이 문서의 최종 수정 일시.
-     * "yyyy/MM/dd HH:mm:ss" 형식으로 저장됩니다.
+     * MongoDB oplog에서 동기화된 이 문서의 최종 수정 일시
+     * "yyyy/MM/dd HH:mm:ss" 형식으로 저장
      */
     val oplogDate: String = "",
     /**

@@ -1,6 +1,11 @@
 spring:
-  profiles:
-    default: local # 기본 환경을 dev로
+  data:
+    elasticsearch:
+      ssl:
+        enable: ${ELASTICSEARCH_SSL_ENABLE:true}
+        trust-all: ${ELASTICSEARCH_SSL_TRUST_ALL:false}
+      repositories:
+        enabled: false
 
 server:
   port: 8080

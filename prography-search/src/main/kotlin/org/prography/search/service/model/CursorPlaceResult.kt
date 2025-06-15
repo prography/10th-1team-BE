@@ -9,6 +9,10 @@ data class CursorPlaceResult(
      */
     val result: List<PlaceSearchResult> = emptyList(),
     /**
+     * 다음 조회를 위한 커서
+     */
+    val cursor: String? = null,
+    /**
      * 다음 조회 가능 여부
      */
     val hasNext: Boolean,

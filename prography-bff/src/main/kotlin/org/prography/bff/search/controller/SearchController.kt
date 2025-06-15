@@ -35,9 +35,52 @@ interface SearchController {
         ],
     )
     fun autoComplete(
+        @Parameter(
+            name = "keyword",
+            `in` = ParameterIn.QUERY,
+            description = "검색어 (음식점 이름 또는 설명 등에서 일치 검색에 사용)",
+            required = true,
+            example = "치킨",
+        )
         keyword: String,
-        size: Int,
+        @Parameter(
+            name = "size",
+            `in` = ParameterIn.QUERY,
+            description = "한 번에 조회할 결과 개수",
+            required = false,
+            example = "5",
+        )
+        size: Int?,
+        @Parameter(
+            name = "dong_code",
+            `in` = ParameterIn.QUERY,
+            description = "검색을 제한할 구 코드 리스트 (여러 개 전달 가능), 비어있을 경우 강남구 서치",
+            required = false,
+            example = "[\"11110\",\"11140\"]",
+        )
         addressCodes: List<String>?,
+        @Parameter(
+            name = "category",
+            `in` = ParameterIn.QUERY,
+            description = """
+                UNDEFINED - 정의되어 있지 않은 유형
+                FD01 - 한식
+                FD02 - 일식
+                FD03 - 중식
+                FD04 - 양식
+                FD05 - 분식
+                FD06 - 카페 & 베이커리
+                FD07 - 패스트푸드
+                FD08 - 샐러드
+                FD09 - 육류
+                FD10 - 해물
+                FD11 - 주점
+                FD12 - 기타 세계음식
+            """,
+            required = false,
+            example = "FD01",
+        )
+        foodCategory: FoodCategory?,
     ): ApiResponse<List<AutoCompleteResponseDTO>>
 
     @Operation(
@@ -64,7 +107,7 @@ interface SearchController {
             name = "keyword",
             `in` = ParameterIn.QUERY,
             description = "검색어 (음식점 이름 또는 설명 등에서 일치 검색에 사용)",
-            required = false,
+            required = true,
             example = "치킨",
         )
         keyword: String,
@@ -72,35 +115,62 @@ interface SearchController {
             name = "size",
             `in` = ParameterIn.QUERY,
             description = "한 번에 조회할 결과 개수",
-            required = true,
-            example = "20",
-        )
-        size: Int,
-        @Parameter(
-            name = "lastId",
-            `in` = ParameterIn.QUERY,
-            description = "이전 페이지의 마지막 ID. 이 ID 이후부터 다음 페이지 조회",
             required = false,
-            example = "더라운지@서울_서초구_강남대로107길_6",
+            example = "5",
         )
-        lastId: String?,
+        size: Int?,
         @Parameter(
             name = "dong_code",
             `in` = ParameterIn.QUERY,
-            description = "검색을 제한할 구 코드 리스트 (여러 개 전달 가능)",
+            description = "검색을 제한할 구 코드 리스트 (여러 개 전달 가능), 비어있을 경우 강남구 서치",
             required = false,
             example = "[\"11110\",\"11140\"]",
         )
         addressCodes: List<String>?,
-        categories: List<FoodCategory>?,
+        @Parameter(
+            name = "category",
+            `in` = ParameterIn.QUERY,
+            description = """
+                UNDEFINED - 정의되어 있지 않은 유형
+                FD01 - 한식
+                FD02 - 일식
+                FD03 - 중식
+                FD04 - 양식
+                FD05 - 분식
+                FD06 - 카페 & 베이커리
+                FD07 - 패스트푸드
+                FD08 - 샐러드
+                FD09 - 육류
+                FD10 - 해물
+                FD11 - 주점
+                FD12 - 기타 세계음식
+            """,
+            required = false,
+            example = "FD01",
+        )
+        foodCategory: FoodCategory?,
         @Parameter(
             name = "sort",
             `in` = ParameterIn.QUERY,
-            description = "정렬 기준 (예: RELATED, AVERAGE_RATING_HIGH)",
+            description = """
+                RELATED - 관련 순 검색 엔진 내부 점수 기반 내림차순 정렬
+                AVERAGE_RATING_HIGH - 카카오와 네이버 점수 내림차순 정렬
+                AVERAGE_RATING_LOW - 카카오와 네이버 점수 오름차순 정렬
+                REVIEW_COUNT_HIGH - 카카오와 네이버 리뷰 갯수 내림차순 정렬
+                REVIEW_COUNT_LOW - 카카오와 네이버 리뷰 갯수 오름차순 정렬
+            """,
             required = false,
             example = "RELATED",
         )
         sort: OrderStrategy?,
+        @Parameter(
+            name = "cursor",
+            `in` = ParameterIn.QUERY,
+            description = "이전 페이지의 조회된 마지막 데이터의 정보, FE에서 따로 계산하실 필욘 없으시고 이전 응답 값의 cursor 필드 값을 넣어주시면 됩니다.",
+            required = false,
+            example = "eyJrZXkiOm51bGwsImlkIjoi7Jik7JeUX+y5tO2OmOyVpOugiOyKpO2GoOuekUDshJzsmrhf6rCV64Ko6rWsX+yVleq1rOygleuhnDEx6ri4XzM3LTMwIn0=",
+        )
+        cursorString: String?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>>
 
     @Operation(
