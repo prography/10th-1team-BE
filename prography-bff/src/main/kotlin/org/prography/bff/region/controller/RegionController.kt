@@ -16,7 +16,7 @@ interface RegionController {
                 content = [
                     Content(
                         mediaType = "application/json",
-                        schema = Schema(implementation = org.prography.bff.region.model.RegionDto::class),
+                        schema = Schema(implementation = RegionDto::class),
                     ),
                 ],
             ),
