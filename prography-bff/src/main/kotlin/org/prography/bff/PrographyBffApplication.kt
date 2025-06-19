@@ -2,7 +2,9 @@ package org.prography.bff
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.cloud.openfeign.EnableFeignClients
 
+@EnableFeignClients
 @SpringBootApplication(scanBasePackages = ["org.prography.bff", "org.prography.search"])
 class PrographyBffApplication
 
