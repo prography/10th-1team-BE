@@ -1,7 +1,7 @@
 package org.prography.bff.voting.controller.model
 
 import org.prography.bff.voting.controller.model.enumeration.MatchPlatform
-import org.prography.bff.voting.controller.model.enumeration.VoteReason
+import org.prography.bff.voting.controller.model.enumeration.Reason
 
 /**
  * 플랫폼 투표 DTO
@@ -14,7 +14,7 @@ data class PlatformVoteDto(
     /**
      * 투표된 이유
      */
-    val reason: VoteReason,
+    val reason: Reason,
     /**
      * 음식점에 대한 후기
      */
