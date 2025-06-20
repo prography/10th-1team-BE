@@ -9,6 +9,8 @@ plugins {
 }
 
 dependencies {
+    val lombokVersion: String by rootProject.extra
+
     // Kotlin
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
@@ -36,6 +38,10 @@ dependencies {
 
     // Health Check
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    // lombok
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 }
 
 allOpen {
