@@ -46,7 +46,3 @@ subprojects {
         }
     }
 }
-
-extra.apply {
-    set("lombokVersion", "1.18.32")
-}
