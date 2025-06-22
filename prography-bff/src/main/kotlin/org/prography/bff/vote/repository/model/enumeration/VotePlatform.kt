@@ -1,4 +1,4 @@
-package org.prography.bff.voting.service.model.enumeration
+package org.prography.bff.vote.repository.model.enumeration
 
 /**
  * 투표 서비스에서 지원하는 플랫폼 목록

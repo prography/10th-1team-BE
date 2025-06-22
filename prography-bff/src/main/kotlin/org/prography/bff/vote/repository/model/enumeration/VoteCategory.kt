@@ -1,4 +1,4 @@
-package org.prography.bff.voting.service.model.enumeration
+package org.prography.bff.vote.repository.model.enumeration
 
 /**
  * 득표 범주
