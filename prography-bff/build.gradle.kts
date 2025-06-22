@@ -44,6 +44,15 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+    // 모킹 테스트
+    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.0.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group = "org.mockito", module = "mockito-core") // 버전 충돌 방지용
+    }
+
+    testImplementation("com.h2database:h2:2.2.220")
 }
 
 allOpen {
