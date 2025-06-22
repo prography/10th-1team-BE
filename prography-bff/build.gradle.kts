@@ -42,11 +42,9 @@ dependencies {
 
     // QueryDSL
     implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
-    implementation("com.querydsl:querydsl-apt:5.1.0:jakarta")
-    implementation("jakarta.persistence:jakarta.persistence-api")
-    implementation("jakarta.annotation:jakarta.annotation-api")
     kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
-    kapt("org.springframework.boot:spring-boot-configuration-processor")
+    kapt("jakarta.annotation:jakarta.annotation-api")
+    kapt("jakarta.persistence:jakarta.persistence-api")
 
     // Spring Boot Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -68,24 +66,16 @@ tasks {
     }
 }
 
-val generated: File = file("src/main/generated")
-
-tasks.withType<JavaCompile> {
-    options.generatedSourceOutputDirectory.set(generated)
+kapt {
+    arguments {
+        arg("querydsl.entityAccessors", "true")
+    }
 }
+
+val generated = file("src/main/generated")
 
 sourceSets {
     main {
         kotlin.srcDirs += generated
     }
-}
-
-tasks.named("clean") {
-    doLast {
-        generated.deleteRecursively()
-    }
-}
-
-kapt {
-    generateStubs = true
 }
