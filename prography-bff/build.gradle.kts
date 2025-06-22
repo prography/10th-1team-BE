@@ -30,9 +30,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     // Postgresql
-//    runtimeOnly("org.postgresql:postgresql")
-
-    runtimeOnly("org.mariadb.jdbc:mariadb-java-client") // MariaDB 드라이버
+    runtimeOnly("org.postgresql:postgresql")
 
     // Mongo DB
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
