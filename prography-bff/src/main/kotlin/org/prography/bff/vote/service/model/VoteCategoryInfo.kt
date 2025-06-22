@@ -1,6 +1,6 @@
-package org.prography.bff.voting.service.model
+package org.prography.bff.vote.service.model
 
-import org.prography.bff.voting.service.model.enumeration.VoteCategory
+import org.prography.bff.vote.repository.model.enumeration.VoteCategory
 
 /**
  * 득표 범주 정보
