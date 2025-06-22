@@ -37,6 +37,7 @@ class AuthenticationFilter(
 
             val json = objectMapper.writeValueAsString(errorBody)
             httpResponse.contentType = "application/json;charset=UTF-8"
+            httpResponse.status = HttpServletResponse.SC_UNAUTHORIZED
             httpResponse.writer.write(json)
             return
         }

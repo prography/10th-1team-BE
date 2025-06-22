@@ -38,6 +38,7 @@ class AuthorizationFilter(
 
             val json = objectMapper.writeValueAsString(errorBody)
             httpResponse.contentType = "application/json;charset=UTF-8"
+            httpResponse.status = HttpServletResponse.SC_FORBIDDEN
             httpResponse.writer.write(json)
             return
         }

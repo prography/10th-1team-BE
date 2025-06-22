@@ -1,6 +1,7 @@
 package org.prography.bff.config.security
 
 import jakarta.servlet.http.HttpServletRequest
+import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.springframework.core.MethodParameter
 import org.springframework.web.bind.support.WebDataBinderFactory
 import org.springframework.web.context.request.NativeWebRequest
@@ -22,6 +23,6 @@ class AuthenticatedUserArgumentResolver : HandlerMethodArgumentResolver {
     ): Any {
         val request = webRequest.nativeRequest as HttpServletRequest
         return request.getAttribute("userId")
-            ?: throw IllegalStateException("userId not found in request")
+            ?: throw InvalidRequestException.InvalidTokenException()
     }
 }
