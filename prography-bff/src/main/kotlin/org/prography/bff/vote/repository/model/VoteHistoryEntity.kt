@@ -14,6 +14,7 @@ import org.prography.bff.vote.repository.model.enumeration.VotePlatform
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
+import java.util.Objects
 import java.util.UUID
 
 /**
@@ -58,4 +59,10 @@ class VoteHistoryEntity(
     @LastModifiedDate
     @Column(name = "voted_date", nullable = false)
     var votedDate: LocalDateTime = LocalDateTime.now(),
-)
+) {
+    override fun equals(other: Any?): Boolean = Objects.equals(id, (other as? VoteHistoryEntity)?.id)
+
+    override fun hashCode(): Int = Objects.hashCode(id)
+
+    override fun toString(): String = "VoteHistory(id=$id)"
+}

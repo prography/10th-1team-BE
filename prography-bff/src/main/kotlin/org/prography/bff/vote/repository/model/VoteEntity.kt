@@ -5,6 +5,7 @@ import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
 import org.prography.bff.vote.repository.model.enumeration.VoteCategory
+import java.util.Objects
 
 /**
  * 플랫폼 투표 엔티티
@@ -43,6 +44,12 @@ class VoteEntity(
     @Column(name = "ACCURATE", nullable = false)
     var accurate: Long,
 ) {
+    override fun equals(other: Any?): Boolean = Objects.equals(id, (other as? VoteEntity)?.id)
+
+    override fun hashCode(): Int = Objects.hashCode(id)
+
+    override fun toString(): String = "Vote(id=$id)"
+
     /**
      * 카테고리에 맞춰서 득표 증가
      */

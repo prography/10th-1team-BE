@@ -16,7 +16,7 @@ class VoteId(
      * 상호명
      */
     @Column(name = "PLACE_ID")
-    val id: String,
+    val placeId: String,
     /**
      * 플랫폼 이름
      */
@@ -30,14 +30,14 @@ class VoteId(
 
         other as VoteId
 
-        if (id != other.id) return false
+        if (placeId != other.placeId) return false
         if (platform != other.platform) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = id.hashCode()
+        var result = placeId.hashCode()
         result = 31 * result + platform.hashCode()
         return result
     }
