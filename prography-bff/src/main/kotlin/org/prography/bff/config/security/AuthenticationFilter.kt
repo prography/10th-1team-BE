@@ -7,6 +7,8 @@ import jakarta.servlet.ServletRequest
 import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.springframework.http.MediaType
+import java.nio.charset.StandardCharsets
 import java.time.LocalDateTime
 
 class AuthenticationFilter(
@@ -36,7 +38,8 @@ class AuthenticationFilter(
                 )
 
             val json = objectMapper.writeValueAsString(errorBody)
-            httpResponse.contentType = "application/json;charset=UTF-8"
+            httpResponse.contentType = MediaType.APPLICATION_JSON_VALUE
+            httpResponse.characterEncoding = StandardCharsets.UTF_8.name()
             httpResponse.status = HttpServletResponse.SC_UNAUTHORIZED
             httpResponse.writer.write(json)
             return

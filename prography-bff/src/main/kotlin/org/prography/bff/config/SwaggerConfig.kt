@@ -13,6 +13,7 @@ import org.prography.bff.config.security.AuthUser
 import org.springdoc.core.customizers.OperationCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpHeaders
 import org.springframework.web.method.HandlerMethod
 
 // Todo : Swagger UI에 JWT Bearer 입력 필드를 추가하는 설정, 로그인 구현 후 적용
@@ -55,7 +56,7 @@ class SwaggerConfig {
                 .scheme("bearer")
                 .bearerFormat("JWT")
                 .`in`(SecurityScheme.In.HEADER)
-                .name("Authorization")
+                .name(HttpHeaders.AUTHORIZATION)
                 .description("JWT Bearer Token")
 
         return OpenAPI()
