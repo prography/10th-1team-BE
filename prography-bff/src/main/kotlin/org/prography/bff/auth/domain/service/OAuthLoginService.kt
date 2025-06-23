@@ -4,6 +4,7 @@ import org.prography.bff.auth.domain.model.LoginDto
 import org.prography.bff.auth.domain.model.TokenType
 import org.prography.bff.auth.domain.port.OAuthProvider
 import org.prography.bff.config.exception.notfound.NotFoundException
+import org.prography.bff.config.security.JwtProvider
 import org.prography.bff.user.domain.entity.Provider
 import org.prography.bff.user.domain.service.UserService
 import org.springframework.stereotype.Service

@@ -1,4 +1,4 @@
-package org.prography.bff.auth.domain.service
+package org.prography.bff.config.security
 
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
