@@ -38,11 +38,10 @@ dependencies {
     // Health Check
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
-    // QueryDSL
-    implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
-    kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
-    kapt("jakarta.annotation:jakarta.annotation-api")
-    kapt("jakarta.persistence:jakarta.persistence-api")
+    // Kotlin JDSL
+    implementation("com.linecorp.kotlin-jdsl:jpql-dsl:3.5.5")
+    implementation("com.linecorp.kotlin-jdsl:jpql-render:3.5.5")
+    implementation("com.linecorp.kotlin-jdsl:spring-data-jpa-support:3.5.5")
 
     // Spring Boot Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -61,19 +60,5 @@ tasks {
     }
     named<Jar>("jar") {
         enabled = true
-    }
-}
-
-kapt {
-    arguments {
-        arg("querydsl.entityAccessors", "true")
-    }
-}
-
-val generated = file("src/main/generated")
-
-sourceSets {
-    main {
-        kotlin.srcDirs += generated
     }
 }
