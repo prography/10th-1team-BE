@@ -1,6 +1,6 @@
-package org.prography.bff.voting.controller.model
+package org.prography.bff.vote.controller.model
 
-import org.prography.bff.voting.controller.model.enumeration.Reason
+import org.prography.bff.vote.controller.model.enumeration.Reason
 
 /**
  * 이유별 투표 상태

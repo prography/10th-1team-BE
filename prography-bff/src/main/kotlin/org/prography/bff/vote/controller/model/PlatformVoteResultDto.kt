@@ -1,4 +1,4 @@
-package org.prography.bff.voting.controller.model
+package org.prography.bff.vote.controller.model
 
 /**
  * 플랫폼 매치에 투표 결과 확인하기 View DTO

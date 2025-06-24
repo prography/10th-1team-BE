@@ -1,12 +1,12 @@
-package org.prography.bff.voting.controller
+package org.prography.bff.vote.controller
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import org.prography.bff.config.response.ApiResponse
-import org.prography.bff.voting.controller.model.PlatformVoteDto
-import org.prography.bff.voting.controller.model.PlatformVoteResultDto
+import org.prography.bff.vote.controller.model.PlatformVoteResultDto
+import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
 
 /**
  * 투표 관련 컨트롤러 Swagger 명세 인터페이스
@@ -54,6 +54,6 @@ interface VoteController {
     )
     fun submitPlatformVote(
         placeId: String,
-        dto: PlatformVoteDto,
+        dto: PlatformVoteSubmitDto,
     ): ApiResponse<Void>
 }

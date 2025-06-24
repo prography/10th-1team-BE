@@ -1,4 +1,4 @@
-package org.prography.bff.voting.controller.model.enumeration
+package org.prography.bff.vote.controller.model.enumeration
 
 /**
  * 투표가 가능한 플랫폼 목록

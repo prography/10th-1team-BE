@@ -1,4 +1,4 @@
-package org.prography.bff.voting.controller.model.enumeration
+package org.prography.bff.vote.controller.model.enumeration
 
 /**
  * 해당 플랫폼에 투표한 이유
