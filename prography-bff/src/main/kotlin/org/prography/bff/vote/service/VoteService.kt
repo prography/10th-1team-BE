@@ -1,17 +1,25 @@
 package org.prography.bff.vote.service
 
+import org.prography.bff.vote.repository.VoteCustomCmdRepositoryImpl
+import org.prography.bff.vote.repository.VoteCustomQueryRepositoryImpl
 import org.prography.bff.vote.repository.model.VoteEntity
+import org.prography.bff.vote.repository.model.VoteHistoryEntity
 import org.prography.bff.vote.repository.model.VoteId
+import org.prography.bff.vote.repository.model.enumeration.VoteCategory
+import org.prography.bff.vote.repository.model.enumeration.VotePlatform
 import org.prography.bff.vote.service.model.VoteCategoryInfo
 import org.prography.bff.vote.service.model.VoteInfo
 import org.prography.bff.vote.service.model.VoteSubmit
+import org.springframework.stereotype.Service
 
 /**
  * 투표 관련한 서비스
  */
-class VoteService {
-    private var voteMap: MutableMap<VoteId, VoteEntity> = mutableMapOf()
-
+@Service
+class VoteService(
+    private val cmdRepository: VoteCustomCmdRepositoryImpl,
+    private val queryRepository: VoteCustomQueryRepositoryImpl,
+) {
     /**
      * 투표 하기
      */
@@ -24,21 +32,30 @@ class VoteService {
         }
 
         val id = VoteId(placeId, vo.platform)
-        val entity =
-            voteMap.getOrDefault(
-                id,
-                VoteEntity(
-                    id = id,
-                    total = 0,
-                    manyReview = 0L,
-                    detailed = 0L,
-                    honest = 0L,
-                    accurate = 0L,
-                ),
+        val entity: VoteEntity =
+            queryRepository.findById(id)
+                .orElse(
+                    VoteEntity(
+                        id = id,
+                        total = 0,
+                        manyReview = 0L,
+                        detailed = 0L,
+                        honest = 0L,
+                        accurate = 0L,
+                    ),
+                )
+
+        val history =
+            VoteHistoryEntity(
+                userId = vo.userId,
+                placeId = placeId,
+                category = VoteCategory.HONEST,
+                platform = vo.platform,
             )
 
-        entity.increase(vo.reason)
-        voteMap[id] = entity
+        entity.increase(vo.categories)
+        cmdRepository.save(entity)
+        cmdRepository.save(history)
     }
 
     /**
@@ -52,7 +69,7 @@ class VoteService {
      * 투표 취소
      */
     fun cancel(placeId: String) {
-        // TODO 아직 기획 미정
+        // TODO 아직 기획 미정f
     }
 
     /**
@@ -63,18 +80,14 @@ class VoteService {
             throw IllegalArgumentException()
         }
 
-        val entities =
-            voteMap
-                .filterKeys { it.id == placeId }
-                .values
-
-        return entities.map { entity: VoteEntity ->
+        val entityMap: Map<VotePlatform, VoteEntity> = queryRepository.findByPlaceId(placeId)
+        return entityMap.map { (platform, entity) ->
             VoteInfo(
-                platform = entity.id.platform,
+                platform = platform,
                 total = entity.total,
                 categories =
-                    entity.toCategoryCountMap().map { category ->
-                        VoteCategoryInfo(category.key, category.value)
+                    entity.toCategoryCountMap().map { (category, count) ->
+                        VoteCategoryInfo(category, count)
                     },
             )
         }
