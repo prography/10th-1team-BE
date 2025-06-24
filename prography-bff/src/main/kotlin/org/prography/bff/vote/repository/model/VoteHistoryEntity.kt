@@ -23,43 +23,62 @@ import java.util.UUID
 @Entity
 @Table(name = "VOTE_HISTORY")
 @EntityListeners(AuditingEntityListener::class)
-class VoteHistoryEntity(
+class VoteHistoryEntity private constructor(
     /**
      * AUTO INCREASE
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    val id: Long = 0L,
+    var id: Long? = null,
+) {
     /**
      * 유저 PK
      */
     @Column(name = "user_id", nullable = false)
-    val userId: UUID,
+    lateinit var userId: UUID
+
     /**
      * 가게 PK
      */
     @Column(name = "place_id", nullable = false)
-    val placeId: String,
+    lateinit var placeId: String
+
     /**
      * 투표 이유
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "category", nullable = false)
-    val category: VoteCategory,
+    lateinit var category: VoteCategory
+
     /**
      * 투표한 플랫폼
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "platform", nullable = false)
-    val platform: VotePlatform,
+    lateinit var platform: VotePlatform
+
     /**
      * 투표한 시간
      */
     @LastModifiedDate
     @Column(name = "voted_date", nullable = false)
-    var votedDate: LocalDateTime = LocalDateTime.now(),
-) {
+    var votedDate: LocalDateTime = LocalDateTime.now()
+
+    protected constructor() : this(null)
+
+    constructor(
+        userId: UUID,
+        placeId: String,
+        category: VoteCategory,
+        platform: VotePlatform,
+    ) : this(null) {
+        this.userId = userId
+        this.placeId = placeId
+        this.category = category
+        this.platform = platform
+    }
+
     override fun equals(other: Any?): Boolean = Objects.equals(id, (other as? VoteHistoryEntity)?.id)
 
     override fun hashCode(): Int = Objects.hashCode(id)

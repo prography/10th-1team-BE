@@ -1,6 +1,5 @@
 package org.prography.bff.vote.repository
 
-import com.linecorp.kotlinjdsl.support.spring.data.jpa.repository.KotlinJdslJpqlExecutor
 import org.prography.bff.vote.repository.custom.VoteCustomQueryRepository
 import org.prography.bff.vote.repository.model.VoteEntity
 import org.prography.bff.vote.repository.model.VoteId
@@ -10,7 +9,6 @@ import java.util.Optional
 
 @Repository
 class VoteCustomQueryRepositoryImpl(
-    private val kotlinJpqlExecutor: KotlinJdslJpqlExecutor,
     private val voteRepository: VoteEntityRepository,
     private val historyRepository: VoteHistoryEntityRepository,
 ) : VoteCustomQueryRepository {
@@ -20,7 +18,7 @@ class VoteCustomQueryRepositoryImpl(
 
     override fun findByPlaceId(placeId: String): Map<VotePlatform, VoteEntity> {
         val entities: List<VoteEntity> =
-            kotlinJpqlExecutor.findAll {
+            voteRepository.findAll {
                 select(entity(VoteEntity::class))
                     .from(entity(VoteEntity::class))
                     .where(
