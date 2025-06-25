@@ -14,8 +14,4 @@ data class VoteStat(
      * 투표 수
      */
     val count: Long,
-    /**
-     * 투표 비율
-     */
-    val ratio: Double,
 )

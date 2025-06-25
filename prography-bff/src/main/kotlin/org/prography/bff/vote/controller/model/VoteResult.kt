@@ -3,9 +3,9 @@ package org.prography.bff.vote.controller.model
 import org.prography.bff.vote.controller.model.enumeration.MatchPlatform
 
 /**
- * 플랫폼 투표 상태
+ * 투표 결과
  */
-data class PlatformStat(
+data class VoteResult(
     /**
      * 플랫폼
      */
@@ -15,7 +15,7 @@ data class PlatformStat(
      */
     val count: Long,
     /**
-     * 투표 비율
+     * 이유 별 투표 현황
      */
-    val ratio: Double,
+    val reasons: List<VoteStat>,
 )

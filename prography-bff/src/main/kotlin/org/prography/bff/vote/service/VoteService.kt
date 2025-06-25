@@ -81,6 +81,11 @@ class VoteService(
         }
 
         val entityMap: Map<VotePlatform, VoteEntity> = queryRepository.findByPlaceId(placeId)
+
+        if (entityMap.isEmpty()) {
+            return emptyList()
+        }
+
         return entityMap.map { (platform, entity) ->
             VoteInfo(
                 platform = platform,

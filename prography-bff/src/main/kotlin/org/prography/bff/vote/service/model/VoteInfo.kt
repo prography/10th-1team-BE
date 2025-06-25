@@ -13,7 +13,7 @@ data class VoteInfo(
     /**
      * 총 득표 수
      */
-    val total: Long = 0,
+    val total: Long = 0L,
     /**
      * 득표 유형
      */

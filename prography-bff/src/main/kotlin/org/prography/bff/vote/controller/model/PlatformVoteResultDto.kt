@@ -1,15 +1,15 @@
 package org.prography.bff.vote.controller.model
 
 /**
- * 플랫폼 매치에 투표 결과 확인하기 View DTO
+ * 플랫폼 투표 상태
  */
 data class PlatformVoteResultDto(
     /**
-     * 플랫폼 별 투표 현황
+     * 투표 결과 유무
      */
-    val platforms: List<PlatformStat>,
+    val voted: Boolean,
     /**
-     * 이유 별 투표 현황
+     * 투표 결과 데이터
      */
-    val reasons: List<VoteStat>,
+    val results: List<VoteResult>,
 )
