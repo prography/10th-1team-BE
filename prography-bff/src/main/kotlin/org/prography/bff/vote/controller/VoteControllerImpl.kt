@@ -1,5 +1,6 @@
 package org.prography.bff.vote.controller
 
+import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.vote.controller.mapper.VoteMapper
 import org.prography.bff.vote.controller.model.PlatformVoteResultDto
@@ -75,6 +76,9 @@ class VoteControllerImpl(
         @PathVariable("id") placeId: String,
         @RequestBody dto: PlatformVoteSubmitDto,
     ): ApiResponse<Void> {
+        if (dto.reasons.isEmpty()) {
+            throw InvalidRequestException.ReasonEmpty()
+        }
         voteService.submit(
             placeId = placeId,
             vo =
