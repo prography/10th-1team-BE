@@ -12,4 +12,8 @@ sealed class NotFoundException(
      * 장소에 대한 정보를 찾지 못한 경우 발생하는 예외
      */
     class PlaceInfoNotFoundException : NotFoundException("해당 식당의 정보가 수집되지 않았습니다.")
+
+    class ProviderNotFoundException : NotFoundException("지원하지 않는 제공자입니다.")
+
+    class UserNotFoundException : NotFoundException("유저 정보가 없습니다.")
 }

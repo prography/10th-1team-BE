@@ -3,6 +3,8 @@ package org.prography.bff.config.exception.badrequest
 sealed class InvalidRequestException(
     override val message: String,
 ) : RuntimeException(message) {
+    class InvalidTokenException : InvalidRequestException("유저 ID를 찾지 못했습니다.")
+
     /**
      * 투표 이유가 비어있을 경우 발생하는 예외
      */
