@@ -5,6 +5,10 @@ package org.prography.search.service.model
  */
 data class CursorPlaceResult(
     /**
+     * 검색된 총 DOC 갯수
+     */
+    val total: Long = 0L,
+    /**
      * 검색 결과 리스트
      */
     val result: List<PlaceSearchResult> = emptyList(),

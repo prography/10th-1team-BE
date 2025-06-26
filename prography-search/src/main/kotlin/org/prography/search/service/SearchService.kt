@@ -152,7 +152,8 @@ class SearchService(
             val request = requestBuilder.build()
             val searchResponse = client.search(request, RestaurantPlace::class.java)
 
-            val hits = searchResponse.hits().hits()
+            val hit = searchResponse.hits()
+            val hits = hit.hits()
             if (hits.isEmpty()) {
                 return CursorPlaceResult(result = emptyList(), hasNext = false)
             }
@@ -160,8 +161,8 @@ class SearchService(
             val pageHits = hits.take(size)
             val lastCursorString = generateCursorString(pageHits, strategy)
             val result =
-                pageHits.map { hit ->
-                    val source = hit.source()!!
+                pageHits.map {
+                    val source = it.source()!!
                     PlaceSearchResult(
                         id = source.mongoId,
                         legalCode = source.legal,
@@ -182,6 +183,7 @@ class SearchService(
                 }
 
             return CursorPlaceResult(
+                total = hit.total()?.value().takeIf { cursorString == null } ?: 0L,
                 result = result,
                 cursor = lastCursorString,
                 hasNext = hits.size > size,
@@ -276,19 +278,19 @@ class SearchService(
 
             SortingStrategy.AVERAGE_RATING_HIGH -> {
                 reqBuilder
-                    .sort { doc -> doc.field { source -> source.field("review_count").order(SortOrder.Asc) } }
+                    .sort { doc -> doc.field { source -> source.field("review_score").order(SortOrder.Desc) } }
                     .sort { doc -> doc.field { source -> source.field("mongo_id").order(SortOrder.Asc) } }
             }
 
             SortingStrategy.AVERAGE_RATING_LOW -> {
                 reqBuilder
-                    .sort { doc -> doc.field { source -> source.field("review_count").order(SortOrder.Asc) } }
+                    .sort { doc -> doc.field { source -> source.field("review_score").order(SortOrder.Asc) } }
                     .sort { doc -> doc.field { source -> source.field("mongo_id").order(SortOrder.Asc) } }
             }
 
             SortingStrategy.REVIEW_COUNT_HIGH -> {
                 reqBuilder
-                    .sort { doc -> doc.field { source -> source.field("review_count").order(SortOrder.Asc) } }
+                    .sort { doc -> doc.field { source -> source.field("review_count").order(SortOrder.Desc) } }
                     .sort { doc -> doc.field { source -> source.field("mongo_id").order(SortOrder.Asc) } }
             }
 

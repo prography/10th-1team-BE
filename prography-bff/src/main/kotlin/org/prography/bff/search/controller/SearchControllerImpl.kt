@@ -97,6 +97,7 @@ class SearchControllerImpl(
 
         return ApiResponse.success(
             CursorResponse(
+                total = cursorSearch.total,
                 content = data,
                 cursor = cursorSearch.cursor,
                 hasNext = cursorSearch.hasNext,
