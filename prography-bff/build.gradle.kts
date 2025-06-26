@@ -53,6 +53,15 @@ dependencies {
     }
 
     testImplementation("com.h2database:h2:2.2.220")
+
+    // Kotlin JDSL
+    implementation("com.linecorp.kotlin-jdsl:jpql-dsl:3.5.5")
+    implementation("com.linecorp.kotlin-jdsl:jpql-render:3.5.5")
+    implementation("com.linecorp.kotlin-jdsl:spring-data-jpa-support:3.5.5")
+
+    // Spring Boot Test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.9.25")
 }
 
 allOpen {

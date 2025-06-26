@@ -1,0 +1,59 @@
+package org.prography.bff.vote.controller
+
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.ArraySchema
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import org.prography.bff.config.response.ApiResponse
+import org.prography.bff.vote.controller.model.PlatformVoteResultDto
+import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
+
+/**
+ * 투표 관련 컨트롤러 Swagger 명세 인터페이스
+ */
+interface VoteController {
+    @Operation(
+        summary = "플랫폼 투표 결과 API",
+        description = """
+            해당 가게의 플랫폼 투표 통계에 대한 정보를 반환합니다.
+            [FIGMA 디자인](https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1103-15926&t=jtUGUew3ZipY26Ca-4)
+        """,
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        array =
+                            ArraySchema(
+                                schema = Schema(implementation = PlatformVoteResultDto::class),
+                            ),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun getPlatformVoteResult(placeId: String): ApiResponse<PlatformVoteResultDto>
+
+    @Operation(
+        summary = "플랫폼 투표 하기 API",
+        description = """
+            해당 가게의 플랫폼 투표하는 API 입니다.
+            [FIGMA 디자인](https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1013-19904&t=kootXK4oHHkiLL0H-11)
+        """,
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun submitPlatformVote(
+        placeId: String,
+        dto: PlatformVoteSubmitDto,
+    ): ApiResponse<Void>
+}
