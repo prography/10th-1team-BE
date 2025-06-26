@@ -153,8 +153,6 @@ class SearchService(
             val searchResponse = client.search(request, RestaurantPlace::class.java)
 
             val hit = searchResponse.hits()
-
-            val total: Long = hit.total()?.value() ?: 0L
             val hits = hit.hits()
             if (hits.isEmpty()) {
                 return CursorPlaceResult(result = emptyList(), hasNext = false)
@@ -185,6 +183,7 @@ class SearchService(
                 }
 
             return CursorPlaceResult(
+                total = hit.total()?.value().takeIf { cursorString == null } ?: 0L,
                 result = result,
                 cursor = lastCursorString,
                 hasNext = hits.size > size,
