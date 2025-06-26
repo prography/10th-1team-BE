@@ -1,4 +1,4 @@
-package org.prography.config
+package org.prography.bff.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry

@@ -1,0 +1,45 @@
+server:
+  port: 8081  # 테스트용 포트 변경 가능
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/testdb_local
+    elasticsearch:
+      host: localhost
+      port: 9200
+      user: elastic
+      password: changeme
+      ssl:
+        enable: true
+        trust-all: true
+      repositories:
+        enabled: false
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+jwt:
+  secret: test-secret-key-for-jwt-which-should-be-long-enough
+  access-expiration: 60000       # 1분
+  refresh-expiration: 3600000    # 1시간
+
+kakao:
+  client-id: test-client-id
+  redirect-uri: http://localhost:8081/oauth/kakao/callback
+  client-secret: test-client-secret
+
+naver:
+  client-id: test-client-id
+  client-secret: test-client-secret
