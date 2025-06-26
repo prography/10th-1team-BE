@@ -4,4 +4,9 @@ sealed class InvalidRequestException(
     override val message: String,
 ) : RuntimeException(message) {
     class InvalidTokenException : InvalidRequestException("유저 ID를 찾지 못했습니다.")
+
+    /**
+     * 투표 이유가 비어있을 경우 발생하는 예외
+     */
+    class ReasonEmpty : InvalidRequestException("투표 이유는 반드시 한 개 이상을 입력하셔야 합니다.")
 }
