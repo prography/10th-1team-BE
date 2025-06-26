@@ -36,10 +36,10 @@ interface VoteController {
     fun getPlatformVoteResult(placeId: String): ApiResponse<PlatformVoteResultDto>
 
     @Operation(
-        summary = "플랫폼 투표 결과 API",
+        summary = "플랫폼 투표 하기 API",
         description = """
-            해당 가게의 플랫폼 투표 통계에 대한 정보를 반환합니다.
-            [FIGMA 디자인](https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1103-15695&t=jtUGUew3ZipY26Ca-11)
+            해당 가게의 플랫폼 투표하는 API 입니다.
+            [FIGMA 디자인](https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1013-19904&t=kootXK4oHHkiLL0H-11)
         """,
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
