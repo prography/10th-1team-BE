@@ -10,7 +10,7 @@ import org.prography.bff.search.controller.model.ReviewSummary
 import org.prography.bff.search.controller.model.SearchResponseDTO
 import org.prography.bff.search.controller.model.enumeration.FoodCategory
 import org.prography.bff.search.controller.model.enumeration.OrderStrategy
-import org.prography.search.service.SearchService
+import org.prography.search.service.PlaceSearchService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/search")
 class SearchControllerImpl(
-    private val searchService: SearchService,
+    private val placeSearchService: PlaceSearchService,
 ) : SearchController {
     @GetMapping("/auto")
     override fun autoComplete(
@@ -29,7 +29,7 @@ class SearchControllerImpl(
         @RequestParam(required = false, name = "category") foodCategory: FoodCategory?,
     ): ApiResponse<List<AutoCompleteResponseDTO>> {
         val data =
-            searchService.autoCompleteByKeyword(
+            placeSearchService.autoCompleteByKeyword(
                 keyword = keyword,
                 size = size ?: 5,
                 addressCodes = addressCodes ?: emptyList(),
@@ -56,7 +56,7 @@ class SearchControllerImpl(
         @RequestParam(required = false, name = "cursor") cursorString: String?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>> {
         val cursorSearch =
-            searchService.cursorSearchByKeyword(
+            placeSearchService.cursorSearchByKeyword(
                 keyword = keyword,
                 size = size ?: 5,
                 cursorString = cursorString,

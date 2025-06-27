@@ -2,6 +2,10 @@ server:
   port: 8080
 
 spring:
+  profiles:
+    active: prod
+    # prod / dev 는 엘라스틱 연결 시도, local 시 엘라스틱 연결 안함
+
   config:
     import: optional:file:./prography-bff/.env[.properties]
 
@@ -32,7 +36,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
 
 management:
   endpoints:
@@ -44,15 +48,15 @@ management:
       show-details: NEVER
 
 kakao:
-  client-id: ${KAKAO_CLIENT_ID}
-  redirect-uri: ${KAKAO_REDIRECT_URI}
-  client-secret: ${KAKAO_CLIENT_SECRET}
+  client-id: ${KAKAO_CLIENT_ID:LOCAL_TEMP}
+  redirect-uri: ${KAKAO_REDIRECT_URI:http://localhost:8080}
+  client-secret: ${KAKAO_CLIENT_SECRET:LOCAL_TEMP}
 
 naver:
-  client-id: ${NAVER_CLIENT_ID}
-  client-secret: ${NAVER_CLIENT_SECRET}
+  client-id: ${NAVER_CLIENT_ID:LOCAL_TEMP}
+  client-secret: ${NAVER_CLIENT_SECRET:LOCAL_TEMP}
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: ${JWT_SECRET:8qUY5ul8QaLGVx5PE54JBhq6jHRjGBqI}
   access-expiration: ${JWT_ACCESS_EXPIRATION:3600000}
   refresh-expiration: ${JWT_REFRESH_EXPIRATION:2592000000}
