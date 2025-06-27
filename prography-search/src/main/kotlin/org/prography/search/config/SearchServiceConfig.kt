@@ -1,4 +1,4 @@
-package org.prography.search.config.elasticsearch
+package org.prography.search.config
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient
 import co.elastic.clients.json.jackson.JacksonJsonpMapper
@@ -15,29 +15,52 @@ import org.apache.http.conn.ssl.TrustAllStrategy
 import org.apache.http.impl.client.BasicCredentialsProvider
 import org.apache.http.ssl.SSLContexts
 import org.elasticsearch.client.RestClient
-import org.prography.search.exception.ElasticsearchException
+import org.prography.search.config.property.ElasticsearchProperty
+import org.prography.search.service.ElasticSearchService
+import org.prography.search.service.FakeSearchService
+import org.prography.search.service.PlaceSearchService
 import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.ConfigurableEnvironment
+import org.springframework.core.env.Profiles
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLHandshakeException
+import kotlin.system.exitProcess
 
 /**
- * Elasticsearch configuration component
+ * 환경(dev, local, prod)에 따라 PlaceSearchService 구현체를 동적으로 등록하는 설정
  */
 @Configuration
 @EnableConfigurationProperties(ElasticsearchProperty::class)
-class ElasticsearchConfig(
+class SearchServiceConfig(
+    private val env: ConfigurableEnvironment,
     private val props: ElasticsearchProperty,
 ) {
-    private val log = LoggerFactory.getLogger(ElasticsearchConfig::class.java)
+    private val log = LoggerFactory.getLogger(SearchServiceConfig::class.java)
+
+    /**
+     * profile 에 따른 서비스에 대한 조건 빈 등록
+     */
+    @Bean
+    fun placeSearchService(): PlaceSearchService {
+        return if (!env.acceptsProfiles(Profiles.of("prod", "dev"))) {
+            log.info("Running in local profile, returning FakeSearchService")
+            FakeSearchService()
+        } else {
+            log.info("Running in prod / dev profile, returning ElasticSearchService")
+            val restClient = restClient()
+            val transport = transport(restClient)
+            val elasticsearchClient = elasticsearchClient(transport)
+            ElasticSearchService(elasticsearchClient)
+        }
+    }
 
     /**
      * Low-level REST Client
      */
-    @Bean
-    fun retClient(): RestClient {
+    private fun restClient(): RestClient {
         val sslProperties = props.ssl
         val schema = if (sslProperties.enable) "https" else HttpHost.DEFAULT_SCHEME_NAME
 
@@ -79,8 +102,7 @@ class ElasticsearchConfig(
     /**
      * Transport layer for Java client
      */
-    @Bean
-    fun transport(restClient: RestClient): ElasticsearchTransport {
+    private fun transport(restClient: RestClient): ElasticsearchTransport {
         log.info("🔗  Wrapping RestClient in RestClientTransport with JacksonJsonMapper")
         val objectMapper =
             ObjectMapper()
@@ -95,8 +117,7 @@ class ElasticsearchConfig(
     /**
      * High-level Java client
      */
-    @Bean
-    fun elasticsearchClient(transport: ElasticsearchTransport): ElasticsearchClient {
+    private fun elasticsearchClient(transport: ElasticsearchTransport): ElasticsearchClient {
         val client = ElasticsearchClient(transport)
         log.info("🚀  ElasticsearchClient initialized")
 
@@ -106,24 +127,16 @@ class ElasticsearchConfig(
                 log.info("✅ Elasticsearch ping successful (cluster is reachable).")
             } else {
                 log.error("❌ Elasticsearch ping returned false; cluster might be unreachable.")
-                throw ElasticsearchException.ConnectionException(
-                    RuntimeException("Elasticsearch ping returned false; cluster unreachable."),
-                )
-//                System.err.println("FATAL: Elasticsearch cluster unreachable (ping returned false). Exiting.")
-//                exitProcess(1)
+                exitProcess(1)
             }
         } catch (sslEx: SSLHandshakeException) {
             // SSL 인증서 검증 실패 시
             log.error("❌ SSL certificate validation failed when pinging Elasticsearch: ${sslEx.localizedMessage}")
-            throw ElasticsearchException.CertificateValidationException(sslEx)
-//            System.err.println("FATAL: Elasticsearch SSL certificate validation failed. Exiting.")
-//            exitProcess(1)
+            exitProcess(1)
         } catch (e: Exception) {
             // 기타 예상치 못한 예외 (네트워크 오류 등)
             log.error("❌ Failed to connect to Elasticsearch during ping check: ${e.localizedMessage}")
-            throw ElasticsearchException.ConnectionException(e)
-//            System.err.println("FATAL: Unable to connect to Elasticsearch (${e.localizedMessage}). Exiting.")
-//            exitProcess(1)
+            exitProcess(1)
         }
         return client
     }
