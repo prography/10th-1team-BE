@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: prod
+    active: local
     # prod / dev 는 엘라스틱 연결 시도, local 시 엘라스틱 연결 안함
 
   config:
@@ -46,6 +46,9 @@ management:
   endpoint:
     health:
       show-details: NEVER
+  health:
+    elasticsearch:
+      enabled: false
 
 kakao:
   client-id: ${KAKAO_CLIENT_ID:LOCAL_TEMP}
