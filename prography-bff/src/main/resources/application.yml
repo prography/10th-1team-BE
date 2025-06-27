@@ -20,7 +20,7 @@ spring:
       ssl:
         enable: ${ELASTICSEARCH_SSL_ENABLE:true}
         # 운영 환경에서 인증서 관련해서 신경쓰지 않기 위해선 true 설정
-        trust-all: true
+        trust-all: ${ELASTICSEARCH_SSL_TRUST_ALL:false}
       repositories:
         enabled: false
 
