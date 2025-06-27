@@ -1,4 +1,4 @@
-package org.prography.bff.search.service.model
+package org.prography.bff.restaurant.service.model
 
 enum class KakaoReviewTag(val id: Int, val description: StrengthDescription) {
     FLAVOR(5, StrengthDescription.FLAVOR),

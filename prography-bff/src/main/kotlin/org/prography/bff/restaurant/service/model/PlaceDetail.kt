@@ -1,9 +1,9 @@
-package org.prography.bff.search.service.model
+package org.prography.bff.restaurant.service.model
 
 import org.prography.bff.config.exception.notfound.NotFoundException
 import org.prography.bff.restaurant.RawRestaurantData
-import org.prography.bff.search.model.photo.Photo
-import org.prography.bff.search.model.reveiw.Review
+import org.prography.bff.restaurant.controller.model.Photo
+import org.prography.bff.restaurant.controller.model.review.Review
 
 data class PlaceDetail(
     val id: String?,
@@ -17,20 +17,21 @@ data class PlaceDetail(
     val kakaoReviewCount: Int,
     val kakaoReviewAvgScore: Double,
     val kakaoReviews: List<Review>,
-    val kakaoVoteRate: Int,
     val naverReviewCount: Int,
     val naverReviewAvgScore: Double?,
     val naverReviews: List<Review>,
-    val naverVoteRate: Int,
+    val dongName: String,
     val hCode: String,
     val bCode: String,
     val x: String,
     val y: String,
+    val summaryAI: String?,
 ) {
     companion object {
         fun fromDomain(
             restaurantData: RawRestaurantData,
             strengthList: List<StrengthScore>,
+            dongName: String,
         ): PlaceDetail {
             val kakaoPlaceInfo =
                 restaurantData.kakaoPlaceData
@@ -60,15 +61,15 @@ data class PlaceDetail(
                 kakaoReviewCount = kakaoReviewData.score.reviewCount,
                 kakaoReviews = kakaoReviewData.reviews.map { Review.fromKakaoReview(it) },
                 kakaoReviewAvgScore = kakaoReviewData.score.averageScore,
-                kakaoVoteRate = kakaoReviewData.score.reviewCount,
                 naverReviewCount = naverReviewScore.totalCount,
                 naverReviewAvgScore = naverReviewScore.reviewRating,
                 naverReviews = naverReviewData.reviews.map { Review.fromNaverReview(it) },
-                naverVoteRate = naverReviewScore.totalCount,
+                dongName = dongName,
                 hCode = restaurantData.hCode,
                 bCode = restaurantData.bCode,
                 x = restaurantData.kakaoPlaceData.x,
                 y = restaurantData.kakaoPlaceData.y,
+                summaryAI = restaurantData.summaryAI,
             )
         }
     }

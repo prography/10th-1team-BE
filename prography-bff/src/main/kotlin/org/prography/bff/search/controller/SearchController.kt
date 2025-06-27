@@ -6,14 +6,18 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.response.CursorResponse
 import org.prography.bff.search.controller.model.AutoCompleteResponseDTO
-import org.prography.bff.search.controller.model.PlaceDetailDTO
 import org.prography.bff.search.controller.model.SearchResponseDTO
 import org.prography.bff.search.controller.model.enumeration.FoodCategory
 import org.prography.bff.search.controller.model.enumeration.OrderStrategy
 
+@Tag(
+    name = "Search",
+    description = "검색 관련 API",
+)
 interface SearchController {
     @Operation(
         summary = "자동 완성 API",
@@ -172,31 +176,4 @@ interface SearchController {
         )
         cursorString: String?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>>
-
-    @Operation(
-        summary = "음식점 세부 페이지 정보",
-        description = "부족한 정보는 말해주세요.",
-        responses = [
-            io.swagger.v3.oas.annotations.responses.ApiResponse(
-                responseCode = "200",
-                content = [
-                    Content(
-                        mediaType = "application/json",
-                        schema = Schema(implementation = PlaceDetailDTO::class),
-                    ),
-                ],
-            ),
-            io.swagger.v3.oas.annotations.responses.ApiResponse(
-                responseCode = "404",
-                description = "데이터가 수집되지 않은 음식점인 경우",
-                content = [
-                    Content(
-                        mediaType = "application/json",
-                        schema = Schema(implementation = ApiResponse.Failure::class),
-                    ),
-                ],
-            ),
-        ],
-    )
-    fun getMockSummary(placeId: String): ApiResponse<PlaceDetailDTO>
 }
