@@ -22,17 +22,15 @@ import org.prography.search.service.model.PlaceSearchResult
 import org.prography.search.service.model.enumeration.FilterCategory
 import org.prography.search.service.model.enumeration.SortingStrategy
 import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Service
 import javax.net.ssl.SSLHandshakeException
 
 /**
  * Elasticsearch 를 이용한 검색 관련 서비스
  */
-@Service
-class SearchService(
+class ElasticSearchService(
     private val client: ElasticsearchClient,
-) {
-    private val log = LoggerFactory.getLogger(SearchService::class.java)
+) : PlaceSearchService {
+    private val log = LoggerFactory.getLogger(ElasticSearchService::class.java)
 
     companion object {
         private const val INDEX = "restaurant_search"
@@ -40,7 +38,7 @@ class SearchService(
         private const val DEFAULT_LEGAL_CODE = "11680" // 강남구
     }
 
-    fun autoCompleteByKeyword(
+    override fun autoCompleteByKeyword(
         keyword: String,
         size: Int,
         addressCodes: List<String>,
@@ -103,13 +101,13 @@ class SearchService(
         }
     }
 
-    fun cursorSearchByKeyword(
+    override fun cursorSearchByKeyword(
         keyword: String,
         size: Int,
         cursorString: String?,
         addressCodes: List<String>,
         category: FilterCategory?,
-        strategy: SortingStrategy = SortingStrategy.RELATED,
+        strategy: SortingStrategy,
     ): CursorPlaceResult {
         try {
             val fetchSize = size + 1

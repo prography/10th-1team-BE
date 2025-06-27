@@ -1,4 +1,4 @@
-package org.prography.search.config.elasticsearch
+package org.prography.search.config.property
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
