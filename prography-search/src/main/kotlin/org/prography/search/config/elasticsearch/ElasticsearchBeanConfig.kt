@@ -15,29 +15,70 @@ import org.apache.http.conn.ssl.TrustAllStrategy
 import org.apache.http.impl.client.BasicCredentialsProvider
 import org.apache.http.ssl.SSLContexts
 import org.elasticsearch.client.RestClient
-import org.prography.search.exception.ElasticsearchException
+import org.prography.search.config.property.ElasticsearchProperty
 import org.slf4j.LoggerFactory
-import org.springframework.boot.context.properties.EnableConfigurationProperties
-import org.springframework.context.annotation.Bean
+import org.springframework.beans.factory.support.BeanDefinitionBuilder
+import org.springframework.beans.factory.support.BeanDefinitionRegistry
+import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor
+import org.springframework.boot.context.properties.bind.Binder
+import org.springframework.context.EnvironmentAware
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.ConfigurableEnvironment
+import org.springframework.core.env.Environment
+import org.springframework.core.env.Profiles
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLHandshakeException
+import kotlin.system.exitProcess
 
 /**
  * Elasticsearch configuration component
  */
-@Configuration
-@EnableConfigurationProperties(ElasticsearchProperty::class)
-class ElasticsearchConfig(
-    private val props: ElasticsearchProperty,
-) {
-    private val log = LoggerFactory.getLogger(ElasticsearchConfig::class.java)
+@Configuration(proxyBeanMethods = false)
+class ElasticsearchBeanConfig : BeanDefinitionRegistryPostProcessor, EnvironmentAware {
+    private lateinit var env: ConfigurableEnvironment
+    private val log = LoggerFactory.getLogger(ElasticsearchBeanConfig::class.java)
+
+    override fun setEnvironment(environment: Environment) {
+        require(environment is ConfigurableEnvironment)
+        this.env = environment
+    }
+
+    override fun postProcessBeanDefinitionRegistry(registry: BeanDefinitionRegistry) {
+        // 추가적인 profile 환경에 대한 빈등록은 여기서 수행
+        if (!env.acceptsProfiles(Profiles.of("prod", "dev"))) {
+            // prod 프로파일이 아닐 땐 스킵
+            log.info("Skipping ElasticsearchClient registration (not in 'prod')")
+            return
+        }
+        log.info("Registering ElasticsearchClient for 'prod'")
+
+        // Binder 로 프로퍼티 바인딩
+        val props =
+            Binder.get(env)
+                .bind("spring.data.elasticsearch", ElasticsearchProperty::class.java)
+                .orElseThrow { IllegalStateException("spring.data.elasticsearch.* properties are missing") }
+
+        if (registry.containsBeanDefinition("elasticsearchClient")) {
+            registry.removeBeanDefinition("elasticsearchClient")
+            log.info("Removed auto-configured elasticsearchClient")
+        }
+
+        // elasticsearchClient 빈 정의
+        val beanDef =
+            BeanDefinitionBuilder
+                .genericBeanDefinition(ElasticsearchClient::class.java) {
+                    val rest = restClient(props)
+                    val transport = transport(rest)
+                    elasticsearchClient(transport)
+                }.beanDefinition
+
+        registry.registerBeanDefinition("elasticsearchClient", beanDef)
+    }
 
     /**
      * Low-level REST Client
      */
-    @Bean
-    fun retClient(): RestClient {
+    private fun restClient(props: ElasticsearchProperty): RestClient {
         val sslProperties = props.ssl
         val schema = if (sslProperties.enable) "https" else HttpHost.DEFAULT_SCHEME_NAME
 
@@ -79,8 +120,7 @@ class ElasticsearchConfig(
     /**
      * Transport layer for Java client
      */
-    @Bean
-    fun transport(restClient: RestClient): ElasticsearchTransport {
+    private fun transport(restClient: RestClient): ElasticsearchTransport {
         log.info("🔗  Wrapping RestClient in RestClientTransport with JacksonJsonMapper")
         val objectMapper =
             ObjectMapper()
@@ -95,8 +135,7 @@ class ElasticsearchConfig(
     /**
      * High-level Java client
      */
-    @Bean
-    fun elasticsearchClient(transport: ElasticsearchTransport): ElasticsearchClient {
+    private fun elasticsearchClient(transport: ElasticsearchTransport): ElasticsearchClient {
         val client = ElasticsearchClient(transport)
         log.info("🚀  ElasticsearchClient initialized")
 
@@ -106,24 +145,16 @@ class ElasticsearchConfig(
                 log.info("✅ Elasticsearch ping successful (cluster is reachable).")
             } else {
                 log.error("❌ Elasticsearch ping returned false; cluster might be unreachable.")
-                throw ElasticsearchException.ConnectionException(
-                    RuntimeException("Elasticsearch ping returned false; cluster unreachable."),
-                )
-//                System.err.println("FATAL: Elasticsearch cluster unreachable (ping returned false). Exiting.")
-//                exitProcess(1)
+                exitProcess(1)
             }
         } catch (sslEx: SSLHandshakeException) {
             // SSL 인증서 검증 실패 시
             log.error("❌ SSL certificate validation failed when pinging Elasticsearch: ${sslEx.localizedMessage}")
-            throw ElasticsearchException.CertificateValidationException(sslEx)
-//            System.err.println("FATAL: Elasticsearch SSL certificate validation failed. Exiting.")
-//            exitProcess(1)
+            exitProcess(1)
         } catch (e: Exception) {
             // 기타 예상치 못한 예외 (네트워크 오류 등)
             log.error("❌ Failed to connect to Elasticsearch during ping check: ${e.localizedMessage}")
-            throw ElasticsearchException.ConnectionException(e)
-//            System.err.println("FATAL: Unable to connect to Elasticsearch (${e.localizedMessage}). Exiting.")
-//            exitProcess(1)
+            exitProcess(1)
         }
         return client
     }

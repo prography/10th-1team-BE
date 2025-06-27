@@ -1,11 +1,8 @@
-package org.prography.search.config.elasticsearch
-
-import org.springframework.boot.context.properties.ConfigurationProperties
+package org.prography.search.config.property
 
 /**
  * Elasticsearch 관련 설정 값
  */
-@ConfigurationProperties(prefix = "spring.data.elasticsearch")
 data class ElasticsearchProperty(
     /**
      * 연결 HOST 주소 e.g localhost, 127.0.0.1
