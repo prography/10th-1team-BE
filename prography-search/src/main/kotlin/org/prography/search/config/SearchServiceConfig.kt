@@ -1,4 +1,4 @@
-package org.prography.search.config.elasticsearch
+package org.prography.search.config
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient
 import co.elastic.clients.json.jackson.JacksonJsonpMapper
@@ -16,69 +16,51 @@ import org.apache.http.impl.client.BasicCredentialsProvider
 import org.apache.http.ssl.SSLContexts
 import org.elasticsearch.client.RestClient
 import org.prography.search.config.property.ElasticsearchProperty
+import org.prography.search.service.ElasticSearchService
+import org.prography.search.service.FakeSearchService
+import org.prography.search.service.PlaceSearchService
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.support.BeanDefinitionBuilder
-import org.springframework.beans.factory.support.BeanDefinitionRegistry
-import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor
-import org.springframework.boot.context.properties.bind.Binder
-import org.springframework.context.EnvironmentAware
+import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.ConfigurableEnvironment
-import org.springframework.core.env.Environment
 import org.springframework.core.env.Profiles
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLHandshakeException
 import kotlin.system.exitProcess
 
 /**
- * Elasticsearch configuration component
+ * 환경(dev, local, prod)에 따라 PlaceSearchService 구현체를 동적으로 등록하는 설정
  */
-@Configuration(proxyBeanMethods = false)
-class ElasticsearchBeanConfig : BeanDefinitionRegistryPostProcessor, EnvironmentAware {
-    private lateinit var env: ConfigurableEnvironment
-    private val log = LoggerFactory.getLogger(ElasticsearchBeanConfig::class.java)
+@Configuration
+@EnableConfigurationProperties(ElasticsearchProperty::class)
+class SearchServiceConfig(
+    private val env: ConfigurableEnvironment,
+    private val props: ElasticsearchProperty,
+) {
+    private val log = LoggerFactory.getLogger(SearchServiceConfig::class.java)
 
-    override fun setEnvironment(environment: Environment) {
-        require(environment is ConfigurableEnvironment)
-        this.env = environment
-    }
-
-    override fun postProcessBeanDefinitionRegistry(registry: BeanDefinitionRegistry) {
-        // 추가적인 profile 환경에 대한 빈등록은 여기서 수행
-        if (!env.acceptsProfiles(Profiles.of("prod", "dev"))) {
-            // prod 프로파일이 아닐 땐 스킵
-            log.info("Skipping ElasticsearchClient registration (not in 'prod')")
-            return
+    /**
+     * profile 에 따른 서비스에 대한 조건 빈 등록
+     */
+    @Bean
+    fun placeSearchService(): PlaceSearchService {
+        return if (!env.acceptsProfiles(Profiles.of("prod", "dev"))) {
+            log.info("Running in local profile, returning FakeSearchService")
+            FakeSearchService()
+        } else {
+            log.info("Running in prod / dev profile, returning ElasticSearchService")
+            val restClient = restClient()
+            val transport = transport(restClient)
+            val elasticsearchClient = elasticsearchClient(transport)
+            ElasticSearchService(elasticsearchClient)
         }
-        log.info("Registering ElasticsearchClient for 'prod'")
-
-        // Binder 로 프로퍼티 바인딩
-        val props =
-            Binder.get(env)
-                .bind("spring.data.elasticsearch", ElasticsearchProperty::class.java)
-                .orElseThrow { IllegalStateException("spring.data.elasticsearch.* properties are missing") }
-
-        if (registry.containsBeanDefinition("elasticsearchClient")) {
-            registry.removeBeanDefinition("elasticsearchClient")
-            log.info("Removed auto-configured elasticsearchClient")
-        }
-
-        // elasticsearchClient 빈 정의
-        val beanDef =
-            BeanDefinitionBuilder
-                .genericBeanDefinition(ElasticsearchClient::class.java) {
-                    val rest = restClient(props)
-                    val transport = transport(rest)
-                    elasticsearchClient(transport)
-                }.beanDefinition
-
-        registry.registerBeanDefinition("elasticsearchClient", beanDef)
     }
 
     /**
      * Low-level REST Client
      */
-    private fun restClient(props: ElasticsearchProperty): RestClient {
+    private fun restClient(): RestClient {
         val sslProperties = props.ssl
         val schema = if (sslProperties.enable) "https" else HttpHost.DEFAULT_SCHEME_NAME
 
