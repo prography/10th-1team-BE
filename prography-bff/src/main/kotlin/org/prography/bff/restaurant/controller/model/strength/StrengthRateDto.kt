@@ -1,4 +1,4 @@
-package org.prography.bff.search.model.strength
+package org.prography.bff.restaurant.controller.model.strength
 
 import io.swagger.v3.oas.annotations.media.Schema
 

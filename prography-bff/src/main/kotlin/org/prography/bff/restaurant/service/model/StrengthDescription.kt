@@ -1,4 +1,4 @@
-package org.prography.bff.search.service.model
+package org.prography.bff.restaurant.service.model
 
 enum class StrengthDescription(
     val korean: String,

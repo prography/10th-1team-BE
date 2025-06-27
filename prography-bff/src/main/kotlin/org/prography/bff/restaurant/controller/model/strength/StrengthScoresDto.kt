@@ -1,6 +1,6 @@
-package org.prography.bff.search.model.strength
+package org.prography.bff.restaurant.controller.model.strength
 
-import org.prography.bff.search.service.model.StrengthScore
+import org.prography.bff.restaurant.service.model.StrengthScore
 
 data class StrengthScoresDto(
     val strengths: List<StrengthRateDto>,

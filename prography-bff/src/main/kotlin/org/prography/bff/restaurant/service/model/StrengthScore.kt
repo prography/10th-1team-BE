@@ -1,4 +1,4 @@
-package org.prography.bff.search.service.model
+package org.prography.bff.restaurant.service.model
 
 data class StrengthScore(
     val category: StrengthDescription, // enum class StrengthDescription(val label: String)

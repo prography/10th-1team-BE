@@ -1,20 +1,18 @@
-package org.prography.bff.search.service.mock
+package org.prography.bff.restaurant.service
 
 import org.prography.bff.config.exception.notfound.NotFoundException
+import org.prography.bff.region.domain.service.RegionService
 import org.prography.bff.restaurant.RawRestaurantDataRepository
 import org.prography.bff.restaurant.kakao.review.KakaoScoreSet
 import org.prography.bff.restaurant.naver.review.NaverScoreSet
-import org.prography.bff.search.service.model.KakaoReviewTag
-import org.prography.bff.search.service.model.NaverReviewTag
-import org.prography.bff.search.service.model.PlaceDetail
-import org.prography.bff.search.service.model.StrengthDescription
-import org.prography.bff.search.service.model.StrengthScore
+import org.prography.bff.restaurant.service.model.*
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
-class MockService(
+class RestaurantService(
     private val restaurantDataRepository: RawRestaurantDataRepository,
+    private val regionService: RegionService,
 ) {
     fun getPlaceDetail(placeId: String): PlaceDetail {
         val restaurantData =
@@ -29,8 +27,9 @@ class MockService(
                 ?: throw NotFoundException.PlaceInfoNotFoundException()
 
         val strengthList = countStrength(kakaoScoreSet, naverScoreSet)
+        val dongName = regionService.findRegionByBCode(restaurantData.bCode)
 
-        return PlaceDetail.fromDomain(restaurantData, strengthList)
+        return PlaceDetail.fromDomain(restaurantData, strengthList, dongName)
     }
 
     private fun countStrength(

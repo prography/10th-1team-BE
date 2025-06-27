@@ -1,4 +1,4 @@
-package org.prography.bff.search.model.photo
+package org.prography.bff.restaurant.controller.model
 
 import io.swagger.v3.oas.annotations.media.Schema
 
