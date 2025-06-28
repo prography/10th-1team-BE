@@ -1,5 +1,6 @@
 package org.prography.bff.restaurant.controller.model.review
 
+import org.prography.bff.config.exception.invaildformat.InvalidFormatException
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -13,7 +14,7 @@ object ReviewDateFormatter {
         return try {
             LocalDateTime.parse(raw, kakaoFormatter)
         } catch (e: Exception) {
-            throw IllegalArgumentException("Invalid Kakao date format: $raw")
+            throw InvalidFormatException.InvalidKakaoDateFormat(raw)
         }
     }
 
@@ -26,7 +27,11 @@ object ReviewDateFormatter {
             when {
                 raw.matches(Regex("""\d{2}\.\d{1,2}\.\d{1,2}\..*""")) -> {
                     val dateStr = trimmed.substringBeforeLast(".")
-                    val localDate = LocalDate.parse(dateStr, naverShortFormatter)
+                    val parts = dateStr.split(".")
+                    val year = parts[0].padStart(2, '0')
+                    val month = parts[1].padStart(2, '0')
+                    val day = parts[2].padStart(2, '0')
+                    val localDate = LocalDate.parse("$year.$month.$day", naverShortFormatter)
                     localDate.atStartOfDay()
                 }
 
@@ -38,10 +43,10 @@ object ReviewDateFormatter {
                     localDate.atStartOfDay()
                 }
 
-                else -> throw IllegalArgumentException("Invalid Naver date format: $raw")
+                else -> throw InvalidFormatException.InvalidNaverDateFormat(raw)
             }
         } catch (e: Exception) {
-            throw IllegalArgumentException("Invalid Naver date format: $raw", e)
+            throw InvalidFormatException.InvalidNaverDateFormat(raw)
         }
     }
 }
