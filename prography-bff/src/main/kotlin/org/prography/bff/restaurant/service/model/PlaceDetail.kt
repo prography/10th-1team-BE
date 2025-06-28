@@ -3,23 +3,24 @@ package org.prography.bff.restaurant.service.model
 import org.prography.bff.config.exception.notfound.NotFoundException
 import org.prography.bff.restaurant.RawRestaurantData
 import org.prography.bff.restaurant.controller.model.Photo
-import org.prography.bff.restaurant.controller.model.review.Review
+import org.prography.bff.restaurant.controller.model.review.ReviewDto
 
 data class PlaceDetail(
     val id: String?,
     val kakaoPlaceUri: String,
     val naverPlaceUri: String,
     val name: String,
+    val category: String,
     val addressName: String,
     val roadAddressName: String,
     val photos: List<Photo>,
     val strengthScores: List<StrengthScore>,
     val kakaoReviewCount: Int,
     val kakaoReviewAvgScore: Double,
-    val kakaoReviews: List<Review>,
+    val kakaoReviews: List<ReviewDto>,
     val naverReviewCount: Int,
     val naverReviewAvgScore: Double?,
-    val naverReviews: List<Review>,
+    val naverReviews: List<ReviewDto>,
     val dongName: String,
     val hCode: String,
     val bCode: String,
@@ -59,17 +60,22 @@ data class PlaceDetail(
                 strengthScores = strengthList,
                 photos = naverPlaceInfo.thumUrls.map { Photo(it) },
                 kakaoReviewCount = kakaoReviewData.score.reviewCount,
-                kakaoReviews = kakaoReviewData.reviews.map { Review.fromKakaoReview(it) },
+                kakaoReviews =
+                    kakaoReviewData.reviews.take(3)
+                        .map { ReviewDto.fromKakaoReview(it) },
                 kakaoReviewAvgScore = kakaoReviewData.score.averageScore,
                 naverReviewCount = naverReviewScore.totalCount,
                 naverReviewAvgScore = naverReviewScore.reviewRating,
-                naverReviews = naverReviewData.reviews.map { Review.fromNaverReview(it) },
+                naverReviews =
+                    naverReviewData.reviews.take(3)
+                        .map { ReviewDto.fromNaverReview(it) },
                 dongName = dongName,
                 hCode = restaurantData.hCode,
                 bCode = restaurantData.bCode,
                 x = restaurantData.kakaoPlaceData.x,
                 y = restaurantData.kakaoPlaceData.y,
                 summaryAI = restaurantData.summaryAI,
+                category = restaurantData.kakaoPlaceData.categoryName.split(" > ").last(),
             )
         }
     }

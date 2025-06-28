@@ -81,4 +81,12 @@ class RestaurantService(
         }
         return scores
     }
+
+    fun getPlaceReview(placeId: String): ReviewList {
+        val restaurantData =
+            restaurantDataRepository.findByIdOrNull(placeId)
+                ?: throw NotFoundException.PlaceNotFoundException()
+
+        return ReviewList.fromDomain(restaurantData)
+    }
 }
