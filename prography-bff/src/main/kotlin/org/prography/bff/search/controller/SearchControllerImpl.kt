@@ -69,8 +69,8 @@ class SearchControllerImpl(
             cursorSearch.result.map { result ->
                 SearchResponseDTO(
                     id = result.id,
-                    addresses = result.addresses,
-                    roadAddresses = result.roadAddresses,
+                    addresses = result.address,
+                    roadAddresses = result.roadAddress,
                     category = result.category,
                     name = result.name,
                     imageUrl = result.imageUrl,
@@ -98,5 +98,43 @@ class SearchControllerImpl(
                 hasNext = cursorSearch.hasNext,
             ),
         )
+    }
+
+    @GetMapping("/recommend")
+    override fun recommandPlace(
+        @RequestParam(required = false, name = "size") size: Int?,
+        @RequestParam(required = false, name = "dong_code") addressCodes: List<String>,
+    ): ApiResponse<List<SearchResponseDTO>> {
+        val data: List<SearchResponseDTO> =
+            placeSearchService.recommendPlace(
+                size =
+                    size
+                        ?: 3,
+                addressCodes = addressCodes,
+            ).map {
+                SearchResponseDTO(
+                    id = it.id,
+                    addresses = it.address,
+                    roadAddresses = it.roadAddress,
+                    category = it.category,
+                    name = it.name,
+                    imageUrl = it.imageUrl,
+                    kakao =
+                        ReviewSummary(
+                            count = it.kakaoReviewCount,
+                            score = it.kakaoScore,
+                            processed = it.kakaoReview,
+                        ),
+                    naver =
+                        ReviewSummary(
+                            count = it.naverReviewCount,
+                            score = it.naverScore,
+                            processed = it.naverReview,
+                        ),
+                    region = Region("법정동 이름", it.legalCode),
+                )
+            }
+
+        return ApiResponse.success(data = data)
     }
 }

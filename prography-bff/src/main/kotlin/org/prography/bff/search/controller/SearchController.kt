@@ -1,5 +1,6 @@
 package org.prography.bff.search.controller
 
+import io.swagger.v3.oas.annotations.ExternalDocumentation
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn
@@ -176,4 +177,46 @@ interface SearchController {
         )
         cursorString: String?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>>
+
+    @Operation(
+        summary = "추천 맛집 리스트 조회",
+        description = "메인 화면에 보여줄 추천 맛집 3개를 반환합니다.",
+        externalDocs =
+            ExternalDocumentation(
+                description = "노션 문서",
+                url = "https://www.notion.so/21cc0f5d7a1d80939270eb796996037a",
+            ),
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    io.swagger.v3.oas.annotations.media.Content(
+                        mediaType = "application/json",
+                        array =
+                            io.swagger.v3.oas.annotations.media.ArraySchema(
+                                schema = io.swagger.v3.oas.annotations.media.Schema(implementation = SearchResponseDTO::class),
+                                arraySchema = io.swagger.v3.oas.annotations.media.Schema(description = "Cursor-paginated list"),
+                            ),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun recommandPlace(
+        @Parameter(
+            name = "size",
+            `in` = ParameterIn.QUERY,
+            description = "한 번에 조회할 결과 개수",
+            required = false,
+            example = "5",
+        )
+        size: Int?,
+        @Parameter(
+            name = "dong_code",
+            `in` = ParameterIn.QUERY,
+            description = "검색을 제한할 구 코드 리스트 (여러 개 전달 가능), 비어있을 경우 강남구 서치",
+            required = false,
+        )
+        addressCodes: List<String> = emptyList(),
+    ): ApiResponse<List<SearchResponseDTO>>
 }
