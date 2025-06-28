@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class CorsConfig : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://localhost:3000") // 허용할 Origin
+            .allowedOrigins("http://localhost:3000", "https://api.reviewmatch.co.kr") // 허용할 Origin
             .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
             .allowCredentials(true)
             .maxAge(3600)
