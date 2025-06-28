@@ -2,6 +2,7 @@ package org.prography.bff.user.domain.entity
 
 import jakarta.persistence.*
 import org.prography.bff.config.BaseTimeEntity
+import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import java.util.*
 
 @Entity
@@ -25,4 +26,24 @@ class User(
     var level: Int = 0
 
     var status: Boolean = false
+        protected set
+
+    fun withdraw() {
+        status = true
+        // 개인정보 마스킹도 여기에 함께 처리 가능
+    }
+
+    fun reactivate() {
+        status = false
+    }
+
+    fun validateActive() {
+        if (status) {
+            throw InvalidRequestException.WithDrawUserException()
+        }
+    }
+
+    fun changeNickName(newName: String) {
+        nickname = newName
+    }
 }

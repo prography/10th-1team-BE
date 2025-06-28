@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.vote.controller.model.PlatformVoteResultDto
 import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
@@ -11,6 +12,10 @@ import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
 /**
  * 투표 관련 컨트롤러 Swagger 명세 인터페이스
  */
+@Tag(
+    name = "Vote",
+    description = "리뷰 매치 투표 전용 API",
+)
 interface VoteController {
     @Operation(
         summary = "플랫폼 투표 결과 API",

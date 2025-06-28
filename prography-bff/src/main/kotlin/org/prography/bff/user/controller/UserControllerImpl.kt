@@ -3,10 +3,9 @@ package org.prography.bff.user.controller
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
 import org.prography.bff.user.controller.model.UserInfoResponseDto
+import org.prography.bff.user.controller.model.UserUpdateRequestDto
 import org.prography.bff.user.domain.service.UserService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
@@ -24,6 +23,31 @@ class UserControllerImpl(private val userService: UserService) : UserController 
                 userInfo.nickname,
                 userInfo.level,
                 userInfo.createdAt,
+            )
+        return ApiResponse.success(response)
+    }
+
+    @DeleteMapping("/me")
+    override fun withdraw(
+        @AuthUser userId: UUID,
+    ): ApiResponse<String> {
+        userService.withdraw(userId)
+        return ApiResponse.success("성공적으로 삭제되었습니다.")
+    }
+
+    @PatchMapping("/me")
+    override fun updateMyInfo(
+        @AuthUser userId: UUID,
+        @RequestBody request: UserUpdateRequestDto,
+    ): ApiResponse<UserInfoResponseDto> {
+        val updatedUserInfo = userService.updateUserInfo(userId, request)
+        val response =
+            UserInfoResponseDto(
+                updatedUserInfo.userId,
+                updatedUserInfo.provider,
+                updatedUserInfo.nickname,
+                updatedUserInfo.level,
+                updatedUserInfo.createdAt,
             )
         return ApiResponse.success(response)
     }
