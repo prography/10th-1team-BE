@@ -1,13 +1,15 @@
 package org.prography.bff.restaurant.controller.model.review
 
 import io.swagger.v3.oas.annotations.media.Schema
+import org.prography.bff.restaurant.controller.model.enumeration.ReviewPlatform
 import org.prography.bff.restaurant.kakao.review.KakaoReview
 import org.prography.bff.restaurant.naver.review.NaverReview
 import java.time.LocalDateTime
 
-data class Review(
+data class ReviewDto(
     @Schema(example = "ReviewID") val id: String,
     @Schema(example = "낭만고라니") val author: String,
+    val reviewPlatform: ReviewPlatform,
     @Schema(example = "http://th-p.talk.kakao.co.kr/th/talkp/wkO60Hi4gC/Kkimcd9RLaHSydAzHnK2uk/n47lhr.jpg") val authorImageUrl: String?,
     @Schema(
         example = "2025-04-01T20:08:21",
@@ -17,9 +19,10 @@ data class Review(
     @Schema(example = "4.0") val starRating: Double?,
 ) {
     companion object {
-        fun fromNaverReview(naverReview: NaverReview): Review {
-            return Review(
+        fun fromNaverReview(naverReview: NaverReview): ReviewDto {
+            return ReviewDto(
                 id = naverReview.reviewId,
+                reviewPlatform = ReviewPlatform.NAVER,
                 author = naverReview.naverOwnerData.nickname,
                 authorImageUrl = naverReview.naverOwnerData.imageUrl,
                 registeredAt = ReviewDateFormatter.parseNaverToLocalDateTime(naverReview.registeredAt),
@@ -28,9 +31,10 @@ data class Review(
             )
         }
 
-        fun fromKakaoReview(kakaoReview: KakaoReview): Review {
-            return Review(
+        fun fromKakaoReview(kakaoReview: KakaoReview): ReviewDto {
+            return ReviewDto(
                 id = kakaoReview.reviewId.toString(),
+                reviewPlatform = ReviewPlatform.KAKAO,
                 author = kakaoReview.ownerData.nickname,
                 authorImageUrl = kakaoReview.ownerData.profileImageUrl,
                 registeredAt = ReviewDateFormatter.parseKakaoToLocalDateTime(kakaoReview.updatedAt),

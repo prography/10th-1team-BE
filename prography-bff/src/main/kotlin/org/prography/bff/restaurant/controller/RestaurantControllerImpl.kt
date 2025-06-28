@@ -2,6 +2,7 @@ package org.prography.bff.restaurant.controller
 
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.restaurant.controller.model.PlaceDetailDTO
+import org.prography.bff.restaurant.controller.model.review.ReviewListDto
 import org.prography.bff.restaurant.controller.model.strength.StrengthScoresDto
 import org.prography.bff.restaurant.service.RestaurantService
 import org.springframework.web.bind.annotation.GetMapping
@@ -39,8 +40,26 @@ class RestaurantControllerImpl(
                 naverReviewAvgScore = detail.naverReviewAvgScore,
                 naverReviews = detail.naverReviews,
                 dongName = detail.dongName,
+                category = detail.category,
             )
 
         return ApiResponse.success(data)
+    }
+
+    @GetMapping("/reviews/{placeId}")
+    fun getAllReview(
+        @PathVariable placeId: String,
+    ): ApiResponse<ReviewListDto> {
+        val placeReview = restaurantService.getPlaceReview(placeId)
+        return ApiResponse.success(
+            ReviewListDto(
+                name = placeReview.name,
+                roadAddressName = placeReview.roadAddressName,
+                totalCount = placeReview.totalCount,
+                kakaoReviewCount = placeReview.kakaoReviewCount,
+                naverReviewCount = placeReview.naverReviewCount,
+                reviews = placeReview.reviews,
+            ),
+        )
     }
 }

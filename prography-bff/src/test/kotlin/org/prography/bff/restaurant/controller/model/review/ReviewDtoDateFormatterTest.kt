@@ -8,7 +8,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class ReviewDateFormatterTest {
+class ReviewDtoDateFormatterTest {
     @Test
     @DisplayName("parseKakaoToLocalDateTime 정상 변환")
     fun testParseKakao_Valid() {
