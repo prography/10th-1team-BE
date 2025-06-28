@@ -70,4 +70,18 @@ class ReviewDateFormatterTest {
             ReviewDateFormatter.parseNaverToLocalDateTime(input)
         }
     }
+
+    @Test
+    fun `parseNaverToLocalDateTime - 정상 포맷 2자리 연도, 월, 1자리 일`() {
+        val raw = "24.10.5.토"
+        val result = ReviewDateFormatter.parseNaverToLocalDateTime(raw)
+        assertEquals(LocalDateTime.of(2024, 10, 5, 0, 0), result)
+    }
+
+    @Test
+    fun `parseNaverToLocalDateTime - 정상 포맷 2자리 연도, 1자리 월, 일`() {
+        val raw = "24.8.5.토"
+        val result = ReviewDateFormatter.parseNaverToLocalDateTime(raw)
+        assertEquals(LocalDateTime.of(2024, 8, 5, 0, 0), result)
+    }
 }
