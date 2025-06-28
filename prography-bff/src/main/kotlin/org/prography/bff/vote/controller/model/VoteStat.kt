@@ -14,6 +14,11 @@ data class VoteStat(
     @Schema(description = "득표 이유")
     val reason: Reason,
     /**
+     * 유저 상세 투표 여부
+     */
+    @Schema(description = "유저가 투표한 이유")
+    val isUserVoted: Boolean = false,
+    /**
      * 투표 수
      */
     @Schema(description = "득표 수")

@@ -5,7 +5,7 @@ import org.prography.bff.vote.repository.model.VoteEntity
 import org.prography.bff.vote.repository.model.VoteId
 import org.prography.bff.vote.repository.model.enumeration.VotePlatform
 import org.springframework.stereotype.Repository
-import java.util.Optional
+import java.util.*
 
 @Repository
 class VoteCustomQueryRepositoryImpl(
@@ -31,5 +31,12 @@ class VoteCustomQueryRepositoryImpl(
 
     override fun existsById(id: VoteId): Boolean {
         return voteRepository.existsById(id)
+    }
+
+    override fun existsUserVote(
+        userId: UUID,
+        placeId: String,
+    ): Boolean {
+        return historyRepository.existsByUserIdAndPlaceId(userId, placeId)
     }
 }

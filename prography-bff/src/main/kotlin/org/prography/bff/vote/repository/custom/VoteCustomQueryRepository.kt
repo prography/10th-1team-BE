@@ -3,7 +3,7 @@ package org.prography.bff.vote.repository.custom
 import org.prography.bff.vote.repository.model.VoteEntity
 import org.prography.bff.vote.repository.model.VoteId
 import org.prography.bff.vote.repository.model.enumeration.VotePlatform
-import java.util.Optional
+import java.util.*
 
 /**
  * 투표 관련 DB 조회 인터페이스
@@ -23,4 +23,12 @@ interface VoteCustomQueryRepository {
      * 상호명 + 플랫폼 복합키로 VetEntity 유무 판단
      */
     fun existsById(id: VoteId): Boolean
+
+    /**
+     * 상호명 + 유저 ID 기반으로 유저 투표 여부 판단
+     */
+    fun existsUserVote(
+        userId: UUID,
+        placeId: String,
+    ): Boolean
 }

@@ -2,11 +2,9 @@ package org.prography.bff.vote.controller
 
 import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.response.ApiResponse
+import org.prography.bff.config.security.AuthUser
 import org.prography.bff.vote.controller.mapper.VoteMapper
-import org.prography.bff.vote.controller.model.PlatformVoteResultDto
-import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
-import org.prography.bff.vote.controller.model.VoteResult
-import org.prography.bff.vote.controller.model.VoteStat
+import org.prography.bff.vote.controller.model.*
 import org.prography.bff.vote.controller.model.enumeration.MatchPlatform
 import org.prography.bff.vote.controller.model.enumeration.Reason
 import org.prography.bff.vote.repository.model.enumeration.VotePlatform
@@ -31,7 +29,8 @@ class VoteControllerImpl(
 ) : VoteController {
     @GetMapping("/{id}")
     override fun getPlatformVoteResult(placeId: String): ApiResponse<PlatformVoteResultDto> {
-        val infoMap: Map<VotePlatform, VoteInfo> = voteService.getVoteResult(placeId).associateBy { it.platform }
+        val infoMap: Map<VotePlatform, VoteInfo> =
+            voteService.getVoteResult(placeId).associateBy { it.platform }
 
         if (infoMap.isEmpty()) {
             return ApiResponse.success(
@@ -90,5 +89,19 @@ class VoteControllerImpl(
         )
 
         return ApiResponse.success()
+    }
+
+    @GetMapping("/summary/{id}")
+    override fun getVoteSummary(
+        @PathVariable("id") placeId: String,
+        @AuthUser userId: UUID?, // NPE 가능성 존재
+    ): ApiResponse<VoteSummaryDto> {
+        val voteSummary = voteService.getVoteSummary(userId, placeId)
+        return ApiResponse.success(
+            VoteSummaryDto(
+                total = voteSummary.total,
+                isUserVoted = voteSummary.isUserVoted,
+            ),
+        )
     }
 }

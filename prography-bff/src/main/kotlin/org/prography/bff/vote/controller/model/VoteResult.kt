@@ -14,6 +14,11 @@ data class VoteResult(
     @Schema(description = "투표한 플랫폼")
     val platform: MatchPlatform,
     /**
+     * 유저 투표 여부
+     */
+    @Schema(description = "유저가 투표한 플랫폼")
+    val isUserVoted: Boolean = false,
+    /**
      * 투표 수
      */
     @Schema(description = "해당 플랫폼의 득표 수")
