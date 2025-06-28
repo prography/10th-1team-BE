@@ -2,6 +2,7 @@ package org.prography.search.service
 
 import org.prography.search.service.model.AutoCompleteResult
 import org.prography.search.service.model.CursorPlaceResult
+import org.prography.search.service.model.PlaceSearchResult
 import org.prography.search.service.model.enumeration.FilterCategory
 import org.prography.search.service.model.enumeration.SortingStrategy
 
@@ -24,4 +25,9 @@ interface PlaceSearchService {
         category: FilterCategory?,
         strategy: SortingStrategy = SortingStrategy.RELATED,
     ): CursorPlaceResult
+
+    fun recommendPlace(
+        size: Int,
+        addressCodes: List<String>,
+    ): List<PlaceSearchResult>
 }

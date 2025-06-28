@@ -21,11 +21,11 @@ data class PlaceSearchResult(
     /**
      * 주소
      */
-    val addresses: String,
+    val address: String,
     /**
      * 도로명 주소
      */
-    val roadAddresses: String,
+    val roadAddress: String,
     /**
      * 음식점 카테고리
      */
