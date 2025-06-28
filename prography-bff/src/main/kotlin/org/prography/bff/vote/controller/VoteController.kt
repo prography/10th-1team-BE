@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.vote.controller.model.PlatformVoteResultDto
 import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
+import org.prography.bff.vote.controller.model.VoteSummaryDto
+import java.util.*
 
 /**
  * 투표 관련 컨트롤러 Swagger 명세 인터페이스
@@ -61,4 +63,27 @@ interface VoteController {
         placeId: String,
         dto: PlatformVoteSubmitDto,
     ): ApiResponse<Void>
+
+    @Operation(
+        summary = "투표 요약 정보 조회 API",
+        description = """
+        해당 가게에 대한 전체 투표 수 및 유저의 투표 여부를 반환합니다.
+        [FIGMA 디자인](https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1013-20466&t=8HiLclRuTbZ5koFv-4)
+    """,
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = VoteSummaryDto::class),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun getVoteSummary(
+        placeId: String,
+        userId: UUID?,
+    ): ApiResponse<VoteSummaryDto>
 }
