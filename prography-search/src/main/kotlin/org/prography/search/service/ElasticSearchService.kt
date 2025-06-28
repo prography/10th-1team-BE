@@ -4,10 +4,15 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient
 import co.elastic.clients.elasticsearch._types.FieldValue
 import co.elastic.clients.elasticsearch._types.SortOrder
 import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery
+import co.elastic.clients.elasticsearch._types.query_dsl.FunctionScore
+import co.elastic.clients.elasticsearch._types.query_dsl.FunctionScoreQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.MultiMatchQuery
+import co.elastic.clients.elasticsearch._types.query_dsl.NumberRangeQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.Operator
 import co.elastic.clients.elasticsearch._types.query_dsl.PrefixQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.Query
+import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery
+import co.elastic.clients.elasticsearch._types.query_dsl.TermQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.TermsQuery
 import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType
 import co.elastic.clients.elasticsearch.core.SearchRequest
@@ -165,8 +170,8 @@ class ElasticSearchService(
                         id = source.mongoId,
                         legalCode = source.legal,
                         administrativeCode = source.division,
-                        addresses = source.address,
-                        roadAddresses = source.roadAddress,
+                        address = source.address,
+                        roadAddress = source.roadAddress,
                         category = source.category.firstOrNull() ?: EMPTY_CATEGORY,
                         name = source.placeName,
                         imageUrl = source.imageUrl,
@@ -194,6 +199,92 @@ class ElasticSearchService(
             log.error("Unexpected error occurred while searching Elasticsearch", e)
             throw ElasticsearchException.SearchingException(e)
         }
+    }
+
+    override fun recommendPlace(
+        size: Int,
+        addressCodes: List<String>,
+    ): List<PlaceSearchResult> {
+        val imageTermQuery =
+            Query.Builder()
+                .term(
+                    TermQuery.Builder()
+                        .field("image")
+                        .value(true)
+                        .build(),
+                ).build()
+
+        val reviewCountRangeQuery: Query =
+            Query.Builder()
+                .range(
+                    RangeQuery.Builder()
+                        .number(NumberRangeQuery.of { number -> number.field("review_count").gte(100.0) }).build(),
+                )
+                .build()
+
+        val reviewScoreRangeQuery =
+            Query.Builder()
+                .range(
+                    RangeQuery.Builder()
+                        .number(NumberRangeQuery.of { number -> number.field("review_score").gte(3.0) }).build(),
+                )
+                .build()
+
+        val boolQuery =
+            createBoolQueryBuilder(addressCodes)
+                .filter(imageTermQuery)
+                .should(reviewCountRangeQuery, reviewScoreRangeQuery)
+                .build()
+
+        val functionScoreQuery =
+            Query.Builder()
+                .functionScore(
+                    FunctionScoreQuery.Builder()
+                        .query(Query.Builder().bool(boolQuery).build())
+                        .functions(
+                            FunctionScore.Builder()
+                                .randomScore({ rs -> rs })
+                                .build(),
+                        )
+                        .build(),
+                ).build()
+
+        val request =
+            SearchRequest.Builder()
+                .size(size)
+                .query(functionScoreQuery).build()
+        val searchResponse = client.search(request, RestaurantPlace::class.java)
+
+        val hit = searchResponse.hits()
+        val hits = hit.hits()
+        if (hits.isEmpty()) {
+            return emptyList()
+        }
+
+        return hits.map {
+            val source = it.source()!!
+            PlaceSearchResult(
+                id = source.mongoId,
+                legalCode = source.legal,
+                administrativeCode = source.division,
+                address = source.address,
+                roadAddress = source.roadAddress,
+                category = source.category.firstOrNull() ?: EMPTY_CATEGORY,
+                name = source.placeName,
+                imageUrl = source.imageUrl,
+                kakaoReviewCount = source.kakaoReviewCount,
+                kakaoScore = source.kakaoScore,
+                kakaoReview = source.kakaoReview,
+                naverReviewCount = source.naverReviewCount,
+                naverScore = source.naverScore,
+                naverReview = source.naverReview,
+                location = source.location ?: GeoPoint(0.0, 0.0),
+            )
+        }
+    }
+
+    private fun createBoolQueryBuilder(addressCodes: List<String>): BoolQuery.Builder {
+        return this.createBoolQueryBuilder(addressCodes, null)
     }
 
     private fun generateCursorString(
