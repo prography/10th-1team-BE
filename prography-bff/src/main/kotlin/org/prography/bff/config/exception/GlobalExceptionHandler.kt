@@ -1,5 +1,6 @@
 package org.prography.bff.config.exception
 
+import org.prography.bff.config.exception.auth.UnauthorizedException
 import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.exception.external.ExternalApiException
 import org.prography.bff.config.exception.notfound.NotFoundException
@@ -27,6 +28,14 @@ class GlobalExceptionHandler {
         log.warn("NotFoundException: ${e.message}")
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
+            .body(ApiResponse.fail(e.message))
+    }
+
+    @ExceptionHandler(UnauthorizedException::class)
+    fun handleUnauthorizedException(e: UnauthorizedException): ResponseEntity<ApiResponse<Nothing>> {
+        log.warn("UnauthorizedException: ${e.message}")
+        return ResponseEntity
+            .status(HttpStatus.UNAUTHORIZED)
             .body(ApiResponse.fail(e.message))
     }
 

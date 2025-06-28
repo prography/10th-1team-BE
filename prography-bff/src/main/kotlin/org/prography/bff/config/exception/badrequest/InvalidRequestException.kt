@@ -9,4 +9,9 @@ sealed class InvalidRequestException(
      * 투표 이유가 비어있을 경우 발생하는 예외
      */
     class ReasonEmpty : InvalidRequestException("투표 이유는 반드시 한 개 이상을 입력하셔야 합니다.")
+
+    /**
+     * 탈퇴한 유저일 경우 예외
+     */
+    class WithDrawUserException : InvalidRequestException("탈퇴한 유저는 활성화가 필요합니다.")
 }

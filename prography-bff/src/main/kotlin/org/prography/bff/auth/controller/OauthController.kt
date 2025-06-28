@@ -4,9 +4,15 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
+import org.prography.bff.auth.controller.model.RefreshTokenRequest
 import org.prography.bff.auth.controller.model.TokenResponseDto
 import org.prography.bff.config.response.ApiResponse
 
+@Tag(
+    name = "Auth",
+    description = "OAuth Token 전용 API",
+)
 interface OauthController {
     @Operation(summary = "카카오 로그인 콜백", description = "카카오 인가 코드를 받아 로그인합니다.")
     @ApiResponses(
@@ -57,4 +63,25 @@ interface OauthController {
         ],
     )
     fun naverCallback(code: String): ApiResponse<TokenResponseDto>
+
+    @Operation(summary = "토큰 재발급", description = "RefreshToken 기반으로 유효한 토큰을 재생성합니다.")
+    @ApiResponses(
+        value = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "토큰 재발급 성공",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = TokenResponseDto::class),
+                    ),
+                ],
+            ),
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "401",
+                description = "유효하지 않은 리프레시 토큰",
+            ),
+        ],
+    )
+    fun refreshToken(request: RefreshTokenRequest): ApiResponse<TokenResponseDto>
 }
