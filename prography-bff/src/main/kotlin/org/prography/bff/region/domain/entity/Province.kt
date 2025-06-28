@@ -16,5 +16,5 @@ class Province(
         orphanRemoval = true,
         fetch = FetchType.LAZY,
     )
-    val cityList: MutableList<org.prography.bff.region.domain.entity.City> = mutableListOf(),
+    val cityList: MutableList<City> = mutableListOf(),
 )
