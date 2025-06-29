@@ -4,7 +4,11 @@ import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
 import org.prography.bff.vote.controller.mapper.VoteMapper
-import org.prography.bff.vote.controller.model.*
+import org.prography.bff.vote.controller.model.PlatformVoteResultDto
+import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
+import org.prography.bff.vote.controller.model.VoteResult
+import org.prography.bff.vote.controller.model.VoteStat
+import org.prography.bff.vote.controller.model.VoteSummaryDto
 import org.prography.bff.vote.controller.model.enumeration.MatchPlatform
 import org.prography.bff.vote.controller.model.enumeration.Reason
 import org.prography.bff.vote.repository.model.enumeration.VotePlatform
@@ -28,7 +32,9 @@ class VoteControllerImpl(
     private val voteService: VoteService,
 ) : VoteController {
     @GetMapping("/{id}")
-    override fun getPlatformVoteResult(placeId: String): ApiResponse<PlatformVoteResultDto> {
+    override fun getPlatformVoteResult(
+        @PathVariable("id") placeId: String,
+    ): ApiResponse<PlatformVoteResultDto> {
         val infoMap: Map<VotePlatform, VoteInfo> =
             voteService.getVoteResult(placeId).associateBy { it.platform }
 
