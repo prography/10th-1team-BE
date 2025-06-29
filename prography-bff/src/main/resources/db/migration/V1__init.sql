@@ -55,4 +55,10 @@ CREATE TABLE vote_history (
                               category TEXT NOT NULL,
                               platform TEXT NOT NULL,
                               voted_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+--                              CONSTRAINT uk_vote_history_user_place UNIQUE (user_id, place_id)
 );
+
+-- 이미 생성된 vote_history 테이블에 유니크 제약 추가
+ALTER TABLE vote_history
+ADD CONSTRAINT uk_vote_history_user_place
+UNIQUE (user_id, place_id);
