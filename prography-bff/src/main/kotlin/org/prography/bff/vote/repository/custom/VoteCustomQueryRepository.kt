@@ -1,9 +1,12 @@
 package org.prography.bff.vote.repository.custom
 
 import org.prography.bff.vote.repository.model.VoteEntity
+import org.prography.bff.vote.repository.model.VoteHistoryEntity
 import org.prography.bff.vote.repository.model.VoteId
 import org.prography.bff.vote.repository.model.enumeration.VotePlatform
-import java.util.*
+import java.time.LocalDateTime
+import java.util.Optional
+import java.util.UUID
 
 /**
  * 투표 관련 DB 조회 인터페이스
@@ -31,4 +34,13 @@ interface VoteCustomQueryRepository {
         userId: UUID,
         placeId: String,
     ): Boolean
+
+    /**
+     * 특정 기간(from - to) 사이에 해당 유저의 투표 이력 조회
+     */
+    fun findHistoriesByVotedDateBetween(
+        userId: UUID,
+        from: LocalDateTime,
+        to: LocalDateTime,
+    ): List<VoteHistoryEntity>
 }
