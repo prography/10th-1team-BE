@@ -43,17 +43,27 @@ class VoteHistoryEntity(
     @Column(name = "place_id", nullable = false)
     var placeId: String,
     /**
+     * 음식점 유형
+     */
+    @Column(name = "place_name")
+    var placeName: String,
+    /**
      * 투표 이유
      */
-    @Column(name = "category", nullable = false)
+    @Column(name = "reasons", nullable = false)
     @Convert(converter = VoteCategoriesConverter::class)
-    var categories: List<VoteCategory> = emptyList(),
+    var reaons: List<VoteCategory> = emptyList(),
     /**
      * 투표한 플랫폼
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "platform", nullable = false)
     var platform: VotePlatform,
+    /**
+     * 음식점 유형
+     */
+    @Column(name = "category")
+    var category: String,
     /**
      * 투표한 시간
      */

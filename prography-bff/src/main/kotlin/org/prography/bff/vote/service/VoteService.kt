@@ -1,18 +1,20 @@
 package org.prography.bff.vote.service
 
+import jakarta.transaction.Transactional
+import org.prography.bff.config.exception.notfound.NotFoundException
+import org.prography.bff.restaurant.RawRestaurantDataRepository
 import org.prography.bff.vote.repository.VoteCustomCmdRepositoryImpl
 import org.prography.bff.vote.repository.VoteCustomQueryRepositoryImpl
 import org.prography.bff.vote.repository.model.VoteEntity
 import org.prography.bff.vote.repository.model.VoteHistoryEntity
 import org.prography.bff.vote.repository.model.VoteId
-import org.prography.bff.vote.repository.model.enumeration.VoteCategory
 import org.prography.bff.vote.repository.model.enumeration.VotePlatform
 import org.prography.bff.vote.service.model.VoteCategoryInfo
 import org.prography.bff.vote.service.model.VoteInfo
 import org.prography.bff.vote.service.model.VoteSubmit
 import org.prography.bff.vote.service.model.VoteSummary
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.UUID
 
 /**
  * 투표 관련한 서비스
@@ -21,10 +23,12 @@ import java.util.*
 class VoteService(
     private val cmdRepository: VoteCustomCmdRepositoryImpl,
     private val queryRepository: VoteCustomQueryRepositoryImpl,
+    private val restaurantDataRepository: RawRestaurantDataRepository,
 ) {
     /**
      * 투표 하기
      */
+    @Transactional
     fun submit(
         placeId: String,
         vo: VoteSubmit,
@@ -32,6 +36,10 @@ class VoteService(
         if (placeId.isBlank()) {
             throw IllegalArgumentException()
         }
+
+        val restaurantData =
+            restaurantDataRepository.findById(placeId)
+                .orElseThrow { NotFoundException.PlaceNotFoundException() }
 
         val id = VoteId(placeId, vo.platform)
         val entity: VoteEntity =
@@ -51,8 +59,10 @@ class VoteService(
             VoteHistoryEntity(
                 userId = vo.userId,
                 placeId = placeId,
-                category = VoteCategory.HONEST,
+                placeName = restaurantData.kakaoPlaceData?.placeName ?: "NO_NAME",
+                reaons = vo.categories,
                 platform = vo.platform,
+                category = restaurantData.kakaoPlaceData?.categoryName?.split(" > ")?.last() ?: "UNDEFINED",
             )
 
         entity.increase(vo.categories)
@@ -98,12 +108,6 @@ class VoteService(
                     },
             )
         }
-    }
-
-    /**
-     * 사용자 투표 이력
-     */
-    fun getSubmitHistory(userId: String) {
     }
 
     fun getVoteSummary(
