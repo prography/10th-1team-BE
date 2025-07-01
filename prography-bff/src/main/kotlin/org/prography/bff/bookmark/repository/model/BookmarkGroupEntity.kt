@@ -85,7 +85,7 @@ class BookmarkGroupEntity protected constructor() {
         return result
     }
 
-    override fun toString(): String = "BookmarkGroupEntity(userId=$userId, groupName=$groupName"
+    override fun toString(): String = "BookmarkGroupEntity(userId=$userId, groupName=$groupName)"
 
     constructor(
         icon: String,
