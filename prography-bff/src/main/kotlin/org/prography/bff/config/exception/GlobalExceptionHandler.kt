@@ -8,6 +8,7 @@ import org.prography.bff.config.response.ApiResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
@@ -53,5 +54,21 @@ class GlobalExceptionHandler {
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(ApiResponse.fail("알 수 없는 서버 오류가 발생했습니다."))
+    }
+
+    /**
+     * DTO의 @Valid 기반 검증 실패 시(MethodArgumentNotValidException)
+     * 혹은 기타 다른 예외도 필요에 따라 추가 가능
+     */
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    fun handleMethodArgNotValid(ex: MethodArgumentNotValidException): ResponseEntity<ApiResponse<Nothing>> {
+        val fieldErrors: Map<String, List<String>> =
+            ex.bindingResult.fieldErrors
+                .groupBy { it.field }
+                .mapValues { entry ->
+                    entry.value.mapNotNull { it.defaultMessage }
+                }
+
+        return ResponseEntity.badRequest().body(ApiResponse.fail(fieldErrors.toString()))
     }
 }
