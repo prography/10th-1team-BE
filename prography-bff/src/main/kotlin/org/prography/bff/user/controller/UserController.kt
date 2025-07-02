@@ -1,14 +1,16 @@
 package org.prography.bff.user.controller
 
+import io.swagger.v3.oas.annotations.ExternalDocumentation
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.parameters.RequestBody
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
+import org.prography.bff.user.controller.model.UserActivityDto
 import org.prography.bff.user.controller.model.UserInfoResponseDto
 import org.prography.bff.user.controller.model.UserUpdateRequestDto
-import java.util.*
+import java.util.UUID
 import io.swagger.v3.oas.annotations.responses.ApiResponse as SwaggerApiResponse
 
 @Tag(
@@ -89,4 +91,26 @@ interface UserController {
         userId: UUID,
         request: UserUpdateRequestDto,
     ): ApiResponse<UserInfoResponseDto>
+
+    @Operation(
+        summary = "유저의 활동 데이터 조회",
+        description = "유저의 활동 데이터를 캘린더 기준으로 조회하는 API 입니다.",
+        externalDocs =
+            ExternalDocumentation(
+                description = "피그마 링크",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1206-18491&t=wvWu6KGlfjrulv3r-11",
+            ),
+        responses = [
+            SwaggerApiResponse(
+                responseCode = "200",
+                description = "조회 성공",
+                content = [Content(schema = Schema(implementation = UserActivityDto::class))],
+            ),
+        ],
+    )
+    fun getActivityCalendar(
+        userId: UUID,
+        year: Int,
+        month: Int,
+    ): List<UserActivityDto>
 }
