@@ -52,15 +52,7 @@ CREATE TABLE vote_history (
                               id BIGSERIAL PRIMARY KEY,
                               user_id UUID NOT NULL,
                               place_id VARCHAR NOT NULL,
-                              place_name VARCHAR NOT NULL,
-                              reasons TEXT NOT NULL,
-                              category VARCHAR NOT NULL,
+                              category TEXT NOT NULL,
                               platform TEXT NOT NULL,
                               voted_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
---                              CONSTRAINT uk_vote_history_user_place UNIQUE (user_id, place_id)
 );
-
--- 이미 생성된 vote_history 테이블에 유니크 제약 추가
-ALTER TABLE vote_history
-ADD CONSTRAINT uk_vote_history_user_place
-UNIQUE (user_id, place_id);
