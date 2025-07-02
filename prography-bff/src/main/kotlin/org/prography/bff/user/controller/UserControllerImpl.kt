@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
+import org.prography.bff.user.controller.model.UserActivityDto
 import org.prography.bff.user.controller.model.UserInfoResponseDto
 import org.prography.bff.user.controller.model.UserUpdateRequestDto
 import org.prography.bff.user.domain.service.UserService
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.YearMonth
@@ -70,22 +70,36 @@ class UserControllerImpl(
     }
 
     @GetMapping("/activity/calendar")
-    fun getCalendar(
-        @AuthUser userId: UUID?,
-        @Min(2000) @Max(2100) @RequestParam("year") year: Int?,
-        @Min(1) @Max(12) @RequestParam("month") month: Int?,
-    ): ApiResponse<String> {
-        val today = LocalDate.now()
-
+    override fun getActivityCalendar(
+        @AuthUser userId: UUID,
+        @Min(
+            value = 2000,
+            message = "year 최소 {value}이어야 합니다.",
+        )
+        @Max(
+            value = 2100,
+            message = "year 최대 {value}이어야 합니다.",
+        )
+        @RequestParam("year") year: Int,
+        @Min(
+            value = 1,
+            message = "month 최소 {value}이어야 합니다.",
+        )
+        @Max(
+            value = 12,
+            message = "month 최대 {value}이어야 합니다.",
+        )
+        @RequestParam("month") month: Int,
+    ): List<UserActivityDto> {
         val yearMonth =
             YearMonth.of(
-                year?.coerceIn(2000, 2100) ?: today.year,
-                month?.coerceIn(1, 12) ?: today.monthValue,
+                year.coerceIn(2000, 2100),
+                month.coerceIn(1, 12),
             )
         val from: LocalDateTime = yearMonth.atDay(1).atStartOfDay()
         val to: LocalDateTime = yearMonth.atEndOfMonth().atTime(LocalTime.MAX)
 
         val voteActivities: List<VoteActivity> = activityService.getVoteActivites(userId, from, to)
-        return ApiResponse.success("$from / $to")
+        TODO("Not yet implemented")
     }
 }

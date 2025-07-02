@@ -1,5 +1,6 @@
 package org.prography.bff.user.service
 
+import org.prography.bff.bookmark.repository.BookmarkCustomQueryRepositoryImpl
 import org.prography.bff.user.service.model.VoteActivity
 import org.prography.bff.vote.repository.VoteCustomQueryRepositoryImpl
 import org.prography.bff.vote.repository.model.VoteHistoryEntity
@@ -10,6 +11,7 @@ import java.util.UUID
 @Service
 class UserActivityService(
     private val voteQueryRepository: VoteCustomQueryRepositoryImpl,
+    private val bookmarkQueryRepository: BookmarkCustomQueryRepositoryImpl,
 ) {
     fun getVoteActivites(
         userId: UUID?,
@@ -28,8 +30,7 @@ class UserActivityService(
                 category = it.category,
                 platform = it.platform.name,
                 reasons =
-                    it.reaons.map {
-                            reason ->
+                    it.reaons.map { reason ->
                         reason.name
                     },
                 placeName = it.placeName,
