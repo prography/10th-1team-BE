@@ -1,13 +1,13 @@
-package org.prography.bff.vote.service.model
+package org.prography.bff.vote.service.model.composite
 
 import org.prography.bff.vote.repository.model.enumeration.VoteCategory
 
 /**
- * 득표 범주 정보
+ * 득표 상태
  */
-data class VoteCategoryInfo(
+data class VotingStats(
     /**
-     * 득표 유형
+     * 득표 범주
      */
     val category: VoteCategory,
     /**

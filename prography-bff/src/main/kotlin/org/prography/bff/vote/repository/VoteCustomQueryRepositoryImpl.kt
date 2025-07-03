@@ -65,4 +65,11 @@ class VoteCustomQueryRepositoryImpl(
                 )
         }.filterNotNull()
     }
+
+    override fun findHistory(
+        id: UUID,
+        placeId: String,
+    ): VoteHistoryEntity {
+        TODO("Not yet implemented")
+    }
 }

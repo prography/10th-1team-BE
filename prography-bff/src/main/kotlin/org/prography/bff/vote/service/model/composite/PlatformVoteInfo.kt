@@ -1,11 +1,11 @@
-package org.prography.bff.vote.service.model
+package org.prography.bff.vote.service.model.composite
 
 import org.prography.bff.vote.repository.model.enumeration.VotePlatform
 
 /**
- * 득표 정보
+ * 플랫폼 득표 정보
  */
-data class VoteInfo(
+data class PlatformVoteInfo(
     /**
      * 투표 플랫폼
      */
@@ -17,5 +17,5 @@ data class VoteInfo(
     /**
      * 득표 유형
      */
-    val categories: List<VoteCategoryInfo>,
+    val categories: List<VotingStats>,
 )
