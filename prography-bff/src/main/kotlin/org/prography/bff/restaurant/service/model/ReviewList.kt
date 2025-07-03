@@ -6,6 +6,8 @@ import org.prography.bff.restaurant.controller.model.review.ReviewDto
 
 data class ReviewList(
     val name: String,
+    val kakaoPlaceUri: String,
+    val naverPlaceUri: String,
     val roadAddressName: String,
     val totalCount: Int,
     val kakaoReviewCount: Int,
@@ -16,6 +18,9 @@ data class ReviewList(
         fun fromDomain(restaurantData: RawRestaurantData): ReviewList {
             val kakaoPlaceInfo =
                 restaurantData.kakaoPlaceData
+                    ?: throw NotFoundException.PlaceInfoNotFoundException()
+            val naverPlaceInfo =
+                restaurantData.naverPlaceData
                     ?: throw NotFoundException.PlaceInfoNotFoundException()
             val kakaoReviewData =
                 restaurantData.kakaoReviewData
@@ -34,6 +39,8 @@ data class ReviewList(
 
             return ReviewList(
                 name = kakaoPlaceInfo.placeName,
+                kakaoPlaceUri = kakaoPlaceInfo.id,
+                naverPlaceUri = naverPlaceInfo.id,
                 roadAddressName = kakaoPlaceInfo.roadAddressName,
                 totalCount = kakaoReviewData.score.reviewCount + naverReviewScore.totalCount,
                 kakaoReviewCount = kakaoReviewData.score.reviewCount,

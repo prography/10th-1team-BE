@@ -11,15 +11,20 @@ data class UserInfoDto(
     val nickname: String,
     val level: Int,
     val createdAt: LocalDateTime,
+    val isNewUser: Boolean,
 ) {
     companion object {
-        fun fromUser(user: User): UserInfoDto {
+        fun fromUser(
+            user: User,
+            isNewUser: Boolean = false,
+        ): UserInfoDto {
             return UserInfoDto(
-                user.id,
-                user.provider,
-                user.nickname,
-                user.level,
-                user.createdAt,
+                userId = user.id,
+                provider = user.provider,
+                nickname = user.nickname,
+                level = user.level,
+                createdAt = user.createdAt,
+                isNewUser = isNewUser,
             )
         }
     }

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.restaurant.controller.model.PlaceDetailDTO
+import org.prography.bff.restaurant.controller.model.review.ReviewListDto
 import io.swagger.v3.oas.annotations.responses.ApiResponse as SwaggerResponse
 
 @Tag(
@@ -39,4 +40,31 @@ interface RestaurantController {
         ],
     )
     fun getPlaceSummary(placeId: String): ApiResponse<PlaceDetailDTO>
+
+    @Operation(
+        summary = "음식점 리뷰 전체 조회",
+        description = "Kakao, Naver 등에서 수집한 음식점 리뷰들을 모두 반환합니다.",
+        responses = [
+            SwaggerResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = ReviewListDto::class),
+                    ),
+                ],
+            ),
+            SwaggerResponse(
+                responseCode = "404",
+                description = "존재하지 않거나 리뷰가 수집되지 않은 음식점",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = ApiResponse.Failure::class),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun getAllReview(placeId: String): ApiResponse<ReviewListDto>
 }

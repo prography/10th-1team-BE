@@ -47,13 +47,15 @@ class RestaurantControllerImpl(
     }
 
     @GetMapping("/reviews/{placeId}")
-    fun getAllReview(
+    override fun getAllReview(
         @PathVariable placeId: String,
     ): ApiResponse<ReviewListDto> {
         val placeReview = restaurantService.getPlaceReview(placeId)
         return ApiResponse.success(
             ReviewListDto(
                 name = placeReview.name,
+                kakaoPlaceUri = placeReview.kakaoPlaceUri,
+                naverPlaceUri = placeReview.naverPlaceUri,
                 roadAddressName = placeReview.roadAddressName,
                 totalCount = placeReview.totalCount,
                 kakaoReviewCount = placeReview.kakaoReviewCount,
