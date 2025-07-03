@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
+import org.prography.bff.config.security.AuthUser
 import org.prography.bff.vote.controller.model.PlatformVoteResultDto
 import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
 import org.prography.bff.vote.controller.model.VoteSummaryDto
@@ -40,7 +41,7 @@ interface VoteController {
             ),
         ],
     )
-    fun getPlatformVoteResult(placeId: String): ApiResponse<PlatformVoteResultDto>
+    fun getPlatformVoteResult(userId: UUID?, placeId: String): ApiResponse<PlatformVoteResultDto>
 
     @Operation(
         summary = "플랫폼 투표 하기 API",
@@ -60,6 +61,7 @@ interface VoteController {
         ],
     )
     fun submitPlatformVote(
+        userId: UUID,
         placeId: String,
         dto: PlatformVoteSubmitDto,
     ): ApiResponse<Void>
@@ -84,6 +86,6 @@ interface VoteController {
     )
     fun getVoteSummary(
         placeId: String,
-        userId: UUID?,
+        userId: UUID,
     ): ApiResponse<VoteSummaryDto>
 }

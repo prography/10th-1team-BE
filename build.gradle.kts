@@ -27,6 +27,12 @@ subprojects {
         }
     }
 
+    tasks.withType<JavaCompile>().configureEach {
+        sourceCompatibility = "21"
+        targetCompatibility = "21"
+        options.release.set(21)
+    }
+
     // 테스트 환경: JUnit5 + Sprint Test
     tasks.withType<Test> {
         workingDir = rootProject.projectDir

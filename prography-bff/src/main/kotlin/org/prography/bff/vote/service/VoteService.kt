@@ -81,7 +81,7 @@ class VoteService(
      * 투표 취소
      */
     fun cancel(placeId: String) {
-        // TODO 아직 기획 미정f
+        // TODO 아직 기획 미정
     }
 
     /**
