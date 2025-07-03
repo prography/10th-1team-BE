@@ -27,18 +27,19 @@ class OAuthLoginService(
         val token = provider.requestAccessToken(code)
         val userInfo = provider.requestUserInfo(token)
 
-        val user = userService.registerIfNotExists(userInfo.provider, userInfo.providerId)
+        val userInfoDto = userService.registerIfNotExists(userInfo.provider, userInfo.providerId)
         return LoginDto(
             accessToken =
                 jwtProvider.createToken(
                     tokenType = TokenType.ACCESS_TOKEN,
-                    subject = user.id.toString(),
+                    subject = userInfoDto.userId.toString(),
                 ),
             refreshToken =
                 jwtProvider.createToken(
                     tokenType = TokenType.REFRESH_TOKEN,
-                    subject = user.id.toString(),
+                    subject = userInfoDto.userId.toString(),
                 ),
+            isNewUser = userInfoDto.isNewUser,
         )
     }
 
@@ -66,6 +67,7 @@ class OAuthLoginService(
                     tokenType = TokenType.REFRESH_TOKEN,
                     subject = user.userId.toString(),
                 ),
+            isNewUser = false,
         )
     }
 }
