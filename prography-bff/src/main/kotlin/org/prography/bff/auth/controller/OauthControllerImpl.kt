@@ -21,6 +21,7 @@ class OauthControllerImpl(
             TokenResponseDto(
                 accessToken = tokenDto.accessToken,
                 refreshToken = tokenDto.refreshToken,
+                isNewUser = tokenDto.isNewUser,
             ),
         )
     }
@@ -34,6 +35,7 @@ class OauthControllerImpl(
             TokenResponseDto(
                 accessToken = tokenDto.accessToken,
                 refreshToken = tokenDto.refreshToken,
+                isNewUser = tokenDto.isNewUser,
             ),
         )
     }
@@ -47,6 +49,7 @@ class OauthControllerImpl(
             TokenResponseDto(
                 accessToken = tokenDto.accessToken,
                 refreshToken = tokenDto.refreshToken,
+                isNewUser = tokenDto.isNewUser,
             ),
         )
     }

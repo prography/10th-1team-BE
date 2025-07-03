@@ -24,26 +24,30 @@ class UserService(
         return user
     }
 
+    /**
+     * 신규 유저는 회원가입 및 신규 유저 플래그 추가
+     */
     @Transactional
     fun registerIfNotExists(
         provider: Provider,
         providerId: String,
-    ): User {
+    ): UserInfoDto {
         val user =
             userRepository.findByProviderAndProviderId(provider, providerId)
-                ?: return userRepository.save(
-                    User(
-                        provider = provider,
-                        providerId = providerId,
-                        nickname = NicknameGenerator.generate(),
+                ?: return UserInfoDto.fromUser(
+                    userRepository.save(
+                        User(
+                            provider = provider,
+                            providerId = providerId,
+                            nickname = NicknameGenerator.generate(),
+                        ),
                     ),
+                    true,
                 )
 
         // 회원 탈퇴 유저는 자동 복구
-        if (user.status) {
-            user.reactivate()
-        }
-        return user
+        if (user.status) user.reactivate()
+        return UserInfoDto.fromUser(user)
     }
 
     fun getUserInfo(userId: UUID): UserInfoDto {
