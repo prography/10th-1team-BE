@@ -7,7 +7,7 @@ import java.util.UUID
 /**
  * 투표 하기 위한 정보를 담은 객체
  */
-data class VoteSubmit(
+data class SubmitVo(
     /**
      * 투표한 유저의 아이디
      */

@@ -4,17 +4,18 @@ import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
 import org.prography.bff.vote.controller.mapper.VoteMapper
-import org.prography.bff.vote.controller.model.PlatformVoteResultDto
-import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
-import org.prography.bff.vote.controller.model.VoteResult
-import org.prography.bff.vote.controller.model.VoteStat
+import org.prography.bff.vote.controller.model.VoteResultDto
+import org.prography.bff.vote.controller.model.VoteSubmitDto
 import org.prography.bff.vote.controller.model.VoteSummaryDto
+import org.prography.bff.vote.controller.model.composite.VoteRecord
+import org.prography.bff.vote.controller.model.composite.VotedResult
 import org.prography.bff.vote.controller.model.enumeration.MatchPlatform
 import org.prography.bff.vote.controller.model.enumeration.Reason
 import org.prography.bff.vote.repository.model.enumeration.VotePlatform
 import org.prography.bff.vote.service.VoteService
-import org.prography.bff.vote.service.model.VoteInfo
-import org.prography.bff.vote.service.model.VoteSubmit
+import org.prography.bff.vote.service.model.PlatformResultVo
+import org.prography.bff.vote.service.model.SubmitVo
+import org.prography.bff.vote.service.model.composite.PlatformVoteInfo
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -33,61 +34,82 @@ class VoteControllerImpl(
 ) : VoteController {
     @GetMapping("/{id}")
     override fun getPlatformVoteResult(
+        @AuthUser userId: UUID?,
         @PathVariable("id") placeId: String,
-    ): ApiResponse<PlatformVoteResultDto> {
-        val infoMap: Map<VotePlatform, VoteInfo> =
-            voteService.getVoteResult(placeId).associateBy { it.platform }
+    ): ApiResponse<VoteResultDto> {
+        if (placeId.isBlank()) {
+            throw IllegalArgumentException()
+        }
 
-        if (infoMap.isEmpty()) {
+        val vo: PlatformResultVo = voteService.getVoteResult(userId, placeId)
+        val platformMap: Map<VotePlatform, PlatformVoteInfo> =
+            vo.result.associateBy { it.platform }
+
+        if (platformMap.isEmpty()) {
             return ApiResponse.success(
-                PlatformVoteResultDto(
-                    voted = false,
-                    results = emptyList(),
+                VoteResultDto(
+                    record = null,
+                    results = emptyMap(),
                 ),
             )
         }
 
-        val stats =
-            MatchPlatform.entries.map { matchPlatform ->
-                val platform = VoteMapper.service(matchPlatform)
-                val info = infoMap[platform]
+        val results: Map<MatchPlatform, VotedResult> =
+            MatchPlatform.entries.associateWith { matchPlatform ->
+                val info: PlatformVoteInfo? = platformMap[VoteMapper.service(matchPlatform)]
+                if (info == null) {
+                    VotedResult(
+                        reasons = Reason.entries.associateWith { 0L },
+                    )
+                } else {
+                    val reasons =
+                        Reason.entries.associateWith { reason ->
+                            val categoryMap = info.categories.associateBy { it.category }
+                            val category = VoteMapper.service(reason)
+                            categoryMap[category]?.count ?: 0L
+                        }
 
-                val categoryMap = info?.categories?.associateBy { it.category } ?: emptyMap()
-
-                val reasons =
-                    Reason.entries.map { reason ->
-                        val category = VoteMapper.service(reason)
-                        val count = categoryMap[category]?.count ?: 0L
-                        VoteStat(reason = reason, count = count)
-                    }
-
-                VoteResult(
-                    platform = matchPlatform,
-                    count = info?.total ?: 0L,
-                    reasons = reasons,
-                )
+                    VotedResult(
+                        count = info.total,
+                        reasons = reasons,
+                    )
+                }
             }
 
         return ApiResponse.success(
-            PlatformVoteResultDto(
-                voted = true,
-                results = stats,
+            VoteResultDto(
+                total = platformMap.values.sumOf { it.total },
+                voted = vo.history != null,
+                record =
+                    vo.history?.let {
+                        VoteRecord(
+                            platform = VoteMapper.controller(it.platform),
+                            reason =
+                                it.reasons.map { reason ->
+                                    VoteMapper.controller(reason)
+                                },
+                            votedDate = it.votedDate,
+                        )
+                    },
+                results = results,
             ),
         )
     }
 
     @PatchMapping("/submit/{id}")
     override fun submitPlatformVote(
+        @AuthUser userId: UUID,
         @PathVariable("id") placeId: String,
-        @RequestBody dto: PlatformVoteSubmitDto,
+        @RequestBody dto: VoteSubmitDto,
     ): ApiResponse<Void> {
         if (dto.reasons.isEmpty()) {
             throw InvalidRequestException.ReasonEmpty()
         }
+
         voteService.submit(
             placeId = placeId,
             vo =
-                VoteSubmit(
+                SubmitVo(
                     userId = UUID.randomUUID(),
                     platform = VoteMapper.service(dto.platform),
                     categories = dto.reasons.map { VoteMapper.service(it) },
@@ -106,7 +128,7 @@ class VoteControllerImpl(
         return ApiResponse.success(
             VoteSummaryDto(
                 total = voteSummary.total,
-                isUserVoted = voteSummary.isUserVoted,
+                voted = voteSummary.isUserVoted,
             ),
         )
     }

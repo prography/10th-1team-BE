@@ -6,10 +6,10 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
-import org.prography.bff.vote.controller.model.PlatformVoteResultDto
-import org.prography.bff.vote.controller.model.PlatformVoteSubmitDto
+import org.prography.bff.vote.controller.model.VoteResultDto
+import org.prography.bff.vote.controller.model.VoteSubmitDto
 import org.prography.bff.vote.controller.model.VoteSummaryDto
-import java.util.*
+import java.util.UUID
 
 /**
  * 투표 관련 컨트롤러 Swagger 명세 인터페이스
@@ -33,14 +33,17 @@ interface VoteController {
                         mediaType = "application/json",
                         array =
                             ArraySchema(
-                                schema = Schema(implementation = PlatformVoteResultDto::class),
+                                schema = Schema(implementation = VoteResultDto::class),
                             ),
                     ),
                 ],
             ),
         ],
     )
-    fun getPlatformVoteResult(placeId: String): ApiResponse<PlatformVoteResultDto>
+    fun getPlatformVoteResult(
+        userId: UUID?,
+        placeId: String,
+    ): ApiResponse<VoteResultDto>
 
     @Operation(
         summary = "플랫폼 투표 하기 API",
@@ -60,8 +63,9 @@ interface VoteController {
         ],
     )
     fun submitPlatformVote(
+        userId: UUID,
         placeId: String,
-        dto: PlatformVoteSubmitDto,
+        dto: VoteSubmitDto,
     ): ApiResponse<Void>
 
     @Operation(

@@ -43,4 +43,12 @@ interface VoteCustomQueryRepository {
         from: LocalDateTime,
         to: LocalDateTime,
     ): List<VoteHistoryEntity>
+
+    /**
+     * 유저의 아이디와 가게 아이디를 통해서 투효 내역 조회
+     */
+    fun findHistory(
+        id: UUID,
+        placeId: String,
+    ): VoteHistoryEntity
 }

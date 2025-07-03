@@ -8,7 +8,7 @@ import org.prography.bff.vote.controller.model.enumeration.Reason
  * 플랫폼 투표 DTO
  */
 @Schema(description = "플랫폼 투표 요청")
-data class PlatformVoteSubmitDto(
+data class VoteSubmitDto(
     /**
      * 투표한 플랫폼
      */
