@@ -4,7 +4,9 @@ import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
+import org.prography.bff.user.controller.model.ActivityVote
 import org.prography.bff.user.controller.model.UserActivityDto
+import org.prography.bff.user.controller.model.UserGroup
 import org.prography.bff.user.controller.model.UserInfoResponseDto
 import org.prography.bff.user.controller.model.UserUpdateRequestDto
 import org.prography.bff.user.domain.service.UserService
@@ -100,6 +102,20 @@ class UserControllerImpl(
         val to: LocalDateTime = yearMonth.atEndOfMonth().atTime(LocalTime.MAX)
 
         val voteActivities: List<VoteActivity> = activityService.getVoteActivites(userId, from, to)
+        TODO("Not yet implemented")
+    }
+
+    @GetMapping("/activity/group")
+    override fun getGroupActivity(
+        @AuthUser userId: UUID,
+    ): List<UserGroup> {
+        TODO("Not yet implemented")
+    }
+
+    @GetMapping("/activity/vote")
+    override fun getVoteActivity(
+        @AuthUser userId: UUID,
+    ): List<ActivityVote> {
         TODO("Not yet implemented")
     }
 }
