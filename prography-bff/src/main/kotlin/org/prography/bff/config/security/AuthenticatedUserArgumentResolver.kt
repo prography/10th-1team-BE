@@ -20,9 +20,14 @@ class AuthenticatedUserArgumentResolver : HandlerMethodArgumentResolver {
         mavContainer: ModelAndViewContainer?,
         webRequest: NativeWebRequest,
         binderFactory: WebDataBinderFactory?,
-    ): Any {
+    ): UUID? {
         val request = webRequest.nativeRequest as HttpServletRequest
-        return request.getAttribute("userId")
-            ?: throw InvalidRequestException.InvalidTokenException()
+        val userIdAttr = request.getAttribute("userId") ?: return null
+
+        return try {
+            UUID.fromString(userIdAttr.toString())
+        } catch (e: IllegalArgumentException) {
+            throw InvalidRequestException.InvalidTokenException()
+        }
     }
 }

@@ -5,17 +5,13 @@ import org.prography.bff.config.response.CursorResponse
 import org.prography.bff.search.controller.mapper.CategoryMapper
 import org.prography.bff.search.controller.mapper.StrategyMapper
 import org.prography.bff.search.controller.model.AutoCompleteResponseDTO
-import org.prography.bff.search.controller.model.PlaceDetailDTO
 import org.prography.bff.search.controller.model.Region
 import org.prography.bff.search.controller.model.ReviewSummary
 import org.prography.bff.search.controller.model.SearchResponseDTO
 import org.prography.bff.search.controller.model.enumeration.FoodCategory
 import org.prography.bff.search.controller.model.enumeration.OrderStrategy
-import org.prography.bff.search.model.strength.StrengthScoresDto
-import org.prography.bff.search.service.mock.MockService
 import org.prography.search.service.PlaceSearchService
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/search")
 class SearchControllerImpl(
-    private val mockService: MockService,
     private val placeSearchService: PlaceSearchService,
 ) : SearchController {
     @GetMapping("/auto")
@@ -51,7 +46,7 @@ class SearchControllerImpl(
         return ApiResponse.success(data)
     }
 
-    @GetMapping("")
+    @GetMapping
     override fun searchTerm(
         @RequestParam(required = true, name = "keyword") keyword: String,
         @RequestParam(required = false, name = "size") size: Int?,
@@ -74,8 +69,8 @@ class SearchControllerImpl(
             cursorSearch.result.map { result ->
                 SearchResponseDTO(
                     id = result.id,
-                    addresses = result.addresses,
-                    roadAddresses = result.roadAddresses,
+                    addresses = result.address,
+                    roadAddresses = result.roadAddress,
                     category = result.category,
                     name = result.name,
                     imageUrl = result.imageUrl,
@@ -105,34 +100,41 @@ class SearchControllerImpl(
         )
     }
 
-    @GetMapping("/detail/{id}")
-    override fun getMockSummary(
-        @PathVariable(value = "id") placeId: String,
-    ): ApiResponse<PlaceDetailDTO> {
-        val detail = mockService.getPlaceDetail(placeId)
+    @GetMapping("/recommend")
+    override fun recommandPlace(
+        @RequestParam(required = false, name = "size") size: Int?,
+        @RequestParam(required = false, name = "dong_code") addressCodes: List<String>,
+    ): ApiResponse<List<SearchResponseDTO>> {
+        val data: List<SearchResponseDTO> =
+            placeSearchService.recommendPlace(
+                size =
+                    size
+                        ?: 3,
+                addressCodes = addressCodes,
+            ).map {
+                SearchResponseDTO(
+                    id = it.id,
+                    addresses = it.address,
+                    roadAddresses = it.roadAddress,
+                    category = it.category,
+                    name = it.name,
+                    imageUrl = it.imageUrl,
+                    kakao =
+                        ReviewSummary(
+                            count = it.kakaoReviewCount,
+                            score = it.kakaoScore,
+                            processed = it.kakaoReview,
+                        ),
+                    naver =
+                        ReviewSummary(
+                            count = it.naverReviewCount,
+                            score = it.naverScore,
+                            processed = it.naverReview,
+                        ),
+                    region = Region("법정동 이름", it.legalCode),
+                )
+            }
 
-        val data =
-            PlaceDetailDTO(
-                detail.kakaoPlaceUri,
-                detail.naverPlaceUri,
-                detail.name,
-                detail.addressName,
-                detail.roadAddressName,
-                detail.bCode,
-                detail.x,
-                detail.y,
-                detail.photos,
-                StrengthScoresDto.fromDomain(detail.strengthScores),
-                detail.kakaoReviewCount,
-                detail.kakaoReviewAvgScore,
-                detail.kakaoReviews,
-                detail.kakaoVoteRate,
-                detail.naverReviewCount,
-                detail.naverReviewAvgScore,
-                detail.naverReviews,
-                detail.naverVoteRate,
-            )
-
-        return ApiResponse.success(data)
+        return ApiResponse.success(data = data)
     }
 }

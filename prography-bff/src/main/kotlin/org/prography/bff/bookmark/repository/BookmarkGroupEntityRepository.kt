@@ -1,0 +1,11 @@
+package org.prography.bff.bookmark.repository
+
+import com.linecorp.kotlinjdsl.support.spring.data.jpa.repository.KotlinJdslJpqlExecutor
+import org.prography.bff.bookmark.repository.model.BookmarkGroupEntity
+import org.springframework.data.jpa.repository.JpaRepository
+import java.util.UUID
+
+/**
+ * BookmarkGroupEntity 관련 Spring Data JPA + Kotlin JDSL 인터페이스
+ */
+interface BookmarkGroupEntityRepository : JpaRepository<BookmarkGroupEntity, UUID>, KotlinJdslJpqlExecutor

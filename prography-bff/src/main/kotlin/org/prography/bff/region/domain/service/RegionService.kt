@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.annotation.PostConstruct
+import org.prography.bff.config.exception.notfound.NotFoundException
 import org.prography.bff.region.domain.entity.City
+import org.prography.bff.region.domain.entity.Dong
 import org.prography.bff.region.domain.entity.Province
 import org.prography.bff.region.domain.repository.CityRepository
 import org.prography.bff.region.domain.repository.DongRepository
 import org.prography.bff.region.domain.repository.ProvinceRepository
 import org.springframework.core.io.ResourceLoader
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -29,6 +32,11 @@ class RegionService(
         @JsonProperty("읍면동명") val townshipName: String?,
         @JsonProperty("리명") val villageName: String?,
     )
+
+    fun findRegionByBCode(bCode: String): String {
+        val dong = dongRepo.findByIdOrNull(bCode) ?: throw NotFoundException.DongNotFoundException()
+        return dong.name
+    }
 
     @PostConstruct
     @Transactional
@@ -77,7 +85,7 @@ class RegionService(
                                 listOfNotNull(dto.townshipName, dto.villageName)
                                     .joinToString(" ")
                             val dong =
-                                org.prography.bff.region.domain.entity.Dong(
+                                Dong(
                                     code = dongCode,
                                     name = dongName,
                                     city = city,

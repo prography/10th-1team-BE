@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: prod
+    active: local
     # prod / dev 는 엘라스틱 연결 시도, local 시 엘라스틱 연결 안함
 
   config:
@@ -32,7 +32,10 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
-
+  flyway:
+    baselineVersion: 1
+    enabled: true
+    locations: classpath:db/migration
   jpa:
     open-in-view: true
     hibernate:
@@ -46,6 +49,9 @@ management:
   endpoint:
     health:
       show-details: NEVER
+  health:
+    elasticsearch:
+      enabled: false
 
 kakao:
   client-id: ${KAKAO_CLIENT_ID:LOCAL_TEMP}

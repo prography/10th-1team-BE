@@ -27,6 +27,7 @@ dependencies {
 
     // JPA
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.flywaydb:flyway-database-postgresql")
 
     // Postgresql
     runtimeOnly("org.postgresql:postgresql")

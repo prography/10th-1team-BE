@@ -1,19 +1,24 @@
 package org.prography.bff.search.controller
 
+import io.swagger.v3.oas.annotations.ExternalDocumentation
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.response.CursorResponse
 import org.prography.bff.search.controller.model.AutoCompleteResponseDTO
-import org.prography.bff.search.controller.model.PlaceDetailDTO
 import org.prography.bff.search.controller.model.SearchResponseDTO
 import org.prography.bff.search.controller.model.enumeration.FoodCategory
 import org.prography.bff.search.controller.model.enumeration.OrderStrategy
 
+@Tag(
+    name = "Search",
+    description = "검색 관련 API",
+)
 interface SearchController {
     @Operation(
         summary = "자동 완성 API",
@@ -174,29 +179,44 @@ interface SearchController {
     ): ApiResponse<CursorResponse<SearchResponseDTO>>
 
     @Operation(
-        summary = "음식점 세부 페이지 정보",
-        description = "부족한 정보는 말해주세요.",
+        summary = "추천 맛집 리스트 조회",
+        description = "메인 화면에 보여줄 추천 맛집 3개를 반환합니다.",
+        externalDocs =
+            ExternalDocumentation(
+                description = "노션 문서",
+                url = "https://www.notion.so/21cc0f5d7a1d80939270eb796996037a",
+            ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
                 responseCode = "200",
                 content = [
-                    Content(
+                    io.swagger.v3.oas.annotations.media.Content(
                         mediaType = "application/json",
-                        schema = Schema(implementation = PlaceDetailDTO::class),
-                    ),
-                ],
-            ),
-            io.swagger.v3.oas.annotations.responses.ApiResponse(
-                responseCode = "404",
-                description = "데이터가 수집되지 않은 음식점인 경우",
-                content = [
-                    Content(
-                        mediaType = "application/json",
-                        schema = Schema(implementation = ApiResponse.Failure::class),
+                        array =
+                            io.swagger.v3.oas.annotations.media.ArraySchema(
+                                schema = io.swagger.v3.oas.annotations.media.Schema(implementation = SearchResponseDTO::class),
+                                arraySchema = io.swagger.v3.oas.annotations.media.Schema(description = "Cursor-paginated list"),
+                            ),
                     ),
                 ],
             ),
         ],
     )
-    fun getMockSummary(placeId: String): ApiResponse<PlaceDetailDTO>
+    fun recommandPlace(
+        @Parameter(
+            name = "size",
+            `in` = ParameterIn.QUERY,
+            description = "한 번에 조회할 결과 개수",
+            required = false,
+            example = "5",
+        )
+        size: Int?,
+        @Parameter(
+            name = "dong_code",
+            `in` = ParameterIn.QUERY,
+            description = "검색을 제한할 구 코드 리스트 (여러 개 전달 가능), 비어있을 경우 강남구 서치",
+            required = false,
+        )
+        addressCodes: List<String> = emptyList(),
+    ): ApiResponse<List<SearchResponseDTO>>
 }
