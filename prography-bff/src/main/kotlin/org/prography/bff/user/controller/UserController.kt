@@ -114,7 +114,7 @@ interface UserController {
         userId: UUID,
         year: Int,
         month: Int,
-    ): List<UserActivityDto>
+    ): ApiResponse<List<UserActivityDto>>
 
     @Operation(
         summary = "유저가 생성한 그룹 조회",
@@ -132,7 +132,7 @@ interface UserController {
             ),
         ],
     )
-    fun getGroupActivity(userId: UUID): List<UserGroup>
+    fun getGroupActivity(userId: UUID): ApiResponse<List<UserGroup>>
 
     @Operation(
         summary = "유저의 투표 데이터 조회",
@@ -150,5 +150,5 @@ interface UserController {
             ),
         ],
     )
-    fun getVoteActivity(userId: UUID): List<ActivityVote>
+    fun getVoteActivity(userId: UUID): ApiResponse<List<ActivityVote>>
 }

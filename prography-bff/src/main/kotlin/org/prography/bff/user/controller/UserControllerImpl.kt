@@ -12,6 +12,7 @@ import org.prography.bff.user.controller.model.UserUpdateRequestDto
 import org.prography.bff.user.domain.service.UserService
 import org.prography.bff.user.service.UserActivityService
 import org.prography.bff.user.service.model.VoteActivity
+import org.prography.bff.vote.controller.model.enumeration.MatchPlatform
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -92,7 +93,7 @@ class UserControllerImpl(
             message = "month 최대 {value}이어야 합니다.",
         )
         @RequestParam("month") month: Int,
-    ): List<UserActivityDto> {
+    ): ApiResponse<List<UserActivityDto>> {
         val yearMonth =
             YearMonth.of(
                 year.coerceIn(2000, 2100),
@@ -101,21 +102,33 @@ class UserControllerImpl(
         val from: LocalDateTime = yearMonth.atDay(1).atStartOfDay()
         val to: LocalDateTime = yearMonth.atEndOfMonth().atTime(LocalTime.MAX)
 
-        val voteActivities: List<VoteActivity> = activityService.getVoteActivites(userId, from, to)
+        val voteActivities: List<VoteActivity> = activityService.getVoteActivities(userId, from, to)
         TODO("Not yet implemented")
     }
 
     @GetMapping("/activity/group")
     override fun getGroupActivity(
         @AuthUser userId: UUID,
-    ): List<UserGroup> {
+    ): ApiResponse<List<UserGroup>> {
         TODO("Not yet implemented")
     }
 
     @GetMapping("/activity/vote")
     override fun getVoteActivity(
         @AuthUser userId: UUID,
-    ): List<ActivityVote> {
-        TODO("Not yet implemented")
+    ): ApiResponse<List<ActivityVote>> {
+        val activities =
+            activityService.getVoteActivities(userId).map {
+                ActivityVote(
+                    placeId = it.placeId,
+                    placeName = it.placeName,
+                    category = it.category,
+                    platform = MatchPlatform.fromString(it.platform),
+                    reasons = it.reasons,
+                    votedDate = it.votedDate,
+                )
+            }
+
+        return ApiResponse.success(activities)
     }
 }

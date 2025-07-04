@@ -11,7 +11,7 @@ import java.util.UUID
 class UserActivityService(
     private val voteQueryRepository: VoteCustomQueryRepositoryImpl,
 ) {
-    fun getVoteActivites(
+    fun getVoteActivities(
         userId: UUID,
         from: LocalDateTime,
         to: LocalDateTime,
@@ -33,7 +33,7 @@ class UserActivityService(
         }
     }
 
-    fun getVoteActivites(userId: UUID): List<VoteActivity> {
+    fun getVoteActivities(userId: UUID): List<VoteActivity> {
         val historyEntities: List<VoteHistoryEntity> = voteQueryRepository.findHistories(userId)
 
         return historyEntities.map {
