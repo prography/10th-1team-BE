@@ -72,4 +72,14 @@ class VoteCustomQueryRepositoryImpl(
     ): VoteHistoryEntity {
         TODO("Not yet implemented")
     }
+
+    override fun findHistories(userId: UUID): List<VoteHistoryEntity> {
+        return historyRepository.findAll {
+            select(entity(VoteHistoryEntity::class))
+                .from(entity(VoteHistoryEntity::class))
+                .where(
+                    path(VoteHistoryEntity::userId).eq(userId),
+                )
+        }.filterNotNull()
+    }
 }

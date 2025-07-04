@@ -18,4 +18,24 @@ enum class MatchPlatform {
      */
     @Schema(description = "네이버 ")
     NAVER,
+
+    /**
+     * 정의되지 않은 플랫폼
+     */
+    @Schema(description = "정의되지 않음")
+    UNDEFINED,
+
+    ;
+
+    companion object {
+        fun fromString(value: String?): MatchPlatform {
+            return try {
+                value?.trim()?.uppercase()?.let { upper ->
+                    entries.firstOrNull { it.name == upper } ?: UNDEFINED
+                } ?: UNDEFINED
+            } catch (e: Exception) {
+                UNDEFINED
+            }
+        }
+    }
 }

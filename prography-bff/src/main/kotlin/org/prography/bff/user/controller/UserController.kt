@@ -7,7 +7,9 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.parameters.RequestBody
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.config.response.ApiResponse
+import org.prography.bff.user.controller.model.ActivityVote
 import org.prography.bff.user.controller.model.UserActivityDto
+import org.prography.bff.user.controller.model.UserGroup
 import org.prography.bff.user.controller.model.UserInfoResponseDto
 import org.prography.bff.user.controller.model.UserUpdateRequestDto
 import java.util.UUID
@@ -112,5 +114,41 @@ interface UserController {
         userId: UUID,
         year: Int,
         month: Int,
-    ): List<UserActivityDto>
+    ): ApiResponse<List<UserActivityDto>>
+
+    @Operation(
+        summary = "유저가 생성한 그룹 조회",
+        description = "유저의 활동 데이터인 그룹을 조회하는 API 입니다.",
+        externalDocs =
+            ExternalDocumentation(
+                description = "피그마 링크",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1206-18491&t=sImFG24XTWo1974L-11",
+            ),
+        responses = [
+            SwaggerApiResponse(
+                responseCode = "200",
+                description = "조회 성공",
+                content = [Content(schema = Schema(implementation = UserGroup::class))],
+            ),
+        ],
+    )
+    fun getGroupActivity(userId: UUID): ApiResponse<List<UserGroup>>
+
+    @Operation(
+        summary = "유저의 투표 데이터 조회",
+        description = "유저의 활동 데이터인 투표 내역을 조회하는 API 입니다.",
+        externalDocs =
+            ExternalDocumentation(
+                description = "피그마 링크",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1218-21666&t=sImFG24XTWo1974L-11",
+            ),
+        responses = [
+            SwaggerApiResponse(
+                responseCode = "200",
+                description = "조회 성공",
+                content = [Content(schema = Schema(implementation = ActivityVote::class))],
+            ),
+        ],
+    )
+    fun getVoteActivity(userId: UUID): ApiResponse<List<ActivityVote>>
 }

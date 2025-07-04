@@ -45,10 +45,15 @@ interface VoteCustomQueryRepository {
     ): List<VoteHistoryEntity>
 
     /**
-     * 유저의 아이디와 가게 아이디를 통해서 투효 내역 조회
+     * 유저의 아이디와 가게 아이디를 통해서 투표 내역 조회
      */
     fun findHistory(
-        id: UUID,
+        userId: UUID,
         placeId: String,
     ): VoteHistoryEntity
+
+    /**
+     * 유저의 아이디를 통해서 투표 내역 조회
+     */
+    fun findHistories(userId: UUID): List<VoteHistoryEntity>
 }
