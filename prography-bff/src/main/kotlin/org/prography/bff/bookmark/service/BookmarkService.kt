@@ -1,15 +1,20 @@
 package org.prography.bff.bookmark.service
 
+import org.prography.bff.bookmark.repository.BookmarkCustomCmdRepositoryImpl
+import org.prography.bff.bookmark.repository.BookmarkCustomQueryRepositoryImpl
 import org.prography.bff.bookmark.repository.model.BookmarkGroupEntity
 import java.util.UUID
 
-class BookmarkService {
+class BookmarkService(
+    private val bookmarkCmdRepository: BookmarkCustomCmdRepositoryImpl,
+    private val bookmarkQueryRepository: BookmarkCustomQueryRepositoryImpl
+) {
     fun createBookmarkGroup(
         userId: UUID,
         icon: String,
         groupName: String,
     ) {
-        val groupEntity = BookmarkGroupEntity(userId = UUID.randomUUID(), icon = icon, groupName = groupName)
+        val groupEntity = BookmarkGroupEntity(userId = userId, icon = icon, groupName = groupName)
     }
 
     fun addBookmarkAtGroup(
