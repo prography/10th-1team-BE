@@ -57,7 +57,7 @@ class BookmarkGroupEntity protected constructor() {
      * 그룹에 저장된 가게의 수
      */
     @Column(name = "total")
-    val total: Long = 0L
+    var total: Long = 0L
 
     /**
      * 그룹이 생성된 날짜
@@ -101,5 +101,18 @@ class BookmarkGroupEntity protected constructor() {
         this.icon = icon
         this.userId = userId
         this.groupName = groupName
+    }
+
+    fun addBookmark(placeId: String): BookmarkEntity {
+        val bookmark = BookmarkEntity.of(this, placeId)
+        total += 1
+        return bookmark
+    }
+
+    fun removeBookmark(bookmark: BookmarkEntity) {
+        require(bookmark.groupId == this.id && bookmark.userId == this.userId) {
+            "이 그룹에 속한 Bookmark만 삭제할 수 있습니다."
+        }
+        total -= 1
     }
 }

@@ -73,4 +73,18 @@ class BookmarkEntity protected constructor() {
     }
 
     override fun toString(): String = "BookmarkEntity(userId=$userId, groupId=$groupId, placeId=$placeId)"
+
+    private constructor(userId: UUID, groupId: UUID, placeId: String) : this() {
+        require(placeId.isNotBlank()) { "placeId는 공백일 수 없습니다." }
+        this.userId = userId
+        this.groupId = groupId
+        this.placeId = placeId
+    }
+
+    companion object {
+        fun of(
+            group: BookmarkGroupEntity,
+            placeId: String,
+        ): BookmarkEntity = BookmarkEntity(group.userId, group.id, placeId)
+    }
 }

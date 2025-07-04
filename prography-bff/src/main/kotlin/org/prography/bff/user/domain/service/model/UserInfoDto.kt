@@ -27,5 +27,16 @@ data class UserInfoDto(
                 isNewUser = isNewUser,
             )
         }
+
+        fun fromNewUser(user: User): UserInfoDto {
+            return UserInfoDto(
+                userId = user.id,
+                provider = user.provider,
+                nickname = user.nickname,
+                level = user.level,
+                createdAt = LocalDateTime.now(),
+                isNewUser = true,
+            )
+        }
     }
 }

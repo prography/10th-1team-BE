@@ -34,7 +34,7 @@ class UserService(
     ): UserInfoDto {
         val user =
             userRepository.findByProviderAndProviderId(provider, providerId)
-                ?: return UserInfoDto.fromUser(
+                ?: return UserInfoDto.fromNewUser(
                     userRepository.save(
                         User(
                             provider = provider,
@@ -42,7 +42,6 @@ class UserService(
                             nickname = NicknameGenerator.generate(),
                         ),
                     ),
-                    true,
                 )
 
         // 회원 탈퇴 유저는 자동 복구

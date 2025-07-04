@@ -24,6 +24,12 @@ class AuthorizationFilter(
         val httpRequest = request as HttpServletRequest
         val httpResponse = response as HttpServletResponse
 
+        // OPTIONS 요청은 필터 통과
+        if (httpRequest.method.equals("OPTIONS", ignoreCase = true)) {
+            chain.doFilter(request, response)
+            return
+        }
+
         val path = httpRequest.requestURI
         val requiredRoles = getRequiredRoles(path)
         val userRole = request.getAttribute("role") as? String
