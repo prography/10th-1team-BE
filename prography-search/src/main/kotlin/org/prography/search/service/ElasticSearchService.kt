@@ -125,7 +125,7 @@ class ElasticSearchService(
                             .query(keyword)
                             .fields("place_name", "place_name.raw^5")
                             .type(TextQueryType.CrossFields)
-                            .operator(Operator.And)
+                            .operator(Operator.Or)
                             .build(),
                     )
                     .build()
