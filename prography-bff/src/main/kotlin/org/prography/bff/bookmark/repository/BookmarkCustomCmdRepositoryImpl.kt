@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class BookmarkCustomCmdRepositoryImpl(
     private val groupRepository: BookmarkGroupEntityRepository,
-    private val bookmarkRepository: BookmarkEntityRepository
+    private val bookmarkRepository: BookmarkEntityRepository,
 ) : BookmarkCustomCmdRepository {
     override fun save(group: BookmarkGroupEntity) {
         groupRepository.save(group)

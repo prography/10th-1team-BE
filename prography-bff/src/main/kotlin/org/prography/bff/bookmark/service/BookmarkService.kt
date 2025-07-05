@@ -7,7 +7,7 @@ import java.util.UUID
 
 class BookmarkService(
     private val bookmarkCmdRepository: BookmarkCustomCmdRepositoryImpl,
-    private val bookmarkQueryRepository: BookmarkCustomQueryRepositoryImpl
+    private val bookmarkQueryRepository: BookmarkCustomQueryRepositoryImpl,
 ) {
     fun createBookmarkGroup(
         userId: UUID,

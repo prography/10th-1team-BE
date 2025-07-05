@@ -82,7 +82,9 @@ class BookmarkEntity protected constructor() {
     }
 
     companion object {
-        fun of(group: BookmarkGroupEntity, placeId: String): BookmarkEntity =
-            BookmarkEntity(group.userId, group.id, placeId)
+        fun of(
+            group: BookmarkGroupEntity,
+            placeId: String,
+        ): BookmarkEntity = BookmarkEntity(group.userId, group.id, placeId)
     }
 }
