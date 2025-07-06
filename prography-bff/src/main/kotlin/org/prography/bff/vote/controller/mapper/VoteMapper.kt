@@ -16,7 +16,7 @@ object VoteMapper {
         return when (platform) {
             MatchPlatform.KAKAO -> VotePlatform.KAKAO
             MatchPlatform.NAVER -> VotePlatform.NAVER
-            MatchPlatform.UNDEFINED -> TODO()
+            MatchPlatform.UNDEFINED -> VotePlatform.UNDEFINED
         }
     }
 
@@ -27,6 +27,7 @@ object VoteMapper {
         return when (platform) {
             VotePlatform.KAKAO -> MatchPlatform.KAKAO
             VotePlatform.NAVER -> MatchPlatform.NAVER
+            VotePlatform.UNDEFINED -> MatchPlatform.UNDEFINED
         }
     }
 
