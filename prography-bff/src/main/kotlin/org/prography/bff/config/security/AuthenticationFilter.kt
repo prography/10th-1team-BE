@@ -33,10 +33,9 @@ class AuthenticationFilter(
         if (token != null && !jwtProvider.validateToken(token)) {
             val errorBody =
                 mapOf(
-                    "error" to "잘못된 토큰 형식입니다.",
+                    "error" to "잘못되었거나 만료된 토큰입니다.",
                     "time" to LocalDateTime.now().toString(),
                 )
-
             val json = objectMapper.writeValueAsString(errorBody)
             httpResponse.contentType = MediaType.APPLICATION_JSON_VALUE
             httpResponse.characterEncoding = StandardCharsets.UTF_8.name()
@@ -56,11 +55,6 @@ class AuthenticationFilter(
     }
 
     private fun extractToken(request: HttpServletRequest): String? {
-        val header = request.getHeader("Authorization")
-        return if (header != null && header.startsWith("Bearer ")) {
-            header.substring(7)
-        } else {
-            null
-        }
+        return request.cookies?.firstOrNull { it.name == "accessToken" }?.value
     }
 }

@@ -33,6 +33,8 @@ class RegionService(
         @JsonProperty("리명") val villageName: String?,
     )
 
+    private lateinit var bcodeToNameMap: Map<String, String>
+
     fun findRegionByBCode(bCode: String): String {
         val dong = dongRepo.findByIdOrNull(bCode) ?: throw NotFoundException.DongNotFoundException()
         return dong.name
@@ -42,6 +44,7 @@ class RegionService(
     @Transactional
     fun saveData() {
         if (dongRepo.count() > 0) {
+            uploadDongCache()
             return // 이미 저장된 경우 저장 X
         }
         // 1) JSON 파일 로드 (플랫한 리스트)
@@ -96,6 +99,12 @@ class RegionService(
             }
 
         println(">>> 저장 완료: Province ${provinceRepo.count()}, City ${cityRepo.count()}, Dong ${dongRepo.count()}")
+        uploadDongCache()
+    }
+
+    private fun uploadDongCache() {
+        val allDongs = dongRepo.findAll()
+        bcodeToNameMap = allDongs.associate { it.code to it.name }
     }
 
     fun getRegionData(): List<Province> = provinceRepo.findAll()
