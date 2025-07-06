@@ -19,4 +19,9 @@ sealed class InvalidRequestException(
      * 이미 투표한 이럭이 있을 경우 발생하는 예외
      */
     class AlreadyVoted : InvalidRequestException("해당 유저는 이미 투표한 이력이 있습니다.")
+
+    /**
+     * 유저가 가지고 있는 그룹에 동일한 그룹이 있습니다.
+     */
+    class AlreadyGroup : InvalidRequestException("동일한 이름의 그룹을 가지고 있습니다.")
 }
