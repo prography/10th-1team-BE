@@ -55,6 +55,11 @@ class AuthenticationFilter(
     }
 
     private fun extractToken(request: HttpServletRequest): String? {
-        return request.cookies?.firstOrNull { it.name == "accessToken" }?.value
+        val header = request.getHeader("Authorization")
+        return if (header != null && header.startsWith("Bearer ")) {
+            header.substring(7)
+        } else {
+            null
+        }
     }
 }

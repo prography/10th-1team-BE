@@ -5,9 +5,8 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
-import org.prography.bff.auth.controller.model.LoginResponseDto
+import org.prography.bff.auth.controller.model.RefreshTokenRequest
+import org.prography.bff.auth.controller.model.TokenResponseDto
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.user.domain.entity.Provider
 
@@ -25,7 +24,7 @@ interface OauthController {
                 content = [
                     Content(
                         mediaType = "application/json",
-                        schema = Schema(implementation = LoginResponseDto::class),
+                        schema = Schema(implementation = TokenResponseDto::class),
                     ),
                 ],
             ),
@@ -42,8 +41,7 @@ interface OauthController {
     fun oauthCallback(
         provider: Provider,
         code: String,
-        response: HttpServletResponse,
-    ): ApiResponse<LoginResponseDto>
+    ): ApiResponse<TokenResponseDto>
 
     @Operation(summary = "토큰 재발급", description = "RefreshToken 기반으로 유효한 토큰을 재생성합니다.")
     @ApiResponses(
@@ -54,7 +52,7 @@ interface OauthController {
                 content = [
                     Content(
                         mediaType = "application/json",
-                        schema = Schema(implementation = LoginResponseDto::class),
+                        schema = Schema(implementation = TokenResponseDto::class),
                     ),
                 ],
             ),
@@ -64,8 +62,5 @@ interface OauthController {
             ),
         ],
     )
-    fun refreshToken(
-        request: HttpServletRequest,
-        response: HttpServletResponse,
-    ): ApiResponse<LoginResponseDto>
+    fun refreshToken(request: RefreshTokenRequest): ApiResponse<TokenResponseDto>
 }
