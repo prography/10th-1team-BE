@@ -1,7 +1,9 @@
 package org.prography.bff.vote.service
 
+import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.exception.notfound.NotFoundException
-import org.prography.bff.restaurant.RawRestaurantDataRepository
+import org.prography.bff.restaurant.repository.PlaceInfo
+import org.prography.bff.restaurant.repository.RawRestaurantCustomRepository
 import org.prography.bff.vote.repository.VoteCustomCmdRepositoryImpl
 import org.prography.bff.vote.repository.VoteCustomQueryRepositoryImpl
 import org.prography.bff.vote.repository.model.VoteEntity
@@ -25,7 +27,7 @@ import java.util.UUID
 class VoteService(
     private val cmdRepository: VoteCustomCmdRepositoryImpl,
     private val queryRepository: VoteCustomQueryRepositoryImpl,
-    private val restaurantDataRepository: RawRestaurantDataRepository,
+    private val restaurantDataRepository: RawRestaurantCustomRepository,
 ) {
     /**
      * 투표 하기
@@ -39,10 +41,12 @@ class VoteService(
             throw IllegalArgumentException()
         }
 
-        val restaurantData =
-            restaurantDataRepository.findById(placeId)
+        val placeInfo: PlaceInfo =
+            restaurantDataRepository.findKakaoPlaceInfoById(placeId)
                 .orElseThrow { NotFoundException.PlaceNotFoundException() }
-
+        if (queryRepository.existsUserVote(userId = vo.userId, placeId = placeId)) {
+            throw InvalidRequestException.AlreadyVoted()
+        }
         val id = VoteId(placeId, vo.platform)
         val entity: VoteEntity =
             queryRepository.findById(id)
@@ -61,10 +65,10 @@ class VoteService(
             VoteHistoryEntity(
                 userId = vo.userId,
                 placeId = placeId,
-                placeName = restaurantData.kakaoPlaceData?.placeName ?: "NO_NAME",
+                placeName = placeInfo.placeName ?: "NO_NAME",
                 reaons = vo.categories,
                 platform = vo.platform,
-                category = restaurantData.kakaoPlaceData?.categoryName?.split(" > ")?.last() ?: "UNDEFINED",
+                category = placeInfo.categoryName?.split(" > ")?.last() ?: "UNDEFINED",
             )
 
         entity.increase(vo.categories)
