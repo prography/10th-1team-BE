@@ -18,4 +18,6 @@ sealed class NotFoundException(
     class UserNotFoundException : NotFoundException("유저 정보가 없습니다.")
 
     class DongNotFoundException : NotFoundException("코드에 해당하는 법정동이 없습니다")
+
+    class GroupNotFound : NotFoundException("해당 그룹은 존재하지 않습니다.")
 }
