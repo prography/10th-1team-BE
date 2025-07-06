@@ -103,14 +103,14 @@ class UserControllerImpl(
         val to: LocalDateTime = yearMonth.atEndOfMonth().atTime(LocalTime.MAX)
 
         val voteActivities: List<VoteActivity> = activityService.getVoteActivities(userId, from, to)
-        TODO("Not yet implemented")
+        return ApiResponse.success(emptyList())
     }
 
     @GetMapping("/activity/group")
     override fun getGroupActivity(
         @AuthUser userId: UUID,
     ): ApiResponse<List<UserGroup>> {
-        TODO("Not yet implemented")
+        return ApiResponse.success(emptyList())
     }
 
     @GetMapping("/activity/vote")
