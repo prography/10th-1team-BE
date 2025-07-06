@@ -50,7 +50,7 @@ interface VoteCustomQueryRepository {
     fun findHistory(
         userId: UUID,
         placeId: String,
-    ): VoteHistoryEntity
+    ): VoteHistoryEntity?
 
     /**
      * 유저의 아이디를 통해서 투표 내역 조회
