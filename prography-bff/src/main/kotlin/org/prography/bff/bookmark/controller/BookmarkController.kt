@@ -234,8 +234,5 @@ interface BookmarkController {
             ),
         ],
     )
-    fun getBookmarks(
-        userId: UUID,
-        groupId: UUID,
-    ): List<BookmarkInfoDto>
+    fun getBookmarks(groupId: UUID): ApiResponse<List<BookmarkInfoDto>>
 }

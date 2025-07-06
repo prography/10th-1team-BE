@@ -99,9 +99,22 @@ class BookmarkControllerImpl(
 
     @GetMapping("/place/{id}")
     override fun getBookmarks(
-        @AuthUser userId: UUID,
         @PathVariable("id") groupId: UUID,
-    ): List<BookmarkInfoDto> {
-        TODO("Not yet implemented")
+    ): ApiResponse<List<BookmarkInfoDto>> {
+        val bookmarks: List<BookmarkInfoDto> =
+            bookmarkService.getBookmarks(groupId)
+                .map {
+                    BookmarkInfoDto(
+                        id = it.id,
+                        placeId = it.placeId,
+                        placeName = it.placeName,
+                        roadAddress = it.roadAddress,
+                        category = it.category.split(" > ").last(),
+                        legal = it.legal,
+                        savedAt = it.savedAt,
+                    )
+                }
+
+        return ApiResponse.success(bookmarks)
     }
 }
