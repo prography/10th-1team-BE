@@ -2,7 +2,6 @@ package org.prography.bff.vote.controller
 
 import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.response.ApiResponse
-import org.prography.bff.config.security.AuthUser
 import org.prography.bff.vote.controller.mapper.VoteMapper
 import org.prography.bff.vote.controller.model.VoteResultDto
 import org.prography.bff.vote.controller.model.VoteSubmitDto
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
@@ -34,7 +34,7 @@ class VoteControllerImpl(
 ) : VoteController {
     @GetMapping("/{id}")
     override fun getPlatformVoteResult(
-        @AuthUser userId: UUID?,
+        @RequestParam userId: UUID?,
         @PathVariable("id") placeId: String,
     ): ApiResponse<VoteResultDto> {
         if (placeId.isBlank()) {
@@ -55,26 +55,28 @@ class VoteControllerImpl(
         }
 
         val results: Map<MatchPlatform, VotedResult> =
-            MatchPlatform.entries.associateWith { matchPlatform ->
-                val info: PlatformVoteInfo? = platformMap[VoteMapper.service(matchPlatform)]
-                if (info == null) {
-                    VotedResult(
-                        reasons = Reason.entries.associateWith { 0L },
-                    )
-                } else {
-                    val reasons =
-                        Reason.entries.associateWith { reason ->
-                            val categoryMap = info.categories.associateBy { it.category }
-                            val category = VoteMapper.service(reason)
-                            categoryMap[category]?.count ?: 0L
-                        }
+            MatchPlatform.entries
+                .filterNot { it == MatchPlatform.UNDEFINED }
+                .associateWith { matchPlatform ->
+                    val info: PlatformVoteInfo? = platformMap[VoteMapper.service(matchPlatform)]
+                    if (info == null) {
+                        VotedResult(
+                            reasons = Reason.entries.associateWith { 0L },
+                        )
+                    } else {
+                        val reasons =
+                            Reason.entries.associateWith { reason ->
+                                val categoryMap = info.categories.associateBy { it.category }
+                                val category = VoteMapper.service(reason)
+                                categoryMap[category]?.count ?: 0L
+                            }
 
-                    VotedResult(
-                        count = info.total,
-                        reasons = reasons,
-                    )
+                        VotedResult(
+                            count = info.total,
+                            reasons = reasons,
+                        )
+                    }
                 }
-            }
 
         return ApiResponse.success(
             VoteResultDto(
@@ -98,7 +100,7 @@ class VoteControllerImpl(
 
     @PatchMapping("/submit/{id}")
     override fun submitPlatformVote(
-        @AuthUser userId: UUID,
+        @RequestParam userId: UUID,
         @PathVariable("id") placeId: String,
         @RequestBody dto: VoteSubmitDto,
     ): ApiResponse<Void> {
@@ -110,7 +112,7 @@ class VoteControllerImpl(
             placeId = placeId,
             vo =
                 SubmitVo(
-                    userId = UUID.randomUUID(),
+                    userId = userId,
                     platform = VoteMapper.service(dto.platform),
                     categories = dto.reasons.map { VoteMapper.service(it) },
                 ),
@@ -122,7 +124,7 @@ class VoteControllerImpl(
     @GetMapping("/summary/{id}")
     override fun getVoteSummary(
         @PathVariable("id") placeId: String,
-        @AuthUser userId: UUID?, // NPE 가능성 존재
+        @RequestParam userId: UUID?, // NPE 가능성 존재
     ): ApiResponse<VoteSummaryDto> {
         val voteSummary = voteService.getVoteSummary(userId, placeId)
         return ApiResponse.success(

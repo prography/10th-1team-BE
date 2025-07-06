@@ -13,4 +13,9 @@ enum class VotePlatform {
      * 네이버 맵
      */
     NAVER,
+
+    /**
+     * 아직 서비스되지 않는 플랫폼
+     */
+    UNDEFINED,
 }
