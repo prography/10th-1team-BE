@@ -2,8 +2,8 @@ package org.prography.bff.vote.service
 
 import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.exception.notfound.NotFoundException
-import org.prography.bff.restaurant.repository.PlaceInfo
-import org.prography.bff.restaurant.repository.RawRestaurantCustomRepository
+import org.prography.bff.restaurant.repository.RestaurantCustomRepository
+import org.prography.bff.restaurant.repository.model.PlaceInfo
 import org.prography.bff.vote.repository.VoteCustomCmdRepositoryImpl
 import org.prography.bff.vote.repository.VoteCustomQueryRepositoryImpl
 import org.prography.bff.vote.repository.model.VoteEntity
@@ -27,7 +27,7 @@ import java.util.UUID
 class VoteService(
     private val cmdRepository: VoteCustomCmdRepositoryImpl,
     private val queryRepository: VoteCustomQueryRepositoryImpl,
-    private val restaurantDataRepository: RawRestaurantCustomRepository,
+    private val restaurantDataRepository: RestaurantCustomRepository,
 ) {
     /**
      * 투표 하기
