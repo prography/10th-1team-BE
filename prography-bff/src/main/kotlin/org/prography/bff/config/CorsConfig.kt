@@ -10,6 +10,7 @@ class CorsConfig : WebMvcConfigurer {
         registry.addMapping("/**")
             .allowedOrigins(
                 "http://localhost:3000",
+                "https://localhost:3000",
                 "https://api.reviewmatch.co.kr",
                 "https://reviewmatch.co.kr",
             ) // 허용할 Origin
