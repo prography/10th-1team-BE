@@ -15,10 +15,15 @@ interface BookmarkCustomQueryRepository {
 
     fun findBookmarkGroupsByUserId(userId: UUID): List<BookmarkGroupEntity>
 
-    fun existsByUserIdAndPlaceId(
+    fun existsBookmark(
         userId: UUID,
         placeId: String,
     ): Boolean
 
     fun findInIds(groupIds: List<UUID>): List<BookmarkGroupEntity>
+
+    fun existsBookmarkGroup(
+        userId: UUID,
+        groupName: String,
+    ): Boolean
 }

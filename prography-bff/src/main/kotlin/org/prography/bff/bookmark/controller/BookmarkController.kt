@@ -69,7 +69,7 @@ interface BookmarkController {
             ),
         ],
     )
-    fun getBookmarkGroups(userId: UUID): List<BookmarkGroupInfoDto>
+    fun getBookmarkGroups(userId: UUID): ApiResponse<List<BookmarkGroupInfoDto>>
 
     @Operation(
         summary = "그룹 조회 API",

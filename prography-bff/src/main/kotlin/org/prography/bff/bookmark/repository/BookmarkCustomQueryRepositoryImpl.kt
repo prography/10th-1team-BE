@@ -36,7 +36,7 @@ class BookmarkCustomQueryRepositoryImpl(
         }.filterNotNull()
     }
 
-    override fun existsByUserIdAndPlaceId(
+    override fun existsBookmark(
         userId: UUID,
         placeId: String,
     ): Boolean {
@@ -59,5 +59,20 @@ class BookmarkCustomQueryRepositoryImpl(
                     path(BookmarkGroupEntity::id).`in`(groupIds),
                 )
         }.filterNotNull()
+    }
+
+    override fun existsBookmarkGroup(
+        userId: UUID,
+        groupName: String,
+    ): Boolean {
+        return bookmarkRepository.findAll(limit = 1) {
+            select(intLiteral(1))
+                .from(entity(BookmarkGroupEntity::class))
+                .where(
+                    path(BookmarkGroupEntity::userId).eq(userId).and(
+                        path(BookmarkGroupEntity::groupName).eq(groupName),
+                    ),
+                )
+        }.isNotEmpty()
     }
 }

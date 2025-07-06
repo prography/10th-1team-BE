@@ -6,11 +6,15 @@ import org.prography.bff.bookmark.repository.model.BookmarkEntity
 import org.prography.bff.bookmark.repository.model.BookmarkGroupEntity
 import org.prography.bff.bookmark.service.model.BookmarkPlace
 import org.prography.bff.bookmark.service.model.PlaceGroup
+import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.exception.notfound.NotFoundException
 import org.prography.bff.restaurant.repository.RestaurantCustomRepository
 import org.prography.bff.restaurant.repository.model.PlaceInfo
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
+@Service
 class BookmarkService(
     private val bookmarkCmdRepository: BookmarkCustomCmdRepositoryImpl,
     private val bookmarkQueryRepository: BookmarkCustomQueryRepositoryImpl,
@@ -20,22 +24,31 @@ class BookmarkService(
         userId: UUID,
         icon: String,
         groupName: String,
-    ) {
+    ): UUID {
+        if (bookmarkQueryRepository.existsBookmarkGroup(userId = userId, groupName = groupName)) {
+            throw InvalidRequestException.AlreadyGroup()
+        }
         val groupEntity = BookmarkGroupEntity(userId = userId, icon = icon, groupName = groupName)
-        bookmarkCmdRepository.save(groupEntity)
+        return bookmarkCmdRepository.saveGroup(groupEntity).id
     }
 
+    @Transactional
     fun addBookmarkAtGroup(
-        groupId: UUID,
+        groupIds: List<UUID>,
         placeId: String,
     ) {
-        val bookmarkGroup: BookmarkGroupEntity =
-            bookmarkQueryRepository.findById(groupId)
-                .orElseThrow { NotFoundException.GroupNotFound() }
+        if (!restaurantDataRepository.existsById(placeId)) {
+            throw NotFoundException.PlaceNotFoundException()
+        }
 
-        val bookmark = bookmarkGroup.addBookmark(placeId = placeId)
-        bookmarkCmdRepository.save(bookmark)
-        bookmarkCmdRepository.save(bookmarkGroup)
+        val groups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findInIds(groupIds)
+        if (groups.isEmpty()) {
+            return
+        }
+
+        val bookmarks: List<BookmarkEntity> = groups.map { it.addBookmark(placeId = placeId) }
+        bookmarkCmdRepository.saveGroups(groups)
+        bookmarkCmdRepository.saveBookmarks(bookmarks)
     }
 
     fun removeBookmarkAtGroup(
@@ -43,7 +56,6 @@ class BookmarkService(
         groupIds: List<UUID>,
         placeId: String,
     ) {
-        val groups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findInIds(groupIds = groupIds)
     }
 
     fun removeBookmarkAtGroup(
@@ -71,7 +83,7 @@ class BookmarkService(
         userId: UUID,
         placeId: String,
     ): Boolean {
-        return bookmarkQueryRepository.existsByUserIdAndPlaceId(
+        return bookmarkQueryRepository.existsBookmark(
             userId = userId,
             placeId = placeId,
         )
