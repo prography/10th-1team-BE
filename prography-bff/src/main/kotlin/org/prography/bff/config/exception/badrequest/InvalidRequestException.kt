@@ -24,4 +24,9 @@ sealed class InvalidRequestException(
      * 유저가 가지고 있는 그룹에 동일한 그룹이 있습니다.
      */
     class AlreadyGroup : InvalidRequestException("동일한 이름의 그룹을 가지고 있습니다.")
+
+    /**
+     * 삭제하려는 그룹과 소유자인 유저가 일치하지 않는 경우 발생하는 예외
+     */
+    class MismatchUser : InvalidRequestException("유저는 해당 그룹을 가지고 있지 않습니다.")
 }
