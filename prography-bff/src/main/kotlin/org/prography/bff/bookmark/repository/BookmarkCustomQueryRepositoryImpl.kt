@@ -76,7 +76,7 @@ class BookmarkCustomQueryRepositoryImpl(
         }.isNotEmpty()
     }
 
-    override fun findBookmarksForPlaceInGroups(
+    override fun findMatchedBookmarksInGroup(
         groupIds: List<UUID>,
         placeId: String,
     ): List<BookmarkEntity> {
@@ -86,6 +86,21 @@ class BookmarkCustomQueryRepositoryImpl(
                 .where(
                     path(BookmarkEntity::groupId).`in`(groupIds).and(
                         path(BookmarkEntity::placeId).eq(placeId),
+                    ),
+                )
+        }.filterNotNull()
+    }
+
+    override fun findMatchedBookmarksInGroup(
+        groupId: UUID,
+        placeIds: List<String>,
+    ): List<BookmarkEntity> {
+        return bookmarkRepository.findAll {
+            select(entity(BookmarkEntity::class))
+                .from(entity(BookmarkEntity::class))
+                .where(
+                    path(BookmarkEntity::groupId).eq(groupId).and(
+                        path(BookmarkEntity::placeId).`in`(placeIds),
                     ),
                 )
         }.filterNotNull()

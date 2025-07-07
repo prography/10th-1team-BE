@@ -52,21 +52,42 @@ class BookmarkService(
     }
 
     fun removeBookmarkAtGroup(
-        userId: UUID,
         groupIds: List<UUID>,
         placeId: String,
     ) {
+        val groups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findInIds(groupIds = groupIds)
+        val bookmarks: List<BookmarkEntity> =
+            bookmarkQueryRepository.findMatchedBookmarksInGroup(
+                groupIds =
+                    groups.map {
+                        it.id
+                    },
+                placeId = placeId,
+            )
+
+        groups.forEach {
+            it.removeBookmark(bookmarks)
+        }
+
+        bookmarkCmdRepository.saveGroups(groups)
+        bookmarkCmdRepository.deleteBookmarks(bookmarks)
     }
 
     fun removeBookmarkAtGroup(
-        userId: UUID,
         groupId: UUID,
         placeIds: List<String>,
     ) {
+        val group: BookmarkGroupEntity =
+            bookmarkQueryRepository.findById(groupId = groupId)
+                .orElseThrow { NotFoundException.GroupNotFound() }
+
+        val bookmarks: List<BookmarkEntity> = bookmarkQueryRepository.findMatchedBookmarksInGroup(groupId = group.id, placeIds = placeIds)
+
+        group.removeBookmark(bookmarks)
+        bookmarkCmdRepository.deleteBookmarks(bookmarks)
     }
 
     fun replaceBookmarkAtGroup(
-        userId: UUID,
         source: UUID,
         target: UUID,
         placeIds: List<String>,
@@ -77,6 +98,18 @@ class BookmarkService(
         userId: UUID,
         groupId: UUID,
     ) {
+        val group: BookmarkGroupEntity =
+            bookmarkQueryRepository.findById(groupId)
+                .orElseThrow { NotFoundException.GroupNotFound() }
+
+        if (group.userId != userId) {
+            throw InvalidRequestException.MismatchUser()
+        }
+
+        val bookmarks: List<BookmarkEntity> = bookmarkQueryRepository.findBookmarksByGroupId(group.id)
+
+        bookmarkCmdRepository.deleteBookmarks(bookmarks)
+        bookmarkCmdRepository.deleteGroup(group)
     }
 
     fun isBookmark(
