@@ -26,4 +26,9 @@ interface BookmarkCustomQueryRepository {
         userId: UUID,
         groupName: String,
     ): Boolean
+
+    fun findBookmarksForPlaceInGroups(
+        groupIds: List<UUID>,
+        placeId: String,
+    ): List<BookmarkEntity>
 }

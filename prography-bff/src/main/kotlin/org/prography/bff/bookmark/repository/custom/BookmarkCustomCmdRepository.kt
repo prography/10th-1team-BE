@@ -14,4 +14,12 @@ interface BookmarkCustomCmdRepository {
     fun saveBookmark(bookmark: BookmarkEntity): BookmarkEntity
 
     fun saveBookmarks(bookmarks: List<BookmarkEntity>)
+
+    fun deleteGroup(group: BookmarkGroupEntity)
+
+    fun deleteGroups(groups: List<BookmarkGroupEntity>)
+
+    fun deleteBookmark(bookmark: BookmarkEntity)
+
+    fun deleteBookmarks(bookmarks: List<BookmarkEntity>)
 }

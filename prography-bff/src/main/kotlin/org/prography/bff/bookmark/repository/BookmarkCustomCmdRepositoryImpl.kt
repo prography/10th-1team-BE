@@ -25,4 +25,20 @@ class BookmarkCustomCmdRepositoryImpl(
     override fun saveBookmarks(bookmarks: List<BookmarkEntity>) {
         bookmarkRepository.saveAll(bookmarks)
     }
+
+    override fun deleteGroup(group: BookmarkGroupEntity) {
+        groupRepository.delete(group)
+    }
+
+    override fun deleteGroups(groups: List<BookmarkGroupEntity>) {
+        groupRepository.deleteAll(groups)
+    }
+
+    override fun deleteBookmark(bookmark: BookmarkEntity) {
+        bookmarkRepository.delete(bookmark)
+    }
+
+    override fun deleteBookmarks(bookmarks: List<BookmarkEntity>) {
+        bookmarkRepository.deleteAll(bookmarks)
+    }
 }
