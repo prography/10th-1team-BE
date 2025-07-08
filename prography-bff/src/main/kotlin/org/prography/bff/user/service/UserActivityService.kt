@@ -24,7 +24,7 @@ class UserActivityService(
                 category = it.category,
                 platform = it.platform.name,
                 reasons =
-                    it.reaons.map { reason ->
+                    it.reasons.map { reason ->
                         reason.name
                     },
                 placeName = it.placeName,
@@ -42,7 +42,7 @@ class UserActivityService(
                 category = it.category,
                 platform = it.platform.name,
                 reasons =
-                    it.reaons.map { reason ->
+                    it.reasons.map { reason ->
                         reason.name
                     },
                 placeName = it.placeName,

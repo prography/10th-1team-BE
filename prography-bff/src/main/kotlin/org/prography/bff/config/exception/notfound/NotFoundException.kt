@@ -20,4 +20,6 @@ sealed class NotFoundException(
     class DongNotFoundException : NotFoundException("코드에 해당하는 법정동이 없습니다")
 
     class VoteHistoryNotFoundException : NotFoundException("해당 투표 이력이 존재하지 않습니다.")
+
+    class VoteNotFoundException : NotFoundException("플랫폼 투표가 존재하지 않습니다.")
 }

@@ -53,6 +53,11 @@ interface VoteCustomQueryRepository {
     ): VoteHistoryEntity?
 
     /**
+     * 투표 이력으로 조회
+     */
+    fun findHistory(historyId: Long): Optional<VoteHistoryEntity>
+
+    /**
      * 유저의 아이디를 통해서 투표 내역 조회
      */
     fun findHistories(userId: UUID): List<VoteHistoryEntity>

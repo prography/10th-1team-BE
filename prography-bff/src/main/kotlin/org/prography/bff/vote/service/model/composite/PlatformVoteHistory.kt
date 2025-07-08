@@ -9,6 +9,10 @@ import java.time.LocalDateTime
  */
 data class PlatformVoteHistory(
     /**
+     * 이력의 고유 아이디
+     */
+    val id: Long,
+    /**
      * 투표한 플랫폼
      */
     val platform: VotePlatform,

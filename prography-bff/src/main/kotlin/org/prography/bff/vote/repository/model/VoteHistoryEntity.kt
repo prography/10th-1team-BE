@@ -24,53 +24,60 @@ import java.util.UUID
 @Entity
 @Table(name = "VOTE_HISTORY")
 @EntityListeners(AuditingEntityListener::class)
-class VoteHistoryEntity(
+class VoteHistoryEntity protected constructor() {
     /**
      * AUTO INCREASE
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    var id: Long? = null,
+    val id: Long = 0L
+
     /**
      * 유저 PK
      */
     @Column(name = "user_id", nullable = false)
-    var userId: UUID,
+    lateinit var userId: UUID
+
     /**
      * 가게 PK
      */
     @Column(name = "place_id", nullable = false)
-    var placeId: String,
+    lateinit var placeId: String
+
     /**
      * 음식점 유형
      */
     @Column(name = "place_name")
-    var placeName: String,
+    lateinit var placeName: String
+
     /**
      * 투표 이유
      */
     @Column(name = "reasons", nullable = false)
     @Convert(converter = VoteCategoriesConverter::class)
-    var reaons: List<VoteCategory> = emptyList(),
+    lateinit var reasons: List<VoteCategory>
+
     /**
      * 투표한 플랫폼
      */
     @Enumerated(EnumType.STRING)
     @Column(name = "platform", nullable = false)
-    var platform: VotePlatform,
+    lateinit var platform: VotePlatform
+
     /**
      * 음식점 유형
      */
     @Column(name = "category")
-    var category: String,
+    lateinit var category: String
+
     /**
      * 투표한 시간
      */
     @LastModifiedDate
     @Column(name = "voted_date", nullable = false)
-    var votedDate: LocalDateTime = LocalDateTime.now(),
-) {
+    lateinit var votedDate: LocalDateTime
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is VoteHistoryEntity) return false
@@ -84,4 +91,21 @@ class VoteHistoryEntity(
     }
 
     override fun toString(): String = "VoteHistoryEntity(userId=$userId, placeId='$placeId')"
+
+    constructor(
+        userId: UUID,
+        placeId: String,
+        placeName: String,
+        reasons: List<VoteCategory>,
+        platform: VotePlatform,
+        category: String,
+    ) : this() {
+        require(placeId.isNotBlank()) { "placeId는 빈 문자열일 수 없습니다." }
+        this.userId = userId
+        this.placeId = placeId
+        this.placeName = placeName
+        this.reasons = reasons
+        this.platform = platform
+        this.category = category
+    }
 }

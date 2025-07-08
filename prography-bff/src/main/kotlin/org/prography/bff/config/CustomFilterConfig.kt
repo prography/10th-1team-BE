@@ -28,6 +28,7 @@ class CustomFilterConfig {
                 "/users/activity" to listOf("USER"),
                 "/group" to listOf("USER"),
                 "/vote/submit" to listOf("USER"),
+                "/vote/cancel" to listOf("USER"),
             )
 
         return FilterRegistrationBean(AuthorizationFilter(uriRoleMap)).apply {

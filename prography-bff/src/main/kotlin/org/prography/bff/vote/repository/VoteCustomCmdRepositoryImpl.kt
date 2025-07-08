@@ -17,4 +17,8 @@ class VoteCustomCmdRepositoryImpl(
     override fun save(history: VoteHistoryEntity) {
         historyEntityRepository.save(history)
     }
+
+    override fun deleteHistory(history: VoteHistoryEntity) {
+        historyEntityRepository.delete(history)
+    }
 }

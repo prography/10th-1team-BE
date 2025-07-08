@@ -1,5 +1,6 @@
 package org.prography.bff.vote.service
 
+import org.prography.bff.config.exception.auth.UnauthorizedException
 import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.exception.notfound.NotFoundException
 import org.prography.bff.restaurant.repository.PlaceInfo
@@ -52,12 +53,8 @@ class VoteService(
             queryRepository.findById(id)
                 .orElse(
                     VoteEntity(
-                        id = id,
-                        total = 0,
-                        manyReview = 0L,
-                        detailed = 0L,
-                        honest = 0L,
-                        accurate = 0L,
+                        placeId = placeId,
+                        platform = vo.platform,
                     ),
                 )
 
@@ -66,9 +63,13 @@ class VoteService(
                 userId = vo.userId,
                 placeId = placeId,
                 placeName = placeInfo.placeName ?: "NO_NAME",
-                reaons = vo.categories,
+                reasons = vo.categories,
                 platform = vo.platform,
-                category = placeInfo.categoryName?.split(" > ")?.last() ?: "UNDEFINED",
+                category =
+                    placeInfo.categoryName
+                        ?.split(" > ")
+                        ?.last()
+                        ?: "UNDEFINED",
             )
 
         entity.increase(vo.categories)
@@ -86,8 +87,26 @@ class VoteService(
     /**
      * 투표 취소
      */
-    fun cancel(placeId: String) {
-        // TODO 아직 기획 미정
+    @Transactional
+    fun cancel(
+        historyId: Long,
+        userId: UUID,
+    ) {
+        val history: VoteHistoryEntity =
+            queryRepository.findHistory(historyId = historyId)
+                .orElseThrow { NotFoundException.VoteHistoryNotFoundException() }
+
+        if (history.userId != userId) {
+            throw UnauthorizedException.NotOwnerException()
+        }
+        val voteId = VoteId(placeId = history.placeId, platform = history.platform)
+        val voteEntity: VoteEntity =
+            queryRepository.findById(voteId)
+                .orElseThrow { NotFoundException.VoteNotFoundException() }
+
+        voteEntity.decrease(history)
+        cmdRepository.deleteHistory(history)
+        cmdRepository.save(voteEntity)
     }
 
     /**
@@ -125,7 +144,7 @@ class VoteService(
         val historyInfo =
             userId
                 ?.let { queryRepository.findHistory(it, placeId) }
-                ?.let { PlatformVoteHistory(platform = it.platform, reasons = it.reaons, votedDate = it.votedDate) }
+                ?.let { PlatformVoteHistory(id = it.id, platform = it.platform, reasons = it.reasons, votedDate = it.votedDate) }
 
         return PlatformResultVo(
             voted = historyInfo != null,
