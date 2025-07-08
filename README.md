@@ -46,18 +46,5 @@
 - 음식점 및 리뷰 정보 저장
 - 주기적 크롤링 스케줄러
 
----
-
-## 🗂️ 폴더 구조
-
-
-
-## Setup
-
-```
-# 커밋 전 • 자동 포맷까지 하고 다시 stage 한 뒤 검사
-./gradlew addKtlintFormatGitPreCommitHook
-
-chmod +x .git/hooks/pre-commit
-```
+--- 
 
