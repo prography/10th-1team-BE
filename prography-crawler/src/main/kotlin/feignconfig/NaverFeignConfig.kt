@@ -16,5 +16,12 @@ class NaverFeignConfig {
         RequestInterceptor { template ->
             template.header("User-Agent", UA)
             template.header("Referer", "https://map.naver.com")
+            template.header("Accept", "application/json, text/plain, */*")
+            template.header("Accept-Language", "ko-KR,ko;q=0.9")
+            template.header("Origin", "https://map.naver.com")
+            template.header("Connection", "keep-alive")
+            template.header("Sec-Fetch-Site", "same-origin")
+            template.header("Sec-Fetch-Mode", "cors")
+            template.header("Sec-Fetch-Dest", "empty")
         }
 }

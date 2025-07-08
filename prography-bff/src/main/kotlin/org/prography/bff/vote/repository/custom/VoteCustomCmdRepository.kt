@@ -16,4 +16,9 @@ interface VoteCustomCmdRepository {
      * VoteHistoryEntity 저장
      */
     fun save(history: VoteHistoryEntity)
+
+    /**
+     * VoteHistoryEntity 삭제
+     */
+    fun deleteHistory(history: VoteHistoryEntity)
 }

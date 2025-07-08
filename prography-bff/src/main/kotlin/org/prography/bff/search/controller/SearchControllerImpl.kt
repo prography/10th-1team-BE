@@ -2,6 +2,7 @@ package org.prography.bff.search.controller
 
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.response.CursorResponse
+import org.prography.bff.region.domain.service.RegionService
 import org.prography.bff.search.controller.mapper.CategoryMapper
 import org.prography.bff.search.controller.mapper.StrategyMapper
 import org.prography.bff.search.controller.model.AutoCompleteResponseDTO
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/search")
 class SearchControllerImpl(
     private val placeSearchService: PlaceSearchService,
+    private val regionService: RegionService,
 ) : SearchController {
     @GetMapping("/auto")
     override fun autoComplete(
@@ -37,7 +39,7 @@ class SearchControllerImpl(
             ).map { (id, legalCode, _, roadAddresses, category, name) ->
                 AutoCompleteResponseDTO(
                     id = id,
-                    region = Region("법정동 이름", legalCode),
+                    region = Region(regionService.findRegionByBCode(legalCode), legalCode),
                     roadAddresses = roadAddresses,
                     category = category,
                     name = name,
@@ -86,7 +88,11 @@ class SearchControllerImpl(
                             score = result.naverScore,
                             processed = result.naverReview,
                         ),
-                    region = Region("법정동 이름", result.legalCode),
+                    region =
+                        Region(
+                            regionService.findRegionByBCode(result.legalCode),
+                            result.legalCode,
+                        ),
                 )
             }.toList()
 
@@ -131,7 +137,7 @@ class SearchControllerImpl(
                             score = it.naverScore,
                             processed = it.naverReview,
                         ),
-                    region = Region("법정동 이름", it.legalCode),
+                    region = Region(regionService.findRegionByBCode(it.legalCode), it.legalCode),
                 )
             }
 

@@ -33,10 +33,9 @@ class AuthenticationFilter(
         if (token != null && !jwtProvider.validateToken(token)) {
             val errorBody =
                 mapOf(
-                    "error" to "잘못된 토큰 형식입니다.",
+                    "error" to "잘못되었거나 만료된 토큰입니다.",
                     "time" to LocalDateTime.now().toString(),
                 )
-
             val json = objectMapper.writeValueAsString(errorBody)
             httpResponse.contentType = MediaType.APPLICATION_JSON_VALUE
             httpResponse.characterEncoding = StandardCharsets.UTF_8.name()

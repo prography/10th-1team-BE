@@ -67,7 +67,7 @@ class VoteCustomQueryRepositoryImpl(
     }
 
     override fun findHistory(
-        id: UUID,
+        userId: UUID,
         placeId: String,
     ): VoteHistoryEntity? {
         val record =
@@ -75,7 +75,7 @@ class VoteCustomQueryRepositoryImpl(
                 select(entity(VoteHistoryEntity::class))
                     .from(entity(VoteHistoryEntity::class))
                     .where(
-                        path(VoteHistoryEntity::userId).eq(id)
+                        path(VoteHistoryEntity::userId).eq(userId)
                             .and(path(VoteHistoryEntity::placeId).eq(placeId)),
                     )
             }.filterNotNull()
@@ -84,6 +84,10 @@ class VoteCustomQueryRepositoryImpl(
             return null
         }
         return record.first()
+    }
+
+    override fun findHistory(historyId: Long): Optional<VoteHistoryEntity> {
+        return historyRepository.findById(historyId)
     }
 
     override fun findHistories(userId: UUID): List<VoteHistoryEntity> {

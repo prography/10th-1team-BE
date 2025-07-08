@@ -2,6 +2,7 @@ package org.prography.bff.vote.controller
 
 import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.response.ApiResponse
+import org.prography.bff.config.security.AuthUser
 import org.prography.bff.vote.controller.mapper.VoteMapper
 import org.prography.bff.vote.controller.model.VoteResultDto
 import org.prography.bff.vote.controller.model.VoteSubmitDto
@@ -15,12 +16,12 @@ import org.prography.bff.vote.service.VoteService
 import org.prography.bff.vote.service.model.PlatformResultVo
 import org.prography.bff.vote.service.model.SubmitVo
 import org.prography.bff.vote.service.model.composite.PlatformVoteInfo
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
@@ -32,10 +33,10 @@ import java.util.UUID
 class VoteControllerImpl(
     private val voteService: VoteService,
 ) : VoteController {
-    @GetMapping("/{id}")
+    @GetMapping("/{placeId}")
     override fun getPlatformVoteResult(
-        @RequestParam userId: UUID?,
-        @PathVariable("id") placeId: String,
+        @AuthUser userId: UUID?,
+        @PathVariable("placeId") placeId: String,
     ): ApiResponse<VoteResultDto> {
         if (placeId.isBlank()) {
             throw IllegalArgumentException()
@@ -85,6 +86,7 @@ class VoteControllerImpl(
                 record =
                     vo.history?.let {
                         VoteRecord(
+                            id = it.id,
                             platform = VoteMapper.controller(it.platform),
                             reason =
                                 it.reasons.map { reason ->
@@ -98,10 +100,10 @@ class VoteControllerImpl(
         )
     }
 
-    @PatchMapping("/submit/{id}")
+    @PatchMapping("/submit/{placeId}")
     override fun submitPlatformVote(
-        @RequestParam userId: UUID,
-        @PathVariable("id") placeId: String,
+        @AuthUser userId: UUID,
+        @PathVariable("placeId") placeId: String,
         @RequestBody dto: VoteSubmitDto,
     ): ApiResponse<Void> {
         if (dto.reasons.isEmpty()) {
@@ -121,10 +123,10 @@ class VoteControllerImpl(
         return ApiResponse.success()
     }
 
-    @GetMapping("/summary/{id}")
+    @GetMapping("/summary/{placeId}")
     override fun getVoteSummary(
-        @PathVariable("id") placeId: String,
-        @RequestParam userId: UUID?, // NPE 가능성 존재
+        @PathVariable("placeId") placeId: String,
+        @AuthUser userId: UUID?,
     ): ApiResponse<VoteSummaryDto> {
         val voteSummary = voteService.getVoteSummary(userId, placeId)
         return ApiResponse.success(
@@ -133,5 +135,15 @@ class VoteControllerImpl(
                 voted = voteSummary.isUserVoted,
             ),
         )
+    }
+
+    @DeleteMapping("/cancel/{historyId}")
+    override fun cancelVote(
+        @AuthUser userId: UUID,
+        @PathVariable("historyId") historyId: Long,
+    ): ApiResponse<Void> {
+        voteService.cancel(historyId = historyId, userId = userId)
+
+        return ApiResponse.success()
     }
 }

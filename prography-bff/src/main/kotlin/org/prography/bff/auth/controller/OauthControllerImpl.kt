@@ -12,25 +12,12 @@ import org.springframework.web.bind.annotation.*
 class OauthControllerImpl(
     private val oAuthLoginService: OAuthLoginService,
 ) : OauthController {
-    @PostMapping("/oauth2/code/kakao")
-    override fun kakaoCallback(
+    @PostMapping("/oauth2/code/{provider}")
+    override fun oauthCallback(
+        @PathVariable provider: Provider,
         @RequestParam code: String,
     ): ApiResponse<TokenResponseDto> {
-        val tokenDto = oAuthLoginService.login(Provider.KAKAO, code)
-        return ApiResponse.success(
-            TokenResponseDto(
-                accessToken = tokenDto.accessToken,
-                refreshToken = tokenDto.refreshToken,
-                isNewUser = tokenDto.isNewUser,
-            ),
-        )
-    }
-
-    @PostMapping("/oauth2/code/naver")
-    override fun naverCallback(
-        @RequestParam code: String,
-    ): ApiResponse<TokenResponseDto> {
-        val tokenDto = oAuthLoginService.login(Provider.NAVER, code)
+        val tokenDto = oAuthLoginService.login(provider, code)
         return ApiResponse.success(
             TokenResponseDto(
                 accessToken = tokenDto.accessToken,
@@ -45,6 +32,7 @@ class OauthControllerImpl(
         @RequestBody request: RefreshTokenRequest,
     ): ApiResponse<TokenResponseDto> {
         val tokenDto = oAuthLoginService.refreshAccessToken(request.refreshToken)
+
         return ApiResponse.success(
             TokenResponseDto(
                 accessToken = tokenDto.accessToken,

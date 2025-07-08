@@ -11,6 +11,11 @@ import java.time.LocalDateTime
 @Schema(title = "투표 기록", description = "투표 결과 기록")
 data class VoteRecord(
     /**
+     * 투표 이력 고유 아이디
+     */
+    @Schema(title = "투표 이력 아이디", description = "이력에 대한 고유 아이디")
+    val id: Long,
+    /**
      * 플랫폼
      */
     @Schema(title = "플랫폼", description = "투표된 플랫폼")
