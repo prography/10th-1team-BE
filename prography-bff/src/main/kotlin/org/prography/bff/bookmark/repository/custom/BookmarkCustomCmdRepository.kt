@@ -7,7 +7,19 @@ import org.prography.bff.bookmark.repository.model.BookmarkGroupEntity
  * 북마크 관련 DB 저장 및 수정 인터페이스
  */
 interface BookmarkCustomCmdRepository {
-    fun save(group: BookmarkGroupEntity)
+    fun saveGroup(group: BookmarkGroupEntity): BookmarkGroupEntity
 
-    fun save(bookmark: BookmarkEntity)
+    fun saveGroups(groups: List<BookmarkGroupEntity>)
+
+    fun saveBookmark(bookmark: BookmarkEntity): BookmarkEntity
+
+    fun saveBookmarks(bookmarks: List<BookmarkEntity>)
+
+    fun deleteGroup(group: BookmarkGroupEntity)
+
+    fun deleteGroups(groups: List<BookmarkGroupEntity>)
+
+    fun deleteBookmark(bookmark: BookmarkEntity)
+
+    fun deleteBookmarks(bookmarks: List<BookmarkEntity>)
 }

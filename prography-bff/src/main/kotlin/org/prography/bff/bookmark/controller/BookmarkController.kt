@@ -23,8 +23,8 @@ interface BookmarkController {
         description = "가게 저장을 위한 그룹을 생성합니다.",
         externalDocs =
             ExternalDocumentation(
-                description = "노션 문서",
-                url = "https://www.notion.so/21cc0f5d7a1d8086a880ce7d3a470d01",
+                description = "피그마 링크",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-55202&t=OtsurZkGnix9x0d3-11",
             ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -52,7 +52,7 @@ interface BookmarkController {
         externalDocs =
             ExternalDocumentation(
                 description = "피그마 링크",
-                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1217-22056&t=wvWu6KGlfjrulv3r-11",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-53568&t=OtsurZkGnix9x0d3-11",
             ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -69,7 +69,7 @@ interface BookmarkController {
             ),
         ],
     )
-    fun getBookmarkGroups(userId: UUID): List<BookmarkGroupInfoDto>
+    fun getBookmarkGroups(userId: UUID): ApiResponse<List<BookmarkGroupInfoDto>>
 
     @Operation(
         summary = "그룹 조회 API",
@@ -77,7 +77,7 @@ interface BookmarkController {
         externalDocs =
             ExternalDocumentation(
                 description = "피그마 링크",
-                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1165-18638&t=wvWu6KGlfjrulv3r-11",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-55692&t=OtsurZkGnix9x0d3-11",
             ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -97,7 +97,7 @@ interface BookmarkController {
     fun getBookmarkGroups(
         userId: UUID,
         placeId: String,
-    ): List<BookmarkGroupInfoDto>
+    ): ApiResponse<List<BookmarkGroupInfoDto>>
 
     @Operation(
         summary = "그룹 삭제 API",
@@ -105,7 +105,7 @@ interface BookmarkController {
         externalDocs =
             ExternalDocumentation(
                 description = "피그마 링크",
-                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1215-25233&t=wvWu6KGlfjrulv3r-11",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-53467&t=OtsurZkGnix9x0d3-11",
             ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -133,7 +133,7 @@ interface BookmarkController {
         externalDocs =
             ExternalDocumentation(
                 description = "피그마 링크",
-                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1167-22112&t=wvWu6KGlfjrulv3r-11",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-55667&t=OtsurZkGnix9x0d3-11",
             ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -152,7 +152,8 @@ interface BookmarkController {
     )
     fun addBookmarkAtGroup(
         userId: UUID,
-        dto: BookmarkCmdDto,
+        placeId: String,
+        groupIds: List<UUID>,
     ): ApiResponse<Void>
 
     @Operation(
@@ -161,7 +162,7 @@ interface BookmarkController {
         externalDocs =
             ExternalDocumentation(
                 description = "피그마 링크",
-                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1167-22178&t=wvWu6KGlfjrulv3r-11",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-55717&t=OtsurZkGnix9x0d3-11",
             ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -178,13 +179,43 @@ interface BookmarkController {
             ),
         ],
     )
-    fun removeBookmarkAtGroup(
+    fun removeBookmarkAtGroups(
         userId: UUID,
-        dto: BookmarkCmdDto,
+        placeId: String,
+        groupIds: List<UUID>,
     ): ApiResponse<Void>
 
     @Operation(
-        summary = "가게 이동 API",
+        summary = "가게 삭제 API",
+        description = "선택된 가게들을 그룹에서 저장을 취소 합니다.",
+        externalDocs =
+            ExternalDocumentation(
+                description = "피그마 링크",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-56405&t=OtsurZkGnix9x0d3-11",
+            ),
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        array =
+                            ArraySchema(
+                                schema = Schema(implementation = Void::class),
+                            ),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun removeBookmarksAtGroup(
+        userId: UUID,
+        groupId: UUID,
+        placeIds: List<String>,
+    ): ApiResponse<Void>
+
+    @Operation(
+        summary = "가게 이동 API (미완성)",
         description = "선택된 가게를 지정된 그룹으로 이동 됩니다.",
         externalDocs =
             ExternalDocumentation(
@@ -217,7 +248,7 @@ interface BookmarkController {
         externalDocs =
             ExternalDocumentation(
                 description = "피그마 링크",
-                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=1215-29848&t=wvWu6KGlfjrulv3r-11",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-53692&t=OtsurZkGnix9x0d3-11",
             ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -237,5 +268,33 @@ interface BookmarkController {
     fun getBookmarks(
         userId: UUID,
         groupId: UUID,
-    ): List<BookmarkInfoDto>
+    ): ApiResponse<List<BookmarkInfoDto>>
+
+    @Operation(
+        summary = "그룹이 저장된 유무 조회 API",
+        description = "선택한 그룹이 저장되었는지 판단하는 API",
+        externalDocs =
+            ExternalDocumentation(
+                description = "피그마 링크",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-54564&t=SLP0kPfR7MjLnHiC-11",
+            ),
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        array =
+                            ArraySchema(
+                                schema = Schema(implementation = Boolean::class),
+                            ),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun savedBookmarks(
+        userId: UUID,
+        placeId: String,
+    ): ApiResponse<Boolean>
 }

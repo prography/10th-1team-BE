@@ -28,12 +28,12 @@ data class BookmarkGroupInfoDto(
      * 해당 그룹이 가지고 있는 가게의 갯수
      */
     @Schema(title = "저장된 갯수", description = "해당 그룹이 가지고 있는 가게의 갯수")
-    val numberOfBookmark: Int,
+    val numberOfBookmark: Long,
     /**
      * 해당 가게가 본 그룹에 저장되어 있는 유무
      */
     @Schema(title = "저장 유무", description = "해당 가게가 본 그룹에 저장되어 있는 유무")
-    val isSaved: Boolean,
+    val isSaved: Boolean = false,
     /**
      * 그룹이 생성된 날짜
      */

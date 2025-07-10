@@ -10,11 +10,35 @@ class BookmarkCustomCmdRepositoryImpl(
     private val groupRepository: BookmarkGroupEntityRepository,
     private val bookmarkRepository: BookmarkEntityRepository,
 ) : BookmarkCustomCmdRepository {
-    override fun save(group: BookmarkGroupEntity) {
-        groupRepository.save(group)
+    override fun saveGroup(group: BookmarkGroupEntity): BookmarkGroupEntity {
+        return groupRepository.save(group)
     }
 
-    override fun save(bookmark: BookmarkEntity) {
-        bookmarkRepository.save(bookmark)
+    override fun saveGroups(groups: List<BookmarkGroupEntity>) {
+        groupRepository.saveAll(groups)
+    }
+
+    override fun saveBookmark(bookmark: BookmarkEntity): BookmarkEntity {
+        return bookmarkRepository.save(bookmark)
+    }
+
+    override fun saveBookmarks(bookmarks: List<BookmarkEntity>) {
+        bookmarkRepository.saveAll(bookmarks)
+    }
+
+    override fun deleteGroup(group: BookmarkGroupEntity) {
+        groupRepository.delete(group)
+    }
+
+    override fun deleteGroups(groups: List<BookmarkGroupEntity>) {
+        groupRepository.deleteAll(groups)
+    }
+
+    override fun deleteBookmark(bookmark: BookmarkEntity) {
+        bookmarkRepository.delete(bookmark)
+    }
+
+    override fun deleteBookmarks(bookmarks: List<BookmarkEntity>) {
+        bookmarkRepository.deleteAll(bookmarks)
     }
 }

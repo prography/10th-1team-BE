@@ -10,10 +10,15 @@ import java.util.UUID
 @Schema(title = "저장된 가게 조회 DTO", description = "그룹을 통해서 자장된 가게를 조회할 경우의 DTO")
 data class BookmarkInfoDto(
     /**
+     *
+     */
+    @Schema(title = "북마크 아이디", description = "북마크 고유 아이디")
+    val id: UUID,
+    /**
      * 저장된 가게 고유 아이디
      */
     @Schema(title = "가게 고유 아이디", description = "저장된 가게의 상세 페이지 조회를 위한 고유 아이디")
-    val placeId: UUID,
+    val placeId: String,
     /**
      * 저장된 가게의 상호명
      */
@@ -33,7 +38,7 @@ data class BookmarkInfoDto(
      * 법정동 이름
      */
     @Schema(title = "법정동", description = "저장된 가게의 도로명 기반 법정동 이름")
-    val legal: String,
+    val legal: Int,
     /**
      * 저장된 날짜
      */

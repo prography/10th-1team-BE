@@ -1,5 +1,6 @@
 package org.prography.bff.restaurant.repository
 
+import org.prography.bff.restaurant.repository.model.PlaceInfo
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Component
 import java.util.Optional
 
 @Component
-class RawRestaurantCustomRepository(
+class RestaurantCustomRepository(
     private val mongoTemplate: MongoTemplate,
 ) {
     companion object {
@@ -29,6 +30,8 @@ class RawRestaurantCustomRepository(
         val query =
             Query(Criteria.where("_id").`is`(id)).apply {
                 fields()
+                    .include("b_code")
+                    .include("kakaoPlaceData.roadAddressName")
                     .include("kakaoPlaceData.placeName")
                     .include("kakaoPlaceData.categoryName")
                     .exclude("_id")
@@ -41,5 +44,24 @@ class RawRestaurantCustomRepository(
                 COLLECTION_NAME,
             )
         return Optional.ofNullable(result)
+    }
+
+    fun findKakaoPlaceInfoInIds(ids: List<String>): List<PlaceInfo> {
+        if (ids.isEmpty()) return emptyList()
+
+        val query =
+            Query(Criteria.where("_id").`in`(ids)).apply {
+                fields()
+                    .include("b_code")
+                    .include("kakaoPlaceData.roadAddressName")
+                    .include("kakaoPlaceData.placeName")
+                    .include("kakaoPlaceData.categoryName")
+            }
+
+        return mongoTemplate.find(
+            query,
+            PlaceInfo::class.java,
+            COLLECTION_NAME,
+        )
     }
 }

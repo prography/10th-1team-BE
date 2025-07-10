@@ -22,4 +22,6 @@ sealed class NotFoundException(
     class VoteHistoryNotFoundException : NotFoundException("해당 투표 이력이 존재하지 않습니다.")
 
     class VoteNotFoundException : NotFoundException("플랫폼 투표가 존재하지 않습니다.")
+
+    class GroupNotFound : NotFoundException("해당 그룹은 존재하지 않습니다.")
 }
