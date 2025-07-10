@@ -6,6 +6,7 @@ import org.prography.bff.bookmark.repository.model.BookmarkEntity
 import org.prography.bff.bookmark.repository.model.BookmarkGroupEntity
 import org.prography.bff.bookmark.service.model.BookmarkPlace
 import org.prography.bff.bookmark.service.model.PlaceGroup
+import org.prography.bff.bookmark.service.model.PlaceGroupWithSaved
 import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.exception.notfound.NotFoundException
 import org.prography.bff.restaurant.repository.RestaurantCustomRepository
@@ -51,11 +52,17 @@ class BookmarkService(
         bookmarkCmdRepository.saveBookmarks(bookmarks)
     }
 
+    @Transactional
     fun removeBookmarkAtGroup(
-        groupIds: List<UUID>,
+        userId: UUID,
         placeId: String,
+        groupIds: List<UUID>,
     ) {
         val groups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findInIds(groupIds = groupIds)
+        if (groups.any { it.userId != userId }) {
+            throw InvalidRequestException.MismatchUser()
+        }
+
         val bookmarks: List<BookmarkEntity> =
             bookmarkQueryRepository.findMatchedBookmarksInGroup(
                 groupIds =
@@ -73,7 +80,9 @@ class BookmarkService(
         bookmarkCmdRepository.deleteBookmarks(bookmarks)
     }
 
+    @Transactional
     fun removeBookmarkAtGroup(
+        userId: UUID,
         groupId: UUID,
         placeIds: List<String>,
     ) {
@@ -94,6 +103,7 @@ class BookmarkService(
     ) {
     }
 
+    @Transactional
     fun deleteBookmarkGroup(
         userId: UUID,
         groupId: UUID,
@@ -123,13 +133,40 @@ class BookmarkService(
     }
 
     fun getBookmarkGroups(userId: UUID): List<PlaceGroup> {
-        val groupEntities: List<BookmarkGroupEntity> = bookmarkQueryRepository.findBookmarkGroupsByUserId(userId)
+        val groups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findBookmarkGroupsByUserId(userId)
 
-        return groupEntities.map {
+        return groups.map {
             PlaceGroup(id = it.id, name = it.groupName, icon = it.icon, total = it.total, createdAt = it.createdAt, savedAt = it.modifiedAt)
         }
     }
 
+    @Transactional(readOnly = true)
+    fun getBookmarkGroups(
+        userId: UUID,
+        placeId: String,
+    ): PlaceGroupWithSaved {
+        val groups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findBookmarkGroupsByUserId(userId)
+        val savedGroupIds: Set<UUID> =
+            bookmarkQueryRepository.findMatchedBookmarksInGroup(groupIds = groups.map { it.id }, placeId = placeId)
+                .mapTo(mutableSetOf()) { it.groupId }
+
+        return PlaceGroupWithSaved(
+            placeGroups =
+                groups.map {
+                    PlaceGroup(
+                        id = it.id,
+                        name = it.groupName,
+                        icon = it.icon,
+                        total = it.total,
+                        createdAt = it.createdAt,
+                        savedAt = it.modifiedAt,
+                    )
+                },
+            savedGroupIds = savedGroupIds.toList(),
+        )
+    }
+
+    @Transactional(readOnly = true)
     fun getBookmarks(groupId: UUID): List<BookmarkPlace> {
         val bookmarks: List<BookmarkEntity> =
             bookmarkQueryRepository.findBookmarksByGroupId(groupId)

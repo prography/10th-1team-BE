@@ -124,17 +124,15 @@ class BookmarkGroupEntity protected constructor() {
     }
 
     fun removeBookmark(bookmarks: List<BookmarkEntity>) {
-        if (bookmarks.isNotEmpty()) {
+        if (bookmarks.isEmpty()) {
             return
         }
 
-        require(bookmarks.all { it.groupId == this.id && it.userId == this.userId }) {
-            "이 그룹에 속한 가게만 삭제할 수 있습니다."
-        }
-        require(bookmarks.size <= total) {
+        val removeBookmarks = bookmarks.filter { it.groupId == id }
+        require(removeBookmarks.size <= total) {
             "삭제하려는 북마크 수(${bookmarks.size})가 현재 그룹에 저장된 개수($total)보다 많습니다."
         }
 
-        total -= bookmarks.size
+        total -= removeBookmarks.size
     }
 }
