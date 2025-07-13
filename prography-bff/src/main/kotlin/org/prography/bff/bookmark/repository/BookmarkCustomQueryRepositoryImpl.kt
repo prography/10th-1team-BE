@@ -3,6 +3,7 @@ package org.prography.bff.bookmark.repository
 import org.prography.bff.bookmark.repository.custom.BookmarkCustomQueryRepository
 import org.prography.bff.bookmark.repository.model.BookmarkEntity
 import org.prography.bff.bookmark.repository.model.BookmarkGroupEntity
+import org.prography.bff.bookmark.repository.model.BookmarkId
 import org.springframework.stereotype.Repository
 import java.util.Optional
 import java.util.UUID
@@ -12,7 +13,7 @@ class BookmarkCustomQueryRepositoryImpl(
     private val groupRepository: BookmarkGroupEntityRepository,
     private val bookmarkRepository: BookmarkEntityRepository,
 ) : BookmarkCustomQueryRepository {
-    override fun findById(groupId: UUID): Optional<BookmarkGroupEntity> {
+    override fun findGroupById(groupId: UUID): Optional<BookmarkGroupEntity> {
         return groupRepository.findById(groupId)
     }
 
@@ -21,12 +22,12 @@ class BookmarkCustomQueryRepositoryImpl(
             select(entity(BookmarkEntity::class))
                 .from(entity(BookmarkEntity::class))
                 .where(
-                    path(BookmarkEntity::groupId).eq(groupId),
+                    path(BookmarkEntity::id)(BookmarkId::groupId).eq(groupId),
                 )
         }.filterNotNull()
     }
 
-    override fun findBookmarkGroupsByUserId(userId: UUID): List<BookmarkGroupEntity> {
+    override fun findGroupsByUserId(userId: UUID): List<BookmarkGroupEntity> {
         return groupRepository.findAll {
             select(entity(BookmarkGroupEntity::class))
                 .from(entity(BookmarkGroupEntity::class))
@@ -45,13 +46,13 @@ class BookmarkCustomQueryRepositoryImpl(
                 .from(entity(BookmarkEntity::class))
                 .where(
                     path(BookmarkEntity::userId).eq(userId).and(
-                        path(BookmarkEntity::placeId).eq(placeId),
+                        path(BookmarkEntity::id)(BookmarkId::placeId).eq(placeId),
                     ),
                 )
         }.isNotEmpty()
     }
 
-    override fun findInIds(groupIds: List<UUID>): List<BookmarkGroupEntity> {
+    override fun findGroupsInIds(groupIds: List<UUID>): List<BookmarkGroupEntity> {
         return bookmarkRepository.findAll {
             select(entity(BookmarkGroupEntity::class))
                 .from(entity(BookmarkGroupEntity::class))
@@ -61,7 +62,7 @@ class BookmarkCustomQueryRepositoryImpl(
         }.filterNotNull()
     }
 
-    override fun existsBookmarkGroup(
+    override fun existsGroup(
         userId: UUID,
         groupName: String,
     ): Boolean {
@@ -84,8 +85,8 @@ class BookmarkCustomQueryRepositoryImpl(
             select(entity(BookmarkEntity::class))
                 .from(entity(BookmarkEntity::class))
                 .where(
-                    path(BookmarkEntity::groupId).`in`(groupIds).and(
-                        path(BookmarkEntity::placeId).eq(placeId),
+                    path(BookmarkEntity::id)(BookmarkId::groupId).`in`(groupIds).and(
+                        path(BookmarkEntity::id)(BookmarkId::placeId).eq(placeId),
                     ),
                 )
         }.filterNotNull()
@@ -99,8 +100,8 @@ class BookmarkCustomQueryRepositoryImpl(
             select(entity(BookmarkEntity::class))
                 .from(entity(BookmarkEntity::class))
                 .where(
-                    path(BookmarkEntity::groupId).eq(groupId).and(
-                        path(BookmarkEntity::placeId).`in`(placeIds),
+                    path(BookmarkEntity::id)(BookmarkId::groupId).eq(groupId).and(
+                        path(BookmarkEntity::id)(BookmarkId::placeId).`in`(placeIds),
                     ),
                 )
         }.filterNotNull()

@@ -107,32 +107,47 @@ class BookmarkGroupEntity protected constructor() {
         require(total < 1000) {
             "이 그룹에는 더 이상 가게를 추가할 수 없습니다. (current=$total)"
         }
+        return BookmarkEntity.of(this, placeId)
+    }
+
+    fun addBookmarks(placeIds: List<String>): List<BookmarkEntity> {
+        require(total < 1000) {
+            "이 그룹에는 더 이상 가게를 추가할 수 없습니다. (current=$total)"
+        }
+
+        require(placeIds.size + total < 1000) {
+            "이 그룹에는 더 이상 가게를 추가할 수 없습니다. (current=$total)"
+        }
+
+        return placeIds.map {
+            BookmarkEntity.of(this, placeId = it)
+        }.also {
+            total += placeIds.size
+        }
+    }
+
+    fun removeBookmark(placeId: String): BookmarkEntity {
+        require(total != 0L) {
+            "이 그룹에는 저장된 가게가 존재하지 없습니다. (current=$total)"
+        }
         return BookmarkEntity.of(this, placeId).also {
-            total += 1
+            total -= 1
         }
     }
 
-    fun removeBookmark(bookmark: BookmarkEntity) {
-        require(bookmark.groupId == this.id && bookmark.userId == this.userId) {
-            "이 그룹에 속한 가게만 삭제할 수 있습니다."
-        }
-        require(total > 0) {
-            "삭제할 가게가 없습니다. (total=$total)"
+    fun removeBookmarks(placeIds: List<String>): List<BookmarkEntity> {
+        require(total != 0L) {
+            "이 그룹에는 저장된 가게가 존재하지 없습니다. (current=$total)"
         }
 
-        total -= 1
-    }
-
-    fun removeBookmark(bookmarks: List<BookmarkEntity>) {
-        if (bookmarks.isEmpty()) {
-            return
+        require(placeIds.size <= total) {
+            "삭제하려는 가게 수(${placeIds.size})가 현재 그룹에 저장된 개수($total)보다 많습니다."
         }
 
-        val removeBookmarks = bookmarks.filter { it.groupId == id }
-        require(removeBookmarks.size <= total) {
-            "삭제하려는 북마크 수(${bookmarks.size})가 현재 그룹에 저장된 개수($total)보다 많습니다."
+        return placeIds.map {
+            BookmarkEntity.of(this, placeId = it)
+        }.also {
+            total -= placeIds.size
         }
-
-        total -= removeBookmarks.size
     }
 }

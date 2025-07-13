@@ -9,20 +9,20 @@ import java.util.UUID
  * 북마크 관련 DB 조회 인터페이스
  */
 interface BookmarkCustomQueryRepository {
-    fun findById(groupId: UUID): Optional<BookmarkGroupEntity>
+    fun findGroupById(groupId: UUID): Optional<BookmarkGroupEntity>
 
     fun findBookmarksByGroupId(groupId: UUID): List<BookmarkEntity>
 
-    fun findBookmarkGroupsByUserId(userId: UUID): List<BookmarkGroupEntity>
+    fun findGroupsByUserId(userId: UUID): List<BookmarkGroupEntity>
 
     fun existsBookmark(
         userId: UUID,
         placeId: String,
     ): Boolean
 
-    fun findInIds(groupIds: List<UUID>): List<BookmarkGroupEntity>
+    fun findGroupsInIds(groupIds: List<UUID>): List<BookmarkGroupEntity>
 
-    fun existsBookmarkGroup(
+    fun existsGroup(
         userId: UUID,
         groupName: String,
     ): Boolean

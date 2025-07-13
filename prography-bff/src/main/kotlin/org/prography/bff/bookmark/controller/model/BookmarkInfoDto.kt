@@ -12,8 +12,8 @@ data class BookmarkInfoDto(
     /**
      *
      */
-    @Schema(title = "북마크 아이디", description = "북마크 고유 아이디")
-    val id: UUID,
+    @Schema(title = "그룹 아이디", description = "그룹 고유 아이디")
+    val groupId: UUID,
     /**
      * 저장된 가게 고유 아이디
      */

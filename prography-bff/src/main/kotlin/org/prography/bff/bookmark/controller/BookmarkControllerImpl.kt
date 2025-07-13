@@ -95,7 +95,7 @@ class BookmarkControllerImpl(
         @PathVariable("placeId") placeId: String,
         @AuthUser groupIds: List<UUID>,
     ): ApiResponse<Void> {
-        bookmarkService.addBookmarkAtGroup(groupIds = groupIds, placeId = placeId)
+        bookmarkService.addBookmarkAtGroup(userId = userId, groupIds = groupIds, placeId = placeId)
         return ApiResponse.success()
     }
 
@@ -136,7 +136,7 @@ class BookmarkControllerImpl(
             bookmarkService.getBookmarks(groupId)
                 .map {
                     BookmarkInfoDto(
-                        id = it.id,
+                        groupId = it.groupId,
                         placeId = it.placeId,
                         placeName = it.placeName,
                         roadAddress = it.roadAddress,

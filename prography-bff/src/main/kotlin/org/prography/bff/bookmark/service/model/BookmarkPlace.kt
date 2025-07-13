@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 data class BookmarkPlace(
-    val id: UUID,
+    val groupId: UUID,
     val placeId: String,
     val placeName: String,
     val roadAddress: String,
