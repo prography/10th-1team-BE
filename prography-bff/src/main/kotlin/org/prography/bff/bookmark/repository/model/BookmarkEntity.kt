@@ -3,7 +3,10 @@ package org.prography.bff.bookmark.repository.model
 import jakarta.persistence.Column
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
+import jakarta.persistence.EntityListeners
 import jakarta.persistence.Table
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 import java.util.Objects
 import java.util.UUID
@@ -13,6 +16,7 @@ import java.util.UUID
  */
 @Entity
 @Table(name = "BOOKMARK")
+@EntityListeners(AuditingEntityListener::class)
 class BookmarkEntity protected constructor() {
     /**
      * 그룹 아이디 + 가게 아이디로 구성된 복합키
@@ -29,6 +33,7 @@ class BookmarkEntity protected constructor() {
     /**
      * 저장한 날짜
      */
+    @CreatedDate
     @Column(name = "saved_at")
     lateinit var savedAt: LocalDateTime
 
