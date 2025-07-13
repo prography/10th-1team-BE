@@ -11,6 +11,7 @@ import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.exception.notfound.NotFoundException
 import org.prography.bff.restaurant.repository.RestaurantCustomRepository
 import org.prography.bff.restaurant.repository.model.PlaceInfo
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
@@ -68,8 +69,12 @@ class BookmarkService(
                 it.addBookmark(placeId = placeId)
             }
 
-        bookmarkCmdRepository.saveGroups(groups)
-        bookmarkCmdRepository.saveBookmarks(bookmarks)
+        try {
+            bookmarkCmdRepository.saveGroups(groups)
+            bookmarkCmdRepository.saveBookmarks(bookmarks)
+        } catch (e: DataIntegrityViolationException) {
+            throw InvalidRequestException.AlreadyBookmark()
+        }
     }
 
     /**

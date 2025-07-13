@@ -29,4 +29,9 @@ sealed class InvalidRequestException(
      * 삭제하려는 그룹과 소유자인 유저가 일치하지 않는 경우 발생하는 예외
      */
     class MismatchUser : InvalidRequestException("유저는 해당 그룹을 가지고 있지 않습니다.")
+
+    /**
+     * 가게 저장 시 그룹에 이미 저장되어 있을 경우 발생하는 예외
+     */
+    class AlreadyBookmark : InvalidRequestException("이미 그룹에 저장된 가게가 있습니다.")
 }
