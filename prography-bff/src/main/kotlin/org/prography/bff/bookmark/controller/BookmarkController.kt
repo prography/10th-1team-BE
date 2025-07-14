@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.prography.bff.bookmark.controller.model.BookmarkCmdDto
+import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
 import org.prography.bff.bookmark.controller.model.BookmarkGroupInfoDto
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
 import org.prography.bff.bookmark.controller.model.BookmarkInfoDto
@@ -239,7 +239,7 @@ interface BookmarkController {
     )
     fun moveBookmarkAtGroup(
         userId: UUID,
-        dto: BookmarkCmdDto,
+        dto: BookmarkMoveDto,
     ): ApiResponse<Void>
 
     @Operation(
