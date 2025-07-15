@@ -36,4 +36,13 @@ interface BookmarkCustomQueryRepository {
         groupId: UUID,
         placeIds: List<String>,
     ): List<BookmarkEntity>
+
+    fun findMatchedBookmarksInGroups(
+        groupIds: List<UUID>,
+        placeIds: List<String>,
+    ): List<BookmarkEntity>
+
+    fun getNumberOfBookmark(groupId: UUID): Long
+
+    fun getNumberOfBookmakr(groupIds: List<UUID>): Map<UUID, Long>
 }

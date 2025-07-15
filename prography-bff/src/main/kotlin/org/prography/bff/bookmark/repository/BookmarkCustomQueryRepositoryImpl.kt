@@ -1,5 +1,8 @@
 package org.prography.bff.bookmark.repository
 
+import com.linecorp.kotlinjdsl.querymodel.jpql.expression.Expression
+import com.linecorp.kotlinjdsl.querymodel.jpql.expression.Expressions.expression
+import jakarta.persistence.Tuple
 import org.prography.bff.bookmark.repository.custom.BookmarkCustomQueryRepository
 import org.prography.bff.bookmark.repository.model.BookmarkEntity
 import org.prography.bff.bookmark.repository.model.BookmarkGroupEntity
@@ -105,5 +108,65 @@ class BookmarkCustomQueryRepositoryImpl(
                     ),
                 )
         }.filterNotNull()
+    }
+
+    override fun findMatchedBookmarksInGroups(
+        groupIds: List<UUID>,
+        placeIds: List<String>,
+    ): List<BookmarkEntity> {
+        return bookmarkRepository.findAll {
+            select(entity(BookmarkEntity::class))
+                .from(entity(BookmarkEntity::class))
+                .where(
+                    path(BookmarkEntity::id)(BookmarkId::groupId).`in`(groupIds).and(
+                        path(BookmarkEntity::id)(BookmarkId::placeId).`in`(placeIds),
+                    ),
+                )
+        }.filterNotNull()
+    }
+
+    override fun getNumberOfBookmark(groupId: UUID): Long {
+        return bookmarkRepository.findAll {
+            select(count(path(BookmarkEntity::id)(BookmarkId::groupId)))
+                .from(entity(BookmarkEntity::class))
+                .where(
+                    path(BookmarkEntity::id)(BookmarkId::groupId).eq(groupId),
+                )
+        }.first() ?: 0L
+    }
+
+    data class result(
+        val groupId: UUID,
+        val total: Long,
+    )
+
+    override fun getNumberOfBookmakr(groupIds: List<UUID>): Map<UUID, Long> {
+        if (groupIds.isEmpty()) {
+            return emptyMap()
+        }
+
+        val groupIdAlias: Expression<UUID> = expression(UUID::class, "groupId")
+        val countAlias: Expression<Long> = expression(Long::class, "count")
+
+        val tuples: List<Tuple> =
+            bookmarkRepository.findAll {
+                val groupIdPath = path(BookmarkEntity::id)(BookmarkId::groupId)
+                select<Tuple>(
+                    groupIdPath.`as`(groupIdAlias),
+                    count(BookmarkEntity::id).`as`(countAlias),
+                )
+                    .from(entity(BookmarkEntity::class))
+                    .where(
+                        groupIdPath.`in`(groupIds),
+                    )
+                    .groupBy(groupIdPath)
+            }.filterNotNull()
+
+        return tuples.associate { tuple ->
+            val groupId: UUID = tuple.get("groupId", UUID::class.java)
+            val cnt: Long = tuple.get("count", Long::class.java)
+
+            groupId to cnt
+        }
     }
 }

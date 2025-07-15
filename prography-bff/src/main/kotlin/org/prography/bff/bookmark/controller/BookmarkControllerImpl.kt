@@ -1,14 +1,23 @@
 package org.prography.bff.bookmark.controller
 
-import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
 import org.prography.bff.bookmark.controller.model.BookmarkGroupInfoDto
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
 import org.prography.bff.bookmark.controller.model.BookmarkInfoDto
+import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
 import org.prography.bff.bookmark.service.BookmarkService
 import org.prography.bff.bookmark.service.model.PlaceGroupWithSaved
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
 /**
@@ -50,7 +59,7 @@ class BookmarkControllerImpl(
 
     @GetMapping("/group/{placeId}")
     override fun getBookmarkGroups(
-        @AuthUser userId: UUID,
+        @RequestParam userId: UUID,
         @PathVariable("placeId") placeId: String,
     ): ApiResponse<List<BookmarkGroupInfoDto>> {
         val vo: PlaceGroupWithSaved =
@@ -82,23 +91,13 @@ class BookmarkControllerImpl(
         return ApiResponse.success()
     }
 
-    @PatchMapping("/place/{placeId}")
-    override fun addBookmarkAtGroup(
+    @PutMapping("/place/{placeId}")
+    override fun modifyBookmarkAtGroup(
         @AuthUser userId: UUID,
         @PathVariable("placeId") placeId: String,
         @RequestParam groupIds: List<UUID>,
     ): ApiResponse<Void> {
-        bookmarkService.addBookmarkAtGroup(userId = userId, groupIds = groupIds, placeId = placeId)
-        return ApiResponse.success()
-    }
-
-    @DeleteMapping("/place/{placeId}")
-    override fun removeBookmarkAtGroups(
-        @AuthUser userId: UUID,
-        @PathVariable("placeId") placeId: String,
-        @RequestParam groupIds: List<UUID>,
-    ): ApiResponse<Void> {
-        bookmarkService.removeBookmarkAtGroup(userId = userId, placeId = placeId, groupIds = groupIds)
+        bookmarkService.updateBookmarkAtGroup(userId = userId, placeId = placeId, savedGroupIds = groupIds)
         return ApiResponse.success()
     }
 
@@ -117,8 +116,12 @@ class BookmarkControllerImpl(
         @AuthUser userId: UUID,
         @RequestBody dto: BookmarkMoveDto,
     ): ApiResponse<Void> {
-        bookmarkService.moveBookmarkAtGroup(userId = userId,
-            targets = dto.targetGroups, source = dto.sourceGroup, placeIds = dto.placeId)
+        bookmarkService.moveBookmarkAtGroup(
+            userId = userId,
+            targets = dto.targetGroups,
+            source = dto.sourceGroup,
+            placeIds = dto.placeId,
+        )
 
         return ApiResponse.success()
     }
