@@ -6,10 +6,10 @@ import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
 import org.prography.bff.bookmark.controller.model.BookmarkGroupInfoDto
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
 import org.prography.bff.bookmark.controller.model.BookmarkInfoDto
+import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
 import org.prography.bff.config.response.ApiResponse
 import java.util.UUID
 
@@ -128,12 +128,12 @@ interface BookmarkController {
     ): ApiResponse<Void>
 
     @Operation(
-        summary = "가게 저장 API",
-        description = "선택된 그룹에 가게를 저장 합니다.",
+        summary = "가게 저장 수정 API",
+        description = "선택된 그룹은 가게를 저장하고 선택되지 않으면 삭제 합니다.",
         externalDocs =
             ExternalDocumentation(
                 description = "피그마 링크",
-                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-55667&t=OtsurZkGnix9x0d3-11",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-55692&t=HuSzMAS2aST8Ztlj-11",
             ),
         responses = [
             io.swagger.v3.oas.annotations.responses.ApiResponse(
@@ -150,36 +150,7 @@ interface BookmarkController {
             ),
         ],
     )
-    fun addBookmarkAtGroup(
-        userId: UUID,
-        placeId: String,
-        groupIds: List<UUID>,
-    ): ApiResponse<Void>
-
-    @Operation(
-        summary = "가게 삭제 API",
-        description = "선택된 그룹에 가게를 저장을 취소 합니다.",
-        externalDocs =
-            ExternalDocumentation(
-                description = "피그마 링크",
-                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-55717&t=OtsurZkGnix9x0d3-11",
-            ),
-        responses = [
-            io.swagger.v3.oas.annotations.responses.ApiResponse(
-                responseCode = "200",
-                content = [
-                    Content(
-                        mediaType = "application/json",
-                        array =
-                            ArraySchema(
-                                schema = Schema(implementation = Void::class),
-                            ),
-                    ),
-                ],
-            ),
-        ],
-    )
-    fun removeBookmarkAtGroups(
+    fun modifyBookmarkAtGroup(
         userId: UUID,
         placeId: String,
         groupIds: List<UUID>,
@@ -215,7 +186,7 @@ interface BookmarkController {
     ): ApiResponse<Void>
 
     @Operation(
-        summary = "가게 이동 API (미완성)",
+        summary = "가게 이동 API",
         description = "선택된 가게를 지정된 그룹으로 이동 됩니다.",
         externalDocs =
             ExternalDocumentation(

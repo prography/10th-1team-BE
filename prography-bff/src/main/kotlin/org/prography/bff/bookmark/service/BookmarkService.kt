@@ -78,6 +78,58 @@ class BookmarkService(
     }
 
     /**
+     * 가게 추가 및 삭제 메소드
+     */
+    @Transactional
+    fun updateBookmarkAtGroup(
+        userId: UUID,
+        placeId: String,
+        savedGroupIds: List<UUID>,
+    ) {
+        if (!restaurantDataRepository.existsById(placeId)) {
+            throw NotFoundException.PlaceNotFoundException()
+        }
+
+        val userGroups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findGroupsByUserId(userId = userId)
+
+        if (userGroups.isEmpty()) {
+            return
+        }
+
+        if (userGroups.any { it.userId != userId }) {
+            throw InvalidRequestException.MismatchUser()
+        }
+
+        val existingBookmarkedGroupIds: Set<UUID> =
+            bookmarkQueryRepository.findMatchedBookmarksInGroup(groupIds = userGroups.map { it.id }, placeId = placeId)
+                .map { it.id.groupId }
+                .toSet()
+
+        val savedGroupIdsSet = savedGroupIds.toSet()
+        val userGroupsById: Map<UUID, BookmarkGroupEntity> = userGroups.associateBy { it.id }
+
+        val groupIdsToAdd = savedGroupIdsSet - existingBookmarkedGroupIds
+        if (groupIdsToAdd.isNotEmpty()) {
+            val bookmarksToAdd: List<BookmarkEntity> =
+                groupIdsToAdd.mapNotNull { groupId ->
+                    userGroupsById[groupId]?.addBookmark(placeId = placeId)
+                }
+            bookmarkCmdRepository.saveBookmarks(bookmarksToAdd)
+        }
+
+        val groupIdsToRemove = existingBookmarkedGroupIds - savedGroupIdsSet
+        if (groupIdsToRemove.isNotEmpty()) {
+            val bookmarkIdsToRemove: List<BookmarkEntity> =
+                groupIdsToRemove.mapNotNull { groupId ->
+                    userGroupsById[groupId]?.removeBookmark(placeId = placeId)
+                }
+            bookmarkCmdRepository.deleteBookmarks(bookmarkIdsToRemove)
+        }
+
+        bookmarkCmdRepository.saveGroups(userGroups)
+    }
+
+    /**
      * 그룹에 저장된 가게 삭제
      */
     @Transactional
@@ -130,7 +182,7 @@ class BookmarkService(
     }
 
     /**
-     * 그룹의 가게를 다른 그룹으로 디동
+     * 그룹의 가게를 다른 그룹으로 이동
      */
     @Transactional
     fun moveBookmarkAtGroup(
@@ -160,12 +212,21 @@ class BookmarkService(
         val sourceBookmarks: List<BookmarkEntity> = sourceGroup.removeBookmarks(placeIds)
         bookmarkCmdRepository.deleteBookmarks(sourceBookmarks)
 
+        val existsGroupPlaceIds: Map<UUID, Set<String>> =
+            bookmarkQueryRepository
+                .findMatchedBookmarksInGroups(groupIds = targets, placeIds = placeIds)
+                .groupBy { it.id.groupId }
+                .mapValues { entry ->
+                    entry.value.map { it.id.placeId }.toSet()
+                }
         val targetBookmarks: List<BookmarkEntity> =
-            targetGroups.flatMap {
-                it.addBookmarks(placeIds = placeIds)
+            targetGroups.flatMap { group ->
+                val existing = existsGroupPlaceIds[group.id] ?: emptySet()
+                val newPlaceIds = placeIds.filterNot { it in existing }
+                group.addBookmarks(placeIds = newPlaceIds)
             }
-        bookmarkCmdRepository.saveBookmarks(targetBookmarks)
 
+        bookmarkCmdRepository.saveBookmarks(targetBookmarks)
         val modifiedGroups = listOf(sourceGroup) + targetGroups
         bookmarkCmdRepository.saveGroups(modifiedGroups)
     }

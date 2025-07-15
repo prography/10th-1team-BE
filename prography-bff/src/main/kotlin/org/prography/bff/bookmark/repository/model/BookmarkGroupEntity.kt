@@ -107,7 +107,9 @@ class BookmarkGroupEntity protected constructor() {
         require(total < 1000) {
             "이 그룹에는 더 이상 가게를 추가할 수 없습니다. (current=$total)"
         }
-        return BookmarkEntity.of(this, placeId)
+        return BookmarkEntity.of(this, placeId).also {
+            total += 1
+        }
     }
 
     fun addBookmarks(placeIds: List<String>): List<BookmarkEntity> {

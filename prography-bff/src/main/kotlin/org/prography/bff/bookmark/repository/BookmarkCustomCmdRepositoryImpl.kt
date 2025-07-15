@@ -31,7 +31,7 @@ class BookmarkCustomCmdRepositoryImpl(
     }
 
     override fun deleteGroups(groups: List<BookmarkGroupEntity>) {
-        groupRepository.deleteAll(groups)
+        groupRepository.deleteAllInBatch(groups)
     }
 
     override fun deleteBookmark(bookmark: BookmarkEntity) {
@@ -39,6 +39,6 @@ class BookmarkCustomCmdRepositoryImpl(
     }
 
     override fun deleteBookmarks(bookmarks: List<BookmarkEntity>) {
-        bookmarkRepository.deleteAll(bookmarks)
+        bookmarkRepository.deleteAllInBatch(bookmarks)
     }
 }
