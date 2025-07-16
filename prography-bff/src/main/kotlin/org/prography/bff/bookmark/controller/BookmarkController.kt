@@ -265,7 +265,7 @@ interface BookmarkController {
         ],
     )
     fun savedBookmarks(
-        userId: UUID,
+        userId: UUID?,
         placeId: String,
     ): ApiResponse<Boolean>
 }

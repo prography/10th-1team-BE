@@ -150,11 +150,14 @@ class BookmarkControllerImpl(
 
     @GetMapping("/saved")
     override fun savedBookmarks(
-        userId: UUID,
+        @AuthUser userId: UUID?,
         placeId: String,
     ): ApiResponse<Boolean> {
-        val saved: Boolean = bookmarkService.isBookmark(userId = userId, placeId = placeId)
+        if (userId == null) {
+            return ApiResponse.success(false)
+        }
 
+        val saved: Boolean = bookmarkService.isBookmark(userId = userId, placeId = placeId)
         return ApiResponse.success(saved)
     }
 }
