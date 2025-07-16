@@ -143,4 +143,15 @@ class SearchControllerImpl(
 
         return ApiResponse.success(data = data)
     }
+
+    @GetMapping("/look")
+    override fun lookPlace(
+        @RequestParam(required = false, name = "size") size: Int?,
+        @RequestParam(required = false, name = "category") foodCategory: FoodCategory?,
+        @RequestParam(required = false, name = "dong_code") addressCodes: List<String>,
+        @RequestParam(required = false, name = "sort") sort: OrderStrategy?,
+        @RequestParam(required = false, name = "cursor") cursorString: String?,
+    ): ApiResponse<CursorResponse<SearchResponseDTO>> {
+        TODO("Not yet implemented")
+    }
 }
