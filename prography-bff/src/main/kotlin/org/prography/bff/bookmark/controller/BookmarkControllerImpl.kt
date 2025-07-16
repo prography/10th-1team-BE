@@ -148,10 +148,10 @@ class BookmarkControllerImpl(
         return ApiResponse.success(bookmarks)
     }
 
-    @GetMapping("/saved")
+    @GetMapping("/saved/{placeId}")
     override fun savedBookmarks(
         @AuthUser userId: UUID?,
-        placeId: String,
+        @PathVariable("placeId") placeId: String,
     ): ApiResponse<Boolean> {
         if (userId == null) {
             return ApiResponse.success(false)
