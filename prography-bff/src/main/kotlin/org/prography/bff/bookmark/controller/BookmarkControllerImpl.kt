@@ -59,7 +59,7 @@ class BookmarkControllerImpl(
 
     @GetMapping("/group/{placeId}")
     override fun getBookmarkGroups(
-        @RequestParam userId: UUID,
+        @AuthUser userId: UUID,
         @PathVariable("placeId") placeId: String,
     ): ApiResponse<List<BookmarkGroupInfoDto>> {
         val vo: PlaceGroupWithSaved =
