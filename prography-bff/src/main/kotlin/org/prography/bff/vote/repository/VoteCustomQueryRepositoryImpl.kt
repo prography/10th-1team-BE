@@ -99,4 +99,14 @@ class VoteCustomQueryRepositoryImpl(
                 )
         }.filterNotNull()
     }
+
+    override fun countHistories(userId: UUID): Long {
+        return historyRepository.findAll {
+            select(count(path(VoteHistoryEntity::userId)))
+                .from(entity(VoteHistoryEntity::class))
+                .where(
+                    path(VoteHistoryEntity::userId).eq(userId),
+                )
+        }.first() ?: 0L
+    }
 }

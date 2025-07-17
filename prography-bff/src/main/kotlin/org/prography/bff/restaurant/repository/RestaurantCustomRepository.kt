@@ -34,7 +34,7 @@ class RestaurantCustomRepository(
                     .include("kakaoPlaceData.roadAddressName")
                     .include("kakaoPlaceData.placeName")
                     .include("kakaoPlaceData.categoryName")
-                    .exclude("_id")
+                    .include("_id")
             }
 
         val result =
@@ -56,6 +56,7 @@ class RestaurantCustomRepository(
                     .include("kakaoPlaceData.roadAddressName")
                     .include("kakaoPlaceData.placeName")
                     .include("kakaoPlaceData.categoryName")
+                    .include("_id")
             }
 
         return mongoTemplate.find(

@@ -122,4 +122,26 @@ interface VoteController {
         userId: UUID,
         historyId: Long,
     ): ApiResponse<Void>
+
+    @Operation(
+        summary = "총 투표 가져오기 API",
+        description = "유저가 투표한 총 갯수를 조회하는 API 입니다.",
+        externalDocs =
+            ExternalDocumentation(
+                description = "Figma 디자인 문서",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2459-59558&t=1l1FYomVF8tdyTgT-11",
+            ),
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = Long::class),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun getTotalNomberOfVoted(userId: UUID): ApiResponse<Long>
 }

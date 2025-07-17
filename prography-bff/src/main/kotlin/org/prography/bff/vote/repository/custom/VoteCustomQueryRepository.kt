@@ -61,4 +61,9 @@ interface VoteCustomQueryRepository {
      * 유저의 아이디를 통해서 투표 내역 조회
      */
     fun findHistories(userId: UUID): List<VoteHistoryEntity>
+
+    /**
+     * 투표 이력 총 갯수
+     */
+    fun countHistories(userId: UUID): Long
 }

@@ -146,4 +146,13 @@ class VoteControllerImpl(
 
         return ApiResponse.success()
     }
+
+    @GetMapping("/count")
+    override fun getTotalNomberOfVoted(
+        @AuthUser userId: UUID,
+    ): ApiResponse<Long> {
+        val count: Long = voteService.totalVotedCountByUserId(userId = userId)
+
+        return ApiResponse.success(count)
+    }
 }
