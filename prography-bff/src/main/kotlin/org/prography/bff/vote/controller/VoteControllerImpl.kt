@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
@@ -102,7 +103,7 @@ class VoteControllerImpl(
 
     @PatchMapping("/submit/{placeId}")
     override fun submitPlatformVote(
-        @AuthUser userId: UUID,
+        @RequestParam userId: UUID,
         @PathVariable("placeId") placeId: String,
         @RequestBody dto: VoteSubmitDto,
     ): ApiResponse<Void> {
@@ -145,5 +146,14 @@ class VoteControllerImpl(
         voteService.cancel(historyId = historyId, userId = userId)
 
         return ApiResponse.success()
+    }
+
+    @GetMapping("/count")
+    override fun getTotalNomberOfVoted(
+        @RequestParam userId: UUID,
+    ): ApiResponse<Long> {
+        val count: Long = voteService.totalVotedCountByUserId(userId = userId)
+
+        return ApiResponse.success(count)
     }
 }

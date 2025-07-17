@@ -173,4 +173,11 @@ class VoteService(
             isUserVoted = isUserVoted,
         )
     }
+
+    /**
+     * 유저의 총 투표횟수
+     */
+    fun totalVotedCountByUserId(userId: UUID): Long {
+        return queryRepository.countHistories(userId = userId)
+    }
 }
