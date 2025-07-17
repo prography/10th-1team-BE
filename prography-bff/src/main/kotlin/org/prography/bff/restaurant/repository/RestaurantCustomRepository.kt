@@ -34,7 +34,6 @@ class RestaurantCustomRepository(
                     .include("kakaoPlaceData.roadAddressName")
                     .include("kakaoPlaceData.placeName")
                     .include("kakaoPlaceData.categoryName")
-                    .exclude("_id")
             }
 
         val result =
