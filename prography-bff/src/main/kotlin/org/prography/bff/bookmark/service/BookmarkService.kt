@@ -84,7 +84,7 @@ class BookmarkService(
     fun updateBookmarkAtGroup(
         userId: UUID,
         placeId: String,
-        savedGroupIds: List<UUID>,
+        desiredGroupIds: Set<UUID>,
     ) {
         if (!restaurantDataRepository.existsById(placeId)) {
             throw NotFoundException.PlaceNotFoundException()
@@ -93,22 +93,20 @@ class BookmarkService(
         val userGroups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findGroupsByUserId(userId = userId)
 
         if (userGroups.isEmpty()) {
-            return
+            throw NotFoundException.GroupNotFound()
         }
 
         if (userGroups.any { it.userId != userId }) {
             throw InvalidRequestException.MismatchUser()
         }
 
+        val userGroupsById: Map<UUID, BookmarkGroupEntity> = userGroups.associateBy { it.id }
         val existingBookmarkedGroupIds: Set<UUID> =
             bookmarkQueryRepository.findMatchedBookmarksInGroup(groupIds = userGroups.map { it.id }, placeId = placeId)
                 .map { it.id.groupId }
                 .toSet()
 
-        val savedGroupIdsSet = savedGroupIds.toSet()
-        val userGroupsById: Map<UUID, BookmarkGroupEntity> = userGroups.associateBy { it.id }
-
-        val groupIdsToAdd = savedGroupIdsSet - existingBookmarkedGroupIds
+        val groupIdsToAdd = desiredGroupIds - existingBookmarkedGroupIds
         if (groupIdsToAdd.isNotEmpty()) {
             val bookmarksToAdd: List<BookmarkEntity> =
                 groupIdsToAdd.mapNotNull { groupId ->
@@ -117,7 +115,7 @@ class BookmarkService(
             bookmarkCmdRepository.saveBookmarks(bookmarksToAdd)
         }
 
-        val groupIdsToRemove = existingBookmarkedGroupIds - savedGroupIdsSet
+        val groupIdsToRemove = existingBookmarkedGroupIds - desiredGroupIds
         if (groupIdsToRemove.isNotEmpty()) {
             val bookmarkIdsToRemove: List<BookmarkEntity> =
                 groupIdsToRemove.mapNotNull { groupId ->

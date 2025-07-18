@@ -100,9 +100,9 @@ class BookmarkControllerImpl(
         bookmarkService.updateBookmarkAtGroup(
             userId = userId,
             placeId = placeId,
-            savedGroupIds =
-                groupIds
-                    ?: emptyList(),
+            desiredGroupIds =
+                groupIds?.toSet()
+                    ?: emptySet(),
         )
         return ApiResponse.success()
     }
