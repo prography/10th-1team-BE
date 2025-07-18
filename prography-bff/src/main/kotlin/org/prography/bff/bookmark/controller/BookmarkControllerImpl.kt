@@ -95,9 +95,15 @@ class BookmarkControllerImpl(
     override fun modifyBookmarkAtGroup(
         @AuthUser userId: UUID,
         @PathVariable("placeId") placeId: String,
-        @RequestParam groupIds: List<UUID>,
+        @RequestParam groupIds: List<UUID>?,
     ): ApiResponse<Void> {
-        bookmarkService.updateBookmarkAtGroup(userId = userId, placeId = placeId, savedGroupIds = groupIds)
+        bookmarkService.updateBookmarkAtGroup(
+            userId = userId,
+            placeId = placeId,
+            savedGroupIds =
+                groupIds
+                    ?: emptyList(),
+        )
         return ApiResponse.success()
     }
 

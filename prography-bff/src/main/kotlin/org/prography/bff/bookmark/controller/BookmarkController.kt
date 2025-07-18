@@ -153,7 +153,7 @@ interface BookmarkController {
     fun modifyBookmarkAtGroup(
         userId: UUID,
         placeId: String,
-        groupIds: List<UUID>,
+        groupIds: List<UUID>?,
     ): ApiResponse<Void>
 
     @Operation(
