@@ -33,8 +33,8 @@ class BookmarkControllerImpl(
         @AuthUser userId: UUID,
         @RequestBody dto: BookmarkGroupSaveDto,
     ): ApiResponse<UUID> {
-        bookmarkService.createBookmarkGroup(userId = userId, icon = dto.icon, groupName = dto.groupName)
-        return ApiResponse.success(UUID.randomUUID())
+        val groupId: UUID = bookmarkService.createBookmarkGroup(userId = userId, icon = dto.icon, groupName = dto.groupName)
+        return ApiResponse.success(groupId)
     }
 
     @GetMapping("/group")
