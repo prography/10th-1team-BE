@@ -109,7 +109,7 @@ class BookmarkControllerImpl(
             UpdatePlaceAtGroup(
                 userId = userId,
                 placeId = placeId,
-                groupdIds = groupIds?.toSet() ?: emptySet(),
+                groupdIds = groupIds,
             ),
         )
     }

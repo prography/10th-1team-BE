@@ -5,5 +5,5 @@ import java.util.UUID
 data class UpdatePlaceAtGroup(
     val userId: UUID,
     val placeId: String,
-    val groupdIds: Set<UUID>,
+    val groupdIds: List<UUID>?,
 )
