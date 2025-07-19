@@ -33,10 +33,10 @@ import java.util.UUID
 class VoteControllerImpl(
     private val voteService: VoteService,
 ) : VoteController {
-    @GetMapping("/{placeId}")
+    @GetMapping("/{place_id}")
     override fun getPlatformVoteResult(
         @AuthUser userId: UUID?,
-        @PathVariable("placeId") placeId: String,
+        @PathVariable(name = "place_id") placeId: String,
     ): ApiResponse<VoteResultDto> {
         if (placeId.isBlank()) {
             throw IllegalArgumentException()
@@ -100,10 +100,10 @@ class VoteControllerImpl(
         )
     }
 
-    @PatchMapping("/submit/{placeId}")
+    @PatchMapping("/submit/{place_id}")
     override fun submitPlatformVote(
         @AuthUser userId: UUID,
-        @PathVariable("placeId") placeId: String,
+        @PathVariable(name = "place_id") placeId: String,
         @RequestBody dto: VoteSubmitDto,
     ): ApiResponse<Void> {
         if (dto.reasons.isEmpty()) {
@@ -123,9 +123,9 @@ class VoteControllerImpl(
         return ApiResponse.success()
     }
 
-    @GetMapping("/summary/{placeId}")
+    @GetMapping("/summary/{place_id}")
     override fun getVoteSummary(
-        @PathVariable("placeId") placeId: String,
+        @PathVariable(name = "place_id") placeId: String,
         @AuthUser userId: UUID?,
     ): ApiResponse<VoteSummaryDto> {
         val voteSummary = voteService.getVoteSummary(userId, placeId)
@@ -137,10 +137,10 @@ class VoteControllerImpl(
         )
     }
 
-    @DeleteMapping("/cancel/{historyId}")
+    @DeleteMapping("/cancel/{history_id}")
     override fun cancelVote(
         @AuthUser userId: UUID,
-        @PathVariable("historyId") historyId: Long,
+        @PathVariable(name = "history_id") historyId: Long,
     ): ApiResponse<Void> {
         voteService.cancel(historyId = historyId, userId = userId)
 
