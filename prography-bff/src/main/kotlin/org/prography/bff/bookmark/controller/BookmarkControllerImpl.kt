@@ -4,6 +4,7 @@ import org.prography.bff.bookmark.controller.model.BookmarkGroupInfoDto
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
 import org.prography.bff.bookmark.controller.model.BookmarkInfoDto
 import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
+import org.prography.bff.bookmark.controller.model.UpdatePlaceAtGroup
 import org.prography.bff.bookmark.service.BookmarkService
 import org.prography.bff.bookmark.service.model.PlaceGroupWithSaved
 import org.prography.bff.config.response.ApiResponse
@@ -96,7 +97,7 @@ class BookmarkControllerImpl(
         @AuthUser userId: UUID,
         @PathVariable("placeId") placeId: String,
         @RequestParam groupIds: List<UUID>?,
-    ): ApiResponse<Void> {
+    ): ApiResponse<UpdatePlaceAtGroup> {
         bookmarkService.updateBookmarkAtGroup(
             userId = userId,
             placeId = placeId,
@@ -104,7 +105,13 @@ class BookmarkControllerImpl(
                 groupIds?.toSet()
                     ?: emptySet(),
         )
-        return ApiResponse.success()
+        return ApiResponse.success(
+            UpdatePlaceAtGroup(
+                userId = userId,
+                placeId = placeId,
+                groupdIds = groupIds?.toSet() ?: emptySet(),
+            ),
+        )
     }
 
     @DeleteMapping("/group/{groupId}/places")

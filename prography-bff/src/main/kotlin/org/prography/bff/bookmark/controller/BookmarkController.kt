@@ -10,6 +10,7 @@ import org.prography.bff.bookmark.controller.model.BookmarkGroupInfoDto
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
 import org.prography.bff.bookmark.controller.model.BookmarkInfoDto
 import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
+import org.prography.bff.bookmark.controller.model.UpdatePlaceAtGroup
 import org.prography.bff.config.response.ApiResponse
 import java.util.UUID
 
@@ -154,7 +155,7 @@ interface BookmarkController {
         userId: UUID,
         placeId: String,
         groupIds: List<UUID>?,
-    ): ApiResponse<Void>
+    ): ApiResponse<UpdatePlaceAtGroup>
 
     @Operation(
         summary = "가게 삭제 API",
