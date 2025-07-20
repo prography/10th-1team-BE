@@ -3,7 +3,7 @@ package org.prography.bff.bookmark.service.model
 import java.time.LocalDateTime
 import java.util.UUID
 
-data class BookmarkPlace(
+data class Place(
     val groupId: UUID,
     val placeId: String,
     val placeName: String,

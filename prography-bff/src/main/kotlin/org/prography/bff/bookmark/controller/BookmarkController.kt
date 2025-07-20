@@ -6,10 +6,12 @@ import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.prography.bff.bookmark.controller.model.BookmarkGroupInfoDto
+import org.prography.bff.bookmark.controller.model.BookmarkGroup
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
-import org.prography.bff.bookmark.controller.model.BookmarkInfoDto
+import org.prography.bff.bookmark.controller.model.BookmarkGroupsDTO
 import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
+import org.prography.bff.bookmark.controller.model.BookmarksDTO
+import org.prography.bff.bookmark.controller.model.UpdatePlaceAtGroup
 import org.prography.bff.config.response.ApiResponse
 import java.util.UUID
 
@@ -62,14 +64,14 @@ interface BookmarkController {
                         mediaType = "application/json",
                         array =
                             ArraySchema(
-                                schema = Schema(implementation = BookmarkGroupInfoDto::class),
+                                schema = Schema(implementation = BookmarkGroupsDTO::class),
                             ),
                     ),
                 ],
             ),
         ],
     )
-    fun getBookmarkGroups(userId: UUID): ApiResponse<List<BookmarkGroupInfoDto>>
+    fun getBookmarkGroups(userId: UUID): ApiResponse<BookmarkGroupsDTO>
 
     @Operation(
         summary = "그룹 조회 API",
@@ -87,7 +89,7 @@ interface BookmarkController {
                         mediaType = "application/json",
                         array =
                             ArraySchema(
-                                schema = Schema(implementation = BookmarkGroupInfoDto::class),
+                                schema = Schema(implementation = BookmarkGroup::class),
                             ),
                     ),
                 ],
@@ -97,7 +99,7 @@ interface BookmarkController {
     fun getBookmarkGroups(
         userId: UUID,
         placeId: String,
-    ): ApiResponse<List<BookmarkGroupInfoDto>>
+    ): ApiResponse<List<BookmarkGroup>>
 
     @Operation(
         summary = "그룹 삭제 API",
@@ -153,8 +155,8 @@ interface BookmarkController {
     fun modifyBookmarkAtGroup(
         userId: UUID,
         placeId: String,
-        groupIds: List<UUID>,
-    ): ApiResponse<Void>
+        groupIds: List<UUID>?,
+    ): ApiResponse<UpdatePlaceAtGroup>
 
     @Operation(
         summary = "가게 삭제 API",
@@ -229,7 +231,7 @@ interface BookmarkController {
                         mediaType = "application/json",
                         array =
                             ArraySchema(
-                                schema = Schema(implementation = BookmarkInfoDto::class),
+                                schema = Schema(implementation = BookmarksDTO::class),
                             ),
                     ),
                 ],
@@ -239,7 +241,7 @@ interface BookmarkController {
     fun getBookmarks(
         userId: UUID,
         groupId: UUID,
-    ): ApiResponse<List<BookmarkInfoDto>>
+    ): ApiResponse<BookmarksDTO>
 
     @Operation(
         summary = "그룹이 저장된 유무 조회 API",
