@@ -1,11 +1,15 @@
 package org.prography.bff.bookmark.controller
 
-import org.prography.bff.bookmark.controller.model.BookmarkGroupInfoDto
+import org.prography.bff.bookmark.controller.model.BookmarkGroup
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
-import org.prography.bff.bookmark.controller.model.BookmarkInfoDto
+import org.prography.bff.bookmark.controller.model.BookmarkGroupsDTO
 import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
+import org.prography.bff.bookmark.controller.model.BookmarkPlace
+import org.prography.bff.bookmark.controller.model.BookmarksDTO
 import org.prography.bff.bookmark.controller.model.UpdatePlaceAtGroup
 import org.prography.bff.bookmark.service.BookmarkService
+import org.prography.bff.bookmark.service.model.PlaceGroup
+import org.prography.bff.bookmark.service.model.PlaceGroupWithPlaces
 import org.prography.bff.bookmark.service.model.PlaceGroupWithSaved
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
@@ -41,40 +45,49 @@ class BookmarkControllerImpl(
     @GetMapping("/group")
     override fun getBookmarkGroups(
         @AuthUser userId: UUID,
-    ): ApiResponse<List<BookmarkGroupInfoDto>> {
-        val groups: List<BookmarkGroupInfoDto> =
-            bookmarkService.getBookmarkGroups(userId)
-                .map {
-                    BookmarkGroupInfoDto(
-                        groupId = it.id,
-                        groupName = it.name,
-                        icon = it.icon,
-                        numberOfBookmark = it.total,
-                        createAt = it.createdAt,
-                        savedAt = it.savedAt,
-                    )
-                }
+    ): ApiResponse<BookmarkGroupsDTO> {
+        val placeGroups: List<PlaceGroup> = bookmarkService.getBookmarkGroups(userId)
 
-        return ApiResponse.success(groups)
+        if (placeGroups.isEmpty()) {
+            ApiResponse.success(BookmarkGroupsDTO())
+        }
+
+        val dto =
+            BookmarkGroupsDTO(
+                total = placeGroups.size.toLong(),
+                groups =
+                    placeGroups.map {
+                        BookmarkGroup(
+                            groupId = it.id,
+                            groupName = it.name,
+                            icon = it.icon,
+                            numberOfBookmark = it.total,
+                            createAt = it.createdAt,
+                            savedAt = it.savedAt,
+                        )
+                    },
+            )
+
+        return ApiResponse.success(dto)
     }
 
     @GetMapping("/group/{place_id}")
     override fun getBookmarkGroups(
         @AuthUser userId: UUID,
         @PathVariable("place_id") placeId: String,
-    ): ApiResponse<List<BookmarkGroupInfoDto>> {
-        val vo: PlaceGroupWithSaved =
+    ): ApiResponse<List<BookmarkGroup>> {
+        val placeGroupWithSaved: PlaceGroupWithSaved =
             bookmarkService.getBookmarkGroups(userId = userId, placeId = placeId)
 
-        val groups: List<BookmarkGroupInfoDto> =
-            vo.placeGroups
+        val groups: List<BookmarkGroup> =
+            placeGroupWithSaved.placeGroups
                 .map {
-                    BookmarkGroupInfoDto(
+                    BookmarkGroup(
                         groupId = it.id,
                         groupName = it.name,
                         icon = it.icon,
                         numberOfBookmark = it.total,
-                        isSaved = vo.savedGroupIds.contains(it.id),
+                        isSaved = placeGroupWithSaved.savedGroupIds.contains(it.id),
                         createAt = it.createdAt,
                         savedAt = it.savedAt,
                     )
@@ -109,7 +122,7 @@ class BookmarkControllerImpl(
             UpdatePlaceAtGroup(
                 userId = userId,
                 placeId = placeId,
-                groupdIds = groupIds,
+                groupIds = groupIds,
             ),
         )
     }
@@ -143,22 +156,28 @@ class BookmarkControllerImpl(
     override fun getBookmarks(
         @AuthUser userId: UUID,
         @PathVariable(name = "group_id") groupId: UUID,
-    ): ApiResponse<List<BookmarkInfoDto>> {
-        val bookmarks: List<BookmarkInfoDto> =
-            bookmarkService.getBookmarks(groupId)
-                .map {
-                    BookmarkInfoDto(
-                        groupId = it.groupId,
-                        placeId = it.placeId,
-                        placeName = it.placeName,
-                        roadAddress = it.roadAddress,
-                        category = it.category.split(" > ").last(),
-                        legal = it.legal,
-                        savedAt = it.savedAt,
-                    )
-                }
+    ): ApiResponse<BookmarksDTO> {
+        val vo: PlaceGroupWithPlaces = bookmarkService.getBookmarks(groupId = groupId)
 
-        return ApiResponse.success(bookmarks)
+        val dto =
+            BookmarksDTO(
+                groupId = vo.placeGroupId,
+                groupName = vo.placeGroupName,
+                icon = vo.placeGroupIcon,
+                total = vo.numberOfPlace,
+                places =
+                    vo.places.map {
+                        BookmarkPlace(
+                            placeId = it.placeId,
+                            placeName = it.placeName,
+                            roadAddress = it.roadAddress,
+                            category = it.category.split(" > ").last(),
+                            legal = it.legal,
+                            savedAt = it.savedAt,
+                        )
+                    },
+            )
+        return ApiResponse.success(dto)
     }
 
     @GetMapping("/saved/{place_id}")

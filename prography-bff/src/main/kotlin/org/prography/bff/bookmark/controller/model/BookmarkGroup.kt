@@ -5,10 +5,10 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 /**
- * 저장 그룹에 대한 조회 DTO
+ * 유저가 생성한 그룹
  */
-@Schema(title = "조회된 그룹 DTO", description = "저장 및 수정에서 출력된 그룹 DTO")
-data class BookmarkGroupInfoDto(
+@Schema(title = "그룹", description = "저장된 그룹")
+data class BookmarkGroup(
     /**
      * 해당 그룹의 고유 아이디
      */

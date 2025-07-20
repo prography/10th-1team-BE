@@ -4,8 +4,9 @@ import org.prography.bff.bookmark.repository.BookmarkCustomCmdRepositoryImpl
 import org.prography.bff.bookmark.repository.BookmarkCustomQueryRepositoryImpl
 import org.prography.bff.bookmark.repository.model.BookmarkEntity
 import org.prography.bff.bookmark.repository.model.BookmarkGroupEntity
-import org.prography.bff.bookmark.service.model.BookmarkPlace
+import org.prography.bff.bookmark.service.model.Place
 import org.prography.bff.bookmark.service.model.PlaceGroup
+import org.prography.bff.bookmark.service.model.PlaceGroupWithPlaces
 import org.prography.bff.bookmark.service.model.PlaceGroupWithSaved
 import org.prography.bff.config.exception.badrequest.InvalidRequestException
 import org.prography.bff.config.exception.notfound.NotFoundException
@@ -314,12 +315,22 @@ class BookmarkService(
      *
      */
     @Transactional(readOnly = true)
-    fun getBookmarks(groupId: UUID): List<BookmarkPlace> {
+    fun getBookmarks(groupId: UUID): PlaceGroupWithPlaces {
+        val group: BookmarkGroupEntity =
+            bookmarkQueryRepository.findGroupById(groupId = groupId)
+                .orElseThrow { NotFoundException.GroupNotFound() }
+
         val bookmarks: List<BookmarkEntity> =
             bookmarkQueryRepository.findBookmarksByGroupId(groupId)
 
         if (bookmarks.isEmpty()) {
-            return emptyList()
+            return PlaceGroupWithPlaces(
+                placeGroupId = group.id,
+                placeGroupName = group.groupName,
+                placeGroupIcon = group.icon,
+                numberOfPlace = 0L,
+                places = emptyList(),
+            )
         }
 
         val placeInfos: Map<String, PlaceInfo> =
@@ -327,17 +338,26 @@ class BookmarkService(
                 .findKakaoPlaceInfoInIds(bookmarks.map { it.id.placeId })
                 .associateBy { it.id }
 
-        return bookmarks.map { bookmark ->
-            val info = placeInfos[bookmark.id.placeId]
-            BookmarkPlace(
-                groupId = bookmark.id.groupId,
-                placeId = bookmark.id.placeId,
-                placeName = info?.placeName ?: "NO_NAME",
-                roadAddress = info?.roadAddress ?: "",
-                category = info?.categoryName ?: "UNDEFINED",
-                legal = info?.leaglCode ?: 0,
-                savedAt = bookmark.savedAt,
-            )
-        }
+        val places: List<Place> =
+            bookmarks.map { bookmark ->
+                val info = placeInfos[bookmark.id.placeId]
+                Place(
+                    groupId = bookmark.id.groupId,
+                    placeId = bookmark.id.placeId,
+                    placeName = info?.placeName ?: "NO_NAME",
+                    roadAddress = info?.roadAddress ?: "",
+                    category = info?.categoryName ?: "UNDEFINED",
+                    legal = info?.leaglCode ?: 0,
+                    savedAt = bookmark.savedAt,
+                )
+            }
+
+        return PlaceGroupWithPlaces(
+            placeGroupId = group.id,
+            placeGroupName = group.groupName,
+            placeGroupIcon = group.icon,
+            numberOfPlace = places.size.toLong(),
+            places = places,
+        )
     }
 }

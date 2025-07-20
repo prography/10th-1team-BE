@@ -2,18 +2,12 @@ package org.prography.bff.bookmark.controller.model
 
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDateTime
-import java.util.UUID
 
 /**
  * 저장된 가게 조회 DTO
  */
-@Schema(title = "저장된 가게 조회 DTO", description = "그룹을 통해서 자장된 가게를 조회할 경우의 DTO")
-data class BookmarkInfoDto(
-    /**
-     *
-     */
-    @Schema(title = "그룹 아이디", description = "그룹 고유 아이디")
-    val groupId: UUID,
+@Schema(title = "저장된 가게", description = "그룹을 통해서 자장된 가게를 조회할 경우의 DTO")
+data class BookmarkPlace(
     /**
      * 저장된 가게 고유 아이디
      */
