@@ -10,7 +10,10 @@ data class ProvinceDto(
 ) {
     companion object {
         fun fromDomain(province: Province): ProvinceDto {
-            val citiesDto = province.cityList.map { CityDetailDto.fromDomain(it) }
+            val citiesDto =
+                province.cityList
+                    .map { CityDetailDto.fromDomain(it) }
+                    .sortedBy { it.name }
             return ProvinceDto(province.name, province.code, citiesDto)
         }
     }
