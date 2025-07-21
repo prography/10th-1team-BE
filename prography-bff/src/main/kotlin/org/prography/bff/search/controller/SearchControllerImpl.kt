@@ -152,6 +152,51 @@ class SearchControllerImpl(
         @RequestParam(required = false, name = "sort") sort: OrderStrategy?,
         @RequestParam(required = false, name = "cursor") cursorString: String?,
     ): ApiResponse<CursorResponse<SearchResponseDTO>> {
-        TODO("Not yet implemented")
+        val cursorSearch =
+            placeSearchService.filteredExplore(
+                size = size ?: 5,
+                cursorString = cursorString,
+                addressCodes = addressCodes,
+                category = CategoryMapper.service(foodCategory ?: FoodCategory.UNDEFINED),
+                strategy = StrategyMapper.service(sort ?: OrderStrategy.RELATED),
+            )
+
+        val data =
+            cursorSearch.result.map { result ->
+                SearchResponseDTO(
+                    id = result.id,
+                    addresses = result.address,
+                    roadAddresses = result.roadAddress,
+                    category = result.category,
+                    name = result.name,
+                    imageUrl = result.imageUrl,
+                    kakao =
+                        ReviewSummary(
+                            count = result.kakaoReviewCount,
+                            score = result.kakaoScore,
+                            processed = result.kakaoReview,
+                        ),
+                    naver =
+                        ReviewSummary(
+                            count = result.naverReviewCount,
+                            score = result.naverScore,
+                            processed = result.naverReview,
+                        ),
+                    region =
+                        Region(
+                            regionService.findRegionByBCode(result.legalCode),
+                            result.legalCode,
+                        ),
+                )
+            }.toList()
+
+        return ApiResponse.success(
+            CursorResponse(
+                total = cursorSearch.total,
+                content = data,
+                cursor = cursorSearch.cursor,
+                hasNext = cursorSearch.hasNext,
+            ),
+        )
     }
 }

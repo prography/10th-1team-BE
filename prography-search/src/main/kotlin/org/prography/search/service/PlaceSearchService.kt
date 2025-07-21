@@ -30,4 +30,12 @@ interface PlaceSearchService {
         size: Int,
         addressCodes: List<String>,
     ): List<PlaceSearchResult>
+
+    fun filteredExplore(
+        size: Int,
+        cursorString: String?,
+        addressCodes: List<String>,
+        category: FilterCategory?,
+        strategy: SortingStrategy = SortingStrategy.RELATED,
+    ): CursorPlaceResult
 }

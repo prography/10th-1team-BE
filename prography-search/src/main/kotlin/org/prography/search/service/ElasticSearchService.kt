@@ -283,6 +283,107 @@ class ElasticSearchService(
         }
     }
 
+    override fun filteredExplore(
+        size: Int,
+        cursorString: String?,
+        addressCodes: List<String>,
+        category: FilterCategory?,
+        strategy: SortingStrategy,
+    ): CursorPlaceResult {
+        try {
+            val fetchSize = size + 1
+            val cursor: Cursor? = Cursor.decode(cursorString, strategy)
+
+            val boolQuery: BoolQuery =
+                createBoolQueryBuilder(addressCodes, category)
+                    .apply {
+                        if (strategy == SortingStrategy.RELATED) {
+                            should(
+                                Query.Builder().term(
+                                    TermQuery.Builder()
+                                        .field("image")
+                                        .value(true)
+                                        .build(),
+                                ).build(),
+                                Query.Builder().range(
+                                    RangeQuery.Builder()
+                                        .number(
+                                            NumberRangeQuery.of { it.field("review_count").gte(100.0) },
+                                        ).build(),
+                                ).build(),
+                                Query.Builder().range(
+                                    RangeQuery.Builder()
+                                        .number(
+                                            NumberRangeQuery.of { it.field("review_score").gte(3.0) },
+                                        ).build(),
+                                ).build(),
+                            )
+                        }
+                    }.build()
+
+            val requestBuilder =
+                createSearchRequestBuilder(strategy)
+                    .size(fetchSize)
+                    .query(Query.Builder().bool(boolQuery).build())
+
+            if (cursor != null) {
+                requestBuilder.searchAfter(
+                    listOf(
+                        FieldValue.of(cursor.key),
+                        FieldValue.of(cursor.id),
+                    ),
+                )
+            }
+
+            val request = requestBuilder.build()
+            val searchResponse = client.search(request, RestaurantPlace::class.java)
+
+            val hit = searchResponse.hits()
+            val hits = hit.hits()
+            if (hits.isEmpty()) {
+                return CursorPlaceResult(result = emptyList(), hasNext = false)
+            }
+
+            val pageHits = hits.take(size)
+            val lastCursorString = generateCursorString(pageHits, strategy)
+            val result =
+                pageHits.map {
+                    val source = it.source()!!
+                    PlaceSearchResult(
+                        id = source.mongoId,
+                        legalCode = source.legal,
+                        administrativeCode = source.division,
+                        address = source.address,
+                        roadAddress = source.roadAddress,
+                        category = source.category.firstOrNull() ?: EMPTY_CATEGORY,
+                        name = source.placeName,
+                        imageUrl = source.imageUrl,
+                        kakaoReviewCount = source.kakaoReviewCount,
+                        kakaoScore = source.kakaoScore,
+                        kakaoReview = source.kakaoReview,
+                        naverReviewCount = source.naverReviewCount,
+                        naverScore = source.naverScore,
+                        naverReview = source.naverReview,
+                        location = source.location ?: GeoPoint(0.0, 0.0),
+                    )
+                }
+
+            return CursorPlaceResult(
+                total = hit.total()?.value().takeIf { cursorString == null } ?: 0L,
+                result = result,
+                cursor = lastCursorString,
+                hasNext = hits.size > size,
+            )
+        } catch (sslEx: SSLHandshakeException) {
+            // SSL 핸드쉐이크나 인증서 검증에서 실패
+            log.error("Elasticsearch SSL certificate validation failed", sslEx)
+            throw ElasticsearchException.CertificateValidationException(sslEx)
+        } catch (e: Exception) {
+            log.error("Unexpected error occurred while searching Elasticsearch", e)
+            throw ElasticsearchException.SearchingException(e)
+        }
+    }
+
     private fun createBoolQueryBuilder(addressCodes: List<String>): BoolQuery.Builder {
         return this.createBoolQueryBuilder(addressCodes, null)
     }
