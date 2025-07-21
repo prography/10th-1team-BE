@@ -52,4 +52,14 @@ class FakeSearchService : PlaceSearchService {
             ),
         )
     }
+
+    override fun filteredExplore(
+        size: Int,
+        cursorString: String?,
+        addressCodes: List<String>,
+        category: FilterCategory?,
+        strategy: SortingStrategy,
+    ): CursorPlaceResult {
+        return CursorPlaceResult(hasNext = false)
+    }
 }
