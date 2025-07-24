@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.prography.bff.bookmark.controller.model.BookmarkGroup
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
+import org.prography.bff.bookmark.controller.model.BookmarkGroupUpdateDTO
 import org.prography.bff.bookmark.controller.model.BookmarkGroupsDTO
 import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
 import org.prography.bff.bookmark.controller.model.BookmarksDTO
@@ -47,6 +48,35 @@ interface BookmarkController {
         userId: UUID,
         dto: BookmarkGroupSaveDto,
     ): ApiResponse<UUID>
+
+    @Operation(
+        summary = "그룹 수정 API",
+        description = "가게 저장을 위한 그룹을 생성합니다.",
+        externalDocs =
+            ExternalDocumentation(
+                description = "피그마 링크",
+                url = "https://www.figma.com/design/xGWaWKSAUvpUaUJVPsITZ5/%EB%A6%AC%EB%B7%B0-%EB%A7%A4%EC%B9%98-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%8C%EC%9D%BC?node-id=2102-55272&t=Aw88pDkxmzfgComL-11",
+            ),
+        responses = [
+            io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        array =
+                            ArraySchema(
+                                schema = Schema(implementation = Void::class),
+                            ),
+                    ),
+                ],
+            ),
+        ],
+    )
+    fun modifyBookmarkGroup(
+        userId: UUID,
+        groupId: UUID,
+        dto: BookmarkGroupUpdateDTO,
+    ): ApiResponse<Void>
 
     @Operation(
         summary = "그룹 조회 API",

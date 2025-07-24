@@ -360,4 +360,26 @@ class BookmarkService(
             places = places,
         )
     }
+
+    /**
+     *
+     */
+    fun updateBookmarkGroup(
+        userId: UUID,
+        groupId: UUID,
+        groupName: String,
+        icon: String,
+    ) {
+        val group: BookmarkGroupEntity =
+            bookmarkQueryRepository.findGroupById(groupId = groupId)
+                .orElseThrow { NotFoundException.GroupNotFound() }
+
+        if (group.userId != userId) {
+            throw InvalidRequestException.MismatchUser()
+        }
+
+        group.changeName(groupName = groupName)
+        group.changeIcon(icon = icon)
+        bookmarkCmdRepository.saveGroup(group)
+    }
 }
