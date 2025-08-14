@@ -152,4 +152,16 @@ class BookmarkGroupEntity protected constructor() {
             total -= placeIds.size
         }
     }
+
+    fun changeName(groupName: String) {
+        require(groupName.isNotBlank() && groupName.length <= 20) {
+            "그룹 이름은 공백이 아니어야 하며, 1~20자여야 합니다."
+        }
+        this.groupName = groupName
+    }
+
+    fun changeIcon(icon: String) {
+        require(icon.isNotBlank()) { "아이콘은 공백이 될 수 없습니다." }
+        this.icon = icon
+    }
 }

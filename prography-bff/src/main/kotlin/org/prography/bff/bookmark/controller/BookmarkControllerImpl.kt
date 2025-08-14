@@ -2,6 +2,7 @@ package org.prography.bff.bookmark.controller
 
 import org.prography.bff.bookmark.controller.model.BookmarkGroup
 import org.prography.bff.bookmark.controller.model.BookmarkGroupSaveDto
+import org.prography.bff.bookmark.controller.model.BookmarkGroupUpdateDTO
 import org.prography.bff.bookmark.controller.model.BookmarkGroupsDTO
 import org.prography.bff.bookmark.controller.model.BookmarkMoveDto
 import org.prography.bff.bookmark.controller.model.BookmarkPlace
@@ -40,6 +41,16 @@ class BookmarkControllerImpl(
     ): ApiResponse<UUID> {
         val groupId: UUID = bookmarkService.createBookmarkGroup(userId = userId, icon = dto.icon, groupName = dto.groupName)
         return ApiResponse.success(groupId)
+    }
+
+    @PatchMapping("/group/{group_id}")
+    override fun modifyBookmarkGroup(
+        @AuthUser userId: UUID,
+        @PathVariable("group_id") groupId: UUID,
+        @RequestBody dto: BookmarkGroupUpdateDTO,
+    ): ApiResponse<Void> {
+        bookmarkService.updateBookmarkGroup(userId = userId, groupId = groupId, groupName = dto.groupName, icon = dto.icon)
+        return ApiResponse.success()
     }
 
     @GetMapping("/group")
