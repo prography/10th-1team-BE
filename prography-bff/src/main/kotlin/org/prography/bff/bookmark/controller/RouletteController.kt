@@ -72,7 +72,7 @@ interface RouletteController {
     )
     fun modifyRouletteGroup(
         userId: UUID,
-        groupId: UUID,
+        rouletteId: UUID,
         dto: RouletteGroupUpdateDTO,
     ): ApiResponse<Void>
 
@@ -154,7 +154,7 @@ interface RouletteController {
     )
     fun deleteRouletteGroup(
         userId: UUID,
-        groupId: UUID,
+        rouletteId: UUID,
     ): ApiResponse<Void>
 
     @Operation(
@@ -183,7 +183,7 @@ interface RouletteController {
     fun modifyItemAtRouletteGroup(
         userId: UUID,
         placeId: String,
-        groupIds: List<UUID>?,
+        rouletteIds: List<UUID>?,
     )
 
     @Operation(
@@ -211,7 +211,7 @@ interface RouletteController {
     )
     fun getRouletteGroup(
         userId: UUID,
-        groupId: UUID,
+        rouletteId: UUID,
     ): ApiResponse<RouletteGroupWithPlaceDTO>
 
     @Operation(
