@@ -35,7 +35,8 @@ class BookmarkCustomQueryRepositoryImpl(
             select(entity(BookmarkGroupEntity::class))
                 .from(entity(BookmarkGroupEntity::class))
                 .where(
-                    path(BookmarkGroupEntity::userId).eq(userId),
+                    path(BookmarkGroupEntity::userId).eq(userId)
+                        .and(path(BookmarkGroupEntity::roulette).eq(false)),
                 )
         }.filterNotNull()
     }
@@ -168,5 +169,18 @@ class BookmarkCustomQueryRepositoryImpl(
 
             groupId to cnt
         }
+    }
+
+    override fun findRouletteGroupsByUserId(userId: UUID): List<BookmarkGroupEntity> {
+        return groupRepository.findAll {
+            select(entity(BookmarkGroupEntity::class))
+                .from(entity(BookmarkGroupEntity::class))
+                .where(
+                    path(BookmarkGroupEntity::userId).eq(userId)
+                        .and(
+                            path(BookmarkGroupEntity::roulette).eq(true),
+                        ),
+                )
+        }.filterNotNull()
     }
 }
