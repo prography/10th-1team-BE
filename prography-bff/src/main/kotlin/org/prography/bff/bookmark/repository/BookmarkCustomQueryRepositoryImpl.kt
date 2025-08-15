@@ -140,7 +140,7 @@ class BookmarkCustomQueryRepositoryImpl(
         val total: Long,
     )
 
-    override fun getNumberOfBookmakr(groupIds: List<UUID>): Map<UUID, Long> {
+    override fun getNumberOfBookmark(groupIds: List<UUID>): Map<UUID, Long> {
         if (groupIds.isEmpty()) {
             return emptyMap()
         }
