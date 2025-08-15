@@ -96,25 +96,21 @@ class BookmarkService(
     @Transactional
     fun removeBookmarkAtGroup(
         userId: UUID,
-        placeId: String,
-        groupIds: List<UUID>,
+        groupId: UUID,
+        placeIds: List<String>,
     ) {
-        val groups: List<BookmarkGroupEntity> =
-            bookmarkQueryRepository.findGroupsInIds(groupIds = groupIds)
+        val group: BookmarkGroupEntity =
+            bookmarkQueryRepository.findGroupById(groupId = groupId)
+                .orElseThrow { NotFoundException.GroupNotFound() }
 
-        if (groups.isEmpty()) {
-            return
-        }
-        if (groups.any { it.userId != userId }) {
-            throw InvalidRequestException.MismatchUser()
+        if (group.userId != userId) {
+            InvalidRequestException.MismatchUser()
         }
 
         val bookmarks: List<BookmarkEntity> =
-            groups.map {
-                it.removeBookmark(placeId)
-            }
+            group.removeBookmarks(placeIds = placeIds)
 
-        bookmarkCmdRepository.saveGroups(groups)
+        bookmarkCmdRepository.saveGroup(group)
         bookmarkCmdRepository.deleteBookmarks(bookmarks)
     }
 
