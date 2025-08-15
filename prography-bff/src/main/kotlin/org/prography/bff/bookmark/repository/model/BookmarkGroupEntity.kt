@@ -79,12 +79,13 @@ class BookmarkGroupEntity protected constructor() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is BookmarkGroupEntity) return false
-        return userId == other.userId && groupName == other.groupName
+        return userId == other.userId && groupName == other.groupName && roulette == other.roulette
     }
 
     override fun hashCode(): Int {
         var result = userId.hashCode()
         result = 31 * result + groupName.hashCode()
+        result = 31 * result + roulette.hashCode()
         return result
     }
 
