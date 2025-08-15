@@ -1,0 +1,2 @@
+ALTER TABLE bookmark_group
+    ADD COLUMN roulette BOOLEAN NOT NULL DEFAULT FALSE;
