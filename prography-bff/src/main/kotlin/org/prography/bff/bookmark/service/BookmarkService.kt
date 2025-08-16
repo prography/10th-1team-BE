@@ -40,6 +40,18 @@ class BookmarkService(
         return bookmarkCmdRepository.saveGroup(groupEntity).id
     }
 
+    fun createRouletteGroup(
+        userId: UUID,
+        icon: String,
+        rouletteName: String,
+    ): UUID {
+        if (bookmarkQueryRepository.existsGroup(userId = userId, groupName = rouletteName)) {
+            throw InvalidRequestException.AlreadyGroup()
+        }
+        val groupEntity = BookmarkGroupEntity(userId = userId, icon = icon, groupName = rouletteName, roulette = true)
+        return bookmarkCmdRepository.saveGroup(groupEntity).id
+    }
+
     /**
      * 가게 추가 및 삭제 메소드
      */
@@ -79,6 +91,53 @@ class BookmarkService(
         }
 
         val groupIdsToRemove = existingBookmarkedGroupIds - desiredGroupIds
+        if (groupIdsToRemove.isNotEmpty()) {
+            val bookmarkIdsToRemove: List<BookmarkEntity> =
+                groupIdsToRemove.mapNotNull { groupId ->
+                    userGroupsById[groupId]?.removeBookmark(placeId = placeId)
+                }
+            bookmarkCmdRepository.deleteBookmarks(bookmarkIdsToRemove)
+        }
+
+        bookmarkCmdRepository.saveGroups(userGroups)
+    }
+
+    @Transactional
+    fun updateItemAtRoulette(
+        userId: UUID,
+        placeId: String,
+        desiredRouletteIds: Set<UUID>,
+    ) {
+        if (!restaurantDataRepository.existsById(placeId)) {
+            throw NotFoundException.PlaceNotFoundException()
+        }
+
+        val userGroups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findRouletteGroupsByUserId(userId = userId)
+
+        if (userGroups.isEmpty()) {
+            throw NotFoundException.GroupNotFound()
+        }
+
+        if (userGroups.any { it.userId != userId }) {
+            throw InvalidRequestException.MismatchUser()
+        }
+
+        val userGroupsById: Map<UUID, BookmarkGroupEntity> = userGroups.associateBy { it.id }
+        val existingBookmarkedGroupIds: Set<UUID> =
+            bookmarkQueryRepository.findMatchedBookmarksInGroup(groupIds = userGroups.map { it.id }, placeId = placeId)
+                .map { it.id.groupId }
+                .toSet()
+
+        val groupIdsToAdd = desiredRouletteIds - existingBookmarkedGroupIds
+        if (groupIdsToAdd.isNotEmpty()) {
+            val bookmarksToAdd: List<BookmarkEntity> =
+                groupIdsToAdd.mapNotNull { groupId ->
+                    userGroupsById[groupId]?.addBookmark(placeId = placeId)
+                }
+            bookmarkCmdRepository.saveBookmarks(bookmarksToAdd)
+        }
+
+        val groupIdsToRemove = existingBookmarkedGroupIds - desiredRouletteIds
         if (groupIdsToRemove.isNotEmpty()) {
             val bookmarkIdsToRemove: List<BookmarkEntity> =
                 groupIdsToRemove.mapNotNull { groupId ->
@@ -199,6 +258,13 @@ class BookmarkService(
         )
     }
 
+    fun isRouletteBookmark(
+        userId: UUID,
+        placeId: String,
+    ): Boolean {
+        return bookmarkQueryRepository.existsRoulette(userId = userId, placeId = placeId)
+    }
+
     /**
      * 유저가 소유하고 있는 저장 그룹 조회
      */
@@ -206,6 +272,14 @@ class BookmarkService(
         val groups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findGroupsByUserId(userId)
 
         return groups.map {
+            PlaceGroup(id = it.id, name = it.groupName, icon = it.icon, total = it.total, createdAt = it.createdAt, savedAt = it.modifiedAt)
+        }
+    }
+
+    fun getRouletteGroups(userId: UUID): List<PlaceGroup> {
+        val rouletteGroups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findRouletteGroupsByUserId(userId)
+
+        return rouletteGroups.map {
             PlaceGroup(id = it.id, name = it.groupName, icon = it.icon, total = it.total, createdAt = it.createdAt, savedAt = it.modifiedAt)
         }
     }
@@ -232,6 +306,38 @@ class BookmarkService(
         return PlaceGroupWithSaved(
             placeGroups =
                 groups.map {
+                    PlaceGroup(
+                        id = it.id,
+                        name = it.groupName,
+                        icon = it.icon,
+                        total = it.total,
+                        createdAt = it.createdAt,
+                        savedAt = it.modifiedAt,
+                    )
+                },
+            savedGroupIds = savedGroupIds.toList(),
+        )
+    }
+
+    @Transactional(readOnly = true)
+    fun getRouletteGroups(
+        userId: UUID,
+        placeId: String,
+    ): PlaceGroupWithSaved {
+        val rouletteGroups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findGroupsByUserId(userId)
+
+        if (rouletteGroups.any { it.userId != userId }) {
+            throw InvalidRequestException.MismatchUser()
+        }
+
+        val savedGroupIds: List<UUID> =
+            bookmarkQueryRepository.findMatchedBookmarksInGroup(groupIds = rouletteGroups.map { it.id }, placeId = placeId)
+                .map { it.id.groupId }
+                .distinct()
+
+        return PlaceGroupWithSaved(
+            placeGroups =
+                rouletteGroups.map {
                     PlaceGroup(
                         id = it.id,
                         name = it.groupName,
@@ -315,5 +421,24 @@ class BookmarkService(
         group.changeName(groupName = groupName)
         group.changeIcon(icon = icon)
         bookmarkCmdRepository.saveGroup(group)
+    }
+
+    fun updateRoulette(
+        userId: UUID,
+        rouletteId: UUID,
+        name: String,
+        icon: String,
+    ) {
+        val roulette: BookmarkGroupEntity =
+            bookmarkQueryRepository.findGroupById(groupId = rouletteId)
+                .orElseThrow { NotFoundException.GroupNotFound() }
+
+        if (roulette.userId != userId) {
+            throw InvalidRequestException.MismatchUser()
+        }
+
+        roulette.changeName(groupName = name)
+        roulette.changeIcon(icon = icon)
+        bookmarkCmdRepository.saveGroup(group = roulette)
     }
 }

@@ -7,7 +7,6 @@ import org.prography.bff.bookmark.controller.model.roulette.RouletteGroupUpdateD
 import org.prography.bff.bookmark.controller.model.roulette.RouletteGroupWithPlaceDTO
 import org.prography.bff.bookmark.controller.model.roulette.RouletteGroupsDTO
 import org.prography.bff.bookmark.service.BookmarkService
-import org.prography.bff.bookmark.service.RouletteService
 import org.prography.bff.bookmark.service.model.PlaceGroup
 import org.prography.bff.bookmark.service.model.PlaceGroupWithPlaces
 import org.prography.bff.bookmark.service.model.PlaceGroupWithSaved
@@ -27,7 +26,6 @@ import java.util.UUID
 @RestController
 @RequestMapping("/roulette")
 class RouletteControllerImpl(
-    private val rouletteService: RouletteService,
     private val bookmarkService: BookmarkService,
 ) : RouletteController {
     @PostMapping("")
@@ -36,7 +34,7 @@ class RouletteControllerImpl(
         @RequestBody dto: RouletteGroupSaveDTO,
     ): ApiResponse<UUID> {
         val rouletteId =
-            rouletteService.createRouletteGroup(
+            bookmarkService.createRouletteGroup(
                 userId = userId,
                 icon = dto.icon,
                 rouletteName = dto.name,
@@ -50,7 +48,7 @@ class RouletteControllerImpl(
         @PathVariable("id") rouletteId: UUID,
         @RequestBody dto: RouletteGroupUpdateDTO,
     ): ApiResponse<Void> {
-        rouletteService.updateRoulette(userId = userId, name = dto.name, icon = dto.icon, rouletteId = rouletteId)
+        bookmarkService.updateRoulette(userId = userId, name = dto.name, icon = dto.icon, rouletteId = rouletteId)
         return ApiResponse.success()
     }
 
@@ -58,7 +56,7 @@ class RouletteControllerImpl(
     override fun getRouletteGroups(
         @RequestParam userId: UUID,
     ): ApiResponse<RouletteGroupsDTO> {
-        val placeGroups: List<PlaceGroup> = rouletteService.getRouletteGroups(userId = userId)
+        val placeGroups: List<PlaceGroup> = bookmarkService.getRouletteGroups(userId = userId)
 
         if (placeGroups.isEmpty()) {
             ApiResponse.success(RouletteGroupsDTO())
@@ -88,7 +86,7 @@ class RouletteControllerImpl(
         @RequestParam userId: UUID,
         @PathVariable("place_id") placeId: String,
     ): ApiResponse<List<RouletteGroup>> {
-        val placeGroupWithSaved: PlaceGroupWithSaved = rouletteService.getRouletteGroups(userId = userId, placeId = placeId)
+        val placeGroupWithSaved: PlaceGroupWithSaved = bookmarkService.getRouletteGroups(userId = userId, placeId = placeId)
 
         val rouletteGroups =
             placeGroupWithSaved.placeGroups.map {
@@ -121,7 +119,7 @@ class RouletteControllerImpl(
         @PathVariable("place_id") placeId: String,
         @RequestParam rouletteIds: List<UUID>?,
     ): ApiResponse<Void> {
-        rouletteService.updateItemAtRoulette(
+        bookmarkService.updateItemAtRoulette(
             userId = userId,
             placeId = placeId,
             desiredRouletteIds = rouletteIds?.toSet() ?: emptySet(),
@@ -168,7 +166,7 @@ class RouletteControllerImpl(
             return ApiResponse.success(false)
         }
 
-        val added: Boolean = rouletteService.isAdded(userId = userId, placeId = placeId)
+        val added: Boolean = bookmarkService.isRouletteBookmark(userId = userId, placeId = placeId)
         return ApiResponse.success(added)
     }
 }
