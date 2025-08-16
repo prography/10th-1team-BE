@@ -15,5 +15,5 @@ data class RouletteGroupWithPlaceDTO(
     @Schema(title = "저장된 가게 수", description = "룰렛에 추가된 가게의 수")
     val total: Long,
     @Schema(title = "추가된 가게", description = "해당 룰렛에 추가된 가게의 정보")
-    val items: List<BookmarkPlace>,
+    val places: List<BookmarkPlace>,
 )
