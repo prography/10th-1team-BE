@@ -129,7 +129,7 @@ class RouletteControllerImpl(
         return ApiResponse.success()
     }
 
-    @GetMapping("detail/{id}")
+    @GetMapping("place/{id}")
     override fun getItemsAtRouletteGroup(
         @AuthUser userId: UUID,
         @PathVariable("id") rouletteId: UUID,
