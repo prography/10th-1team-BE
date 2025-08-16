@@ -11,6 +11,7 @@ import org.prography.bff.bookmark.service.model.PlaceGroup
 import org.prography.bff.bookmark.service.model.PlaceGroupWithPlaces
 import org.prography.bff.bookmark.service.model.PlaceGroupWithSaved
 import org.prography.bff.config.response.ApiResponse
+import org.prography.bff.config.security.AuthUser
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -30,7 +31,7 @@ class RouletteControllerImpl(
 ) : RouletteController {
     @PostMapping("")
     override fun createRouletteGroup(
-        @RequestParam userId: UUID,
+        @AuthUser userId: UUID,
         @RequestBody dto: RouletteGroupSaveDTO,
     ): ApiResponse<UUID> {
         val rouletteId =
@@ -44,7 +45,7 @@ class RouletteControllerImpl(
 
     @PatchMapping("/{id}")
     override fun modifyRouletteGroup(
-        @RequestParam userId: UUID,
+        @AuthUser userId: UUID,
         @PathVariable("id") rouletteId: UUID,
         @RequestBody dto: RouletteGroupUpdateDTO,
     ): ApiResponse<Void> {
@@ -54,7 +55,7 @@ class RouletteControllerImpl(
 
     @GetMapping("")
     override fun getRouletteGroups(
-        @RequestParam userId: UUID,
+        @AuthUser userId: UUID,
     ): ApiResponse<RouletteGroupsDTO> {
         val placeGroups: List<PlaceGroup> = bookmarkService.getRouletteGroups(userId = userId)
 
@@ -83,7 +84,7 @@ class RouletteControllerImpl(
 
     @GetMapping("/{place_id}")
     override fun getRouletteGroups(
-        @RequestParam userId: UUID,
+        @AuthUser userId: UUID,
         @PathVariable("place_id") placeId: String,
     ): ApiResponse<List<RouletteGroup>> {
         val placeGroupWithSaved: PlaceGroupWithSaved = bookmarkService.getRouletteGroups(userId = userId, placeId = placeId)
@@ -106,7 +107,7 @@ class RouletteControllerImpl(
 
     @DeleteMapping("/{id}")
     override fun deleteRouletteGroup(
-        @RequestParam userId: UUID,
+        @AuthUser userId: UUID,
         @PathVariable("id") rouletteId: UUID,
     ): ApiResponse<Void> {
         bookmarkService.deleteBookmarkGroup(userId = userId, groupId = rouletteId)
@@ -115,7 +116,7 @@ class RouletteControllerImpl(
 
     @PutMapping("/{place_id}")
     override fun modifyItemAtRouletteGroup(
-        @RequestParam userId: UUID,
+        @AuthUser userId: UUID,
         @PathVariable("place_id") placeId: String,
         @RequestParam rouletteIds: List<UUID>?,
     ): ApiResponse<Void> {
@@ -130,7 +131,7 @@ class RouletteControllerImpl(
 
     @GetMapping("detail/{id}")
     override fun getItemsAtRouletteGroup(
-        @RequestParam userId: UUID,
+        @AuthUser userId: UUID,
         @PathVariable("id") rouletteId: UUID,
     ): ApiResponse<RouletteGroupWithPlaceDTO> {
         val vo: PlaceGroupWithPlaces = bookmarkService.getBookmarks(groupId = rouletteId)
@@ -159,7 +160,7 @@ class RouletteControllerImpl(
 
     @GetMapping("/saved/{place_id}")
     override fun addedItemAtRouletteGroup(
-        @RequestParam userId: UUID?,
+        @AuthUser userId: UUID?,
         @PathVariable("place_id") placeId: String,
     ): ApiResponse<Boolean> {
         if (userId == null) {
