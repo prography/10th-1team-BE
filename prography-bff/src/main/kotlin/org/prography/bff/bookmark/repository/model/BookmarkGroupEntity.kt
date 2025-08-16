@@ -73,15 +73,19 @@ class BookmarkGroupEntity protected constructor() {
     @Column(name = "modified_at")
     lateinit var modifiedAt: LocalDateTime
 
+    @Column(name = "roulette", nullable = false)
+    var roulette: Boolean = false
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is BookmarkGroupEntity) return false
-        return userId == other.userId && groupName == other.groupName
+        return userId == other.userId && groupName == other.groupName && roulette == other.roulette
     }
 
     override fun hashCode(): Int {
         var result = userId.hashCode()
         result = 31 * result + groupName.hashCode()
+        result = 31 * result + roulette.hashCode()
         return result
     }
 
@@ -91,9 +95,9 @@ class BookmarkGroupEntity protected constructor() {
         icon: String,
         userId: UUID,
         groupName: String,
+        roulette: Boolean = false,
     ) : this() {
         require(icon.isNotBlank()) { "아이콘은 공백이 될 수 없습니다." }
-        require(true) { "userId는 반드시 필요합니다." }
         require(groupName.isNotBlank() && groupName.length <= 20) {
             "그룹 이름은 공백이 아니어야 하며, 1~20자여야 합니다."
         }
@@ -101,25 +105,33 @@ class BookmarkGroupEntity protected constructor() {
         this.icon = icon
         this.userId = userId
         this.groupName = groupName
+        this.roulette = roulette
     }
 
     fun addBookmark(placeId: String): BookmarkEntity {
-        require(total < 1000) {
-            "이 그룹에는 더 이상 가게를 추가할 수 없습니다. (current=$total)"
-        }
+        val limit = if (roulette) 8 else 1000
+        val message =
+            if (roulette) {
+                "룰렛 그룹에는 최대 8개의 가게만 추가 할 수 있습니다. (current=$total)"
+            } else {
+                "이 그룹에는 더 이상 가게를 추가할 수 없습니다. (current=$total)"
+            }
+        require(total < limit) { message }
+
         return BookmarkEntity.of(this, placeId).also {
             total += 1
         }
     }
 
     fun addBookmarks(placeIds: List<String>): List<BookmarkEntity> {
-        require(total < 1000) {
-            "이 그룹에는 더 이상 가게를 추가할 수 없습니다. (current=$total)"
-        }
-
-        require(placeIds.size + total < 1000) {
-            "이 그룹에는 더 이상 가게를 추가할 수 없습니다. (current=$total)"
-        }
+        val limit = if (roulette) 8 else 1000
+        val message =
+            if (roulette) {
+                "룰렛 그룹에는 최대 8개의 가게만 추가할 수 있습니다. 추가하려는 개수: ${placeIds.size}, 현재 개수: $total"
+            } else {
+                "이 그룹에는 더 이상 가게를 추가할 수 없습니다. 추가하려는 개수: ${placeIds.size}, 현재 개수: $total"
+            }
+        require(placeIds.size + total <= limit) { message }
 
         return placeIds.map {
             BookmarkEntity.of(this, placeId = it)
