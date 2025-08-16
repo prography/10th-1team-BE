@@ -99,7 +99,7 @@ interface RouletteController {
             ),
         ],
     )
-    fun getRoulette(userId: UUID): ApiResponse<RouletteGroupsDTO>
+    fun getRouletteGroups(userId: UUID): ApiResponse<RouletteGroupsDTO>
 
     @Operation(
         summary = "룰렛 그룹 조회 API",
@@ -184,7 +184,7 @@ interface RouletteController {
         userId: UUID,
         placeId: String,
         rouletteIds: List<UUID>?,
-    )
+    ): ApiResponse<Void>
 
     @Operation(
         summary = "룰렛 그룹에 추가된 가게 조회 API",
@@ -209,7 +209,7 @@ interface RouletteController {
             ),
         ],
     )
-    fun getRouletteGroup(
+    fun getItemsAtRouletteGroup(
         userId: UUID,
         rouletteId: UUID,
     ): ApiResponse<RouletteGroupWithPlaceDTO>
