@@ -1,7 +1,5 @@
 package org.prography.bff.user.controller
 
-import jakarta.validation.constraints.Max
-import jakarta.validation.constraints.Min
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
 import org.prography.bff.user.controller.model.ActivityVote
@@ -75,23 +73,7 @@ class UserControllerImpl(
     @GetMapping("/activity/calendar")
     override fun getActivityCalendar(
         @AuthUser userId: UUID,
-        @Min(
-            value = 2000,
-            message = "year 최소 {value}이어야 합니다.",
-        )
-        @Max(
-            value = 2100,
-            message = "year 최대 {value}이어야 합니다.",
-        )
-        @RequestParam("year") year: Int,
-        @Min(
-            value = 1,
-            message = "month 최소 {value}이어야 합니다.",
-        )
-        @Max(
-            value = 12,
-            message = "month 최대 {value}이어야 합니다.",
-        )
+        @RequestParam("year") year: Int, // 검증 어노테이션 유효성 예외 HV000151: A method overriding another method must not redefine the parameter constraint configuration
         @RequestParam("month") month: Int,
     ): ApiResponse<List<UserActivityDto>> {
         val yearMonth =
