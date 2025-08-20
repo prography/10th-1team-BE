@@ -132,7 +132,7 @@ interface UserController {
             message = "month 최대 {value}이어야 합니다.",
         )
         month: Int,
-    ): ApiResponse<List<UserActivityDto>>
+    ): ApiResponse<UserActivityDto>
 
     @Operation(
         summary = "유저가 생성한 그룹 조회",

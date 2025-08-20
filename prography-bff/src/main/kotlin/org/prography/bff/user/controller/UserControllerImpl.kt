@@ -75,7 +75,7 @@ class UserControllerImpl(
         @AuthUser userId: UUID,
         @RequestParam("year") year: Int, // 검증 어노테이션 유효성 예외 HV000151: A method overriding another method must not redefine the parameter constraint configuration
         @RequestParam("month") month: Int,
-    ): ApiResponse<List<UserActivityDto>> {
+    ): ApiResponse<UserActivityDto> {
         val yearMonth =
             YearMonth.of(
                 year.coerceIn(2000, 2100),
@@ -85,7 +85,23 @@ class UserControllerImpl(
         val to: LocalDateTime = yearMonth.atEndOfMonth().atTime(LocalTime.MAX)
 
         val voteActivities: List<VoteActivity> = activityService.getVoteActivities(userId, from, to)
-        return ApiResponse.success(emptyList())
+        return ApiResponse.success(
+            UserActivityDto(
+                votes =
+                    voteActivities.map {
+                        ActivityVote(
+                            placeId = it.placeId,
+                            placeName = it.placeName,
+                            category = it.category,
+                            platform = MatchPlatform.fromString(it.platform),
+                            reasons = it.reasons,
+                            votedDate = it.votedDate,
+                        )
+                    },
+                bookmarks = emptyList(),
+                groups = emptyList(),
+            ),
+        )
     }
 
     @GetMapping("/activity/group")
