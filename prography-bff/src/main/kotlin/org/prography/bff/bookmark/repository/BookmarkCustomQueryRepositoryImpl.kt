@@ -35,7 +35,8 @@ class BookmarkCustomQueryRepositoryImpl(
             select(entity(BookmarkGroupEntity::class))
                 .from(entity(BookmarkGroupEntity::class))
                 .where(
-                    path(BookmarkGroupEntity::userId).eq(userId),
+                    path(BookmarkGroupEntity::userId).eq(userId)
+                        .and(path(BookmarkGroupEntity::roulette).eq(false)),
                 )
         }.filterNotNull()
     }
@@ -135,12 +136,7 @@ class BookmarkCustomQueryRepositoryImpl(
         }.first() ?: 0L
     }
 
-    data class result(
-        val groupId: UUID,
-        val total: Long,
-    )
-
-    override fun getNumberOfBookmakr(groupIds: List<UUID>): Map<UUID, Long> {
+    override fun getNumberOfBookmark(groupIds: List<UUID>): Map<UUID, Long> {
         if (groupIds.isEmpty()) {
             return emptyMap()
         }
@@ -168,5 +164,39 @@ class BookmarkCustomQueryRepositoryImpl(
 
             groupId to cnt
         }
+    }
+
+    override fun findRouletteGroupsByUserId(userId: UUID): List<BookmarkGroupEntity> {
+        return groupRepository.findAll {
+            select(entity(BookmarkGroupEntity::class))
+                .from(entity(BookmarkGroupEntity::class))
+                .where(
+                    path(BookmarkGroupEntity::userId).eq(userId)
+                        .and(
+                            path(BookmarkGroupEntity::roulette).eq(true),
+                        ),
+                )
+        }.filterNotNull()
+    }
+
+    override fun existsRoulette(
+        userId: UUID,
+        placeId: String,
+    ): Boolean {
+        return bookmarkRepository.findAll(limit = 1) {
+            select(intLiteral(1))
+                .from(
+                    entity(BookmarkEntity::class),
+                    join(BookmarkGroupEntity::class)
+                        .on(path(BookmarkEntity::id)(BookmarkId::groupId).eq(path(BookmarkGroupEntity::id))),
+                )
+                .where(
+                    and(
+                        path(BookmarkEntity::userId).eq(userId),
+                        path(BookmarkEntity::id)(BookmarkId::placeId).eq(placeId),
+                        path(BookmarkGroupEntity::roulette).eq(true),
+                    ),
+                )
+        }.isNotEmpty()
     }
 }

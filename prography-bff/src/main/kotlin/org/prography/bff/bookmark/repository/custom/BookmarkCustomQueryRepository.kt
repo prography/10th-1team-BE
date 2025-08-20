@@ -44,5 +44,12 @@ interface BookmarkCustomQueryRepository {
 
     fun getNumberOfBookmark(groupId: UUID): Long
 
-    fun getNumberOfBookmakr(groupIds: List<UUID>): Map<UUID, Long>
+    fun getNumberOfBookmark(groupIds: List<UUID>): Map<UUID, Long>
+
+    fun findRouletteGroupsByUserId(userId: UUID): List<BookmarkGroupEntity>
+
+    fun existsRoulette(
+        userId: UUID,
+        placeId: String,
+    ): Boolean
 }
