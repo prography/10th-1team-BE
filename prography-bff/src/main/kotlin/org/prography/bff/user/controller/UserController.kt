@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.parameters.RequestBody
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.constraints.Max
+import jakarta.validation.constraints.Min
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.user.controller.model.ActivityVote
 import org.prography.bff.user.controller.model.UserActivityDto
@@ -112,9 +114,25 @@ interface UserController {
     )
     fun getActivityCalendar(
         userId: UUID,
+        @Min(
+            value = 2000,
+            message = "year 최소 {value}이어야 합니다.",
+        )
+        @Max(
+            value = 2100,
+            message = "year 최대 {value}이어야 합니다.",
+        )
         year: Int,
+        @Min(
+            value = 1,
+            message = "month 최소 {value}이어야 합니다.",
+        )
+        @Max(
+            value = 12,
+            message = "month 최대 {value}이어야 합니다.",
+        )
         month: Int,
-    ): ApiResponse<List<UserActivityDto>>
+    ): ApiResponse<UserActivityDto>
 
     @Operation(
         summary = "유저가 생성한 그룹 조회",

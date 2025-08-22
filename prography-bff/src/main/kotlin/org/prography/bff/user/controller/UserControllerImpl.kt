@@ -1,7 +1,5 @@
 package org.prography.bff.user.controller
 
-import jakarta.validation.constraints.Max
-import jakarta.validation.constraints.Min
 import org.prography.bff.config.response.ApiResponse
 import org.prography.bff.config.security.AuthUser
 import org.prography.bff.user.controller.model.ActivityVote
@@ -75,25 +73,9 @@ class UserControllerImpl(
     @GetMapping("/activity/calendar")
     override fun getActivityCalendar(
         @AuthUser userId: UUID,
-        @Min(
-            value = 2000,
-            message = "year 최소 {value}이어야 합니다.",
-        )
-        @Max(
-            value = 2100,
-            message = "year 최대 {value}이어야 합니다.",
-        )
-        @RequestParam("year") year: Int,
-        @Min(
-            value = 1,
-            message = "month 최소 {value}이어야 합니다.",
-        )
-        @Max(
-            value = 12,
-            message = "month 최대 {value}이어야 합니다.",
-        )
+        @RequestParam("year") year: Int, // 검증 어노테이션 유효성 예외 HV000151: A method overriding another method must not redefine the parameter constraint configuration
         @RequestParam("month") month: Int,
-    ): ApiResponse<List<UserActivityDto>> {
+    ): ApiResponse<UserActivityDto> {
         val yearMonth =
             YearMonth.of(
                 year.coerceIn(2000, 2100),
@@ -103,7 +85,23 @@ class UserControllerImpl(
         val to: LocalDateTime = yearMonth.atEndOfMonth().atTime(LocalTime.MAX)
 
         val voteActivities: List<VoteActivity> = activityService.getVoteActivities(userId, from, to)
-        return ApiResponse.success(emptyList())
+        return ApiResponse.success(
+            UserActivityDto(
+                votes =
+                    voteActivities.map {
+                        ActivityVote(
+                            placeId = it.placeId,
+                            placeName = it.placeName,
+                            category = it.category,
+                            platform = MatchPlatform.fromString(it.platform),
+                            reasons = it.reasons,
+                            votedDate = it.votedDate,
+                        )
+                    },
+                bookmarks = emptyList(),
+                groups = emptyList(),
+            ),
+        )
     }
 
     @GetMapping("/activity/group")
