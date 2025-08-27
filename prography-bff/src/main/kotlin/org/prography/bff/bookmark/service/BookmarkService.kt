@@ -45,7 +45,7 @@ class BookmarkService(
         icon: String,
         rouletteName: String,
     ): UUID {
-        if (bookmarkQueryRepository.existsGroup(userId = userId, groupName = rouletteName)) {
+        if (bookmarkQueryRepository.existsRouletteGroup(userId = userId, groupName = rouletteName)) {
             throw InvalidRequestException.AlreadyGroup()
         }
         val groupEntity = BookmarkGroupEntity(userId = userId, icon = icon, groupName = rouletteName, roulette = true)
@@ -324,7 +324,7 @@ class BookmarkService(
         userId: UUID,
         placeId: String,
     ): PlaceGroupWithSaved {
-        val rouletteGroups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findGroupsByUserId(userId)
+        val rouletteGroups: List<BookmarkGroupEntity> = bookmarkQueryRepository.findRouletteGroupsByUserId(userId)
 
         if (rouletteGroups.any { it.userId != userId }) {
             throw InvalidRequestException.MismatchUser()

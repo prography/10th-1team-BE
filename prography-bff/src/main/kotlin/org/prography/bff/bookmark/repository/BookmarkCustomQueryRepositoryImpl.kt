@@ -74,8 +74,27 @@ class BookmarkCustomQueryRepositoryImpl(
             select(intLiteral(1))
                 .from(entity(BookmarkGroupEntity::class))
                 .where(
-                    path(BookmarkGroupEntity::userId).eq(userId).and(
-                        path(BookmarkGroupEntity::groupName).eq(groupName),
+                    path(BookmarkGroupEntity::roulette).eq(false).and(
+                        path(BookmarkGroupEntity::userId).eq(userId).and(
+                            path(BookmarkGroupEntity::groupName).eq(groupName),
+                        ),
+                    ),
+                )
+        }.isNotEmpty()
+    }
+
+    override fun existsRouletteGroup(
+        userId: UUID,
+        groupName: String,
+    ): Boolean {
+        return bookmarkRepository.findAll(limit = 1) {
+            select(intLiteral(1))
+                .from(entity(BookmarkGroupEntity::class))
+                .where(
+                    path(BookmarkGroupEntity::roulette).eq(true).and(
+                        path(BookmarkGroupEntity::userId).eq(userId).and(
+                            path(BookmarkGroupEntity::groupName).eq(groupName),
+                        ),
                     ),
                 )
         }.isNotEmpty()

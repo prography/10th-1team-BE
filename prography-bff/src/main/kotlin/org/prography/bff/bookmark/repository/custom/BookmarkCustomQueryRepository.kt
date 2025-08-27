@@ -27,6 +27,11 @@ interface BookmarkCustomQueryRepository {
         groupName: String,
     ): Boolean
 
+    fun existsRouletteGroup(
+        userId: UUID,
+        groupName: String,
+    ): Boolean
+
     fun findMatchedBookmarksInGroup(
         groupIds: List<UUID>,
         placeId: String,
